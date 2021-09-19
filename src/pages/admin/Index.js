@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
-import { Menu, MenuItem } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import Divider from "@mui/material/Divider";
-import Collapse from "@mui/material/Collapse";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
+import Hidden from "@material-ui/core/Hidden";
+import { Menu, MenuItem } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Divider from "@material-ui/core/Divider";
+import Collapse from "@material-ui/core/Collapse";
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 import { HiViewList } from "react-icons/hi";
 import { FaUserCircle, FaBell } from "react-icons/fa";
 import { IoIosArrowUp, IoIosArrowBack } from "react-icons/io";
@@ -232,17 +232,10 @@ const AdminIndex = (props) => {
 
   return (
     <Router>
-      <Box sx={{ display: "flex" }}>
+      <div className={styles.root}>
         <CssBaseline />
-        <AppBar
-          position="fixed"
-          elevation={0}
-          sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
-          }}
-        >
-          <Toolbar className={styles.toolbar}>
+        <AppBar position="fixed" elevation={0} className={styles.appBar}>
+          <Toolbar>
             <IconButton
               aria-label="open drawer"
               edge="start"
@@ -289,50 +282,46 @@ const AdminIndex = (props) => {
             </div>
           </Toolbar>
         </AppBar>
-        <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Drawer
-            classes={{ paper: styles.muiDrawer }}
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-          >
-            {drawer}
-          </Drawer>
-          <Drawer
-            classes={{ paper: styles.muiDrawer }}
-            variant="permanent"
-            sx={{
-              display: { xs: "none", sm: "block" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Box>
-        <Box
-          className="admin-background"
-          component="main"
-          sx={{ flexGrow: 1, p: 3 }}
-        >
+        <nav className={styles.drawer}>
+          <Hidden smUp implementation="css">
+            <Drawer
+              classes={{ paper: styles.drawerPaper }}
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { xs: "block", sm: "none" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth,
+                },
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Drawer
+              classes={{ paper: styles.drawerPaper }}
+              variant="permanent"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth,
+                },
+              }}
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+        </nav>
+        <main className={styles.content}>
           <Toolbar />
           <Switch>
             {routes.map((route, index) => (
@@ -344,8 +333,8 @@ const AdminIndex = (props) => {
               />
             ))}
           </Switch>
-        </Box>
-      </Box>
+        </main>
+      </div>
     </Router>
   );
 };
@@ -386,12 +375,9 @@ const style = {
   },
 };
 
-const useStyles = makeStyles({
-  muiDrawer: {
-    backgroundImage: `radial-gradient(circle farthest-corner at 10% 20%,${PRIMARY_COLOR} 0%,${PRIMARY_COLOR} 90%)`,
-  },
-  toolbar: {
-    backgroundColor: "white",
+const useStyles = makeStyles((theme) => ({
+  drawerPaper: {
+    background: PRIMARY_COLOR,
   },
   drawerToolbar: {
     backgroundColor: PRIMARY_COLOR,
@@ -399,7 +385,27 @@ const useStyles = makeStyles({
   listItemText: {
     fontSize: "1.4rem", //Insert your required size
   },
-});
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+    background: "white",
+  },
+}));
 
 AdminIndex.propTypes = {
   window: PropTypes.func,
