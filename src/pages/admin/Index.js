@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Collapse from "@material-ui/core/Collapse";
 import AppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
@@ -55,7 +54,7 @@ import { useDispatch } from "react-redux";
 
 import { userlogoutsuccess } from "../../reducers/UserReducer";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const AdminIndex = (props) => {
   const { window } = props;
@@ -129,19 +128,28 @@ const AdminIndex = (props) => {
               <ListItemIcon>
                 <RiZzzLine style={style.nestedIcon}></RiZzzLine>
               </ListItemIcon>
-              <ListItemText primary="Chờ xử lý" />
+              <ListItemText
+                primary="Chờ xử lý"
+                classes={{ primary: styles.listItemText }}
+              />
             </ListItem>
             <ListItem button style={style.nested}>
               <ListItemIcon>
                 <AiOutlineFileSync style={style.nestedIcon}></AiOutlineFileSync>
               </ListItemIcon>
-              <ListItemText primary="Đang xử lý" />
+              <ListItemText
+                primary="Đang xử lý"
+                classes={{ primary: styles.listItemText }}
+              />
             </ListItem>
             <ListItem button style={style.nested}>
               <ListItemIcon>
                 <AiOutlineFileDone style={style.nestedIcon}></AiOutlineFileDone>
               </ListItemIcon>
-              <ListItemText primary="Đã xử lý" />
+              <ListItemText
+                primary="Đã xử lý"
+                classes={{ primary: styles.listItemText }}
+              />
             </ListItem>
           </List>
         </Collapse>
@@ -174,13 +182,19 @@ const AdminIndex = (props) => {
                   style={style.nestedIcon}
                 ></IoFileTrayStackedSharp>
               </ListItemIcon>
-              <ListItemText primary="Quản lý danh mục" />
+              <ListItemText
+                primary="Quản lý danh mục"
+                classes={{ primary: styles.listItemText }}
+              />
             </ListItem>
             <ListItem button style={style.nested}>
               <ListItemIcon>
                 <AiOutlineTag style={style.nestedIcon}></AiOutlineTag>
               </ListItemIcon>
-              <ListItemText primary="Quản lý tag" />
+              <ListItemText
+                primary="Quản lý tag"
+                classes={{ primary: styles.listItemText }}
+              />
             </ListItem>
           </List>
         </Collapse>
@@ -354,11 +368,11 @@ const style = {
     color: ICON_COLOR,
   },
   nested: {
-    paddingLeft: "30px",
+    paddingLeft: "25px",
     color: TEXT_ON_PRIMARY,
   },
   nestedIcon: {
-    fontSize: "1.2rem",
+    fontSize: "0.9rem",
     color: ICON_COLOR,
   },
   navLinkStyle: {
@@ -383,7 +397,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: PRIMARY_COLOR,
   },
   listItemText: {
-    fontSize: "1.4rem", //Insert your required size
+    fontSize: "0.9rem",
   },
   content: {
     flexGrow: 1,
