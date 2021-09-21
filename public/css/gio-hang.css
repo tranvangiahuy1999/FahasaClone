@@ -758,6 +758,9 @@ button.receiptbtn {
         width: 100%!important;
 
     }
+    .checkout-right {
+        margin-bottom: 50px;
+    }
 
     .navbar ul li a.nav-link{
         margin-left:0.25rem!important;

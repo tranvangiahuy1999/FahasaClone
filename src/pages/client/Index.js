@@ -10,7 +10,7 @@ function HomePage() {
       
          <div>
         {/* khoi sach moi  */}
-        <section className="_1khoi sachmoi bg-white">
+        <section className="_1khoi sachmoi bg-light">
           <div className="container">
             <div className="noidung" style={{width: '100%'}}>
               <div className="row">
@@ -525,7 +525,7 @@ function HomePage() {
           </div>
         </section>
         {/* div _1khoi -- khoi sachnendoc */}
-        <section className="_1khoi sachnendoc bg-white mt-4">
+        <section className="_1khoi sachnendoc bg-light mt-4">
           <div className="container">
             <div className="noidung" style={{width: '100%'}}>
               <div className="row">
@@ -596,8 +596,8 @@ function HomePage() {
           </div>
         </section>
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-        <section className="abovefooter text-white" style={{backgroundColor: '#64ae55'}}>
-          <div className="container">
+        <section className="abovefooter text-white" >
+          <div className="container"style={{backgroundColor: '#64ae55'}}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
                 <div className="dichvu d-flex align-items-center">
@@ -614,7 +614,7 @@ function HomePage() {
                   <div className="noidung">
                     <h3 className="tieude font-weight-bold">MIỄN PHÍ GIAO HÀNG</h3>
                     <p className="detail">Từ 150.000đ ở TP.HCM</p>
-                    <p className="detail">Từ 300.000đ ở tỉnh thành khác</p>
+                    <p className="detail">Từ 150.000đ ở TP.HN</p>
                   </div>
                 </div>
               </div>

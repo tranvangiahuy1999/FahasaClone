@@ -11,7 +11,7 @@ function Nav() {
           <div className="collapse navbar-collapse" id="collapsibleNavId">
             {/* form tìm kiếm  */}
             <form className="form-inline ml-auto my-2 my-lg-0 mr-3">
-              <div className="input-group" style={{width: '720px'}}>
+              <div className="input-group" style={{width: '630px'}}>
                 <input type="text" className="form-control" aria-label="Small" placeholder="Nhập sách cần tìm kiếm..." />
                 <div className="input-group-append">
                   <button type="button" className="btn" style={{backgroundColor: '#64ae55', color: 'white'}}>

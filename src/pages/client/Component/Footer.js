@@ -7,11 +7,11 @@ function Footer() {
             <footer>
               <div className="container py-4">
                 <div className="row">
-                  <div className="col-md-3 col-xs-6">
+                  <div className="col-md-4 col-xs-6">
                     <div className="gioithieu">
                       <h3 className="header text-uppercase font-weight-bold">Về DealBook</h3>
-                      <a href="#">Giới thiệu về DealBook</a>
-                      <a href="#">Tuyển dụng</a>
+                      <a href="#">Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM</a>
+                      <a href="#"></a>
                       <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
                     </div>
                   </div>
@@ -30,7 +30,7 @@ function Footer() {
                       <img src="images/dang-ky-bo-cong-thuong.png" alt="dang-ky-bo-cong-thuong" />
                     </div>
                   </div>
-                  <div className="col-md-3 col-xs-6">
+                  <div className="col-md-2 col-xs-6">
                     <div className="ptthanhtoan">
                       <h3 className="header text-uppercase font-weight-bold">Phương thức thanh toán</h3>
                       <img src="images/visa-payment.jpg" alt="visa-payment" />
