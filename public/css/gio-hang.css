@@ -828,3 +828,11 @@ li.tittle {
     margin-top: -4%;
     margin-bottom: -50px;
 }
+
+button.slick-prev.slick-arrow.slick-disabled {
+    margin-left: 12px;
+}
+
+button.slick-prev.slick-arrow {
+    margin-left: 10px;
+}

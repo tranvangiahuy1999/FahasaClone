@@ -16,7 +16,7 @@ import Paper from "@material-ui/core/Paper";
 import { GoPlus } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
 import { LOGO_COLOR } from "../../constants/index";
-
+import CreateProductModal from "../../components/CreateProductModel"
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -154,7 +154,7 @@ export default function Product() {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("calories");
   const [selected, setSelected] = useState([]);
-
+  const [openCreateModal, setOpenCreateModal] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -193,11 +193,28 @@ export default function Product() {
 
     setSelected(newSelected);
   };
+  const createModalHandleOpen = () => {
+    setOpenCreateModal(true);
+  };
 
+  const createModalHandleClose = () => {
+    setOpenCreateModal(false);
+  };
+
+  const createModalHandleCloseAfterSave = () => {
+    createModalHandleClose();
+
+  };
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   return (
     <div className={classes.root}>
+       <CreateProductModal
+        open={openCreateModal}
+        closeModal={createModalHandleClose}
+        closeModalAfterSave={createModalHandleCloseAfterSave}
+        title="Tạo sản phẩm"
+      ></CreateProductModal>
       <div className="row mb-2">
         <div className="col-lg-6 col-md-6">
           <h5>Danh sách sản phẩm</h5>
@@ -225,6 +242,7 @@ export default function Product() {
                   color: "white",
                 }}
                 size="small"
+                onClick={createModalHandleOpen}
                 variant="contained"
                 startIcon={<GoPlus></GoPlus>}
               >

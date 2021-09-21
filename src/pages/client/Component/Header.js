@@ -33,7 +33,7 @@ function Header() {
         <section className="header bg-light">
           <div className="container">
             <div className="row">
-              <div className="col-md-3" style={{marginRight: '-15px'}}>
+              <div className="col-md-3" style={{marginRight: '0px',paddingLeft:'35px'}}>
                 {/* CATEGORIES */}
                 <div className="categorycontent display" >
                   <ul >
@@ -221,14 +221,14 @@ function Header() {
                     <li data-target="#carouselId" data-slide-to={2} />
                   </ol>
                   <div className="carousel-inner">
-                    <div className="carousel-item active">
-                      <a href="#"><img src="images/banner-sach-moi.jpg" className="img-fluid" style={{height: '386px'}} width="900px" alt="First slide" /></a>
+                    <div className="carousel-item active"style={{width: '965px'}} >
+                      <a href="#"><img src="images/banner-sach-moi.jpg" className="img-fluid" style={{height: '386px'}} width="965px" alt="First slide" /></a>
                     </div>
                     <div className="carousel-item">
-                      <a href="#"><img src="images/banner-beethoven.jpg" className="img-fluid" style={{height: '386px'}} width="900px" alt="Second slide" /></a>
+                      <a href="#"><img src="images/banner-beethoven.jpg" className="img-fluid" style={{height: '386px'}} width="965px" alt="Second slide" /></a>
                     </div>
                     <div className="carousel-item">
-                      <a href="#"><img src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg" className="img-fluid" style={{height: '386px'}} alt="Third slide" /></a>
+                      <a href="#"><img src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg" className="img-fluid" style={{height: '386px'}} width="965px" alt="Third slide" /></a>
                     </div>
                   </div>
                   <a className="carousel-control-prev" href="#carouselId" data-slide="prev">

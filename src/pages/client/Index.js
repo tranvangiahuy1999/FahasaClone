@@ -20,7 +20,7 @@ function HomePage() {
                   <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
                 </div>
               </div>
-              <div className="khoisanpham" style={{paddingBottom: '2rem'}}>
+              <div className="khoisanpham container" style={{paddingBottom: '2rem'}}>
                 {/* 1 san pham */}
                 <div className="card">
                   <a href="/chi-tiet" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
