@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,9 +19,10 @@ import { IoSearch } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import { LOGO_COLOR } from "../../constants/index";
 import CreateCategoryModal from "../../components/CreateCategoryModal";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import adminApis from "../../apis/AdminApis";
+import { FaRegEdit } from "react-icons/fa";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -99,6 +101,9 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell align="center" padding="normal">
+          <div className="text-center">Tùy chỉnh</div>
+        </TableCell>
       </TableRow>
     </TableHead>
   );
@@ -139,8 +144,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 export default function Category(props) {
   let { id } = useParams();
+  let query = useQuery();
   const cateList = useSelector((state) => state.admin);
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -148,13 +158,17 @@ export default function Category(props) {
   const [selected, setSelected] = useState([]);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [categoryList, getCategoryList] = useState([]);
+  const [parentId, setParentId] = useState();
+  const [editCateData, setEditCateData] = useState();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    console.log(id);
+    const temp = new URLSearchParams(query);
+    setParentId(temp.get("parentId"));
+
     if (id) {
       getCategoryByParentId(id);
     } else {
@@ -174,11 +188,18 @@ export default function Category(props) {
     }
   };
 
+  const editModalHandleOpen = (data) => {
+    setEditCateData(data);
+    console.log(data);
+    setOpenCreateModal(true);
+  };
+
   const createModalHandleOpen = () => {
     setOpenCreateModal(true);
   };
 
   const createModalHandleClose = () => {
+    setEditCateData();
     setOpenCreateModal(false);
   };
 
@@ -243,6 +264,7 @@ export default function Category(props) {
         closeModalAfterSave={createModalHandleCloseAfterSave}
         title="Tạo danh mục"
         parentId={id}
+        cateEditFilter={editCateData}
       ></CreateCategoryModal>
       <div className="row m-0 p-0">
         <h5>Danh sách danh mục</h5>
@@ -254,18 +276,18 @@ export default function Category(props) {
             <Link color="inherit" to="/admin/category">
               Danh mục 1
             </Link>
-            {props.parentId && (
+            {parentId && (
               <Link
                 color="inherit"
-                to={`/admin/category/${props.parentId}?parentId=${props.parentId}`}
+                to={`/admin/category/${parentId}?parentId=${parentId}`}
               >
                 Danh mục 2
               </Link>
             )}
-            {id !== props.parentId && (
+            {id && parentId && id !== parentId && (
               <Link
                 color="inherit"
-                to={`/admin/category/${id}?parentId=${props.parentId}`}
+                to={`/admin/category/${id}?parentId=${parentId}`}
               >
                 Danh mục 3
               </Link>
@@ -321,9 +343,9 @@ export default function Category(props) {
               onRequestSort={handleRequestSort}
               rowCount={categoryList.length}
             />
-            <TableBody>
-              {categoryList.length ? (
-                stableSort(categoryList, getComparator(order, orderBy)).map(
+            {categoryList.length ? (
+              <TableBody>
+                {stableSort(categoryList, getComparator(order, orderBy)).map(
                   (row, index) => {
                     const isItemSelected = isSelected(row.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
@@ -352,8 +374,8 @@ export default function Category(props) {
                           ) : (
                             <Link
                               to={
-                                props.parentId
-                                  ? `/admin/category/${row._id}?parentId=${props.parentId}`
+                                parentId
+                                  ? `/admin/category/${row._id}?parentId=${parentId}`
                                   : `/admin/category/${row._id}?parentId=${row._id}`
                               }
                             >
@@ -375,16 +397,28 @@ export default function Category(props) {
                             <span>Không được bày bán</span>
                           )}
                         </TableCell>
+                        <TableCell align="center">
+                          <IconButton
+                            color="primary"
+                            aria-label="update category"
+                            onClick={() => editModalHandleOpen(row)}
+                          >
+                            <FaRegEdit color={LOGO_COLOR} size={18} />
+                          </IconButton>
+                        </TableCell>
                       </TableRow>
                     );
                   }
-                )
-              ) : (
-                <></>
-              )}
-            </TableBody>
+                )}
+              </TableBody>
+            ) : (
+              <></>
+            )}
           </Table>
         </TableContainer>
+        {categoryList.length === 0 && (
+          <div className="empty-data-text">Chưa có dữ liệu</div>
+        )}
       </Paper>
     </div>
   );

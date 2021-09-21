@@ -40,7 +40,6 @@ import {
   Route,
   NavLink,
   Link,
-  useLocation,
 } from "react-router-dom";
 
 import {
@@ -59,13 +58,8 @@ import adminApis from "../../apis/AdminApis";
 
 const drawerWidth = 250;
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 const AdminIndex = (props) => {
   const { window } = props;
-  let query = useQuery();
   const styles = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -86,12 +80,7 @@ const AdminIndex = (props) => {
     },
     {
       path: "/admin/category/:id",
-      main: () => (
-        <Category
-          getCategoryList={getCategoryList}
-          parentId={query.get("parentId")}
-        ></Category>
-      ),
+      main: () => <Category getCategoryList={getCategoryList}></Category>,
     },
     {
       path: "/admin/product",

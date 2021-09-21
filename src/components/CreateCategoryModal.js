@@ -19,12 +19,12 @@ const CreateCategoryModal = (props) => {
   const [editName, setEditName] = useState();
   const [checked, setChecked] = useState(false);
 
-  // useEffect(() => {
-  //   if (props.cateEditFilter) {
-  //     setEditName(props.cateEditFilter.name);
-  //     setChecked(props.cateEditFilter.active);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (props.cateEditFilter) {
+      setEditName(props.cateEditFilter.name);
+      setChecked(props.cateEditFilter.active);
+    }
+  }, [props.cateEditFilter]);
 
   const handleSwitch = () => {
     setChecked(!checked);
@@ -39,19 +39,29 @@ const CreateCategoryModal = (props) => {
     try {
       e.preventDefault();
       let formData = {};
-      if (props.parentId) {
+      let res = null;
+      if (props.cateEditFilter) {
         formData = {
           name: editName,
-          parentId: props.parentId,
           active: checked,
         };
+        res = await AdminApi.updateCategory(formData, props.cateEditFilter._id);
       } else {
-        formData = {
-          name: editName,
-          active: checked,
-        };
+        if (props.parentId) {
+          formData = {
+            name: editName,
+            parentId: props.parentId,
+            active: checked,
+          };
+        } else {
+          formData = {
+            name: editName,
+            active: checked,
+          };
+        }
+        res = await AdminApi.createCategory(formData);
       }
-      const res = await AdminApi.createCategory(formData);
+
       if (res.status === 200) {
         alert({
           icon: "success",
