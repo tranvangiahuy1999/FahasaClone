@@ -208,12 +208,21 @@ export default function Category(props) {
     props.getCategoryList();
   };
 
+  const formatSingleDayMonth = (string) => {
+    let stringtemp = string.toString();
+    if (stringtemp.length < 2) {
+      const temp = "0" + stringtemp;
+      return temp;
+    }
+    return stringtemp;
+  };
+
   const convertTime = (unformatTime) => {
     let date = new Date(unformatTime);
     const formatedTime =
-      date.getDate() +
+      formatSingleDayMonth(date.getDate()) +
       " / " +
-      (date.getMonth() + 1) +
+      formatSingleDayMonth(date.getMonth() + 1) +
       " / " +
       date.getFullYear();
     return formatedTime;

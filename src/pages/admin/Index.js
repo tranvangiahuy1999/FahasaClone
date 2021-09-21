@@ -276,7 +276,8 @@ const AdminIndex = (props) => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
+              // sx={{ mr: 2, display: { sm: "none" } }}
+              className={styles.menuButton}
             >
               <HiViewList color={ICON_COLOR}></HiViewList>
             </IconButton>
@@ -329,13 +330,13 @@ const AdminIndex = (props) => {
               ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
               }}
-              sx={{
-                display: { xs: "block", sm: "none" },
-                "& .MuiDrawer-paper": {
-                  boxSizing: "border-box",
-                  width: drawerWidth,
-                },
-              }}
+              // sx={{
+              //   display: { xs: "block", sm: "none" },
+              //   "& .MuiDrawer-paper": {
+              //     boxSizing: "border-box",
+              //     width: drawerWidth,
+              //   },
+              // }}
             >
               {drawer}
             </Drawer>
@@ -344,13 +345,13 @@ const AdminIndex = (props) => {
             <Drawer
               classes={{ paper: styles.drawerPaper }}
               variant="permanent"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                "& .MuiDrawer-paper": {
-                  boxSizing: "border-box",
-                  width: drawerWidth,
-                },
-              }}
+              // sx={{
+              //   display: { xs: "none", sm: "block" },
+              //   "& .MuiDrawer-paper": {
+              //     boxSizing: "border-box",
+              //     width: drawerWidth,
+              //   },
+              // }}
               open
             >
               {drawer}
@@ -429,6 +430,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
       flexShrink: 0,
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
   },
   root: {
