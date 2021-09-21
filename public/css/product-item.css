@@ -101,6 +101,7 @@ i.fa.fa-shopping-cart {
 
 a.btn.btn-secondary.rounded-circle {
     width: 42px;
+    margin-right: 8px;
     height: 40px;
     background-color: #dfdfdf;
     border: #cacaca;
@@ -422,7 +423,7 @@ ul li a.header{
 
 
 .categorycontent ul li ul .content.phai{
-    margin-left: 20px;
+    margin-left: -15px;
 }
 
 
@@ -448,11 +449,13 @@ ul li a.header{
 .dichvu p.detail {
     font-size: 12px;
     margin-bottom: 1px;
-    width: 198px;
+    width: 159px;
+    color: white;
 }
 
 .dichvu {
-    padding: 24px 0px 24px;
+    padding: 24px 0px 19px;
+    height: 120px;
 }
 
 .dichvu h6.tieude {
@@ -916,7 +919,10 @@ small.tacgia.text-muted {
     transition: 0.3s;
     padding: 3px 0px;
 }
-
+li.nav-item.giohang {
+    padding-left: 55px;
+    margin-right: 7px;
+}
 h6.card-title.ten {
     font-weight: 400;
     margin-bottom: 4px;
@@ -978,6 +984,7 @@ h6.card-title.ten {
     .navbar ul li.giohang{
         border-bottom: 1px dashed #CF111A;
         padding-bottom: 0.5rem;
+        margin-left: -55px;
         margin-right:8px;
     }
  
