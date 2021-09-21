@@ -198,40 +198,34 @@ export default function Product() {
 
   return (
     <div className={classes.root}>
+      <h5>Danh sách sản phẩm</h5>
       <div className="row mb-2">
-        <div className="col-lg-6 col-md-6">
-          <h5>Danh sách sản phẩm</h5>
+        <div className="col-lg-6 col-md-6 pt-2 pb-2">
+          <TextField
+            id="input-with-icon-textfield"
+            placeholder="Tìm kiếm sản phẩm"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IoSearch></IoSearch>
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
         </div>
-        <div className="col-lg-6 col-md-6">
-          <div className="row">
-            <div className="col-lg-6 p-2">
-              <TextField
-                id="input-with-icon-textfield"
-                placeholder="Tìm kiếm sản phẩm"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IoSearch></IoSearch>
-                    </InputAdornment>
-                  ),
-                }}
-                variant="standard"
-              />
-            </div>
-            <div className="col-lg-6 p-2 right-wrapper">
-              <Button
-                style={{
-                  backgroundColor: LOGO_COLOR,
-                  color: "white",
-                }}
-                size="small"
-                variant="contained"
-                startIcon={<GoPlus></GoPlus>}
-              >
-                Thêm sản phẩm
-              </Button>
-            </div>
-          </div>
+        <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
+          <Button
+            style={{
+              backgroundColor: LOGO_COLOR,
+              color: "white",
+            }}
+            size="small"
+            variant="contained"
+            startIcon={<GoPlus></GoPlus>}
+          >
+            Thêm sản phẩm
+          </Button>
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Hidden from "@material-ui/core/Hidden";
 import { Menu, MenuItem } from "@material-ui/core";
@@ -51,8 +51,10 @@ import {
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setCategoryData } from "../../reducers/AdminReducer";
 
 import { userlogoutsuccess } from "../../reducers/UserReducer";
+import adminApis from "../../apis/AdminApis";
 
 const drawerWidth = 250;
 
@@ -66,10 +68,19 @@ const AdminIndex = (props) => {
   const [openReceiptNest, setOpenReceiptNest] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  useEffect(() => {
+    getCategoryList();
+  }, []);
+
   const routes = [
     {
       path: "/admin/category",
-      main: () => <Category></Category>,
+      exact: true,
+      main: () => <Category getCategoryList={getCategoryList}></Category>,
+    },
+    {
+      path: "/admin/category/:id",
+      main: () => <Category getCategoryList={getCategoryList}></Category>,
     },
     {
       path: "/admin/product",
@@ -214,6 +225,17 @@ const AdminIndex = (props) => {
     </div>
   );
 
+  const getCategoryList = async () => {
+    try {
+      const res = await adminApis.getCategory();
+      if (res.status === 200) {
+        await dispatch(setCategoryData(res.data));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -341,8 +363,8 @@ const AdminIndex = (props) => {
             {routes.map((route, index) => (
               <Route
                 key={index}
-                path={route.path}
                 exact={route.exact}
+                path={route.path}
                 children={<route.main />}
               />
             ))}
