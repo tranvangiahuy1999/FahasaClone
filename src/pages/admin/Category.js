@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -14,9 +15,12 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { GoPlus } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
+import { IoIosArrowForward } from "react-icons/io";
 import { LOGO_COLOR } from "../../constants/index";
-import adminApis from "../../apis/AdminApis";
 import CreateCategoryModal from "../../components/CreateCategoryModal";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import adminApis from "../../apis/AdminApis";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -135,25 +139,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Category() {
+export default function Category(props) {
+  let { id } = useParams();
+  const cateList = useSelector((state) => state.admin);
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
   const [selected, setSelected] = useState([]);
   const [openCreateModal, setOpenCreateModal] = useState(false);
-
-  const [categoryList, setCategoryList] = useState([]);
+  const [categoryList, getCategoryList] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getCategoryList();
   }, []);
 
-  const getCategoryList = async () => {
+  useEffect(() => {
+    console.log(id);
+    if (id) {
+      getCategoryByParentId(id);
+    } else {
+      getCategoryList([...cateList.categoryData]);
+    }
+  }, [id, cateList]);
+
+  const getCategoryByParentId = async (id) => {
     try {
-      const res = await adminApis.getCategory();
+      const query = `?parentId=${id}`;
+      const res = await adminApis.getCategoryByParent(query);
       if (res.status === 200) {
-        setCategoryList(res.data);
+        getCategoryList([...res.data]);
       }
     } catch (e) {
       console.log(e);
@@ -170,7 +184,7 @@ export default function Category() {
 
   const createModalHandleCloseAfterSave = () => {
     createModalHandleClose();
-    getCategoryList();
+    props.getCategoryList();
   };
 
   const convertTime = (unformatTime) => {
@@ -199,25 +213,25 @@ export default function Category() {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
+  // const handleClick = (event, name) => {
+  //   const selectedIndex = selected.indexOf(name);
+  //   let newSelected = [];
 
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
+  //   if (selectedIndex === -1) {
+  //     newSelected = newSelected.concat(selected, name);
+  //   } else if (selectedIndex === 0) {
+  //     newSelected = newSelected.concat(selected.slice(1));
+  //   } else if (selectedIndex === selected.length - 1) {
+  //     newSelected = newSelected.concat(selected.slice(0, -1));
+  //   } else if (selectedIndex > 0) {
+  //     newSelected = newSelected.concat(
+  //       selected.slice(0, selectedIndex),
+  //       selected.slice(selectedIndex + 1)
+  //     );
+  //   }
 
-    setSelected(newSelected);
-  };
+  //   setSelected(newSelected);
+  // };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -227,46 +241,69 @@ export default function Category() {
         open={openCreateModal}
         closeModal={createModalHandleClose}
         closeModalAfterSave={createModalHandleCloseAfterSave}
-        title="Tạo danh mục cấp 1"
+        title="Tạo danh mục"
+        parentId={id}
       ></CreateCategoryModal>
-      <div className="row mb-2">
-        <div className="col-lg-6 col-md-6">
-          <h5>Danh sách danh mục</h5>
-        </div>
-        <div className="col-lg-6 col-md-6">
-          <div className="row">
-            <div className="col-lg-6 p-2">
-              <TextField
-                id="input-with-icon-textfield"
-                placeholder="Tìm kiếm danh mục"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IoSearch></IoSearch>
-                    </InputAdornment>
-                  ),
-                }}
-                variant="standard"
-              />
-            </div>
-            <div className="col-lg-6 p-2 right-wrapper">
-              <Button
-                style={{
-                  backgroundColor: LOGO_COLOR,
-                  color: "white",
-                }}
-                size="small"
-                onClick={createModalHandleOpen}
-                variant="contained"
-                startIcon={<GoPlus></GoPlus>}
+      <div className="row m-0 p-0">
+        <h5>Danh sách danh mục</h5>
+        <span className="pl-3">
+          <Breadcrumbs
+            separator={<IoIosArrowForward size="16px" />}
+            aria-label="breadcrumb"
+          >
+            <Link color="inherit" to="/admin/category">
+              Danh mục 1
+            </Link>
+            {props.parentId && (
+              <Link
+                color="inherit"
+                to={`/admin/category/${props.parentId}?parentId=${props.parentId}`}
               >
-                Thêm danh mục
-              </Button>
-            </div>
-          </div>
-        </div>
+                Danh mục 2
+              </Link>
+            )}
+            {id !== props.parentId && (
+              <Link
+                color="inherit"
+                to={`/admin/category/${id}?parentId=${props.parentId}`}
+              >
+                Danh mục 3
+              </Link>
+            )}
+          </Breadcrumbs>
+        </span>
       </div>
 
+      <div className="row mb-2">
+        <div className="col-lg-6 col-md-6 pt-2 pb-2">
+          <TextField
+            id="input-with-icon-textfield"
+            placeholder="Tìm kiếm danh mục"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IoSearch></IoSearch>
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
+        </div>
+        <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
+          <Button
+            style={{
+              backgroundColor: LOGO_COLOR,
+              color: "white",
+            }}
+            size="small"
+            onClick={createModalHandleOpen}
+            variant="contained"
+            startIcon={<GoPlus></GoPlus>}
+          >
+            Thêm danh mục
+          </Button>
+        </div>
+      </div>
       <Paper className={classes.paper}>
         <TableContainer>
           <Table
@@ -294,7 +331,6 @@ export default function Category() {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row.name)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
@@ -311,20 +347,32 @@ export default function Category() {
                           padding="none"
                           align="center"
                         >
-                          {row.name}
+                          {row.level === 3 ? (
+                            <span>{row.name}</span>
+                          ) : (
+                            <Link
+                              to={
+                                props.parentId
+                                  ? `/admin/category/${row._id}?parentId=${props.parentId}`
+                                  : `/admin/category/${row._id}?parentId=${row._id}`
+                              }
+                            >
+                              {row.name}
+                            </Link>
+                          )}
                         </TableCell>
                         <TableCell align="center">{row.level}</TableCell>
                         <TableCell align="center">
                           {convertTime(row.createdAt)}
                         </TableCell>
                         <TableCell align="center">
-                          {row.subCate.length}
+                          {row.subCate ? row.subCate.length : 0}
                         </TableCell>
                         <TableCell align="center">
                           {row.active ? (
-                            <div>Đang được bày bán</div>
+                            <span>Đang được bày bán</span>
                           ) : (
-                            <div>Không được bày bán</div>
+                            <span>Không được bày bán</span>
                           )}
                         </TableCell>
                       </TableRow>
