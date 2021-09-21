@@ -35,6 +35,10 @@ const CreateCategoryModal = (props) => {
     setChecked(false);
   };
 
+  const convertFirstCharUppercase = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -42,20 +46,20 @@ const CreateCategoryModal = (props) => {
       let res = null;
       if (props.cateEditFilter) {
         formData = {
-          name: editName,
+          name: convertFirstCharUppercase(editName),
           active: checked,
         };
         res = await AdminApi.updateCategory(formData, props.cateEditFilter._id);
       } else {
         if (props.parentId) {
           formData = {
-            name: editName,
+            name: convertFirstCharUppercase(editName),
             parentId: props.parentId,
             active: checked,
           };
         } else {
           formData = {
-            name: editName,
+            name: convertFirstCharUppercase(editName),
             active: checked,
           };
         }
