@@ -290,7 +290,7 @@ label.error {
 
 
 .duoinavbar .container .row {
-    height: 40px;
+    height: 185px;
 }
 
 .duoinavbar {
@@ -410,7 +410,7 @@ ul i.fa.fa-chevron-right{
 
 ul li a.header{
     font-size: 15px;
-    padding-left: 33px;
+    padding-left: 17px !important;
     color: #64ae55;
 }
 
@@ -517,7 +517,7 @@ footer .header {
     color: #666666;
     text-decoration: none;
     transition: 0.2s;
-    line-height: 40px;
+    line-height: 14px;
 }
 
 .breadcrumb-item a:hover{
@@ -555,7 +555,8 @@ footer .header {
 /* het css cho product-page  */
 /* css cho khoi thong tin cua  product-page*/
 .khoithongtin .header hr {
-    margin-top: 10px;
+    margin-top: 25px;
+    width: 50%;
 }
 
 .khoithongtin .rate {color: #D9D9D5;font-size: 14px;}
@@ -573,7 +574,7 @@ footer .header {
 .khoithongtin .header h4 {
     font-weight: 400;
     font-size: 22px;
-    margin-bottom: 5px;
+    margin-bottom: 30px;
 }
 
 .khoithongtin .gia {
@@ -850,6 +851,7 @@ footer .header {
 /* css cho nut xem tat ca  */
 a.btn.btn-warning.btn-sm.text-white {
     height: 25px;
+    margin-right: 20px;
     width: 77px;
     background: #F5A623;
     font-size: 11px;

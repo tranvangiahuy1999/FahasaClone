@@ -1,18 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  categoryData: [],
-};
+const initialState = {};
 
 export const adminReducer = createSlice({
   name: "accountmanagementdata",
   initialState,
-  reducers: {
-    setCategoryData: (state, action) => {
-      state.categoryData = action.payload;
-    },
-  },
+  reducers: {},
 });
 
-export const { setCategoryData } = adminReducer.actions;
+export const {} = adminReducer.actions;
 export default adminReducer.reducer;
