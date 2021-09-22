@@ -2,7 +2,7 @@ import React, {  useEffect, useState  } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Nav from './Nav';
-import { display } from '@mui/system';
+import { display } from '@material-ui/system';
 import shopApis from "../../../apis/ShopApis";
 const  Receipt=()=> {
   const [categoryList, setCategoryList] = useState([]);
