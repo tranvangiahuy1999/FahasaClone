@@ -633,6 +633,14 @@ footer .header {
   font-size: 14px;
   margin-bottom: 13px;
 }
+
+.cateitem {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 /* het css cho footer  */
 
 @media (max-width: 767px) {

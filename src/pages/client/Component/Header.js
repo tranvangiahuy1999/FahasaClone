@@ -64,7 +64,7 @@ const Header = () => {
                       .map((value, index) => (
                         <li key={index}>
                           <div className="row">
-                            <div className="col-9">
+                            <div className="col-9 cateitem">
                               <a href="/danh-sach">{value.name}</a>
                             </div>
                             <div className="col-3">
