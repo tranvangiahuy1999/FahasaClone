@@ -58,10 +58,17 @@ const Header=()=> {
                     categoryList
                       .filter((item, idx) => idx < 11)
                       .map((value, index) => (
-                    <li  key={index}> <a href="/danh-sach"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
-                      <ul className="categorydetail container">
-                      <div className="row " style={{height:'185px'}} >
-                      {value.subCate.length ? (
+                        <li key={index}>
+                          <div className="row">
+                            <div className="col-9 cateitem">
+                              <a href="/danh-sach">{value.name}</a>
+                            </div>
+                            <div className="col-3">
+                              <i className="fa fa-chevron-right icon float-right" />
+                            </div>
+                          </div>
+                          <ul className="categorydetail">
+                            {value.subCate.length ? (
                               value.subCate
                                 .filter((item, idx) => idx < 6)
                                 .map((value, index) => (
