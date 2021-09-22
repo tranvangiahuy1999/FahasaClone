@@ -1,8 +1,26 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState  } from 'react';
 import Nav from "./Nav";
 import Footer from './Footer';
-function ProductList() {
+import shopApis from "../../../apis/ShopApis";
+const ProductList=()=> {
+  const [categoryList, setCategoryList] = useState([]);
+
+  useEffect(() => {
+    getCategoryData();
+  }, []);
+
+  const getCategoryData = async () => {
+    try {
+      const res = await shopApis.getCategoryList();
+      console.log(res);
+      if (res.status === 200) {
+        setCategoryList(res.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
     
+  };   
         return (
             <div>
                 <Nav/>
@@ -15,180 +33,65 @@ function ProductList() {
                   <i className="fa fa-bars" />
                   <span className="text-uppercase font-weight-bold ml-1">Danh mục sách</span>
                 </div>
+
                 {/* CATEGORIES */}
                 <div className="categorycontent1" >
-                  <ul>
-                    <li> <a href="#"> Sách Kinh Tế - Kỹ Năng</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Kinh Tế - Kỹ
-                            Năng</a></li>
+                  <ul >
+                  {categoryList.length ? (
+                    categoryList
+                      .filter((item, idx) => idx < 11)
+                      .map((value, index) => (
+                    <li  key={index}> <a href="/danh-sach"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
+                      <ul className="categorydetail container">
+                      <div className="row " style={{height:'185px'}} >
+                      {value.subCate.length ? (
+                              value.subCate
+                                .filter((item, idx) => idx < 6)
+                                .map((value, index) => (
+                       
+                          <div className="col-4"key={index}>
+                          <li className="liheader"><a href="/danh-sach" className="header text-uppercase"> {value.name}
+                          </a></li>
                         <div className="content trai">
-                          <li><a href="#">Kinh Tế - Chính Trị</a></li>
-                          <li><a href="#">Sách Khởi Nghiệp</a></li>
-                          <li><a href="#">Sách Tài Chính, Kế Toán</a></li>
-                          <li><a href="#">Sách Quản Trị Nhân Sự</a></li>
-                          <li><a href="#">Sách Kỹ Năng Làm Việc</a></li>
+                        {value.subCate.length ? (
+                                        value.subCate
+                                          .filter((item, idx) => idx < 5)
+                                          .map((value, index) => (
+                          <li key={index}><a href="/danh-sach">{value.name}</a></li>
+                          ))
+                          ) : (
+                            <></>
+                          )}
                         </div>
-                        <div className="content phai">
-                          <li><a href="#">Nhân Vật - Bài Học Kinh Doanh</a></li>
-                          <li><a href="#">Sách Quản Trị - Lãnh Đạo</a></li>
-                          <li><a href="#">Sách Kinh Tế Học</a></li>
-                          <li><a href="#">Sách Chứng Khoán - Bất Động Sản - Đầu Tư</a></li>
-                          <li><a href="#">Sách Marketing - Bán Hàng</a></li>
-                        </div>
+                          </div>
+                           
+                          
+                      
+                           ))
+                           ) : (
+                             <></>
+                           )}
+                          </div>
+
+                        
                       </ul>
                     </li>
-                    <li><a href>Nghệ Thuật Sống - Tâm Lý </a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Nghệ Thuật Sống -
-                            Tâm
-                            Lý</a></li>
-                        <div className="content trai">
-                          <li><a href="#">Sách Nghệ Thuật Sống</a></li>
-                          <li><a href="#">Sách Tâm Lý</a></li>
-                          <li><a href="#">Sách Hướng Nghiệp</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Sách Nghệ Thuật Sống Đẹp</a></li>
-                          <li><a href="#">Sách Tư Duy </a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Văn Học Việt Nam</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Văn Học Việt
-                            Nam</a></li>
-                        <div className="content trai">
-                          <li><a href="#">Truyện Ngắn - Tản Văn </a></li>
-                          <li><a href="#">Tiểu Thuyết lịch Sử </a></li>
-                          <li><a href="#">Phóng Sự - Ký Sự - Du ký - Tùy Bút</a></li>
-                          <li><a href="#">Thơ</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Tiểu thuyết</a></li>
-                          <li><a href="#">Tiểu sử - Hồi ký</a></li>
-                          <li><a href="#">Phê Bình Văn Học</a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Văn Học Nước Ngoài</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Văn Học Nước
-                            Ngoài</a></li>
-                        <div className="content trai">
-                          <li><a href="#">Văn Học Hiện Đại</a></li>
-                          <li><a href="#">Tiểu Thuyết </a></li>
-                          <li><a href="#">Truyện Trinh Thám</a></li>
-                          <li><a href="#">Thần Thoại - Cổ Tích</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Văn Học Kinh Điển</a></li>
-                          <li><a href="#">Sách Giả Tưởng - Kinh Dị</a></li>
-                          <li><a href="#">Truyện Kiếm Hiệp</a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Thiếu Nhi</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Thiếu
-                            Nhi</a>
-                        </li>
-                        <div className="content trai">
-                          <li><a href="#">Mẫu Giáo</a></li>
-                          <li><a href="#">Thiếu Niên</a></li>
-                          <li><a href="#">Kiến Thức - Bách Khoa</a></li>
-                          <li><a href="#">Truyện Cổ Tích</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Nhi Đồng</a></li>
-                          <li><a href="#">Văn Học Thiếu Nhi</a></li>
-                          <li><a href="#">Kỹ Năng Sống</a></li>
-                          <li><a href="#">Truyện Tranh</a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Giáo Dục - Gia Đình</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Giáo Dục -
-                            Gia
-                            Đình</a></li>
-                        <div className="content trai">
-                          <li><a href="#">Giáo dục</a></li>
-                          <li><a href="#">Thai Giáo</a></li>
-                          <li><a href="#">Sách Dinh Dưỡng - Chăm Sóc Trẻ</a></li>
-                          <li><a href="#">Ẩm Thực - Nấu Ăn</a></li>
-                          <li><a href="#">Sách Tham Khảo</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Giới Tính</a></li>
-                          <li><a href="#">Sách Làm Cha Mẹ</a></li>
-                          <li><a href="#">Kiến Thức - Kỹ Năng Cho Trẻ</a></li>
-                          <li><a href="#">Ngoại Ngữ - Từ Điển</a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Lịch Sử</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Lịch Sử</a>
-                        </li>
-                        <div className="content trai">
-                          <li><a href="#">Lịch Sử Việt Nam</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Lịch Sử Thế Giới</a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Văn Hóa - Nghệ Thuật</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Văn Hóa -
-                            Nghệ
-                            Thuật</a></li>
-                        <div className="content trai">
-                          <li><a href="#">Văn Hóa</a></li>
-                          <li><a href="#">Phong Tục Tập Quán</a></li>
-                          <li><a href="#">Phong Thủy</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Nghệ Thuật</a></li>
-                          <li><a href="#">Kiến Trúc</a></li>
-                          <li><a href="#">Du Lịch</a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Khoa Học - Triết Học</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Khoa Học -
-                            Triết
-                            Học</a></li>
-                        <div className="content trai">
-                          <li><a href="#">Triết Học Phương Tây</a></li>
-                          <li><a href="#">Khoa Học Cơ Bản</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Minh Tiết Phương Đông</a></li>
-                        </div>
-                      </ul>
-                    </li>
-                    <li><a href="#">Sách Tâm Linh - Tôn Giáo</a><i className="fa fa-chevron-right float-right" />
-                    </li>
-                    <li><a href="#">Sách Y Học - Thực Dưỡng</a><i className="fa fa-chevron-right float-right" />
-                      <ul>
-                        <li className="liheader"><a href="#" className="header text-uppercase">Sách Y Học - Thực
-                            Dưỡng</a></li>
-                        <div className="content trai">
-                          <li><a href="#">Chăm Sóc Sức Khỏe</a></li>
-                          <li><a href="#">Y Học</a></li>
-                          <li><a href="#">Thiền - Yoga</a></li>
-                        </div>
-                        <div className="content phai">
-                          <li><a href="#">Thực Dưỡng</a></li>
-                          <li><a href="#">Đông Y - Cổ Truyền</a></li>
-                        </div>
-                      </ul>
-                    </li>
+                       ))
+                       ) : (
+                         <></>
+                       )}
+                    
+                  
+                  
+                
+                   
+                   
+               
+                  
+                  
                   </ul>
                 </div>
+
               </div>
             </div>
             <div className="col-md-5 ml-auto contact d-none d-md-block">
@@ -214,7 +117,7 @@ function ProductList() {
         </section>
         {/* ảnh banner  */}
         <section className="banner">
-          <div className="container">
+          <div className="container text-center">
             <a href="sach-moi-tuyen-chon.html"><img src="images/banner-sach-ktkn.jpg" alt="banner-sach-ktkn" className="img-fluid" /></a>
           </div>
         </section>
@@ -224,7 +127,7 @@ function ProductList() {
             <div>
               <h1 className="header text-uppercase">sách kinh tế - kỹ năng</h1>
             </div>
-            <div className="the-loai-sach">
+            <div className="the-loai-sach" style={{paddingLeft:'46px'}}>
               <ul className="list-unstyled d-flex">
                 <li>
                   <a href="#" className="danh-muc text-decoration-none">
@@ -364,7 +267,26 @@ function ProductList() {
                 </div>
               </div>
               {/* các sản phẩm  */}
-              <div className="items">
+              <div className="row">
+                <div className='col-3'>
+              
+                      <div className="thongtinsach1">
+                        <ul>
+                        {categoryList.length ? (
+                    categoryList
+                      .filter((item, idx) => idx < 11)
+                      .map((value, index) => (
+                          <li  key={index}><a href="#" style={{color:'black'}}>{value.name}</a></li>
+                          ))
+                          ) : (
+                            <></>
+                          )}
+                        </ul>
+                    
+                    </div>
+                </div>
+                <div className="col-9">
+                <div className="items">
                 <div className="row">
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                     <div className="card ">
@@ -582,14 +504,18 @@ function ProductList() {
                 </div>
               </div>
               {/*het khoi san pham*/}
+                </div>
+              
+              </div>
+           
             </div>
             {/*het div noidung*/}
           </div>
           {/*het container*/}
         </section>
         {/*het _1khoi*/}
-        <section className="abovefooter text-white" style={{backgroundColor: '#64ae55'}}>
-          <div className="container">
+        <section className="abovefooter text-white" >
+          <div className="container"style={{backgroundColor: '#64ae55'}}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
                 <div className="dichvu d-flex align-items-center">

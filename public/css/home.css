@@ -368,8 +368,8 @@ ul i.fa.fa-chevron-right.icon{
     text-align: left;
 }
 .categorycontent ul li ul li.liheader1{
-    margin-top: -34px;
-    margin-right: 18%;
+    margin-top: 10px !important;
+    margin-left: 16px;
 }
 ul li a.header{
     font-size: 15px;
@@ -671,13 +671,12 @@ footer .header {
     margin-top: -2%;
 }
 
-.col-md-3 {
+.content.trai li a {
+    font-size: 10px;
+    line-height: 0px;
 }
-
-i.fa.fa-phone {
-}
-
-span {
+.row.tren {
+    height: 185px;
 }
 
 i.fa.fa-phone {
@@ -694,4 +693,33 @@ i.fas.fa-comments-dollar {
 
 .carousel-inner {
     margin-left: -13px;
+}
+
+div#step2header {
+    height: 57px;
+}
+
+.thongtinsach {
+    border: 1px solid gray;
+}
+
+.thongtinsach1 {
+    border: 1px solid gray;
+    margin-left: 18px;
+}
+
+.thongtinsach1 ul li {
+    list-style: none;
+}
+
+i.fa.fa-chevron-right.icon.float-right {
+    margin-top: 15px;
+}
+
+span.input-group-text.btn-spin.btn-inc {
+    padding-left: 5px;
+}
+
+span.input-group-text.btn-spin.btn-dec {
+    padding-left: 5px;
 }

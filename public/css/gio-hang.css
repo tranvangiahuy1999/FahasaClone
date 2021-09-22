@@ -284,9 +284,11 @@ label.error {
     box-sizing: border-box;
     height: 387px;
     margin-top: 8px;
+    margin-left: -2px;
     position: relative;
     z-index: 10;
     background: white;
+    color: black;
 }
 
 .categorycontent1 ul{
@@ -297,6 +299,9 @@ label.error {
 .categorycontent1 > ul > li:hover{
     background-color: #64ae55;
     cursor: pointer;
+    width: 277px;
+    margin-left: -31px;
+    padding-left: 31px;
 }
 
 .categorycontent1 > ul > li:hover > a{
@@ -318,7 +323,7 @@ label.error {
 
 .categorycontent1  ul  li  a{
     line-height: 35px;
-    padding-left: 16px;
+    padding-left: -30px;
     font-weight: 400;
     font-size: 13px;
 }
@@ -332,7 +337,7 @@ label.error {
     z-index: 99;
     top: -1px;
     left: -16px;
-    margin-left: 270px;
+    margin-left: 295px;
     box-shadow: 0px 1px 3px #e7dddd;
     background-color: white;
 }
@@ -371,7 +376,7 @@ ul i.fa.fa-chevron-right{
 
 ul li a.header{
     font-size: 15px;
-    padding-left: 33px;
+    padding-left: 33px !important;
     color: #64ae55;
 }
 
@@ -528,7 +533,7 @@ footer .header {
 }
 
 .soluong .input-number {
-    width: 73px;
+    width: 90px;
     height: 20px;
 }
 
@@ -752,8 +757,28 @@ button.receiptbtn {
     margin-left: 68%;
 }
 /* het css cho cart-steps  */
-
-@media (max-width:767px){
+@media only screen and (max-width: 1024px) {
+    .duoinavbar {
+        height: 40px;
+        width: 94%;
+    }
+    .categorycontent {
+        border: 1px solid #b4b2b2;
+        box-sizing: border-box;
+      width: 100%;
+        height: 387px;
+        background: white;
+        text-align: left;
+    }
+    .carousel-inner {
+        position: relative !important;
+        width: 90% !important;
+        overflow: hidden !important;
+        margin-left: 60px !important;
+    }
+ 
+}
+@media (max-width:768px){
     .navbar form .input-group{
         width: 100%!important;
 
@@ -801,12 +826,19 @@ button.receiptbtn {
         margin-left: 61%;
         margin-bottom: -2%;
     }
+    .col-md-5.giua {
+        margin-left: -25px !important;
+        margin-top: 36px;
+    }
     .group.d-flex.justify-content-between {
     margin-right: 0px !important;
     margin-left: 0px !important;
 }
 }
-
+.col-md-5.giua {
+    margin-left: 87px;
+    margin-top: 36px;
+}
 
 
 .group.d-flex.justify-content-between {
