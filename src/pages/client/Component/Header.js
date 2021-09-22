@@ -63,8 +63,14 @@ const Header = () => {
                       .filter((item, idx) => idx < 11)
                       .map((value, index) => (
                         <li key={index}>
-                          <a>{value.name}</a>
-                          <i className="fa fa-chevron-right icon float-right" />
+                          <div className="row">
+                            <div className="col-9">
+                              <a href="/danh-sach">{value.name}</a>
+                            </div>
+                            <div className="col-3">
+                              <i className="fa fa-chevron-right icon float-right" />
+                            </div>
+                          </div>
                           <ul className="categorydetail">
                             {value.subCate.length ? (
                               value.subCate
