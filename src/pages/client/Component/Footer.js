@@ -7,11 +7,12 @@ function Footer() {
             <footer>
               <div className="container py-4">
                 <div className="row">
-                  <div className="col-md-4 col-xs-6">
+                  <div className="col-md-6 col-xs-6">
                     <div className="gioithieu">
                       <h3 className="header text-uppercase font-weight-bold">Về DealBook</h3>
                       <a href="#">Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM</a>
-                      <a href="#"></a>
+                      <a href="#">Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.</a>
+                      <a href="#">     <img src="images/1.png" alt="jcb-payment" /></a>
                       <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
                     </div>
                   </div>
@@ -24,13 +25,8 @@ function Footer() {
                       <a href="#">Chính sách đổi trả</a>
                     </div>
                   </div>
+                
                   <div className="col-md-3 col-xs-6">
-                    <div className="lienket">
-                      <h3 className="header text-uppercase font-weight-bold">HỢP TÁC VÀ LIÊN KẾT</h3>
-                      <img src="images/dang-ky-bo-cong-thuong.png" alt="dang-ky-bo-cong-thuong" />
-                    </div>
-                  </div>
-                  <div className="col-md-2 col-xs-6">
                     <div className="ptthanhtoan">
                       <h3 className="header text-uppercase font-weight-bold">Phương thức thanh toán</h3>
                       <img src="images/visa-payment.jpg" alt="visa-payment" />

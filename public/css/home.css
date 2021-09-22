@@ -244,6 +244,7 @@ label.error {
 
 .categoryheader {
     height: 40px;
+    margin-left: 26px;
     background-color: 	#006400;
 }
 
@@ -286,6 +287,7 @@ label.error {
 
 .categorycontent ul{
     list-style: none;
+    padding-left: 0px;
     background: white;
 }
 
@@ -321,13 +323,13 @@ label.error {
 .categorycontent ul li ul{
     display: none;
     height: 386px;
-    width: 855px;
+    width: 970px;
     border: 1px solid #d1d1d1;
     position: absolute;
     z-index: 99;
     top: 0px;
     left: 0px;
-    margin-left: 270px;
+    margin-left: 318px;
     box-shadow: 0px 1px 3px #e7dddd;
     background-color: white;
 }
@@ -366,8 +368,8 @@ ul i.fa.fa-chevron-right.icon{
     text-align: left;
 }
 .categorycontent ul li ul li.liheader1{
-    margin-top: -34px;
-    margin-right: 18%;
+    margin-top: 10px !important;
+    margin-left: 16px;
 }
 ul li a.header{
     font-size: 15px;
@@ -408,10 +410,16 @@ ul li a.header{
 
 ._1khoi h1.header {
     font-size: 20px;
+    margin-left: 25px;
+    margin-top: 15px;
+    margin-bottom: 25px;
 }
 
 ._1khoi h2.header {
     font-size: 20px;
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-bottom: 36px;
 }
 
 /* css cho nut xem tat ca  */
@@ -661,4 +669,57 @@ footer .header {
 
 .privacy.py-sm-5.py-4 {
     margin-top: -2%;
+}
+
+.content.trai li a {
+    font-size: 10px;
+    line-height: 0px;
+}
+.row.tren {
+    height: 185px;
+}
+
+i.fa.fa-phone {
+    padding-right: 3px;
+}
+
+i.fas.fa-comments-dollar {
+    padding-right: 5px;
+}
+
+.resp-tab-content.hor_1.resp-tab-content-active {
+    padding-bottom: 74px;
+}
+
+.carousel-inner {
+    margin-left: -13px;
+}
+
+div#step2header {
+    height: 57px;
+}
+
+.thongtinsach {
+    border: 1px solid gray;
+}
+
+.thongtinsach1 {
+    border: 1px solid gray;
+    margin-left: 18px;
+}
+
+.thongtinsach1 ul li {
+    list-style: none;
+}
+
+i.fa.fa-chevron-right.icon.float-right {
+    margin-top: 15px;
+}
+
+span.input-group-text.btn-spin.btn-inc {
+    padding-left: 5px;
+}
+
+span.input-group-text.btn-spin.btn-dec {
+    padding-left: 5px;
 }
