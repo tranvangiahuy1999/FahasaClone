@@ -1,64 +1,110 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./Component/Footer";
-import Header from "./Component/Header"
+import Header from "./Component/Header";
 import Nav from "./Component/Nav";
 function HomePage() {
   return (
     <div>
-           <Nav/>
-        <Header/>
-      
-         <div>
+      <Nav />
+      <Header />
+
+      <div>
         {/* khoi sach moi  */}
         <section className="_1khoi sachmoi bg-light">
           <div className="container">
-            <div className="noidung" style={{width: '100%'}}>
+            <div className="noidung" style={{ width: "100%" }}>
               <div className="row">
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
-                  <h1 className="header text-uppercase" style={{fontWeight: 400}}>SÁCH MỚI TUYỂN CHỌN</h1>
-                  <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                  <h1
+                    className="header text-uppercase"
+                    style={{ fontWeight: 400 }}
+                  >
+                    SÁCH MỚI TUYỂN CHỌN
+                  </h1>
+                  <a
+                    href="sach-moi-tuyen-chon.html"
+                    className="btn btn-warning btn-sm text-white"
+                  >
+                    Xem tất cả
+                  </a>
                 </div>
               </div>
+
               <div className="khoisanpham container" style={{paddingBottom: '2rem'}}>
                 {/* 1 san pham */}
                 <div className="card">
-                  <a href="/chi-tiet" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                    <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                  <a
+                    href="/chi-tiet"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h3>
+                      <h3 className="card-title ten">
+                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                      </h3>
                       <small className="tacgia text-muted">Brian Finch</small>
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                   
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="Ma-bun-luu-manh-va-nhung-cau-chuyen-khac-cua-nguyen-tri.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Ma Bùn Lưu Manh Và Những Câu Chuyện Khác Của Nguyễn
-                        Trí">
-                    <img className="card-img-top anh" src="images/ma-bun-luu-manh.jpg" alt="ma-bun-luu-manh" />
+                  <a
+                    href="Ma-bun-luu-manh-va-nhung-cau-chuyen-khac-cua-nguyen-tri.html"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Ma Bùn Lưu Manh Và Những Câu Chuyện Khác Của Nguyễn
+                        Trí"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/ma-bun-luu-manh.jpg"
+                      alt="ma-bun-luu-manh"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Ma Bùn Lưu Manh Và Những Câu Chuyện Khác Của Nguyễn
-                        Trí</h3>
+                      <h3 className="card-title ten">
+                        Ma Bùn Lưu Manh Và Những Câu Chuyện Khác Của Nguyễn Trí
+                      </h3>
                       <small className="tacgia text-muted">Nguyễn Trí</small>
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">68.000 ₫</div>
                         <div className="giacu text-muted">85.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                  
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Bank 4.0 - Giao dịch mọi nơi, không chỉ là ngân hàng">
-                    <img className="card-img-top anh" src="images/bank-4.0.jpg" alt="bank-4.0" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Bank 4.0 - Giao dịch mọi nơi, không chỉ là ngân hàng"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/bank-4.0.jpg"
+                      alt="bank-4.0"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Bank 4.0 - Giao dịch mọi nơi, không chỉ là ngân hàng
+                      <h3 className="card-title ten">
+                        Bank 4.0 - Giao dịch mọi nơi, không chỉ là ngân hàng
                       </h3>
                       <small className="tacgia text-muted">Brett King</small>
                       <div className="gia d-flex align-items-baseline">
@@ -66,85 +112,150 @@ function HomePage() {
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                     
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Bộ Sách 500 Câu Chuyện Đạo Đức - Những Câu Chuyện
-                        Tình Thân (Bộ 8 Cuốn)">
-                    <img className="card-img-top anh" src="images/bo-sach-500-cau-chuyen-dao-duc.jpg" alt="bo-sach-500-cau-chuyen-dao-duc" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Bộ Sách 500 Câu Chuyện Đạo Đức - Những Câu Chuyện
+                        Tình Thân (Bộ 8 Cuốn)"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/bo-sach-500-cau-chuyen-dao-duc.jpg"
+                      alt="bo-sach-500-cau-chuyen-dao-duc"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Bộ Sách 500 Câu Chuyện Đạo Đức - Những Câu Chuyện
-                        Tình Thân (Bộ 8 Cuốn)</h3>
-                      <small className="tacgia text-muted">Nguyễn Hạnh - Trần Thị Thanh Nguyên</small>
+                      <h3 className="card-title ten">
+                        Bộ Sách 500 Câu Chuyện Đạo Đức - Những Câu Chuyện Tình
+                        Thân (Bộ 8 Cuốn)
+                      </h3>
+                      <small className="tacgia text-muted">
+                        Nguyễn Hạnh - Trần Thị Thanh Nguyên
+                      </small>
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                     
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lịch Sử Ung Thư - Hoàng Đế Của Bách Bệnh">
-                    <img className="card-img-top anh" src="images/ung-thu-hoang-de-cua-bach-benh.jpg" alt="ung-thu-hoang-de-cua-bach-benh" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Lịch Sử Ung Thư - Hoàng Đế Của Bách Bệnh"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/ung-thu-hoang-de-cua-bach-benh.jpg"
+                      alt="ung-thu-hoang-de-cua-bach-benh"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Lịch Sử Ung Thư - Hoàng Đế Của Bách Bệnh</h3>
-                      <small className="tacgia text-muted">Siddhartha Mukherjee</small>
+                      <h3 className="card-title ten">
+                        Lịch Sử Ung Thư - Hoàng Đế Của Bách Bệnh
+                      </h3>
+                      <small className="tacgia text-muted">
+                        Siddhartha Mukherjee
+                      </small>
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Cuốn Sách Khám Phá: Trời Đêm Huyền Diệu">
-                    <img className="card-img-top anh" src="images/troi-dem-huyen-dieu.jpg" alt="troi-dem-huyen-dieu" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Cuốn Sách Khám Phá: Trời Đêm Huyền Diệu"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/troi-dem-huyen-dieu.jpg"
+                      alt="troi-dem-huyen-dieu"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Cuốn Sách Khám Phá: Trời Đêm Huyền Diệu</h3>
-                      <small className="tacgia text-muted">Disney Learning</small>
+                      <h3 className="card-title ten">
+                        Cuốn Sách Khám Phá: Trời Đêm Huyền Diệu
+                      </h3>
+                      <small className="tacgia text-muted">
+                        Disney Learning
+                      </small>
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Bộ Sách Những Câu Chuyện Cho Con Thành Người Tử Tế (Bộ 5 Cuốn)">
-                    <img className="card-img-top anh" src="images/bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te.jpg" alt="bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Bộ Sách Những Câu Chuyện Cho Con Thành Người Tử Tế (Bộ 5 Cuốn)"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te.jpg"
+                      alt="bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Bộ Sách Những Câu Chuyện Cho Con Thành Người Tử Tế (Bộ 5
-                        Cuốn)</h3>
+                      <h3 className="card-title ten">
+                        Bộ Sách Những Câu Chuyện Cho Con Thành Người Tử Tế (Bộ 5
+                        Cuốn)
+                      </h3>
                       <small className="tacgia text-muted">Nhiều Tác Giả</small>
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                     
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lịch Sử Thế Giới">
-                    <img className="card-img-top anh" src="images/lich-su-the-gioi.jpg" alt="lich-su-the-gioi" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Lịch Sử Thế Giới"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/lich-su-the-gioi.jpg"
+                      alt="lich-su-the-gioi"
+                    />
                     <div className="card-body noidungsp mt-3">
                       <h3 className="card-title ten">Lịch Sử Thế Giới</h3>
-                      <small className="tacgia text-muted">Nam Phong tùng thư - Phạm Quỳnh chủ nhiệm</small>
+                      <small className="tacgia text-muted">
+                        Nam Phong tùng thư - Phạm Quỳnh chủ nhiệm
+                      </small>
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      
                     </div>
                   </a>
                 </div>
@@ -155,368 +266,680 @@ function HomePage() {
         {/* khoi sach combo hot  */}
         <section className="_1khoi combohot mt-4">
           <div className="container">
-            <div className="noidung bg-white" style={{width: '100%'}}>
+            <div className="noidung bg-white" style={{ width: "100%" }}>
               <div className="row">
                 {/*header */}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
-                  <h2 className="header text-uppercase" style={{fontWeight: 400}}>COMBO SÁCH HOT - GIẢM ĐẾN 25%</h2>
-                  <a href="#" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                  <h2
+                    className="header text-uppercase"
+                    style={{ fontWeight: 400 }}
+                  >
+                    COMBO SÁCH HOT - GIẢM ĐẾN 25%
+                  </h2>
+                  <a href="#" className="btn btn-warning btn-sm text-white">
+                    Xem tất cả
+                  </a>
                 </div>
               </div>
               <div className="privacy py-sm-5 py-4 up">
-        <div className="container py-xl-4 py-lg-2">
-          {/* tittle heading */}
-         
-          {/* //tittle heading */}
-          <div className="checkout-right">
-            {/*Horizontal Tab*/}
-            <div id="parentHorizontalTab">
-              <ul className="resp-tabs-list hor_1">
-                <li className="tittle">Xu hướng Theo Ngày</li>
-                <li className="tittle">Sách HOT-Giảm Sốc</li>
-                <li className="tittle">BestSeller Ngữ Văn</li>
-             
-              </ul>
-              <div className="resp-tabs-container hor_1">
-                  {/* khối 1 */}
-                <div>
-                <div className="items">
-                <div className="row">
-                  <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                <div className="container py-xl-4 py-lg-2">
+                  {/* tittle heading */}
+
+                  {/* //tittle heading */}
+                  <div className="checkout-right">
+                    {/*Horizontal Tab*/}
+                    <div id="parentHorizontalTab">
+                      <ul className="resp-tabs-list hor_1">
+                        <li className="tittle">Xu hướng Theo Ngày</li>
+                        <li className="tittle">Sách HOT-Giảm Sốc</li>
+                        <li className="tittle">BestSeller Ngữ Văn</li>
+                      </ul>
+                      <div className="resp-tabs-container hor_1">
+                        {/* khối 1 */}
+                        <div>
+                          <div className="items">
+                            <div className="row">
+                              <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        
                         </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                        {/* hetkhoi1 */}
+                        {/* khối 2 */}
+                        <div>
+                          <div className="items">
+                            <div className="row">
+                              <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+
+                              <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                         
                         </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                        {/* het khoi 2 */}
+                        {/* Khối 3 */}
+                        <div>
+                          <div className="items">
+                            <div className="row">
+                              <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+
+                              <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
+                                <div className="card ">
+                                  <a
+                                    href="product-item.html"
+                                    className="motsanpham"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "black",
+                                    }}
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"
+                                  >
+                                    <img
+                                      className="card-img-top anh"
+                                      src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg"
+                                      alt="lap-ke-hoach-kinh-doanh-hieu-qua"
+                                    />
+                                    <div className="card-body noidungsp mt-3">
+                                      <h6 className="card-title ten">
+                                        Lập Kế Hoạch Kinh Doanh Hiệu Quả
+                                      </h6>
+                                      <small className="tacgia text-muted">
+                                        Brian Finch
+                                      </small>
+                                      <div className="gia d-flex align-items-baseline">
+                                        <div className="giamoi">111.200 ₫</div>
+                                        <div className="giacu text-muted">
+                                          139.000 ₫
+                                        </div>
+                                        <div className="sale">-20%</div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          
                         </div>
-                      </a>
+                        {/* hết khối 3 */}
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                         
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                         
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                          
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                         
-                        </div>
-                      </a>
-                    </div>
+
+                    {/*Plug-in Initialisation*/}
                   </div>
                 </div>
               </div>
-                </div>
-                {/* hetkhoi1 */}
-                {/* khối 2 */}
-                <div>
-                <div className="items">
-                <div className="row">
-                  <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                          
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                 
-                 
-                  
-                  <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                        
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                        
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                          
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                </div>
-                {/* het khoi 2 */}
-                {/* Khối 3 */}
-                <div>
-                <div className="items">
-                <div className="row">
-                  <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                         
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                 
-                 
-                  
-                  <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                         
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
-                    <div className="card ">
-                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
-                        <div className="card-body noidungsp mt-3">
-                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
-                          <small className="tacgia text-muted">Brian Finch</small>
-                          <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
-                          </div>
-                        
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-               
-                </div>
-              </div>
-                </div>
-                {/* hết khối 3 */}
-              
-              </div>
-            </div>
-           
-            {/*Plug-in Initialisation*/}
-          </div>
-        </div>
-      
-      </div>
             </div>
           </div>
         </section>
         {/* khoi sach sap phathanh  */}
         <section className="_1khoi sapphathanh mt-4">
           <div className="container">
-            <div className="noidung bg-white" style={{width: '100%'}}>
+            <div className="noidung bg-white" style={{ width: "100%" }}>
               <div className="row">
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
-                  <h2 className="header text-uppercase" style={{fontWeight: 400}}>SÁCH SẮP PHÁT HÀNH / ĐẶT TRƯỚC</h2>
-                  <a href="#" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                  <h2
+                    className="header text-uppercase"
+                    style={{ fontWeight: 400 }}
+                  >
+                    SÁCH SẮP PHÁT HÀNH / ĐẶT TRƯỚC
+                  </h2>
+                  <a href="#" className="btn btn-warning btn-sm text-white">
+                    Xem tất cả
+                  </a>
                 </div>
               </div>
               <div className="khoisanpham">
                 {/* 1 san pham */}
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Ngoại Giao Của Chính Quyền Sài Gòn">
-                    <img className="card-img-top anh" src="images/ngoai-giao-cua-chinh-quyen-sai-gon.jpg" alt="ngoai-giao-cua-chinh-quyen-sai-gon" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Ngoại Giao Của Chính Quyền Sài Gòn"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/ngoai-giao-cua-chinh-quyen-sai-gon.jpg"
+                      alt="ngoai-giao-cua-chinh-quyen-sai-gon"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Ngoại Giao Của Chính Quyền Sài Gòn</h3>
+                      <h3 className="card-title ten">
+                        Ngoại Giao Của Chính Quyền Sài Gòn
+                      </h3>
                       <small className="tacgia text-muted">Brian Finch</small>
-                      <div className="gia d-flex align-items-baseline">
-                      </div>
-                     
+                      <div className="gia d-flex align-items-baseline"></div>
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Đường Mây Trên Đất Hoa">
-                    <img className="card-img-top anh" src="images/duong-may-tren-dat-hoa.jpg" alt="duong-may-tren-dat-hoa" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Đường Mây Trên Đất Hoa"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/duong-may-tren-dat-hoa.jpg"
+                      alt="duong-may-tren-dat-hoa"
+                    />
                     <div className="card-body noidungsp mt-3">
                       <h3 className="card-title ten">Đường Mây Trên Đất Hoa</h3>
                       <small className="tacgia text-muted">Brian Finch</small>
-                      <div className="gia d-flex align-items-baseline">
-                      </div>
-                    
+                      <div className="gia d-flex align-items-baseline"></div>
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Muôn Kiếp Nhân Sinh">
-                    <img className="card-img-top anh" src="images/muon-kiep-nhan-sinh.jpg" alt="muon-kiep-nhan-sinh" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Muôn Kiếp Nhân Sinh"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/muon-kiep-nhan-sinh.jpg"
+                      alt="muon-kiep-nhan-sinh"
+                    />
                     <div className="card-body noidungsp mt-3">
                       <h3 className="card-title ten">Muôn Kiếp Nhân Sinh</h3>
                       <small className="tacgia text-muted">Brian Finch</small>
-                      <div className="gia d-flex align-items-baseline">
-                      </div>
-                     
+                      <div className="gia d-flex align-items-baseline"></div>
                     </div>
                   </a>
                 </div>
                 <div className="card">
-                  <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Đường Mây Trong Cõi Mộng">
-                    <img className="card-img-top anh" src="images/duong-may-trong-coi-mong.jpg" alt="duong-may-trong-coi-mong.jpg" />
+                  <a
+                    href="#"
+                    className="motsanpham"
+                    style={{ textDecoration: "none", color: "black" }}
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Đường Mây Trong Cõi Mộng"
+                  >
+                    <img
+                      className="card-img-top anh"
+                      src="images/duong-may-trong-coi-mong.jpg"
+                      alt="duong-may-trong-coi-mong.jpg"
+                    />
                     <div className="card-body noidungsp mt-3">
-                      <h3 className="card-title ten">Đường Mây Trong Cõi Mộng</h3>
+                      <h3 className="card-title ten">
+                        Đường Mây Trong Cõi Mộng
+                      </h3>
                       <small className="tacgia text-muted">Brian Finch</small>
-                      <div className="gia d-flex align-items-baseline">
-                      </div>
-                     
+                      <div className="gia d-flex align-items-baseline"></div>
                     </div>
                   </a>
                 </div>
@@ -527,66 +950,258 @@ function HomePage() {
         {/* div _1khoi -- khoi sachnendoc */}
         <section className="_1khoi sachnendoc bg-light mt-4">
           <div className="container">
-            <div className="noidung" style={{width: '100%'}}>
+            <div className="noidung" style={{ width: "100%" }}>
               <div className="row">
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
-                  <h2 className="header text-uppercase" style={{fontWeight: 400}}>SÁCH HAY NÊN ĐỌC</h2>
-                  <a href="#" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                  <h2
+                    className="header text-uppercase"
+                    style={{ fontWeight: 400 }}
+                  >
+                    SÁCH HAY NÊN ĐỌC
+                  </h2>
+                  <a href="#" className="btn btn-warning btn-sm text-white">
+                    Xem tất cả
+                  </a>
                 </div>
                 {/* 1 san pham */}
                 <div className="col-lg col-sm-4">
                   <div className="card">
-                    <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Từng bước chân nở hoa: Khi câu kinh bước tới">
-                      <img className="card-img-top anh" src="images/tung-buoc-chan-no-hoa.jpg" alt="tung-buoc-chan-no-hoa" />
-                    </a><div className="card-body noidungsp mt-3"><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Từng bước chân nở hoa: Khi câu kinh bước tới">
-                        <h3 className="card-title ten">Từng bước chân nở hoa: Khi câu kinh bước tới</h3>
-                        <small className="thoigian text-muted">03/04/2020</small>
-                      </a><div><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Từng bước chân nở hoa: Khi câu kinh bước tới" /><a className="detail" href="#">Xem chi tiết</a></div>
+                    <a
+                      href="#"
+                      className="motsanpham"
+                      style={{ textDecoration: "none", color: "black" }}
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Từng bước chân nở hoa: Khi câu kinh bước tới"
+                    >
+                      <img
+                        className="card-img-top anh"
+                        src="images/tung-buoc-chan-no-hoa.jpg"
+                        alt="tung-buoc-chan-no-hoa"
+                      />
+                    </a>
+                    <div className="card-body noidungsp mt-3">
+                      <a
+                        href="#"
+                        className="motsanpham"
+                        style={{ textDecoration: "none", color: "black" }}
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Từng bước chân nở hoa: Khi câu kinh bước tới"
+                      >
+                        <h3 className="card-title ten">
+                          Từng bước chân nở hoa: Khi câu kinh bước tới
+                        </h3>
+                        <small className="thoigian text-muted">
+                          03/04/2020
+                        </small>
+                      </a>
+                      <div>
+                        <a
+                          href="#"
+                          className="motsanpham"
+                          style={{ textDecoration: "none", color: "black" }}
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Từng bước chân nở hoa: Khi câu kinh bước tới"
+                        />
+                        <a className="detail" href="#">
+                          Xem chi tiết
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg col-sm-4">
                   <div className="card">
-                    <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Cảm ơn vì đã được thương">
-                      <img className="card-img-top anh" src="images/cam-on-vi-da-duoc-thuong.jpg" alt="cam-on-vi-da-duoc-thuong" />
-                    </a><div className="card-body noidungsp mt-3"><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Cảm ơn vì đã được thương">
-                        <h3 className="card-title ten">Cảm ơn vì đã được thương</h3>
-                        <small className="thoigian text-muted">31/03/2020</small>
-                      </a><div><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Cảm ơn vì đã được thương" /><a className="detail" href="#">Xem chi tiết</a></div>
+                    <a
+                      href="#"
+                      className="motsanpham"
+                      style={{ textDecoration: "none", color: "black" }}
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Cảm ơn vì đã được thương"
+                    >
+                      <img
+                        className="card-img-top anh"
+                        src="images/cam-on-vi-da-duoc-thuong.jpg"
+                        alt="cam-on-vi-da-duoc-thuong"
+                      />
+                    </a>
+                    <div className="card-body noidungsp mt-3">
+                      <a
+                        href="#"
+                        className="motsanpham"
+                        style={{ textDecoration: "none", color: "black" }}
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Cảm ơn vì đã được thương"
+                      >
+                        <h3 className="card-title ten">
+                          Cảm ơn vì đã được thương
+                        </h3>
+                        <small className="thoigian text-muted">
+                          31/03/2020
+                        </small>
+                      </a>
+                      <div>
+                        <a
+                          href="#"
+                          className="motsanpham"
+                          style={{ textDecoration: "none", color: "black" }}
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Cảm ơn vì đã được thương"
+                        />
+                        <a className="detail" href="#">
+                          Xem chi tiết
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg col-sm-4">
                   <div className="card">
-                    <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Hào quang của vua Gia Long trong mắt Michel Gaultier">
-                      <img className="card-img-top anh" src="images/vua-gia-long.jpg" alt="vua-gia-long" />
-                    </a><div className="card-body noidungsp mt-3"><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Hào quang của vua Gia Long trong mắt Michel Gaultier">
-                        <h3 className="card-title ten">Hào quang của vua Gia Long trong mắt Michel Gaultier</h3>
-                        <small className="thoigian text-muted">21/03/2020</small>
-                      </a><div><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Hào quang của vua Gia Long trong mắt Michel Gaultier" /><a className="detail" href="#">Xem chi tiết</a></div>
+                    <a
+                      href="#"
+                      className="motsanpham"
+                      style={{ textDecoration: "none", color: "black" }}
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Hào quang của vua Gia Long trong mắt Michel Gaultier"
+                    >
+                      <img
+                        className="card-img-top anh"
+                        src="images/vua-gia-long.jpg"
+                        alt="vua-gia-long"
+                      />
+                    </a>
+                    <div className="card-body noidungsp mt-3">
+                      <a
+                        href="#"
+                        className="motsanpham"
+                        style={{ textDecoration: "none", color: "black" }}
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Hào quang của vua Gia Long trong mắt Michel Gaultier"
+                      >
+                        <h3 className="card-title ten">
+                          Hào quang của vua Gia Long trong mắt Michel Gaultier
+                        </h3>
+                        <small className="thoigian text-muted">
+                          21/03/2020
+                        </small>
+                      </a>
+                      <div>
+                        <a
+                          href="#"
+                          className="motsanpham"
+                          style={{ textDecoration: "none", color: "black" }}
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Hào quang của vua Gia Long trong mắt Michel Gaultier"
+                        />
+                        <a className="detail" href="#">
+                          Xem chi tiết
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg col-sm-4">
                   <div className="card">
-                    <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Suối nguồn” và cái tôi hiện sinh trong từng cá thể">
-                      <img className="card-img-top anh" src="images/suoi-nguon-va-cai-toi-trong-tung-ca-the.jpg" alt="suoi-nguon-va-cai-toi-trong-tung-ca-the" />
-                    </a><div className="card-body noidungsp mt-3"><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Suối nguồn” và cái tôi hiện sinh trong từng cá thể">
-                        <h3 className="card-title ten">"Suối nguồn” và cái tôi hiện sinh trong từng cá thể</h3>
-                        <small className="thoigian text-muted">16/03/2020</small>
-                      </a><div><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Suối nguồn” và cái tôi hiện sinh trong từng cá thể" /><a className="detail" href="#">Xem chi tiết</a></div>
+                    <a
+                      href="#"
+                      className="motsanpham"
+                      style={{ textDecoration: "none", color: "black" }}
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Suối nguồn” và cái tôi hiện sinh trong từng cá thể"
+                    >
+                      <img
+                        className="card-img-top anh"
+                        src="images/suoi-nguon-va-cai-toi-trong-tung-ca-the.jpg"
+                        alt="suoi-nguon-va-cai-toi-trong-tung-ca-the"
+                      />
+                    </a>
+                    <div className="card-body noidungsp mt-3">
+                      <a
+                        href="#"
+                        className="motsanpham"
+                        style={{ textDecoration: "none", color: "black" }}
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Suối nguồn” và cái tôi hiện sinh trong từng cá thể"
+                      >
+                        <h3 className="card-title ten">
+                          "Suối nguồn” và cái tôi hiện sinh trong từng cá thể
+                        </h3>
+                        <small className="thoigian text-muted">
+                          16/03/2020
+                        </small>
+                      </a>
+                      <div>
+                        <a
+                          href="#"
+                          className="motsanpham"
+                          style={{ textDecoration: "none", color: "black" }}
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Suối nguồn” và cái tôi hiện sinh trong từng cá thể"
+                        />
+                        <a className="detail" href="#">
+                          Xem chi tiết
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg col-sm-4">
                   <div className="card cuoicung">
-                    <a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Đại dịch trên những con đường tơ lụa">
-                      <img className="card-img-top anh" src="images/dai-dich-tren-con-duong-to-lua.jpg" alt="dai-dich-tren-con-duong-to-lua" />
-                    </a><div className="card-body noidungsp mt-3"><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Đại dịch trên những con đường tơ lụa">
-                        <h3 className="card-title ten">Đại dịch trên những con đường tơ lụa</h3>
-                        <small className="thoigian text-muted">16/03/2020</small>
-                      </a><div><a href="#" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Đại dịch trên những con đường tơ lụa" /><a className="detail" href="#">Xem chi tiết</a></div>
+                    <a
+                      href="#"
+                      className="motsanpham"
+                      style={{ textDecoration: "none", color: "black" }}
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="Đại dịch trên những con đường tơ lụa"
+                    >
+                      <img
+                        className="card-img-top anh"
+                        src="images/dai-dich-tren-con-duong-to-lua.jpg"
+                        alt="dai-dich-tren-con-duong-to-lua"
+                      />
+                    </a>
+                    <div className="card-body noidungsp mt-3">
+                      <a
+                        href="#"
+                        className="motsanpham"
+                        style={{ textDecoration: "none", color: "black" }}
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="Đại dịch trên những con đường tơ lụa"
+                      >
+                        <h3 className="card-title ten">
+                          Đại dịch trên những con đường tơ lụa
+                        </h3>
+                        <small className="thoigian text-muted">
+                          16/03/2020
+                        </small>
+                      </a>
+                      <div>
+                        <a
+                          href="#"
+                          className="motsanpham"
+                          style={{ textDecoration: "none", color: "black" }}
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="Đại dịch trên những con đường tơ lụa"
+                        />
+                        <a className="detail" href="#">
+                          Xem chi tiết
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -596,14 +1211,16 @@ function HomePage() {
           </div>
         </section>
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-        <section className="abovefooter text-white" >
-          <div className="container"style={{backgroundColor: '#64ae55'}}>
+        <section className="abovefooter text-white">
+          <div className="container" style={{ backgroundColor: "#64ae55" }}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
                 <div className="dichvu d-flex align-items-center">
                   <img src="images/icon-books.png" alt="icon-books" />
                   <div className="noidung">
-                    <h3 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH HAY</h3>
+                    <h3 className="tieude font-weight-bold">
+                      HƠN 14.000 TỰA SÁCH HAY
+                    </h3>
                     <p className="detail">Tuyển chọn bởi DealBooks</p>
                   </div>
                 </div>
@@ -612,7 +1229,9 @@ function HomePage() {
                 <div className="dichvu d-flex align-items-center">
                   <img src="images/icon-ship.png" alt="icon-ship" />
                   <div className="noidung">
-                    <h3 className="tieude font-weight-bold">MIỄN PHÍ GIAO HÀNG</h3>
+                    <h3 className="tieude font-weight-bold">
+                      MIỄN PHÍ GIAO HÀNG
+                    </h3>
                     <p className="detail">Từ 150.000đ ở TP.HCM</p>
                     <p className="detail">Từ 150.000đ ở TP.HN</p>
                   </div>
@@ -622,7 +1241,9 @@ function HomePage() {
                 <div className="dichvu d-flex align-items-center">
                   <img src="images/icon-gift.png" alt="icon-gift" />
                   <div className="noidung">
-                    <h3 className="tieude font-weight-bold">QUÀ TẶNG MIỄN PHÍ</h3>
+                    <h3 className="tieude font-weight-bold">
+                      QUÀ TẶNG MIỄN PHÍ
+                    </h3>
                     <p className="detail">Tặng Bookmark</p>
                     <p className="detail">Bao sách miễn phí</p>
                   </div>
@@ -632,8 +1253,12 @@ function HomePage() {
                 <div className="dichvu d-flex align-items-center">
                   <img src="images/icon-return.png" alt="icon-return" />
                   <div className="noidung">
-                    <h3 className="tieude font-weight-bold">ĐỔI TRẢ NHANH CHÓNG</h3>
-                    <p className="detail">Hàng bị lỗi được đổi trả nhanh chóng</p>
+                    <h3 className="tieude font-weight-bold">
+                      ĐỔI TRẢ NHANH CHÓNG
+                    </h3>
+                    <p className="detail">
+                      Hàng bị lỗi được đổi trả nhanh chóng
+                    </p>
                   </div>
                 </div>
               </div>
@@ -641,11 +1266,8 @@ function HomePage() {
           </div>
         </section>
       </div>
-        <Footer/>
+      <Footer />
     </div>
-    
-     
-    
   );
 }
 

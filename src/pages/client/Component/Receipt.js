@@ -1,3 +1,4 @@
+
 import React, {  useEffect, useState  } from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -33,7 +34,9 @@ const  Receipt=()=> {
               <div className="categoryheader">
                 <div className="noidungheader text-white">
                   <i className="fa fa-bars" />
-                  <span className="text-uppercase font-weight-bold ml-1">Danh mục sách</span>
+                  <span className="text-uppercase font-weight-bold ml-1">
+                    Danh mục sách
+                  </span>
                 </div>
 
                 {/* CATEGORIES */}
@@ -100,7 +103,9 @@ const  Receipt=()=> {
               <div className="benphai float-right">
                 <div className="hotline">
                   <i className="fa fa-phone" />
-                  <span>Hotline:<b>1900 1999</b> </span>
+                  <span>
+                    Hotline:<b>1900 1999</b>{" "}
+                  </span>
                 </div>
                 <i className="fas fa-comments-dollar" />
                 <a href="#">Hỗ trợ trực tuyến </a>
@@ -109,6 +114,7 @@ const  Receipt=()=> {
           </div>
         </div>
       </section>
+
             {/* giao diện giỏ hàng  */}
       <section className="content my-3">
         <div className="container">
@@ -335,12 +341,46 @@ const  Receipt=()=> {
                   </div>
                 </div>
               </div>
-            </section>
-            <Footer/>
-          </div> 
-        
-        );
-    }
-
+            </div>
+            <div className="col-lg-3 col-sm-6">
+              <div className="dichvu d-flex align-items-center">
+                <img src="images/icon-ship.png" alt="icon-ship" />
+                <div className="noidung">
+                  <h6 className="tieude font-weight-bold">
+                    MIỄN PHÍ GIAO HÀNG
+                  </h6>
+                  <p className="detail">Từ 150.000đ ở TP.HCM</p>
+                  <p className="detail">Từ 300.000đ ở tỉnh thành khác</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-sm-6">
+              <div className="dichvu d-flex align-items-center">
+                <img src="images/icon-gift.png" alt="icon-gift" />
+                <div className="noidung">
+                  <h6 className="tieude font-weight-bold">QUÀ TẶNG MIỄN PHÍ</h6>
+                  <p className="detail">Tặng Bookmark</p>
+                  <p className="detail">Bao sách miễn phí</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-sm-6">
+              <div className="dichvu d-flex align-items-center">
+                <img src="images/icon-return.png" alt="icon-return" />
+                <div className="noidung">
+                  <h6 className="tieude font-weight-bold">
+                    ĐỔI TRẢ NHANH CHÓNG
+                  </h6>
+                  <p className="detail">Hàng bị lỗi được đổi trả nhanh chóng</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Footer />
+    </div>
+  );
+}
 
 export default Receipt;

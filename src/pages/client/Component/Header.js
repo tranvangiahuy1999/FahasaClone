@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import shopApis from "../../../apis/ShopApis";
 
-const Header=()=> {
+const Header = () => {
   const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,6 @@ const Header=()=> {
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
-      console.log(res);
       if (res.status === 200) {
         setCategoryList(res.data);
       }
@@ -33,18 +32,21 @@ const Header=()=> {
                   </div>
                 </div>
               </div>
-              <div className="col-md-9">
-                <div className="benphai float-right">
-                  <div className="hotline">
-                    <i className="fa fa-phone" />
-                    <span>Hotline:<b>1900 1999</b> </span>
-                  </div>
-                  <i className="fas fa-comments-dollar" />
-                  <a href="#">Hỗ trợ trực tuyến </a>
+            </div>
+            <div className="col-md-9">
+              <div className="benphai float-right">
+                <div className="hotline">
+                  <i className="fa fa-phone mr-2" />
+                  <span>
+                    Hotline:<b>1900 1999</b>{" "}
+                  </span>
                 </div>
+                <i className="fas fa-comments-dollar mr-2" />
+                <a href="#">Hỗ trợ trực tuyến </a>
               </div>
             </div>
           </div>
+
         </section>
         {/* noi dung danh muc sach(categories) + banner slider */}
         <section className="header bg-light">
@@ -128,23 +130,36 @@ const Header=()=> {
                       <a href="#"><img src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg" className="img-fluid" style={{height: '386px'}} width="965px" alt="Third slide" /></a>
                     </div>
                   </div>
-                  <a className="carousel-control-prev" href="#carouselId" data-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true" />
-                    <span className="sr-only">Previous</span>
-                  </a>
-                  <a className="carousel-control-next" href="#carouselId" data-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true" />
-                    <span className="sr-only">Next</span>
-                  </a>
                 </div>
+                <a
+                  className="carousel-control-prev"
+                  href="#carouselId"
+                  data-slide="prev"
+                >
+                  <span
+                    className="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">Previous</span>
+                </a>
+                <a
+                  className="carousel-control-next"
+                  href="#carouselId"
+                  data-slide="next"
+                >
+                  <span
+                    className="carousel-control-next-icon"
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">Next</span>
+                </a>
               </div>
             </div>
           </div>
-        </section>
-      </div>
-        
-        );
-    }
-
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default Header;
