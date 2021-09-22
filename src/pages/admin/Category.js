@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -16,13 +14,9 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { GoPlus } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
-import { IoIosArrowForward } from "react-icons/io";
 import { LOGO_COLOR } from "../../constants/index";
-import CreateCategoryModal from "../../components/CreateCategoryModal";
-import { Link, useParams, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import adminApis from "../../apis/AdminApis";
-import { FaRegEdit } from "react-icons/fa";
+import CreateCategoryModal from "../../components/CreateCategoryModal";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -101,9 +95,6 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell align="center" padding="normal">
-          <div className="text-center">Tùy chỉnh</div>
-        </TableCell>
       </TableRow>
     </TableHead>
   );
@@ -144,54 +135,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
-export default function Category(props) {
-  let { id } = useParams();
-  let query = useQuery();
-  const cateList = useSelector((state) => state.admin);
+export default function Category() {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
   const [selected, setSelected] = useState([]);
   const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [categoryList, getCategoryList] = useState([]);
-  const [parentId, setParentId] = useState();
-  const [editCateData, setEditCateData] = useState();
+
+  const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    getCategoryList();
   }, []);
 
-  useEffect(() => {
-    const temp = new URLSearchParams(query);
-    setParentId(temp.get("parentId"));
-
-    if (id) {
-      getCategoryByParentId(id);
-    } else {
-      getCategoryList([...cateList.categoryData]);
-    }
-  }, [id, cateList]);
-
-  const getCategoryByParentId = async (id) => {
+  const getCategoryList = async () => {
     try {
-      const query = `?parentId=${id}`;
-      const res = await adminApis.getCategoryByParent(query);
+      const res = await adminApis.getCategory();
       if (res.status === 200) {
-        getCategoryList([...res.data]);
+        setCategoryList(res.data);
       }
     } catch (e) {
       console.log(e);
     }
-  };
-
-  const editModalHandleOpen = (data) => {
-    setEditCateData(data);
-    console.log(data);
-    setOpenCreateModal(true);
   };
 
   const createModalHandleOpen = () => {
@@ -199,30 +165,20 @@ export default function Category(props) {
   };
 
   const createModalHandleClose = () => {
-    setEditCateData();
     setOpenCreateModal(false);
   };
 
   const createModalHandleCloseAfterSave = () => {
     createModalHandleClose();
-    props.getCategoryList();
-  };
-
-  const formatSingleDayMonth = (string) => {
-    let stringtemp = string.toString();
-    if (stringtemp.length < 2) {
-      const temp = "0" + stringtemp;
-      return temp;
-    }
-    return stringtemp;
+    getCategoryList();
   };
 
   const convertTime = (unformatTime) => {
     let date = new Date(unformatTime);
     const formatedTime =
-      formatSingleDayMonth(date.getDate()) +
+      date.getDate() +
       " / " +
-      formatSingleDayMonth(date.getMonth() + 1) +
+      (date.getMonth() + 1) +
       " / " +
       date.getFullYear();
     return formatedTime;
@@ -243,25 +199,25 @@ export default function Category(props) {
     setSelected([]);
   };
 
-  // const handleClick = (event, name) => {
-  //   const selectedIndex = selected.indexOf(name);
-  //   let newSelected = [];
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
 
-  //   if (selectedIndex === -1) {
-  //     newSelected = newSelected.concat(selected, name);
-  //   } else if (selectedIndex === 0) {
-  //     newSelected = newSelected.concat(selected.slice(1));
-  //   } else if (selectedIndex === selected.length - 1) {
-  //     newSelected = newSelected.concat(selected.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelected = newSelected.concat(
-  //       selected.slice(0, selectedIndex),
-  //       selected.slice(selectedIndex + 1)
-  //     );
-  //   }
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
 
-  //   setSelected(newSelected);
-  // };
+    setSelected(newSelected);
+  };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -271,70 +227,46 @@ export default function Category(props) {
         open={openCreateModal}
         closeModal={createModalHandleClose}
         closeModalAfterSave={createModalHandleCloseAfterSave}
-        title="Tạo danh mục"
-        parentId={id}
-        cateEditFilter={editCateData}
+        title="Tạo danh mục cấp 1"
       ></CreateCategoryModal>
-      <div className="row m-0 p-0">
-        <h5>Danh sách danh mục</h5>
-        <span className="pl-3">
-          <Breadcrumbs
-            separator={<IoIosArrowForward size="16px" />}
-            aria-label="breadcrumb"
-          >
-            <Link color="inherit" to="/admin/category">
-              Danh mục 1
-            </Link>
-            {parentId && (
-              <Link
-                color="inherit"
-                to={`/admin/category/${parentId}?parentId=${parentId}`}
+      <div className="row mb-2">
+        <div className="col-lg-6 col-md-6">
+          <h5>Danh sách danh mục</h5>
+        </div>
+        <div className="col-lg-6 col-md-6">
+          <div className="row">
+            <div className="col-lg-6 p-2">
+              <TextField
+                id="input-with-icon-textfield"
+                placeholder="Tìm kiếm danh mục"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IoSearch></IoSearch>
+                    </InputAdornment>
+                  ),
+                }}
+                variant="standard"
+              />
+            </div>
+            <div className="col-lg-6 p-2 right-wrapper">
+              <Button
+                style={{
+                  backgroundColor: LOGO_COLOR,
+                  color: "white",
+                }}
+                size="small"
+                onClick={createModalHandleOpen}
+                variant="contained"
+                startIcon={<GoPlus></GoPlus>}
               >
-                Danh mục 2
-              </Link>
-            )}
-            {id && parentId && id !== parentId && (
-              <Link
-                color="inherit"
-                to={`/admin/category/${id}?parentId=${parentId}`}
-              >
-                Danh mục 3
-              </Link>
-            )}
-          </Breadcrumbs>
-        </span>
+                Thêm danh mục
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="row mb-2">
-        <div className="col-lg-6 col-md-6 pt-2 pb-2">
-          <TextField
-            id="input-with-icon-textfield"
-            placeholder="Tìm kiếm danh mục"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <IoSearch></IoSearch>
-                </InputAdornment>
-              ),
-            }}
-            variant="standard"
-          />
-        </div>
-        <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-          <Button
-            style={{
-              backgroundColor: LOGO_COLOR,
-              color: "white",
-            }}
-            size="small"
-            onClick={createModalHandleOpen}
-            variant="contained"
-            startIcon={<GoPlus></GoPlus>}
-          >
-            Thêm danh mục
-          </Button>
-        </div>
-      </div>
       <Paper className={classes.paper}>
         <TableContainer>
           <Table
@@ -352,9 +284,9 @@ export default function Category(props) {
               onRequestSort={handleRequestSort}
               rowCount={categoryList.length}
             />
-            {categoryList.length ? (
-              <TableBody>
-                {stableSort(categoryList, getComparator(order, orderBy)).map(
+            <TableBody>
+              {categoryList.length ? (
+                stableSort(categoryList, getComparator(order, orderBy)).map(
                   (row, index) => {
                     const isItemSelected = isSelected(row.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
@@ -362,6 +294,7 @@ export default function Category(props) {
                     return (
                       <TableRow
                         hover
+                        onClick={(event) => handleClick(event, row.name)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
@@ -378,56 +311,32 @@ export default function Category(props) {
                           padding="none"
                           align="center"
                         >
-                          {row.level === 3 ? (
-                            <span>{row.name}</span>
-                          ) : (
-                            <Link
-                              to={
-                                parentId
-                                  ? `/admin/category/${row._id}?parentId=${parentId}`
-                                  : `/admin/category/${row._id}?parentId=${row._id}`
-                              }
-                            >
-                              {row.name}
-                            </Link>
-                          )}
+                          {row.name}
                         </TableCell>
                         <TableCell align="center">{row.level}</TableCell>
                         <TableCell align="center">
                           {convertTime(row.createdAt)}
                         </TableCell>
                         <TableCell align="center">
-                          {row.subCate ? row.subCate.length : 0}
+                          {row.subCate.length}
                         </TableCell>
                         <TableCell align="center">
                           {row.active ? (
-                            <span>Đang được bày bán</span>
+                            <div>Đang được bày bán</div>
                           ) : (
-                            <span>Không được bày bán</span>
+                            <div>Không được bày bán</div>
                           )}
-                        </TableCell>
-                        <TableCell align="center">
-                          <IconButton
-                            color="primary"
-                            aria-label="update category"
-                            onClick={() => editModalHandleOpen(row)}
-                          >
-                            <FaRegEdit color={LOGO_COLOR} size={18} />
-                          </IconButton>
                         </TableCell>
                       </TableRow>
                     );
                   }
-                )}
-              </TableBody>
-            ) : (
-              <></>
-            )}
+                )
+              ) : (
+                <></>
+              )}
+            </TableBody>
           </Table>
         </TableContainer>
-        {categoryList.length === 0 && (
-          <div className="empty-data-text">Chưa có dữ liệu</div>
-        )}
       </Paper>
     </div>
   );
