@@ -33,7 +33,7 @@ import {
 import Category from "./Category";
 import Product from "./Product";
 import Receipt from "./Receipt";
-import CreateProduct from './CreateProduct';
+import CreateProduct from "./CreateProduct";
 
 import {
   BrowserRouter as Router,
@@ -91,8 +91,8 @@ const AdminIndex = (props) => {
       path: "/admin/receipt",
       main: () => <Receipt></Receipt>,
     },
-	{
-      path: "/admin/AddProduct",
+    {
+      path: "/admin/addproduct",
       main: () => <CreateProduct></CreateProduct>,
     },
   ];
