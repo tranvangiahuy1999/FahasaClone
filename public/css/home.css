@@ -229,7 +229,7 @@ label.error {
 
 /* .duoinavbar  */
 .duoinavbar{
-    background-color:#64ae55 ;
+    background-color: #fdfefd;
 }
 
 .benphai.float-right {
@@ -282,6 +282,7 @@ label.error {
     box-sizing: border-box;
     height: 387px;
     background: white;
+    margin-left: 3px;
     text-align: left;
 }
 
@@ -338,9 +339,28 @@ label.error {
     cursor: auto;
 }
 
+.categorycontent ul li a.tieude{
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    margin-bottom: -37px;
+    font-size: 15px;
+    height: 35px;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    transition: 0.3s;
+}
 .categorycontent ul li a{
     text-decoration: none;
     color: black;
+    font-weight: 400;
+    margin-bottom: 4px;
+    font-size: 15px;
+    height: 35px;
 }
 
 .categorycontent ul li:hover ul{
@@ -547,7 +567,7 @@ h3.card-title.ten {
 
 /* css cho khoi sach nen doc  */
 .sachnendoc .card-body.noidungsp.mt-3 {
-    padding: 10px 0 10px 0;
+    padding: 10px -1px 11px 0 !important;
 }
 
 .sachnendoc a.detail {
@@ -672,7 +692,7 @@ footer .header {
 }
 
 .content.trai li a {
-    font-size: 10px;
+    font-size: 13px;
     line-height: 0px;
 }
 .row.tren {
@@ -705,7 +725,8 @@ div#step2header {
 
 .thongtinsach1 {
     border: 1px solid gray;
-    margin-left: 18px;
+    margin-left: 0px;
+    padding: 11px;
 }
 
 .thongtinsach1 ul li {
@@ -718,8 +739,18 @@ i.fa.fa-chevron-right.icon.float-right {
 
 span.input-group-text.btn-spin.btn-inc {
     padding-left: 5px;
+    border-radius: unset;
 }
 
 span.input-group-text.btn-spin.btn-dec {
     padding-left: 5px;
+    border-radius: unset;
+}
+
+a.btn.nutmuathem.mb-3 {
+    background: #ffa50094;
+}
+
+a.btn.nutmuathem.mb-3:hover {
+    background: #64ae55;
 }

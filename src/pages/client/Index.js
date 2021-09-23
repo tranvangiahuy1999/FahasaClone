@@ -17,7 +17,7 @@ function HomePage() {
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
                   <h1 className="header text-uppercase" style={{fontWeight: 400}}>SÁCH MỚI TUYỂN CHỌN</h1>
-                  <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                 
                 </div>
               </div>
               <div className="khoisanpham container" style={{paddingBottom: '2rem'}}>
@@ -151,6 +151,7 @@ function HomePage() {
               </div>
             </div>
           </div>
+          <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
         </section>
         {/* khoi sach combo hot  */}
         <section className="_1khoi combohot mt-4">
@@ -160,7 +161,7 @@ function HomePage() {
                 {/*header */}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
                   <h2 className="header text-uppercase" style={{fontWeight: 400}}>COMBO SÁCH HOT - GIẢM ĐẾN 25%</h2>
-                  <a href="#" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+               
                 </div>
               </div>
               <div className="privacy py-sm-5 py-4 up">
@@ -303,6 +304,7 @@ function HomePage() {
                   </div>
                 </div>
               </div>
+              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-5 btn-sm text-white">Xem tất cả</a>
                 </div>
                 {/* hetkhoi1 */}
                 {/* khối 2 */}
@@ -382,6 +384,7 @@ function HomePage() {
                   </div>
                 </div>
               </div>
+              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-5 btn-sm text-white">Xem tất cả</a>
                 </div>
                 {/* het khoi 2 */}
                 {/* Khối 3 */}
@@ -445,14 +448,17 @@ function HomePage() {
                
                 </div>
               </div>
+              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-5 btn-sm text-white">Xem tất cả</a>
                 </div>
                 {/* hết khối 3 */}
-              
+            
               </div>
+            
             </div>
-           
+    
             {/*Plug-in Initialisation*/}
           </div>
+       
         </div>
       
       </div>
@@ -467,7 +473,7 @@ function HomePage() {
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
                   <h2 className="header text-uppercase" style={{fontWeight: 400}}>SÁCH SẮP PHÁT HÀNH / ĐẶT TRƯỚC</h2>
-                  <a href="#" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                 
                 </div>
               </div>
               <div className="khoisanpham">
@@ -522,7 +528,9 @@ function HomePage() {
                 </div>
               </div>
             </div>
+        
           </div>
+          <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm mt-5 text-white">Xem tất cả</a>
         </section>
         {/* div _1khoi -- khoi sachnendoc */}
         <section className="_1khoi sachnendoc bg-light mt-4">
@@ -532,7 +540,7 @@ function HomePage() {
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
                   <h2 className="header text-uppercase" style={{fontWeight: 400}}>SÁCH HAY NÊN ĐỌC</h2>
-                  <a href="#" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                
                 </div>
                 {/* 1 san pham */}
                 <div className="col-lg col-sm-4">
@@ -592,8 +600,10 @@ function HomePage() {
                 </div>
               </div>
             </div>
+            <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-4 btn-sm mb-5 text-white">Xem tất cả</a>
             <hr />
           </div>
+      
         </section>
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
         <section className="abovefooter text-white" >
@@ -603,7 +613,7 @@ function HomePage() {
                 <div className="dichvu d-flex align-items-center">
                   <img src="images/icon-books.png" alt="icon-books" />
                   <div className="noidung">
-                    <h3 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH HAY</h3>
+                    <h3 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH</h3>
                     <p className="detail">Tuyển chọn bởi DealBooks</p>
                   </div>
                 </div>

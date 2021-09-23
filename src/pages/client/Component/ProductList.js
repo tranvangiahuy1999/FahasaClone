@@ -41,7 +41,7 @@ const ProductList=()=> {
                     categoryList
                       .filter((item, idx) => idx < 11)
                       .map((value, index) => (
-                    <li  key={index}> <a href="/danh-sach"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
+                    <li  key={index}> <a href="/danh-sach" className="tieude"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
                       <ul className="categorydetail container">
                       <div className="row " style={{height:'185px'}} >
                       {value.subCate.length ? (
@@ -269,8 +269,10 @@ const ProductList=()=> {
               {/* các sản phẩm  */}
               <div className="row">
                 <div className='col-3'>
-              
-                      <div className="thongtinsach1">
+                    
+                      <div className="thongtinsach1">  
+                        <h1 style={{fontSize:'19px',marginTop:'6px',marginLeft:'3px',fontWeight:'bold'}}>Nhóm Sản Phẩm</h1>
+                        <h3  style={{fontSize:'17px',marginLeft:'13px'}}>Tất Cả Sản Phẩm</h3>
                         <ul>
                         {categoryList.length ? (
                     categoryList
@@ -287,9 +289,9 @@ const ProductList=()=> {
                 </div>
                 <div className="col-9">
                 <div className="items">
-                <div className="row">
+                <div className="row" style={{marginRight:'25px'}}>
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
-                    <div className="card ">
+                    <div className="card list">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                         <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
@@ -300,22 +302,13 @@ const ProductList=()=> {
                             <div className="giacu text-muted">139.000 ₫</div>
                             <div className="sale">-20%</div>
                           </div>
-                          <div className="danhgia">
-                            <ul className="d-flex" style={{listStyle: 'none'}}>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li><i className="fa fa-star" /></li>
-                              <span className="text-muted">0 nhận xét</span>
-                            </ul>
-                          </div>
+                        
                         </div>
                       </a>
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
-                    <div className="card ">
+                    <div className="card list ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                         <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
@@ -326,22 +319,13 @@ const ProductList=()=> {
                             <div className="giacu text-muted">139.000 ₫</div>
                             <div className="sale">-20%</div>
                           </div>
-                          <div className="danhgia">
-                            <ul className="d-flex" style={{listStyle: 'none'}}>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li><i className="fa fa-star" /></li>
-                              <span className="text-muted">0 nhận xét</span>
-                            </ul>
-                          </div>
+                         
                         </div>
                       </a>
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
-                    <div className="card ">
+                    <div className="card list ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                         <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
@@ -352,22 +336,13 @@ const ProductList=()=> {
                             <div className="giacu text-muted">139.000 ₫</div>
                             <div className="sale">-20%</div>
                           </div>
-                          <div className="danhgia">
-                            <ul className="d-flex" style={{listStyle: 'none'}}>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li><i className="fa fa-star" /></li>
-                              <span className="text-muted">0 nhận xét</span>
-                            </ul>
-                          </div>
+                       
                         </div>
                       </a>
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
-                    <div className="card ">
+                    <div className="card list">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                         <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
@@ -378,22 +353,13 @@ const ProductList=()=> {
                             <div className="giacu text-muted">139.000 ₫</div>
                             <div className="sale">-20%</div>
                           </div>
-                          <div className="danhgia">
-                            <ul className="d-flex" style={{listStyle: 'none'}}>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li><i className="fa fa-star" /></li>
-                              <span className="text-muted">0 nhận xét</span>
-                            </ul>
-                          </div>
+                      
                         </div>
                       </a>
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
-                    <div className="card ">
+                    <div className="card list ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                         <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
@@ -404,22 +370,13 @@ const ProductList=()=> {
                             <div className="giacu text-muted">139.000 ₫</div>
                             <div className="sale">-20%</div>
                           </div>
-                          <div className="danhgia">
-                            <ul className="d-flex" style={{listStyle: 'none'}}>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li><i className="fa fa-star" /></li>
-                              <span className="text-muted">0 nhận xét</span>
-                            </ul>
-                          </div>
+                       
                         </div>
                       </a>
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
-                    <div className="card ">
+                    <div className="card list">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                         <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
@@ -430,22 +387,13 @@ const ProductList=()=> {
                             <div className="giacu text-muted">139.000 ₫</div>
                             <div className="sale">-20%</div>
                           </div>
-                          <div className="danhgia">
-                            <ul className="d-flex" style={{listStyle: 'none'}}>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li><i className="fa fa-star" /></li>
-                              <span className="text-muted">0 nhận xét</span>
-                            </ul>
-                          </div>
+                      
                         </div>
                       </a>
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
-                    <div className="card ">
+                    <div className="card list">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                         <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
@@ -456,16 +404,24 @@ const ProductList=()=> {
                             <div className="giacu text-muted">139.000 ₫</div>
                             <div className="sale">-20%</div>
                           </div>
-                          <div className="danhgia">
-                            <ul className="d-flex" style={{listStyle: 'none'}}>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li className="active"><i className="fa fa-star" /></li>
-                              <li><i className="fa fa-star" /></li>
-                              <span className="text-muted">0 nhận xét</span>
-                            </ul>
+                      
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
+                    <div className="card list">
+                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
+                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <div className="card-body noidungsp mt-3">
+                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
+                          <small className="tacgia text-muted">Brian Finch</small>
+                          <div className="gia d-flex align-items-baseline">
+                            <div className="giamoi">111.200 ₫</div>
+                            <div className="giacu text-muted">139.000 ₫</div>
+                            <div className="sale">-20%</div>
                           </div>
+                      
                         </div>
                       </a>
                     </div>
@@ -521,7 +477,7 @@ const ProductList=()=> {
                 <div className="dichvu d-flex align-items-center">
                   <img src="images/icon-books.png" alt="icon-books" />
                   <div className="noidung">
-                    <h6 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH HAY</h6>
+                    <h6 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH </h6>
                     <p className="detail">Tuyển chọn bởi DealBooks</p>
                   </div>
                 </div>
@@ -532,7 +488,7 @@ const ProductList=()=> {
                   <div className="noidung">
                     <h6 className="tieude font-weight-bold">MIỄN PHÍ GIAO HÀNG</h6>
                     <p className="detail">Từ 150.000đ ở TP.HCM</p>
-                    <p className="detail">Từ 300.000đ ở tỉnh thành khác</p>
+                    <p className="detail">Từ 300.000đ ở TP.HN</p>
                   </div>
                 </div>
               </div>

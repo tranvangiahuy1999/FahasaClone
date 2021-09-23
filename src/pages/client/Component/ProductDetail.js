@@ -42,7 +42,7 @@ const ProductDetail=()=> {
                     categoryList
                       .filter((item, idx) => idx < 11)
                       .map((value, index) => (
-                    <li  key={index}> <a href="/danh-sach"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
+                    <li  key={index}> <a href="/danh-sach"className="tieude"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
                       <ul className="categorydetail container">
                       <div className="row " style={{height:'185px'}} >
                       {value.subCate.length ? (
@@ -132,7 +132,7 @@ const ProductDetail=()=> {
                     </a>
                     <a href="images/lap-ke-hoach-kinh-doanh-hieu-qua-ms.jpg" data-fancybox="thumb-img" />
                   </div>
-                  <div className="list-anhchitiet d-flex mb-4" style={{marginLeft: '2rem'}}>
+                  <div className="list-anhchitiet d-flex mb-4" style={{marginLeft: '90px'}}>
                     <img className="thumb-img thumb1 mr-3" src="images/lap-ke-hoach-kinh-doanh-hieu-qua-mt.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-mt" />
                     <img className="thumb-img thumb2" src="images/lap-ke-hoach-kinh-doanh-hieu-qua-ms.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-ms" />
                   </div>
@@ -153,13 +153,12 @@ const ProductDetail=()=> {
                         </div>
                       </div>
                       <div className="uudai my-3">
-                        <h6 className="header font-weight-bold">Khuyến mãi &amp; Ưu đãi tại DealBook:</h6>
+                        <h6 className="header font-weight-bold">Tại DealBook:</h6>
                         <ul>
-                          <li><b>Miễn phí giao hàng </b>cho đơn hàng từ 150.000đ ở TP.HCM và 300.000đ ở
-                            Tỉnh/Thành khác <a href="#">&gt;&gt; Chi tiết</a></li>
+                          <li><b>Giao hàng </b>cho đơn hàng ở TP.HCM và ở
+                            Tỉnh/Thành khác </li>
                           <li><b>Combo sách HOT - GIẢM 25% </b><a href="#">&gt;&gt;Xem ngay</a></li>
-                          <li>Tặng Bookmark cho mỗi đơn hàng</li>
-                          <li>Bao sách miễn phí (theo yêu cầu)</li>
+                         
                         </ul>
                       </div>
                       <div className="soluong d-flex">
@@ -177,7 +176,7 @@ const ProductDetail=()=> {
                       <div className="nutmua btn w-100 text-uppercase">Chọn mua</div>
                       <a className="huongdanmuahang text-decoration-none" href="#">(Vui lòng xem hướng dẫn mua
                         hàng)</a>
-                      <small className="share">Share: </small>
+                
                       <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
                     </div>
                     {/* thông tin khác của sản phẩm:  tác giả, ngày xuất bản, kích thước ....  */}
@@ -186,6 +185,8 @@ const ProductDetail=()=> {
                         <ul>
                           <li>Tác giả: <a href="#" className="tacgia">Brian Finch</a></li>
                           <li>Ngày xuất bản: <b>04-2020</b></li>
+                          <li>Nhà cung cấp: Nhà Xuất Bản Thanh Niên</li>
+                          <li>Hình thức bìa: <b>Bìa mềm</b></li>
                           {/* <li>Kích thước: <b>20.5 x 13.5 cm</b></li> */}
                           {/* <li>Dịch giả: Skye Phan;</li>
                           <li>Nhà xuất bản: Nhà Xuất Bản Thanh Niên</li>
@@ -198,7 +199,7 @@ const ProductDetail=()=> {
                   </div>
                 </div>
                 {/* decripstion của 1 sản phẩm: giới thiệu , đánh giá độc giả  */}
-                <div className="product-description col-md-9">
+                <div className="product-description col-md-12">
                   {/* 2 tab ở trên  */}
                   <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
@@ -222,8 +223,8 @@ const ProductDetail=()=> {
               <p className="giamgia"> <b>04-2020</b></p>
             </div>
             <div className="group d-flex justify-content-between">
-              <p className="label">Dịch Gỉa:</p>
-              <p className="phivanchuyen">Skye Phan;</p>
+              <p className="label"><b>Dịch Giả:</b></p>
+              <p className="phivanchuyen"><a href="#" className="tacgia">Skye Phan</a></p>
             </div>
             <div className="group d-flex justify-content-between">
               <p className="label">Kích thước:</p>
@@ -248,6 +249,7 @@ const ProductDetail=()=> {
           </div>
         </div>
       </div>
+      <hr style={{marginTop:'50px'}}/>
                       <h6 className="tieude font-weight-bold">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                       <p>
                         <span>Khi bắt đầu thành lập doanh nghiệp hay mở rộng quy mô hoạt động, lập ra một
@@ -351,16 +353,7 @@ const ProductDetail=()=> {
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      <div className="danhgia">
-                        <ul className="d-flex" style={{listStyle: 'none'}}>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li><i className="fa fa-star" /></li>
-                          <li><span className="text-muted">0 nhận xét</span></li>
-                        </ul>
-                      </div>
+                     
                     </div>
                   </a>
                 </div>
@@ -377,16 +370,7 @@ const ProductDetail=()=> {
                         <div className="giacu text-muted">85.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      <div className="danhgia">
-                        <ul className="d-flex" style={{listStyle: 'none'}}>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li><i className="fa fa-star" /></li>
-                          <li><span className="text-muted">0 nhận xét</span></li>
-                        </ul>
-                      </div>
+                      
                     </div>
                   </a>
                 </div>
@@ -402,16 +386,7 @@ const ProductDetail=()=> {
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      <div className="danhgia">
-                        <ul className="d-flex" style={{listStyle: 'none'}}>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li><i className="fa fa-star" /></li>
-                          <li><span className="text-muted">0 nhận xét</span></li>
-                        </ul>
-                      </div>
+                   
                     </div>
                   </a>
                 </div>
@@ -428,16 +403,7 @@ const ProductDetail=()=> {
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      <div className="danhgia">
-                        <ul className="d-flex" style={{listStyle: 'none'}}>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li><i className="fa fa-star" /></li>
-                          <li><span className="text-muted">0 nhận xét</span></li>
-                        </ul>
-                      </div>
+                    
                     </div>
                   </a>
                 </div>
@@ -452,16 +418,7 @@ const ProductDetail=()=> {
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      <div className="danhgia">
-                        <ul className="d-flex" style={{listStyle: 'none'}}>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li><i className="fa fa-star" /></li>
-                          <li><span className="text-muted">0 nhận xét</span></li>
-                        </ul>
-                      </div>
+                   
                     </div>
                   </a>
                 </div>
@@ -476,16 +433,7 @@ const ProductDetail=()=> {
                         <div className="giacu text-muted">139.000 ₫</div>
                         <div className="sale">-20%</div>
                       </div>
-                      <div className="danhgia">
-                        <ul className="d-flex" style={{listStyle: 'none'}}>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li className="active"><i className="fa fa-star" /></li>
-                          <li><i className="fa fa-star" /></li>
-                          <li><span className="text-muted">0 nhận xét</span></li>
-                        </ul>
-                      </div>
+                    
                     </div>
                   </a>
                 </div>
@@ -545,7 +493,7 @@ const ProductDetail=()=> {
         {/* khối sản phẩm đã xem  */}
       
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-        <section className="abovefooter text-white mt-5" >
+        <section className="abovefooter text-white mt-3" >
           <div className="container"style={{backgroundColor: '#64ae55'}}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
