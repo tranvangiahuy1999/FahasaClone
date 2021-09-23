@@ -195,29 +195,20 @@ export default function Receipt() {
 
   return (
     <div className={classes.root}>
-      <div className="row mb-2">
-        <div className="col-lg-6 col-md-6">
-          <h5>Danh sách đơn hàng</h5>
-        </div>
-        <div className="col-lg-6 col-md-6">
-          <div className="row">
-            <div className="col-lg-6 p-2"></div>
-            <div className="col-lg-6 p-2">
-              <TextField
-                id="input-with-icon-textfield"
-                placeholder="Tìm kiếm đơn hàng"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IoSearch></IoSearch>
-                    </InputAdornment>
-                  ),
-                }}
-                variant="standard"
-              />
-            </div>
-          </div>
-        </div>
+      <h5>Danh sách đơn hàng</h5>
+      <div className="mb-2">
+        <TextField
+          id="input-with-icon-textfield"
+          placeholder="Tìm kiếm đơn hàng"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <IoSearch></IoSearch>
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+        />
       </div>
 
       <Paper className={classes.paper}>
