@@ -44,3 +44,35 @@
   padding: 18px;
 }
 
+.modal-image-frame {
+  border-radius: 8px;
+  height: 200px;
+  border: 2px dashed lightgray;
+  text-align: center;
+}
+
+.modal-image-frame img {
+  width: 200px;
+}
+
+.modal-image-frame .upload-template {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: lightgray;
+  margin-top: 20px;
+}
+
+.modal-image-frame #material-button-label {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.modal-image-frame #material-button-label span {
+  margin-left: 4px;
+}
+
+.addprod-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
