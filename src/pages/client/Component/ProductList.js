@@ -94,16 +94,7 @@ const ProductList=()=> {
 
               </div>
             </div>
-            <div className="col-md-5 ml-auto contact d-none d-md-block">
-              <div className="benphai float-right">
-                <div className="hotline">
-                  <i className="fa fa-phone" />
-                  <span>Hotline:<b>1900 1999</b> </span>
-                </div>
-                <i className="fas fa-comments-dollar" />
-                <a href="#">Hỗ trợ trực tuyến </a>
-              </div>
-            </div>
+         
           </div>
         </div>
       </section>
@@ -268,7 +259,7 @@ const ProductList=()=> {
               </div>
               {/* các sản phẩm  */}
               <div className="row">
-                <div className='col-3'>
+                <div className='col-3' >
                     
                       <div className="thongtinsach1">  
                         <h1 style={{fontSize:'19px',marginTop:'6px',marginLeft:'3px',fontWeight:'bold'}}>Nhóm Sản Phẩm</h1>

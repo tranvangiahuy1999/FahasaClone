@@ -45,7 +45,9 @@ label.label-select {
     font-size: 20px;
     font-weight: 400;
     padding-top: 10px;
+    margin-left: 25px;
     padding-bottom: 10px;
+    font-weight: bold;
 }
 
 
@@ -572,12 +574,12 @@ footer .header {
 .khoithongtin .uudai .header {
     margin-top: 5px;
     padding: 10px 0px 2px 16px;
-    font-size: 13px;
+    font-size: 22px;
 }
 
 .khoithongtin .header h4 {
-    font-weight: 400;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 28px;
     margin-bottom: 30px;
 }
 
@@ -603,7 +605,7 @@ footer .header {
 
 .khoithongtin .soluong label {
     width: 101px;
-    font-size: 14px;
+    font-size: 22px;
     margin-top: 9px;
 }
 
@@ -660,14 +662,15 @@ footer .header {
 
 .khoithongtin .giaban {
     margin-top: 7px;
+    font-size: 22px;
 }
 
 .khoithongtin .giaban .giamoi {
     color: red;
     font-size: 26px;
     position: absolute;
-    top: 12px;
-    left: 149px;
+    top: 37px;
+    left: 241px;
 }
 
 /* don vi tien  */
@@ -675,8 +678,8 @@ footer .header {
     color: red;
     font-size: 26px;
     position: absolute;
-    top: 12px;
-    left: 250px;
+    top: 37px;
+    left: 341px;
     font-weight: bold;
 }
 
@@ -687,6 +690,7 @@ footer .header {
 
 .khoithongtin .tietkiem {
     margin-top: 7px;
+    font-size: 22px;
 }
 
 .khoithongtin .tietkiem .sale {
@@ -697,10 +701,10 @@ footer .header {
     padding: 1px 4px;
     position: absolute;
     font-weight: bold;
-    left: 143px;
+    left: 364px;
     width: 42px;
     right: 300px;
-    top: 51px;
+    top: 49px;
 }
 
 .khoithongtin small.share {
@@ -946,7 +950,7 @@ h6.card-title.ten {
 }
 
 .card-body.noidungsp {
-    padding: 10px 10px 0px 10px;
+    padding: 10px 10px 15px 10px;
 }
 
 .card {
@@ -1119,8 +1123,13 @@ a.btn.btn-warning.btn-sm.text-white:hover {
 
 ol.breadcrumb.mb-0.p-0.bg-transparent {
     margin-top: 13px;
+    margin-left: 25px;
 }
 
 .hotrokh {
     margin-left: 35px;
+}
+
+.giabia {
+    font-size: 22px;
 }
