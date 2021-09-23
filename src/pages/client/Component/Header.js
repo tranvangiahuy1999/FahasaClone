@@ -67,17 +67,11 @@ const Header = () => {
                       .map((value, index) => (
                         <li key={index}>
                           {" "}
-                          <div className="row ">
-                            <div className="col-9 ">
-                              <a href="/danh-sach" className="cateitem">
-                                {" "}
-                                {value.name}
-                              </a>
-                            </div>
-                            <div className="col-3 ">
-                              <i className="fa fa-chevron-right icon float-right" />
-                            </div>
-                          </div>
+                          <a href="/danh-sach" className="tieude">
+                            {" "}
+                            {value.name}
+                          </a>
+                          <i className="fa fa-chevron-right icon float-right" />
                           <ul className="categorydetail container">
                             <div className="row " style={{ height: "185px" }}>
                               {value.subCate.length ? (
@@ -125,7 +119,7 @@ const Header = () => {
               </div>
             </div>
             {/* banner slider  */}
-            <div className="col-md-9 px-0">
+            <div className="col-md-9 px-0" width="965px">
               <div
                 id="carouselId"
                 className="carousel slide"
@@ -140,35 +134,39 @@ const Header = () => {
                   <li data-target="#carouselId" data-slide-to={1} />
                   <li data-target="#carouselId" data-slide-to={2} />
                 </ol>
-                <div className="carousel-inner">
-                  <div className="carousel-item active">
+                <div
+                  className="carousel-inner"
+                  width="965px"
+                  style={{ marginTop: "-40px" }}
+                >
+                  <div className="carousel-item active" width="965px">
                     <a href="#">
                       <img
                         src="images/banner-sach-moi.jpg"
                         className="img-fluid"
-                        style={{ height: "386px" }}
+                        style={{ height: "427px" }}
                         width="965px"
                         alt="First slide"
                       />
                     </a>
                   </div>
-                  <div className="carousel-item">
+                  <div className="carousel-item" width="965px">
                     <a href="#">
                       <img
                         src="images/banner-beethoven.jpg"
                         className="img-fluid"
-                        style={{ height: "386px" }}
+                        style={{ height: "427px" }}
                         width="965px"
                         alt="Second slide"
                       />
                     </a>
                   </div>
-                  <div className="carousel-item">
+                  <div className="carousel-item" width="965px">
                     <a href="#">
                       <img
                         src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg"
                         className="img-fluid"
-                        style={{ height: "386px" }}
+                        style={{ height: "427px" }}
                         width="965px"
                         alt="Third slide"
                       />

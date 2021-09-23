@@ -326,6 +326,7 @@ label.error {
     padding-left: -30px;
     font-weight: 400;
     font-size: 13px;
+    color: black;
 }
 
 .categorycontent1 ul li ul{
@@ -346,9 +347,28 @@ label.error {
     cursor: auto;
 }
 
-.categorycontent1 ul li a{
+.categorycontent1 ul li a.tieude{
     text-decoration: none;
     color: black;
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    margin-bottom: -36px;
+    font-size: 15px;
+    height: 35px;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    transition: 0.3s;
+}
+.categorycontent1 ul li a.tieude{
+    text-decoration: none;
+    color: black;
+  
+   
 }
 
 .categorycontent1 ul li:hover ul{
@@ -535,6 +555,7 @@ footer .header {
 .soluong .input-number {
     width: 90px;
     height: 20px;
+    margin-top: 11px;
 }
 
 .item-caption .item-info .ten {
@@ -851,7 +872,7 @@ h3.tittle-w3l.text-left.mb-lg-5.mb-sm-4.mb-3 {
 }
 
 li.tittle {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 

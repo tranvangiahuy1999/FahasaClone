@@ -121,7 +121,7 @@ const  Receipt=()=> {
                   <div className="cart-empty-content w-100 text-center justify-content-center">
                     <img src="images/shopping-cart-not-product.png" alt="shopping-cart-not-product" />
                     <p>Chưa có sản phẩm nào trong giở hàng của bạn</p>
-                    <a href="index.html" className="btn nutmuathem mb-3">Mua thêm</a>
+                  
                   </div>
                 </div>
               </div>
@@ -199,15 +199,11 @@ const  Receipt=()=> {
                   
                   {/* bước số 2: nhập địa chỉ giao hàng  */}
                   <div className="card">
-                    <div className="card-header" role="tab" id="step2header">
-                      <h5 className="mb-0">
-                        <a data-toggle="collapse" data-parent="#cart-steps-accordion" href="#step2contentid" aria-expanded="true" aria-controls="step2contentid" className="text-uppercase header"><span className="steps"></span>
-                          <span className="label">Địa chỉ giao hàng</span>
-                          <i className="fa fa-chevron-right float-right" />
-                        </a>
-                      </h5>
-                    </div>
-                    <div id="step2contentid" className="collapse in" role="tabpanel" aria-labelledby="step2header">
+                    
+                          <span style={{textAlign:'center',paddingTop:'15px',fontSize:'20px',fontWeight:'bold'}} className="label">Địa chỉ giao hàng</span>
+                
+                    
+                    <div  role="tabpanel" aria-labelledby="step2header">
                       <div className="card-body">
                         <form className="form-diachigiaohang">
                           <div className="form-label-group">
