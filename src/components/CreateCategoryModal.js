@@ -20,11 +20,11 @@ const CreateCategoryModal = (props) => {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (props.modalEditFilter) {
-      setEditName(props.modalEditFilter.name);
-      setChecked(props.modalEditFilter.active);
+    if (props.cateEditFilter) {
+      setEditName(props.cateEditFilter.name);
+      setChecked(props.cateEditFilter.active);
     }
-  }, []);
+  }, [props.cateEditFilter]);
 
   const handleSwitch = () => {
     setChecked(!checked);
@@ -35,23 +35,37 @@ const CreateCategoryModal = (props) => {
     setChecked(false);
   };
 
+  const convertFirstCharUppercase = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      let formData = {
-        name: editName,
-        parentId: "",
-        active: checked,
-      };
+      let formData = {};
       let res = null;
-      if (props.modalEditFilter) {
-        res = await AdminApi.updateCategory(
-          props.modalEditFilter._id,
-          formData
-        );
+      if (props.cateEditFilter) {
+        formData = {
+          name: convertFirstCharUppercase(editName),
+          active: checked,
+        };
+        res = await AdminApi.updateCategory(formData, props.cateEditFilter._id);
       } else {
+        if (props.parentId) {
+          formData = {
+            name: convertFirstCharUppercase(editName),
+            parentId: props.parentId,
+            active: checked,
+          };
+        } else {
+          formData = {
+            name: convertFirstCharUppercase(editName),
+            active: checked,
+          };
+        }
         res = await AdminApi.createCategory(formData);
       }
+
       if (res.status === 200) {
         alert({
           icon: "success",

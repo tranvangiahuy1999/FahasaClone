@@ -16,7 +16,7 @@ import Paper from "@material-ui/core/Paper";
 import { GoPlus } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
 import { LOGO_COLOR } from "../../constants/index";
-import CreateProduct from "../admin/CreateProduct"
+import CreateProduct from "../admin/CreateProduct";
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -203,49 +203,42 @@ export default function Product() {
 
   const createModalHandleCloseAfterSave = () => {
     createModalHandleClose();
-
   };
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   return (
     <div className={classes.root}>
-      
       <div className="row mb-2">
-        <div className="col-lg-6 col-md-6">
-          <h5>Danh sách sản phẩm</h5>
-        </div>
-        <div className="col-lg-6 col-md-6">
-          <div className="row">
-            <div className="col-lg-6 p-2">
-              <TextField
-                id="input-with-icon-textfield"
-                placeholder="Tìm kiếm sản phẩm"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IoSearch></IoSearch>
-                    </InputAdornment>
-                  ),
-                }}
-                variant="standard"
-              />
-            </div>
-            <div className="col-lg-6 p-2 right-wrapper">
-              <a href="/admin/AddProduct">
-              <Button
-                style={{
-                  backgroundColor: LOGO_COLOR,
-                  color: "white",
-                }}
-                size="small"
-                onClick={createModalHandleOpen}
-                variant="contained"
-                startIcon={<GoPlus></GoPlus>}
-              >
-                Thêm sản phẩm
-              </Button>
-              </a>
-            </div>
+        <h5>Danh sách sản phẩm</h5>
+
+        <div className="row mb-2">
+          <div className="col-lg-6 col-md-6 pt-2 pb-2">
+            <TextField
+              id="input-with-icon-textfield"
+              placeholder="Tìm kiếm sản phẩm"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <IoSearch></IoSearch>
+                  </InputAdornment>
+                ),
+              }}
+              variant="standard"
+            />
+          </div>
+          <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
+            <Button
+              style={{
+                backgroundColor: LOGO_COLOR,
+                color: "white",
+              }}
+              size="small"
+              onClick={createModalHandleOpen}
+              variant="contained"
+              startIcon={<GoPlus></GoPlus>}
+            >
+              Thêm danh mục
+            </Button>
           </div>
         </div>
       </div>
