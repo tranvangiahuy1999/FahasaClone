@@ -431,6 +431,7 @@ ul li a.header{
 ._1khoi h1.header {
     font-size: 20px;
     margin-left: 25px;
+    font-weight: bold !important;
     margin-top: 15px;
     margin-bottom: 25px;
 }
@@ -438,7 +439,8 @@ ul li a.header{
 ._1khoi h2.header {
     font-size: 20px;
     margin-top: 20px;
-    margin-left: 25px;
+    font-weight: bold !important;
+    margin-left: 15px;
     margin-bottom: 36px;
 }
 
@@ -753,4 +755,7 @@ a.btn.nutmuathem.mb-3 {
 
 a.btn.nutmuathem.mb-3:hover {
     background: #64ae55;
+}
+.col-4 {
+    height: 175px;
 }

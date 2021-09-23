@@ -95,16 +95,7 @@ const ProductDetail=()=> {
 
               </div>
             </div>
-            <div className="col-md-5 ml-auto contact d-none d-md-block">
-              <div className="benphai float-right">
-                <div className="hotline">
-                  <i className="fa fa-phone" />
-                  <span>Hotline:<b>1900 1999</b> </span>
-                </div>
-                <i className="fas fa-comments-dollar" />
-                <a href="#">Hỗ trợ trực tuyến </a>
-              </div>
-            </div>
+          
           </div>
         </div>
       </section>
@@ -180,22 +171,7 @@ const ProductDetail=()=> {
                       <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
                     </div>
                     {/* thông tin khác của sản phẩm:  tác giả, ngày xuất bản, kích thước ....  */}
-                    <div className="col-md-5">
-                      <div className="thongtinsach">
-                        <ul>
-                          <li>Tác giả: <a href="#" className="tacgia">Brian Finch</a></li>
-                          <li>Ngày xuất bản: <b>04-2020</b></li>
-                          <li>Nhà cung cấp: Nhà Xuất Bản Thanh Niên</li>
-                          <li>Hình thức bìa: <b>Bìa mềm</b></li>
-                          {/* <li>Kích thước: <b>20.5 x 13.5 cm</b></li> */}
-                          {/* <li>Dịch giả: Skye Phan;</li>
-                          <li>Nhà xuất bản: Nhà Xuất Bản Thanh Niên</li>
-                          <li>Hình thức bìa: <b>Bìa mềm</b></li>
-                          <li>Số trang: <b>336</b></li>
-                          <li>Cân nặng: <b>0</b></li> */}
-                        </ul>
-                      </div>
-                    </div>
+                  
                   </div>
                 </div>
                 {/* decripstion của 1 sản phẩm: giới thiệu , đánh giá độc giả  */}
@@ -213,6 +189,7 @@ const ProductDetail=()=> {
                     <div className="row">
      
         <div className="col-md-5 giua ">
+           <h3 style={{marginLeft:'-85px',marginBottom:'25px'}}>Chi Tiết Sản Phẩm</h3>
           <div className="tonggiatien">
             <div className="group d-flex justify-content-between">
               <p className="label">Tác giả:</p>
@@ -250,6 +227,7 @@ const ProductDetail=()=> {
         </div>
       </div>
       <hr style={{marginTop:'50px'}}/>
+      <h3>Mô Tả Sản Phẩm</h3>
                       <h6 className="tieude font-weight-bold">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                       <p>
                         <span>Khi bắt đầu thành lập doanh nghiệp hay mở rộng quy mô hoạt động, lập ra một
