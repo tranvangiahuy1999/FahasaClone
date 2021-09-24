@@ -16,9 +16,13 @@ const adminApis = {
     const url = "/api/category/create";
     return axiosClient.post(url, data);
   },
-  updateCategory(body, id) {
+  updateCategory(data, id) {
     const url = `/api/category/update/${id}`;
-    return axiosClient.put(url, body);
+    return axiosClient.put(url, data);
+  },
+  createProduct(data) {
+    const url = "/api/product/create";
+    return axiosClient.post(url, data);
   },
 };
 

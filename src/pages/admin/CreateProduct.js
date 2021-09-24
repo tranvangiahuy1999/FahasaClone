@@ -16,12 +16,15 @@ import ImageListItemBar from "@material-ui/core/ImageListItemBar";
 import CardMedia from "@material-ui/core/CardMedia";
 import { AiOutlineCloseCircle, AiOutlineCloudUpload } from "react-icons/ai";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { IoTrashBin } from "react-icons/io5";
 import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
+
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,21 +105,51 @@ const useStyles = makeStyles((theme) => ({
 export default function Product() {
   const classes = useStyles();
   const fileRef = useRef();
+  const history = useHistory();
   const [name, setName] = useState();
   const [desc, setDesc] = useState();
-  const [category, setCategory] = useState(["", "", ""]);
+  const [category, setCategory] = useState(["null", "null", "null"]);
   const [categoryList1, setCategoryList1] = useState([]);
-  const [categoryList2, setCategoryList2] = useState([]);
-  const [categoryList3, setCategoryList3] = useState([]);
+  const [categoryList2, setCategoryList2] = useState([
+    { _id: "null", name: "Không có" },
+  ]);
+  const [categoryList3, setCategoryList3] = useState([
+    { _id: "null", name: "Không có" },
+  ]);
   const [specify, setSpecify] = useState([{ key: "", value: "" }]);
   const [previewFile, setPreviewFile] = useState([]);
   const [file, setFile] = useState([]);
-  const [products, setProducts] = useState([{ key: "", value: "", price: "" }]);
+  const [products, setProducts] = useState([
+    { key: "", value: "", price: 1000 },
+  ]);
+  const [submitStateBtn, setSubmitStateBtn] = useState(false);
   const [existImageList, setExistImageList] = useState([]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    getCategoryLevel1();
   }, []);
+
+  useEffect(() => {
+    resetCategoryValue(1);
+    if (category[0] !== "null") {
+      getCategoryLevel2WithParent(category[0]);
+    }
+  }, [category[0]]);
+
+  useEffect(() => {
+    resetCategoryValue(2);
+    if (category[1] !== "null") {
+      getCategoryLevel3WithParent(category[1]);
+    } else {
+      setCategoryList3([{ _id: "null", name: "Không có" }]);
+    }
+  }, [category[1]]);
+
+  const resetCategoryValue = (i) => {
+    let temp = category;
+    temp[i] = "null";
+    setCategory([...temp]);
+  };
 
   const handleChangeMedia = (e) => {
     const files = [...e.target.files];
@@ -171,7 +204,36 @@ export default function Product() {
     setFile(file.filter((_, i) => i !== index));
   };
 
-  const onChangeProducts = (param, value, index) => {};
+  const onChangeProducts = (param, value, index) => {
+    let temp = products;
+    if (param === "key") {
+      temp[index].key = value;
+    } else if (param === "value") {
+      temp[index].value = value;
+    } else {
+      temp[index].price = value;
+    }
+    setProducts([...temp]);
+  };
+
+  const addProductsRow = () => {
+    let temp = products;
+    temp.push({ key: "", value: "", price: 1000 });
+    setProducts([...temp]);
+  };
+
+  const deleteProductsRow = (index) => {
+    let temp = products;
+    if (temp.length === 1) {
+      alert({
+        icon: "error",
+        title: "Tối thiểu phải có 1 sản phẩm",
+      });
+      return;
+    }
+    temp.splice(index, 1);
+    setProducts([...temp]);
+  };
 
   const onChangeSpecify = (param, value, index) => {
     let temp = specify;
@@ -202,15 +264,6 @@ export default function Product() {
     setSpecify([...temp]);
   };
 
-  const formatSpecifyData = (arrayData) => {
-    const temp = [];
-    arrayData.forEach((ele, i) => {
-      temp.push(JSON.parse(ele));
-    });
-    console.log(temp);
-    return temp;
-  };
-
   const handleChangeCategory = (index, value) => {
     let temp = category;
     temp[index] = value;
@@ -228,15 +281,103 @@ export default function Product() {
     }
   };
 
-  const getCategoryWithParent = async (id, level) => {
+  const getCategoryLevel2WithParent = async (id) => {
     try {
       const query = `?parentId=${id}`;
       const res = await adminApis.getCategoryByParent(query);
+      let temp = [{ _id: "null", name: "Không có" }];
       if (res.status === 200) {
+        setCategoryList2([...temp.concat(res.data)]);
+      } else {
+        setCategoryList2([...temp]);
       }
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const getCategoryLevel3WithParent = async (id) => {
+    try {
+      const query = `?parentId=${id}`;
+      const res = await adminApis.getCategoryByParent(query);
+      let temp = [{ _id: "null", name: "Không có" }];
+      if (res.status === 200) {
+        setCategoryList3([...temp.concat(res.data)]);
+      } else {
+        setCategoryList2([...temp]);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const formatProducts = (data) => {
+    let parameter = [];
+    data.forEach((ele) => {
+      let entity = {
+        bar_code: ele.key,
+        name: ele.value,
+        price: ele.price,
+      };
+      parameter.push(entity);
+    });
+    return parameter;
+  };
+
+  const formatForm = (data) => {
+    const formdata = new FormData();
+    const parameter = formatProducts(products);
+
+    formdata.append("name", name);
+    formdata.append("description", desc);
+    specify.map((ele, index) => {
+      formdata.append(`details[${ele.key}]`, ele.value);
+    });
+    parameter.map((value, index) => {
+      formdata.append(`parameter[${index}].bar_code`, value.bar_code);
+      formdata.append(`parameter[${index}].name`, value.name);
+      formdata.append(`parameter[${index}].price`, value.price);
+    });
+    category.map((value, index) => {
+      let temp = value;
+      if (value === "null") {
+        temp = "";
+      }
+      formdata.append(`cate${index + 1}`, temp);
+    });
+
+    file.forEach((item) => {
+      formdata.append("file", item);
+    });
+
+    return formdata;
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (!category[0]) {
+      alert({
+        icon: "error",
+        title: "Vui lòng chọn danh mục 1",
+      });
+      return;
+    }
+    setSubmitStateBtn(true);
+
+    try {
+      const formData = await formatForm();
+      const res = await adminApis.createProduct(formData);
+      if (res.status === 200) {
+        alert({
+          icon: "success",
+          title: "Tạo sản phẩm thành công",
+        });
+        history.push("/admin/product");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    setSubmitStateBtn(false);
   };
 
   return (
@@ -244,7 +385,7 @@ export default function Product() {
       <div className="product-modal">
         <div className={classes.paper}>
           <div className={classes.paperContainer}>
-            <form>
+            <form onSubmit={onSubmit}>
               <FormLabel>
                 <span className="addprod-title">Thông tin sản phẩm</span>
               </FormLabel>
@@ -260,11 +401,15 @@ export default function Product() {
                     onChange={(e) => handleChangeCategory(0, e.target.value)}
                     required
                   >
-                    {/* {categoryList.map((item, index) => (
-                      <MenuItem key={index} value={item._id}>
-                        {item.name}
-                      </MenuItem>
-                    ))} */}
+                    {categoryList1.length ? (
+                      categoryList1.map((item, index) => (
+                        <MenuItem key={index} value={item._id}>
+                          {item.name}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <></>
+                    )}
                   </Select>
                 </FormGroup>
                 <FormGroup className="col-4">
@@ -278,12 +423,16 @@ export default function Product() {
                     onChange={(e) => handleChangeCategory(1, e.target.value)}
                     required
                   >
-                    {/* {categoryList.map((item, index) => (
-                      <MenuItem key={index} value={item._id}>
-                        {item.name}
-                      </MenuItem>
-                    ))} */}
-                  </Select>{" "}
+                    {categoryList2.length ? (
+                      categoryList2.map((item, index) => (
+                        <MenuItem key={index} value={item._id}>
+                          {item.name}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+                  </Select>
                 </FormGroup>
                 <FormGroup className="col-4">
                   <InputLabel id="demo-simple-select-label">
@@ -296,11 +445,15 @@ export default function Product() {
                     onChange={(e) => handleChangeCategory(2, e.target.value)}
                     required
                   >
-                    {/* {categoryList.map((item, index) => (
-                      <MenuItem key={index} value={item._id}>
-                        {item.name}
-                      </MenuItem>
-                    ))} */}
+                    {categoryList3.length ? (
+                      categoryList3.map((item, index) => (
+                        <MenuItem key={index} value={item._id}>
+                          {item.name}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <></>
+                    )}
                   </Select>
                 </FormGroup>
               </div>
@@ -319,7 +472,7 @@ export default function Product() {
                     },
                   }}
                   required
-                  label="Tên"
+                  label="Tên sản phẩm"
                 />
               </FormGroup>
 
@@ -327,7 +480,7 @@ export default function Product() {
                 <FormLabel className="mt-5 mb-3">
                   <span className="addprod-title">Phân loại sản phẩm</span>
                 </FormLabel>
-                {specify.map((ele, index) => (
+                {products.map((ele, index) => (
                   <div className="row m-0 p-0 mt-2" key={index}>
                     <div className="col-3">
                       <FormGroup>
@@ -340,7 +493,7 @@ export default function Product() {
                           variant="filled"
                           value={ele.key}
                           onChange={(e) =>
-                            onChangeSpecify("key", e.target.value, index)
+                            onChangeProducts("key", e.target.value, index)
                           }
                           InputProps={{
                             classes: {
@@ -348,7 +501,7 @@ export default function Product() {
                             },
                           }}
                           required
-                          label="Mã sản phẩm"
+                          label="Mã phân loại"
                         />
                       </FormGroup>
                     </div>
@@ -363,7 +516,7 @@ export default function Product() {
                           variant="filled"
                           value={ele.value}
                           onChange={(e) =>
-                            onChangeSpecify("value", e.target.value, index)
+                            onChangeProducts("value", e.target.value, index)
                           }
                           InputProps={{
                             classes: {
@@ -371,34 +524,34 @@ export default function Product() {
                             },
                           }}
                           required
-                          label="Tên sản phẩm"
+                          label="Tên phân loại"
                         />
                       </FormGroup>
                     </div>
                     <div className="col-4">
                       <FormGroup>
-                        <TextField
+                        <CurrencyTextField
                           InputLabelProps={{
                             classes: {
                               root: classes.resize,
                             },
                           }}
-                          variant="filled"
-                          onWheel={(e) => e.target.blur()}
-                          // value={price}
-                          // onChange={(e) => {
-                          //   setPrice(e.target.value);
-                          // }}
                           InputProps={{
                             classes: {
                               input: classes.resize,
                             },
-                            inputProps: {
-                              min: 1000,
-                            },
                           }}
+                          variant="filled"
+                          currencySymbol="vnd"
+                          minimumValue="1000"
+                          outputFormat="string"
+                          decimalCharacter="."
+                          digitGroupSeparator=","
+                          value={ele.price}
+                          onChange={(event, value) =>
+                            onChangeProducts("price", value, index)
+                          }
                           required
-                          type="number"
                           label="Giá tiền"
                         />
                       </FormGroup>
@@ -406,7 +559,7 @@ export default function Product() {
                     <div className="col-1">
                       <IconButton
                         color="secondary"
-                        onClick={() => deleteSpecifyRow(index)}
+                        onClick={() => deleteProductsRow(index)}
                       >
                         <IoTrashBin></IoTrashBin>
                       </IconButton>
@@ -417,7 +570,7 @@ export default function Product() {
                   <Button
                     type="button"
                     variant="contained"
-                    onClick={addSpecifyRow}
+                    onClick={addProductsRow}
                     style={{
                       fontSize: "0.9rem",
                       backgroundColor: "#2dbf64",
@@ -622,7 +775,7 @@ export default function Product() {
 
               <div className="mt-3 row modal-action">
                 <Button
-                  // disabled={submitButtonState}
+                  disabled={submitStateBtn}
                   type="submit"
                   variant="contained"
                   color="primary"
