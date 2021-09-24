@@ -230,7 +230,7 @@ export default function Product() {
             />
           </div>
           <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-            <Link to="/admin/addproduct">
+            <Link to="/admin/product/addproduct">
               <Button
                 style={{
                   backgroundColor: LOGO_COLOR,

@@ -85,6 +85,7 @@ const AdminIndex = (props) => {
     },
     {
       path: "/admin/product",
+      exact: true,
       main: () => <Product></Product>,
     },
     {
@@ -92,7 +93,7 @@ const AdminIndex = (props) => {
       main: () => <Receipt></Receipt>,
     },
     {
-      path: "/admin/addproduct",
+      path: "/admin/product/addproduct",
       main: () => <CreateProduct></CreateProduct>,
     },
   ];
