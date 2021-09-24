@@ -715,6 +715,7 @@ i.fas.fa-comments-dollar {
 
 .carousel-inner {
     margin-left: -13px;
+    width: 100% !important;
 }
 
 div#step2header {
@@ -758,4 +759,8 @@ a.btn.nutmuathem.mb-3:hover {
 }
 .col-4 {
     height: 175px;
+}
+.danhsach button {
+    margin-top: 10px;
+    margin-right: 3px;
 }

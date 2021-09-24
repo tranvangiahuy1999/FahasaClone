@@ -25,7 +25,7 @@ const ProductDetail=()=> {
         return (
             <div>
                 <Nav/>
-                <section className="duoinavbar">
+                <section className="duoinavbar"style={{background:'#F0F0F0'}}>
         <div className="container text-white">
           <div className="row justify">
             <div className="col-lg-3 col-md-5">
@@ -81,15 +81,7 @@ const ProductDetail=()=> {
                        ) : (
                          <></>
                        )}
-                    
-                  
-                  
                 
-                   
-                   
-               
-                  
-                  
                   </ul>
                 </div>
 
@@ -100,7 +92,7 @@ const ProductDetail=()=> {
         </div>
       </section>
         {/* breadcrumb  */}
-        <section className="breadcrumbbar">
+        <section className="breadcrumbbar"style={{background:'#F0F0F0',paddingTop:'10px',height:'72px'}}>
           <div className="container">
             <ol className="breadcrumb mb-0 p-0 bg-transparent">
               <li className="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
@@ -110,16 +102,16 @@ const ProductDetail=()=> {
           </div>
         </section>
         {/* nội dung của trang  */}
-        <section className="product-page mb-4">
+        <section className="product-page mb-4" style={{background:'#F0F0F0',paddingBottom:'50px'}}>
           <div className="container">
             {/* chi tiết 1 sản phẩm */}
             <div className="product-detail bg-white p-4">
               <div className="row">
                 {/* ảnh  */}
-                <div className="col-md-5 khoianh">
+                <div className="col-md-6 khoianh">
                   <div className="anhto mb-4">
                     <a className="active" href="/chi-tiet#thumb-img-1" data-fancybox="thumb-img">
-                      <img className="product-image" src="images/lap-ke-hoach-kinh-doanh-hieu-qua-mt.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-mt" style={{width: '100%'}} />
+                      <img className="product-image" src="images/lap-ke-hoach-kinh-doanh-hieu-qua-mt.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-mt" style={{width: '85%'}} />
                     </a>
                     <a href="images/lap-ke-hoach-kinh-doanh-hieu-qua-ms.jpg" data-fancybox="thumb-img" />
                   </div>
@@ -129,7 +121,7 @@ const ProductDetail=()=> {
                   </div>
                 </div>
                 {/* thông tin sản phẩm: tên, giá bìa giá bán tiết kiệm, các khuyến mãi, nút chọn mua.... */}
-                <div className="col-md-7 khoithongtin">
+                <div className="col-md-6 khoithongtin">
                   <div className="row">
                     <div className="col-md-12 header">
                       <h4 className="ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h4>
@@ -141,6 +133,11 @@ const ProductDetail=()=> {
                         <div className="giabia">Giá bìa:<span className="giacu ml-2">139.000 ₫</span></div>
                         <div className="giaban">Giá bán tại DealBooks: <span className="giamoi font-weight-bold">111.200 </span><span className="donvitien">₫</span></div>
                         <div className="tietkiem">Tiết kiệm: <b>27.800 ₫</b> <span className="sale">-20%</span>
+                        </div>
+                        <div className="danhsach" style={{marginRight:'2px'}}>
+                        <button type="button" className="btn btn-outline-success">Tập 1</button>
+                        <button type="button" className="btn btn-outline-success">Tập 2</button>
+                        <button type="button" className="btn btn-outline-success">Tập 3</button>
                         </div>
                       </div>
                       <div className="uudai my-3">
@@ -187,9 +184,9 @@ const ProductDetail=()=> {
                   <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active ml-3 " id="nav-gioithieu" role="tabpanel" aria-labelledby="nav-gioithieu-tab">
                     <div className="row">
-     
-        <div className="col-md-5 giua ">
-           <h3 style={{marginLeft:'-85px',marginBottom:'25px'}}>Chi Tiết Sản Phẩm</h3>
+                    <h3 style={{marginTop:'35px',marginBottom:'-15px'}}>Chi Tiết Sản Phẩm</h3>
+        <div className="col-md-5 mt-4 giua ">
+   
           <div className="tonggiatien">
             <div className="group d-flex justify-content-between">
               <p className="label">Tác giả:</p>
@@ -308,14 +305,14 @@ const ProductDetail=()=> {
         </section>
         {/* het product-page */}
         {/* khối sản phẩm tương tự */}
-        <section className="_1khoi sachmoi">
-          <div className="container">
+        <section className="_1khoi sachmoi" style={{background:'#F0F0F0',paddingBottom:'50px' }}>
+          <div className="container"style={{background:'white',marginTop:'-25px'  }}>
             <div className="noidung bg-white" style={{width: '100%'}}>
               <div className="row">
                 {/*header*/}
-                <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light pt-2">
+                <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light pt-2" style={{marginTop:'20px'}}>
                   <h5 className="header text-uppercase" style={{fontWeight: 400}}>Sản phẩm tương tự</h5>
-                  <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                 
                 </div>
               </div>
               <div className="khoisanpham" style={{paddingBottom: '2rem'}}>
@@ -466,13 +463,15 @@ const ProductDetail=()=> {
                 </div>
               </div>
             </div>
+            <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
           </div>
+
         </section>
         {/* khối sản phẩm đã xem  */}
       
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-        <section className="abovefooter text-white mt-3" >
-          <div className="container"style={{backgroundColor: '#64ae55'}}>
+        <section className="abovefooter text-white mt-3"style={{background:'#F0F0F0' }} >
+          <div className="container"style={{backgroundColor: '#64ae55',width:'100%',marginTop:'-16px'}}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
                 <div className="dichvu d-flex align-items-center">
@@ -515,7 +514,44 @@ const ProductDetail=()=> {
             </div>
           </div>
         </section>
-        <Footer/>
+        <div  style={{background:'#F0F0F0',width:'100%'}} >
+        <footer>
+              <div className="container py-4" style={{background:'white',width:'100%'}}>
+                <div className="row">
+                  <div className="col-md-6 col-xs-6">
+                    <div className="gioithieu">
+                      <h3 className="header text-uppercase font-weight-bold">Về DealBook</h3>
+                      <a href="#">Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM</a>
+                      <a href="#">Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.</a>
+                      <a href="#"><img src="images/dang-ky-bo-cong-thuong.png" alt="jcb-payment" /></a>
+                      <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
+                    </div>
+                  </div>
+                  <div className="col-md-3 col-xs-6">
+                    <div className="hotrokh">
+                      <h3 className="header text-uppercase font-weight-bold">HỖ TRỢ KHÁCH HÀNG</h3>
+                      <a href="#">Hướng dẫn đặt hàng</a>
+                      <a href="#">Phương thức thanh toán</a>
+                      <a href="#">Phương thức vận chuyển</a>
+                      <a href="#">Chính sách đổi trả</a>
+                    
+                    </div>
+                  </div>
+                
+                  <div className="col-md-3 col-xs-6">
+                    <div className="ptthanhtoan">
+                    
+                      <a href="#"><img src="images/footer_icon1.png" alt="jcb-payment" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </footer>
+            {/* nut cuon len dau trang */}
+            <div className="fixed-bottom">
+              <div className="btn btn-warning float-right rounded-circle nutcuonlen" id="backtotop" href="#" style={{background: '#64ae55'}}><i className="fa fa-chevron-up text-white" /></div>
+            </div>
+        </div>
       </div>
         
         );

@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <div>
       {/* thanh tieu de "danh muc sach" + hotline + ho tro truc tuyen */}
-      <section className="duoinavbar">
+      <section className="duoinavbar" >
         <div className="container text-white">
           <div className="row justify">
             <div className="col-md-3">
@@ -40,7 +40,7 @@ const Header = () => {
         </div>
       </section>
       {/* noi dung danh muc sach(categories) + banner slider */}
-      <section className="header bg-light">
+      <section className="header " style={{background:'#F0F0F0 '}}>
         <div className="container">
           <div className="row">
             <div
@@ -125,38 +125,38 @@ const Header = () => {
                 </ol>
                 <div
                   className="carousel-inner"
-                  width="965px"
+                  width="950px"
                   style={{ marginTop: "-40px" }}
                 >
-                  <div className="carousel-item active" width="965px">
+                  <div className="carousel-item active" width="800px">
                     <a href="#">
                       <img
                         src="images/banner-sach-moi.jpg"
                         className="img-fluid"
                         style={{ height: "427px" }}
-                        width="965px"
+                        width="950px"
                         alt="First slide"
                       />
                     </a>
                   </div>
-                  <div className="carousel-item" width="965px">
+                  <div className="carousel-item" width="950px">
                     <a href="#">
                       <img
                         src="images/banner-beethoven.jpg"
                         className="img-fluid"
                         style={{ height: "427px" }}
-                        width="965px"
+                        width="950px"
                         alt="Second slide"
                       />
                     </a>
                   </div>
-                  <div className="carousel-item" width="965px">
+                  <div className="carousel-item" width="950px">
                     <a href="#">
                       <img
                         src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg"
                         className="img-fluid"
                         style={{ height: "427px" }}
-                        width="965px"
+                        width="950px"
                         alt="Third slide"
                       />
                     </a>

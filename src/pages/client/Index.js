@@ -4,15 +4,15 @@ import Header from "./Component/Header"
 import Nav from "./Component/Nav";
 function HomePage() {
   return (
-    <div>
+    <div style={{background:'#F0F0F0'}}>
            <Nav/>
         <Header/>
       
          <div>
         {/* khoi sach moi  */}
-        <section className="_1khoi sachmoi bg-light">
-          <div className="container">
-            <div className="noidung" style={{width: '100%'}}>
+        <section className="_1khoi sachmoi "style={{background:'#F0F0F0'}}>
+          <div className="container"style={{width:'82%',background:'white'}}>
+            <div className="noidung" style={{background:'white',marginTop:'35px'}}>
               <div className="row">
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
@@ -150,14 +150,15 @@ function HomePage() {
                 </div>
               </div>
             </div>
+            <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
           </div>
-          <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+         
         </section>
         {/* khoi sach combo hot  */}
         <section className="_1khoi combohot mt-4">
-          <div className="container">
-            <div className="noidung bg-white" style={{width: '100%'}}>
-              <div className="row">
+          <div className="container"style={{width: '84%'}}>
+            <div className="noidung bg-white" style={{width: '100%',marginTop:'39px'}}>
+              <div className="row"style={{width: '100%',marginLeft:'0px'}}>
                 {/*header */}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
                   <h2 className="header text-uppercase" style={{fontWeight: 400}}>COMBO SÁCH HOT - GIẢM ĐẾN 25%</h2>
@@ -466,10 +467,10 @@ function HomePage() {
           </div>
         </section>
         {/* khoi sach sap phathanh  */}
-        <section className="_1khoi sapphathanh mt-4">
-          <div className="container">
-            <div className="noidung bg-white" style={{width: '100%'}}>
-              <div className="row">
+        <section className="_1khoi sapphathanh  "style={{marginTop: '90px'}}>
+        <div className="container"style={{width: '84%'}}>
+            <div className="noidung bg-white" style={{width: '100%',marginLeft:'0px'}}>
+              <div className="row"style={{width: '100%',marginLeft:'0px'}}>
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
                   <h2 className="header text-uppercase" style={{fontWeight: 400}}>SÁCH SẮP PHÁT HÀNH / ĐẶT TRƯỚC</h2>
@@ -527,14 +528,15 @@ function HomePage() {
                   </a>
                 </div>
               </div>
+              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm mt-5 text-white">Xem tất cả</a>
             </div>
-        
+            
           </div>
-          <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm mt-5 text-white">Xem tất cả</a>
+        
         </section>
         {/* div _1khoi -- khoi sachnendoc */}
-        <section className="_1khoi sachnendoc bg-light mt-4">
-          <div className="container">
+        <section className="_1khoi sachnendoc mt-5"style={{background:'#F0F0F0'}}>
+          <div className="container bg-light"style={{width: '83%',marginBottom:'40px'}}>
             <div className="noidung" style={{width: '100%'}}>
               <div className="row">
                 {/*header*/}
@@ -599,15 +601,16 @@ function HomePage() {
                   </div>
                 </div>
               </div>
+              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-4 btn-sm mb-5 text-white">Xem tất cả</a>
             </div>
-            <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-4 btn-sm mb-5 text-white">Xem tất cả</a>
-            <hr />
+ 
+          
           </div>
       
         </section>
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
         <section className="abovefooter text-white" >
-          <div className="container"style={{backgroundColor: '#64ae55'}}>
+          <div className="container"style={{backgroundColor: '#64ae55',width:'83%'}}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
                 <div className="dichvu d-flex align-items-center">
