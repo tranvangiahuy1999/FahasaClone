@@ -409,7 +409,8 @@ $(function () {
                         </a>
                         <div class="item-caption d-flex w-100">
                             <div class="item-info ml-3">
-                                <a href="product-item.html" class="ten">${item.name}</a>
+                                <a href="product-item.html"style="font-size: 18px" class="ten">${item.name}</a>
+                                <button type="button" style="font-size: 11px" class="btn btn-outline-success">Tập 1</button>
                                 <div class="soluong d-flex">
                                     <div class="input-number input-group mb-3">
                                         <div class="input-group-prepend">

@@ -2,109 +2,20 @@ import React, {  useEffect, useState  } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Nav from './Nav';
-import { display } from '@material-ui/system';
-import shopApis from "../../../apis/ShopApis";
+
 const  Receipt=()=> {
-  const [categoryList, setCategoryList] = useState([]);
+  
 
-  useEffect(() => {
-    getCategoryData();
-  }, []);
-
-  const getCategoryData = async () => {
-    try {
-      const res = await shopApis.getCategoryList();
-      console.log(res);
-      if (res.status === 200) {
-        setCategoryList(res.data);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    
-  };   
+ 
         return (
             <div>
                 <Nav/>
-                <section className="duoinavbar">
-        <div className="container text-white">
-          <div className="row justify">
-            <div className="col-lg-3 col-md-5">
-              <div className="categoryheader">
-                <div className="noidungheader text-white">
-                  <i className="fa fa-bars" />
-                  <span className="text-uppercase font-weight-bold ml-1">Danh mục sách</span>
-                </div>
-
-                {/* CATEGORIES */}
-                <div className="categorycontent1" >
-                  <ul >
-                  {categoryList.length ? (
-                    categoryList
-                      .filter((item, idx) => idx < 11)
-                      .map((value, index) => (
-                    <li  key={index}> <a href="/danh-sach"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
-                      <ul className="categorydetail container">
-                      <div className="row " style={{height:'185px'}} >
-                      {value.subCate.length ? (
-                              value.subCate
-                                .filter((item, idx) => idx < 6)
-                                .map((value, index) => (
-                       
-                          <div className="col-4"key={index}>
-                          <li className="liheader"><a href="/danh-sach" className="header text-uppercase"> {value.name}
-                          </a></li>
-                        <div className="content trai">
-                        {value.subCate.length ? (
-                                        value.subCate
-                                          .filter((item, idx) => idx < 5)
-                                          .map((value, index) => (
-                          <li key={index}><a href="/danh-sach">{value.name}</a></li>
-                          ))
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                          </div>
-                           
-                          
-                      
-                           ))
-                           ) : (
-                             <></>
-                           )}
-                          </div>
-
-                        
-                      </ul>
-                    </li>
-                       ))
-                       ) : (
-                         <></>
-                       )}
-                    
-                  
-                  
-                
-                   
-                   
-               
-                  
-                  
-                  </ul>
-                </div>
-
-              </div>
-            </div>
-          
-          </div>
-        </div>
-      </section>
+              
             {/* giao diện giỏ hàng  */}
-      <section className="content my-3">
-        <div className="container">
-          <div className="cart-page bg-white">
-            <div className="row">
+      <section className="content my-3" style={{background:'#F0F0F0'}}>
+        <div className="container"style={{background:'#F0F0F0'}}>
+          <div className="cart-page bg-white"style={{background:'#F0F0F0'}}>
+            <div className="row"style={{background:'#F0F0F0'}}>
               {/* giao diện giỏ hàng khi không có item  */}
               <div className="col-12 cart-empty d-none">
                 <div className="py-3 pl-3">
@@ -117,7 +28,7 @@ const  Receipt=()=> {
                 </div>
               </div>
               {/* giao diện giỏ hàng khi có hàng (phần comment màu xanh bên dưới là phần 2 sản phẩm trong giỏ hàng nhưng giờ đã demo bằng jquery) */}
-              <div className="col-md-8 cart">
+              <div className="col-md-8 cart"style={{background:'white'}}>
                 <div className="cart-content py-3 pl-3">
                   {/* <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(1 sản phẩm)</span></h6>
                             <div class="cart-list-items">
@@ -279,8 +190,9 @@ const  Receipt=()=> {
       </section>
       {/* het khoi content  */}
             {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-            <section className="abovefooter text-white" >
-              <div className="container"style={{backgroundColor: '#64ae55'}}>
+          
+            <section className="abovefooter text-white" style={{marginLeft:'-20px',background:'#F0F0F0',marginTop:'-16px'}} >
+              <div className="container"style={{backgroundColor: '#64ae55',width:'84%'}}>
                 <div className="row">
                   <div className="col-lg-3 col-sm-6">
                     <div className="dichvu d-flex align-items-center">
@@ -323,9 +235,45 @@ const  Receipt=()=> {
                 </div>
               </div>
             </section>
-            <Footer/>
+            <div style={{marginLeft:'-20px',background:'#F0F0F0'}}>
+            <footer>
+              <div className="container py-4" style={{background:'white',width:'84%'}}>
+                <div className="row">
+                  <div className="col-md-6 col-xs-6">
+                    <div className="gioithieu">
+                      <h3 className="header text-uppercase font-weight-bold">Về DealBook</h3>
+                      <a href="#">Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM</a>
+                      <a href="#">Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.</a>
+                      <a href="#"><img src="images/dang-ky-bo-cong-thuong.png" alt="jcb-payment" /></a>
+                      <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
+                    </div>
+                  </div>
+                  <div className="col-md-3 col-xs-6">
+                    <div className="hotrokh">
+                      <h3 className="header text-uppercase font-weight-bold">HỖ TRỢ KHÁCH HÀNG</h3>
+                      <a href="#">Hướng dẫn đặt hàng</a>
+                      <a href="#">Phương thức thanh toán</a>
+                      <a href="#">Phương thức vận chuyển</a>
+                      <a href="#">Chính sách đổi trả</a>
+                    
+                    </div>
+                  </div>
+                
+                  <div className="col-md-3 col-xs-6">
+                    <div className="ptthanhtoan">
+                    
+                      <a href="#"><img src="images/footer_icon1.png" alt="jcb-payment" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </footer>
+            {/* nut cuon len dau trang */}
+            <div className="fixed-bottom">
+              <div className="btn btn-warning float-right rounded-circle nutcuonlen" id="backtotop" href="#" style={{background: '#64ae55'}}><i className="fa fa-chevron-up text-white" /></div>
+            </div>
           </div> 
-        
+          </div>
         );
     }
 

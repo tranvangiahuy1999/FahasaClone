@@ -301,7 +301,7 @@ label.error {
     cursor: pointer;
     width: 277px;
     margin-left: -31px;
-    padding-left: 31px;
+    padding-left: 10px;
 }
 
 .categorycontent1 > ul > li:hover > a{
@@ -315,6 +315,7 @@ label.error {
 .categorycontent1 > ul > li{
     border-bottom: 1px solid #f8e1e1;
     height: 35px;
+    margin-left: -20px;
 }
 
 .categorycontent1 > ul > li:last-child{
@@ -779,6 +780,32 @@ button.receiptbtn {
     margin-left: 68%;
 }
 /* het css cho cart-steps  */
+/* @media only screen and (min-width: 1200px) {
+    .categorycontent ul li a.tieude {
+        text-decoration: none;
+        color: black;
+        font-weight: 400;
+        margin-bottom: -37px;
+        font-size: 15px;
+        height: 35px;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        transition: 0.3s;
+    }
+    .categorycontent {
+        border: 1px solid #b4b2b2;
+        box-sizing: border-box;
+         width: 100%;
+        height: 387px;
+        background: white;
+        text-align: left;
+    }
+
+}
 @media only screen and (max-width: 1024px) {
     .duoinavbar {
         height: 40px;
@@ -787,10 +814,25 @@ button.receiptbtn {
     .categorycontent {
         border: 1px solid #b4b2b2;
         box-sizing: border-box;
-      width: 100%;
+         width: 100%;
         height: 387px;
         background: white;
         text-align: left;
+    }
+    .categorycontent ul li a.tieude {
+        text-decoration: none;
+        color: black;
+        font-weight: 400;
+        margin-bottom: -37px;
+        font-size: 15px;
+        height: 35px;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        transition: 0.3s;
     }
     .carousel-inner {
         position: relative !important;
@@ -799,11 +841,18 @@ button.receiptbtn {
         margin-left: 60px !important;
     }
  
-}
+} */
 @media (max-width:768px){
     .navbar form .input-group{
         width: 100%!important;
 
+    }
+    .ptthanhtoan {
+        margin-left: -7px !important;
+        margin-top: 8px !important;
+    }
+    .ptthanhtoan a img {
+        width: 336px !important;
     }
     .checkout-right {
         margin-bottom: 50px;

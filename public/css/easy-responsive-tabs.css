@@ -249,11 +249,13 @@ h2.resp-accordion:first-child {
     /* !important;*/
 }
 
-@media (max-width: 1080px) {
+@media only screen and  (max-width: 1080px) {
     .resp-tabs-list li {
         font-size: 18px;
         padding: 13px 36.8px;
     }
+    
+
 }
 
 @media (max-width: 991px) {
@@ -264,6 +266,7 @@ h2.resp-accordion:first-child {
     .resp-tab-content {
         padding: 40px 35px;
     }
+
 }
 
 @media only screen and (max-width: 768px) {

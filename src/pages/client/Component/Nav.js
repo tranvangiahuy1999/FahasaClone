@@ -17,6 +17,7 @@ function Nav() {
                   <button type="button" className="btn" style={{backgroundColor: '#64ae55', color: 'white'}}>
                     <i className="fa fa-search" />
                   </button>
+                  
                 </div>
               </div>
             </form>
@@ -32,6 +33,7 @@ function Nav() {
                   Hàng</a>
               </li>
             </ul>
+            
 
             
           </div>

@@ -24,7 +24,7 @@ const ProductList=()=> {
         return (
             <div>
                 <Nav/>
-                <section className="duoinavbar">
+                <section className="duoinavbar"style={{background:'#F0F0F0'}}>
         <div className="container text-white">
           <div className="row justify">
             <div className="col-lg-3 col-md-5">
@@ -98,7 +98,7 @@ const ProductList=()=> {
           </div>
         </div>
       </section>
-        <section className="breadcrumbbar">
+        <section className="breadcrumbbar"style={{background:'#F0F0F0',paddingTop:'10px',height:'72px'}}>
           <div className="container">
             <ol className="breadcrumb mb-0 p-0 bg-transparent">
               <li className="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
@@ -107,14 +107,14 @@ const ProductList=()=> {
           </div>
         </section>
         {/* ảnh banner  */}
-        <section className="banner">
+        <section className="banner"style={{background:'#F0F0F0',paddingBottom:'50px'}}>
           <div className="container text-center">
             <a href="sach-moi-tuyen-chon.html"><img src="images/banner-sach-ktkn.jpg" alt="banner-sach-ktkn" className="img-fluid" /></a>
           </div>
         </section>
         {/* thể loại sách: kinh tế chính trị nhân vật bài học kinh doanh ( từng ô vuông) */}
-        <section className="page-content my-3">
-          <div className="container">
+        <section className="page-content my-3"style={{background:'#F0F0F0',height:'280px'}}>
+          <div className="container"style={{background:'white',marginTop:'-17px',width:'84%',paddingBottom:'10px'}}>
             <div>
               <h1 className="header text-uppercase">sách kinh tế - kỹ năng</h1>
             </div>
@@ -225,43 +225,16 @@ const ProductList=()=> {
           </div>
         </section>
         {/* khối sản phẩm  */}
-        <section className="content my-4">
-          <div className="container">
-            <div className="noidung bg-white" style={{width: '100%'}}>
+        <section className="content my-4"style={{background:'#F0F0F0'}}>
+          <div className="container"style={{marginTop:'-24px',width:'84%',marginLeft:'108px'}}>
+            <div className="noidung bg-white" style={{width: '101%'}}>
               {/* header của khối sản phẩm : tag(tác giả), bộ lọc và sắp xếp  */}
-              <div className="header-khoi-sp d-flex">
-                <div className="tag">
-                  <label>Tác giả nổi bật:</label>
-                  <a href="#">Tất cả</a>
-                  <a href="#" data-tacgia=".MarieForleo">Marie Forleo</a>
-                  <a href="#" data-tacgia=".DeanGraziosi">Dean Graziosi</a>
-                  <a href="#" data-tacgia=".DavikClark">Davik Clark</a>
-                  <a href="#" data-tacgia=".TSLêThẩmDương">TS Lê Thẩm Dương</a>
-                  <a href="#" data-tacgia=".SimonSinek">Simon Sinek</a>
-                </div>
-                <div className="sort d-flex ml-auto">
-                  <div className="hien-thi">
-                    <label htmlFor="hienthi-select" className="label-select">Hiển thị</label>
-                    <select className="hienthi-select">
-                      <option value={30}>30</option>
-                      <option value={60}>60</option>
-                    </select>
-                  </div>
-                  <div className="sap-xep">
-                    <label htmlFor="sapxep-select" className="label-select">Sắp xếp</label>
-                    <select className="sapxep-select">
-                      <option value="moinhat">Mới nhất</option>
-                      <option value="thap-cao">Giá: Thấp - Cao</option>
-                      <option value="cao-thap">Giá: Cao - Thấp</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+             
               {/* các sản phẩm  */}
-              <div className="row">
+              <div className="row"style={{background:'#F0F0F0',marginBottom:'-35px'}}>
                 <div className='col-3' >
                     
-                      <div className="thongtinsach1">  
+                      <div className="thongtinsach1"style={{background:'white',border:'none'}}>  
                         <h1 style={{fontSize:'19px',marginTop:'6px',marginLeft:'3px',fontWeight:'bold'}}>Nhóm Sản Phẩm</h1>
                         <h3  style={{fontSize:'17px',marginLeft:'13px'}}>Tất Cả Sản Phẩm</h3>
                         <ul>
@@ -278,7 +251,27 @@ const ProductList=()=> {
                     
                     </div>
                 </div>
-                <div className="col-9">
+                <div className="col-9" style={{background:'white'}}> 
+                <div className="header-khoi-sp d-flex">
+             
+             <div className="sort d-flex ml-auto">
+               <div className="hien-thi">
+                 <label htmlFor="hienthi-select" className="label-select">Hiển thị :</label>
+                 <select className="hienthi-select">
+                   <option value={30}>30</option>
+                   <option value={60}>60</option>
+                 </select>
+               </div>
+               <div className="sap-xep">
+                 <label htmlFor="sapxep-select" className="label-select">Sắp xếp : </label>
+                 <select className="sapxep-select">
+                   <option value="moinhat">Mới nhất</option>
+                   <option value="thap-cao">Giá: Thấp - Cao</option>
+                   <option value="cao-thap">Giá: Cao - Thấp</option>
+                 </select>
+               </div>
+             </div>
+           </div>
                 <div className="items">
                 <div className="row" style={{marginRight:'25px'}}>
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
@@ -461,8 +454,8 @@ const ProductList=()=> {
           {/*het container*/}
         </section>
         {/*het _1khoi*/}
-        <section className="abovefooter text-white" >
-          <div className="container"style={{backgroundColor: '#64ae55'}}>
+        <section className="abovefooter text-white"style={{background:'#F0F0F0' ,paddingTop:'35px'  }} >
+          <div className="container"style={{backgroundColor: '#64ae55',width:'84%'}}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
                 <div className="dichvu d-flex align-items-center">
@@ -505,7 +498,45 @@ const ProductList=()=> {
             </div>
           </div>
         </section>
-        <Footer/>
+        <div  style={{background:'#F0F0F0'}} >
+
+        <footer>
+              <div className="container py-4" style={{background:'white',width:'84%'}}>
+                <div className="row">
+                  <div className="col-md-6 col-xs-6">
+                    <div className="gioithieu">
+                      <h3 className="header text-uppercase font-weight-bold">Về DealBook</h3>
+                      <a href="#">Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM</a>
+                      <a href="#">Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.</a>
+                      <a href="#"><img src="images/dang-ky-bo-cong-thuong.png" alt="jcb-payment" /></a>
+                      <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
+                    </div>
+                  </div>
+                  <div className="col-md-3 col-xs-6">
+                    <div className="hotrokh">
+                      <h3 className="header text-uppercase font-weight-bold">HỖ TRỢ KHÁCH HÀNG</h3>
+                      <a href="#">Hướng dẫn đặt hàng</a>
+                      <a href="#">Phương thức thanh toán</a>
+                      <a href="#">Phương thức vận chuyển</a>
+                      <a href="#">Chính sách đổi trả</a>
+                    
+                    </div>
+                  </div>
+                
+                  <div className="col-md-3 col-xs-6">
+                    <div className="ptthanhtoan">
+                    
+                      <a href="#"><img src="images/footer_icon1.png" alt="jcb-payment" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </footer>
+            {/* nut cuon len dau trang */}
+            <div className="fixed-bottom">
+              <div className="btn btn-warning float-right rounded-circle nutcuonlen" id="backtotop" href="#" style={{background: '#64ae55'}}><i className="fa fa-chevron-up text-white" /></div>
+            </div>
+        </div>
       </div>
         );
     }

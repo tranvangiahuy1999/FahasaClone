@@ -481,7 +481,7 @@ ul li a.header{
 /* css cho footer  */
 .ptthanhtoan {
     width: 200px;
-    margin-left: -80px;
+    margin-left: -99px;
     margin-top: -7px;
 }
 
@@ -864,6 +864,7 @@ a.btn.btn-warning.btn-sm.text-white {
     width: 180px;
     color: orange !important;
     margin-left: 44%;
+    margin-bottom: 35px;
     background: #f5a6230a;
     font-size: 19px;
 } 
@@ -983,7 +984,10 @@ h6.card-title.ten {
         width: 100%!important;
 
     }
-
+    .carousel-item {
+        width: 80%;
+        margin-left: 53px;
+    }
     .navbar ul li a.nav-link{
         margin-left:0.25rem!important;
     }
@@ -1112,7 +1116,7 @@ h3.account-header {
 }
 
 .list{
-    width: 248px;
+    width: 233px;
 }
 
 
@@ -1132,4 +1136,12 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
 
 .giabia {
     font-size: 22px;
+}
+
+.card.list:hover {
+    border: 5px solid #F0F0F0;
+}
+
+.card.list {
+    border: none;
 }
