@@ -24,6 +24,18 @@ const adminApis = {
     const url = "/api/product/create";
     return axiosClient.post(url, data);
   },
+  getProductByPageAndBarcode(page, query) {
+    const url = `/api/product/search?page=${page}&search=${query}`;
+    return axiosClient.get(url);
+  },
+  getAllProducts(page) {
+    const url = `/api/product/get/all/${page}`;
+    return axiosClient.get(url);
+  },
+  deleteProduct(id) {
+    const url = `/api/product/delete/${id}`;
+    return axiosClient.delete(url);
+  },
 };
 
 export default adminApis;

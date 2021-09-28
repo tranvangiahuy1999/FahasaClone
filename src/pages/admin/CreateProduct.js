@@ -13,7 +13,6 @@ import Select from "@material-ui/core/Select";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
-import CardMedia from "@material-ui/core/CardMedia";
 import { AiOutlineCloseCircle, AiOutlineCloudUpload } from "react-icons/ai";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
@@ -23,84 +22,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { IoTrashBin } from "react-icons/io5";
 import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
-
+import { LOGO_COLOR, ICON_COLOR } from "../../constants/index";
 import { useHistory } from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    overflowX: "true",
-  },
-  resize: {
-    fontSize: "1rem",
-  },
-  buttonLabel: {
-    fontSize: "1rem",
-  },
-  formControl: {
-    margin: "1%",
-    width: "48%",
-  },
-  FormGroup: {
-    marginTop: 10,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  selectTemplate: {
-    padding: 4,
-    fontSize: "1rem",
-  },
-  switchControl: {
-    marginTop: 6,
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: 10,
-    width: "100%",
-  },
-  paperContainer: {
-    padding: theme.spacing(5, 5, 5),
-  },
-  imageWrapper: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
-  },
-  imageList: {
-    width: 900,
-    height: 160,
-  },
-  titleBar: {
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0) 80%)",
-  },
-  title: {
-    color: "white",
-    fontSize: "1rem",
-  },
-  table: {
-    width: "100%",
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: "rect(0 0 0 0)",
-    height: 1,
-    margin: -1,
-    overflow: "hidden",
-    padding: 0,
-    position: "absolute",
-    top: 20,
-    width: 1,
-  },
-}));
 
 export default function Product() {
   const classes = useStyles();
@@ -109,7 +32,9 @@ export default function Product() {
   const [name, setName] = useState();
   const [desc, setDesc] = useState();
   const [category, setCategory] = useState(["null", "null", "null"]);
-  const [categoryList1, setCategoryList1] = useState([]);
+  const [categoryList1, setCategoryList1] = useState([
+    { _id: "null", name: "Không có" },
+  ]);
   const [categoryList2, setCategoryList2] = useState([
     { _id: "null", name: "Không có" },
   ]);
@@ -120,7 +45,7 @@ export default function Product() {
   const [previewFile, setPreviewFile] = useState([]);
   const [file, setFile] = useState([]);
   const [products, setProducts] = useState([
-    { key: "", value: "", price: 1000 },
+    { key: "", value: "", price: 1000, itemFile: null, itemFileName: "" },
   ]);
   const [submitStateBtn, setSubmitStateBtn] = useState(false);
   const [existImageList, setExistImageList] = useState([]);
@@ -133,6 +58,8 @@ export default function Product() {
     resetCategoryValue(1);
     if (category[0] !== "null") {
       getCategoryLevel2WithParent(category[0]);
+    } else {
+      setCategoryList2([{ _id: "null", name: "Không có" }]);
     }
   }, [category[0]]);
 
@@ -149,6 +76,21 @@ export default function Product() {
     let temp = category;
     temp[i] = "null";
     setCategory([...temp]);
+  };
+
+  const handleChangeItemMedia = (event, index) => {
+    console.log(index);
+    if (event.target.files === null) {
+      return;
+    }
+    let tempArray = products;
+    tempArray.map((ele, i) => {
+      if (i === index) {
+        tempArray[i].itemFile = event.target.files[0];
+        tempArray[i].itemFileName = event.target.files[0].name;
+      }
+    });
+    setProducts([...tempArray]);
   };
 
   const handleChangeMedia = (e) => {
@@ -179,7 +121,7 @@ export default function Product() {
       alert({
         icon: "error",
         title: "File ảnh quá lớn",
-        msg: "Dung lượng ảnh tối đa chỉ được 10MB",
+        msg: "Dung lượng ảnh tối đa chỉ được 5MB",
       });
     }
   };
@@ -273,8 +215,11 @@ export default function Product() {
   const getCategoryLevel1 = async () => {
     try {
       const res = await adminApis.getCategory();
+      let temp = [{ _id: "null", name: "Không có" }];
       if (res.status === 200) {
-        setCategoryList1(res.data);
+        setCategoryList1([...temp.concat(res.data)]);
+      } else {
+        setCategoryList2([...temp]);
       }
     } catch (e) {
       console.log(e);
@@ -482,6 +427,35 @@ export default function Product() {
                 </FormLabel>
                 {products.map((ele, index) => (
                   <div className="row m-0 p-0 mt-2" key={index}>
+                    <div className="col-2 text-center pt-3">
+                      <input
+                        accept="image/*"
+                        id={`contained-button-file-${index}`}
+                        hidden
+                        onClick={(event) => {
+                          event.target.value = null;
+                        }}
+                        onChange={(e) => handleChangeItemMedia(e, index)}
+                        type="file"
+                      />
+                      <label htmlFor={`contained-button-file-${index}`}>
+                        <Button
+                          variant="contained"
+                          component="span"
+                          style={{
+                            color: "white",
+                            backgroundColor: LOGO_COLOR,
+                            fontSize: "0.7rem",
+                            padding: "0.3rem",
+                          }}
+                        >
+                          Thêm ảnh
+                        </Button>
+                      </label>
+                      <div className="text-center one-line-text">
+                        {ele.itemFileName}
+                      </div>
+                    </div>
                     <div className="col-3">
                       <FormGroup>
                         <TextField
@@ -505,7 +479,7 @@ export default function Product() {
                         />
                       </FormGroup>
                     </div>
-                    <div className="col-4">
+                    <div className="col-3">
                       <FormGroup>
                         <TextField
                           InputLabelProps={{
@@ -528,7 +502,7 @@ export default function Product() {
                         />
                       </FormGroup>
                     </div>
-                    <div className="col-4">
+                    <div className="col-3">
                       <FormGroup>
                         <CurrencyTextField
                           InputLabelProps={{
@@ -543,9 +517,9 @@ export default function Product() {
                           }}
                           variant="filled"
                           currencySymbol="vnd"
-                          minimumValue="1000"
+                          minimumValue="0"
+                          decimalPlaces="0"
                           outputFormat="string"
-                          decimalCharacter="."
                           digitGroupSeparator=","
                           value={ele.price}
                           onChange={(event, value) =>
@@ -711,9 +685,13 @@ export default function Product() {
                   <input
                     type="file"
                     hidden
+                    multiple
                     onChange={handleChangeMedia}
                     alt=""
-                    accept="image/png, image/jpeg"
+                    accept="image/*"
+                    onClick={(event) => {
+                      event.target.value = null;
+                    }}
                     ref={fileRef}
                   />
                   <div className="modal-image-frame">
@@ -778,8 +756,11 @@ export default function Product() {
                   disabled={submitStateBtn}
                   type="submit"
                   variant="contained"
-                  color="primary"
-                  style={{ fontSize: "0.9rem" }}
+                  style={{
+                    fontSize: "0.9rem",
+                    backgroundColor: ICON_COLOR,
+                    color: "white",
+                  }}
                 >
                   Lưu sản phẩm
                 </Button>
@@ -791,3 +772,79 @@ export default function Product() {
     </div>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    overflowX: "true",
+  },
+  resize: {
+    fontSize: "1rem",
+  },
+  buttonLabel: {
+    fontSize: "1rem",
+  },
+  formControl: {
+    margin: "1%",
+    width: "48%",
+  },
+  FormGroup: {
+    marginTop: 10,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  selectTemplate: {
+    padding: 4,
+    fontSize: "1rem",
+  },
+  switchControl: {
+    marginTop: 6,
+  },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 10,
+    width: "100%",
+  },
+  paperContainer: {
+    padding: theme.spacing(5, 5, 5),
+  },
+  imageWrapper: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: theme.palette.background.paper,
+  },
+  imageList: {
+    width: 900,
+    height: 160,
+  },
+  titleBar: {
+    background:
+      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0) 80%)",
+  },
+  title: {
+    color: "red",
+    fontSize: "1rem",
+  },
+  table: {
+    width: "100%",
+  },
+  visuallyHidden: {
+    border: 0,
+    clip: "rect(0 0 0 0)",
+    height: 1,
+    margin: -1,
+    overflow: "hidden",
+    padding: 0,
+    position: "absolute",
+    top: 20,
+    width: 1,
+  },
+}));

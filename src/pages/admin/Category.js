@@ -77,8 +77,8 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <div className="text-center">STT</div>
+        <TableCell padding="checkbox" align="center">
+          <span>STT</span>
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -102,7 +102,7 @@ function EnhancedTableHead(props) {
           </TableCell>
         ))}
         <TableCell align="center" padding="normal">
-          <div className="text-center">Tùy chỉnh</div>
+          <span>Tùy chỉnh</span>
         </TableCell>
       </TableRow>
     </TableHead>
@@ -111,9 +111,7 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -155,7 +153,6 @@ export default function Category(props) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
-  const [selected, setSelected] = useState([]);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [categoryList, getCategoryList] = useState([]);
   const [parentId, setParentId] = useState();
@@ -233,37 +230,6 @@ export default function Category(props) {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = categoryList.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  // const handleClick = (event, name) => {
-  //   const selectedIndex = selected.indexOf(name);
-  //   let newSelected = [];
-
-  //   if (selectedIndex === -1) {
-  //     newSelected = newSelected.concat(selected, name);
-  //   } else if (selectedIndex === 0) {
-  //     newSelected = newSelected.concat(selected.slice(1));
-  //   } else if (selectedIndex === selected.length - 1) {
-  //     newSelected = newSelected.concat(selected.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelected = newSelected.concat(
-  //       selected.slice(0, selectedIndex),
-  //       selected.slice(selectedIndex + 1)
-  //     );
-  //   }
-
-  //   setSelected(newSelected);
-  // };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   return (
     <div className={classes.root}>
@@ -345,10 +311,8 @@ export default function Category(props) {
           >
             <EnhancedTableHead
               classes={classes}
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={categoryList.length}
             />
@@ -356,20 +320,17 @@ export default function Category(props) {
               <TableBody>
                 {stableSort(categoryList, getComparator(order, orderBy)).map(
                   (row, index) => {
-                    const isItemSelected = isSelected(row.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
                         role="checkbox"
-                        aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={row.name}
-                        selected={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <div className="text-center">{index + 1}</div>
+                        <TableCell padding="checkbox" align="center">
+                          {index + 1}
                         </TableCell>
                         <TableCell
                           component="th"
@@ -397,7 +358,7 @@ export default function Category(props) {
                           {convertTime(row.createdAt)}
                         </TableCell>
                         <TableCell align="center">
-                          {row.subCate ? row.subCate.length : 0}
+                          <span>{row.subCate.length} danh mục</span>
                         </TableCell>
                         <TableCell align="center">
                           {row.active ? (
