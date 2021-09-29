@@ -5,7 +5,7 @@ function Footer() {
         return (
             <div>
             <footer>
-              <div className="container py-4" style={{background:'white',width:'83%'}}>
+              <div className="container py-4" style={{background:'white',width:'81%'}}>
                 <div className="row">
                   <div className="col-md-6 col-xs-6">
                     <div className="gioithieu">

@@ -244,7 +244,8 @@ label.error {
 
 .categoryheader {
     height: 40px;
-    margin-left: 26px;
+    width: 280px;
+    margin-left: 33px;
     background-color: 	#006400;
 }
 
@@ -323,14 +324,14 @@ label.error {
 
 .categorycontent ul li ul{
     display: none;
-    height: 386px;
+    height: 387px;
     width: 970px;
     border: 1px solid #d1d1d1;
     position: absolute;
     z-index: 99;
     top: 0px;
     left: 0px;
-    margin-left: 318px;
+    margin-left: 316px;
     box-shadow: 0px 1px 3px #e7dddd;
     background-color: white;
 }
@@ -400,7 +401,7 @@ ul li a.header{
 .categorycontent ul li ul .content{
     float:left;
     margin-left: 20px;
-    width: 300px;
+    width: 342px;
     height: 265px;
     text-align: left;
 }
@@ -553,7 +554,23 @@ h3.card-title.ten {
     margin: 0 -10px;
 }
 
-
+li.breadcrumb-item {
+    margin-top: -24px;
+}
+                        /* ////xu li css */
+.phu {
+    margin-bottom: 3px;
+    font-size: 16px;
+    height: 21px;
+    width: 145px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    transition: 0.3s;
+}
+/* het css */
 /* css cho 1 khoi san pham - slick */
 
 /* css rieng cho phan combo phat hanh - card-border*/
@@ -586,6 +603,7 @@ h3.card-title.ten {
 
 .sachnendoc img.card-img-top.anh {
     position: static;
+    height: 170px;
     border-radius: 0;
 }
 
@@ -659,7 +677,9 @@ footer .header {
         width: 100%!important;
 
     }
-
+    .mobileNewbook{
+        margin-left: 35px !important;
+    }
     .navbar ul li a.nav-link{
         margin-left:0.25rem!important;
     }
@@ -682,7 +702,12 @@ footer .header {
         display: none;
     }
     ul.categorydetail{
-  display: none !important;
+        display: none !important;
+    }
+    .categoryheader{
+        width: 100%;
+        margin-top: 0%;
+        margin-left: 10px;
     }
 }
 
@@ -710,7 +735,8 @@ i.fas.fa-comments-dollar {
 }
 
 .resp-tab-content.hor_1.resp-tab-content-active {
-    padding-bottom: 74px;
+    padding-bottom: 0px;
+    height: auto;
 }
 
 .carousel-inner {
@@ -757,10 +783,115 @@ a.btn.nutmuathem.mb-3 {
 a.btn.nutmuathem.mb-3:hover {
     background: #64ae55;
 }
-.col-4 {
+
+/* .col-4 {
     height: 175px;
-}
+} */
 .danhsach button {
     margin-top: 10px;
     margin-right: 3px;
+}
+@media only screen and (min-width:769px) and (max-width: 1024px){
+
+    .header.container-header{
+        width: 100%;
+        background-color: #006400;
+        padding: 0;
+        overflow: hidden;
+    }
+ 
+    .header.container-header .container{
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+    .carousel-inner{
+        max-height: 45vh;
+        margin-left: 0px !important;
+    }
+    .mobileNewbook{
+        margin-left: 70px !important;
+    }
+ 
+    li.nav-item.giohang{
+        padding-left: 0!important;
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+    a.btn.btn-secondary.rounded-circle{
+        display: block;
+        width: 45px;
+    }
+    .flex-mid{
+        display: flex;
+        align-items: center;
+    }
+}
+/* mobile */
+@media only screen and (max-width:740px){
+    .navbar form .input-group{
+        width: 100%!important;
+    }
+    .index_footer{
+        width: 100% !important; 
+    }
+    .thongtinsach1{
+        width: 106% ;
+        margin-left: -40px;
+        margin-bottom: 50px;
+    }
+    .col-md-9.col-xs-12{
+        margin-left: -27px;
+    }
+    .breadcrumbbar{
+        margin-left: -115px !important;
+    }
+    .ptthanhtoan a img {
+        width: 291px !important;
+        margin-top: 0px !important;
+        margin-left: -7% !important;
+    }
+    .navbar ul li a.nav-link{
+        margin-left:0.25rem!important;
+    }
+    .carousel-inner{
+        max-height: 35vh; /* Them vao */
+    }
+    .card.list{ /* Thêm vào */
+        justify-content: center;
+        width: 100%;
+    }
+    .navbar ul li.account{
+        border-top: 1px dashed #CF111A;
+        border-bottom: 1px dashed #CF111A;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+    .navbar ul li.giohang{
+        border-bottom: 1px dashed #CF111A;
+        padding-bottom: 0.5rem;
+        margin-right:8px;
+    }
+    .duoinavbar{
+        display: block;
+        margin-left: -20px !important;
+    }
+    .categorycontent{
+        display: none;
+    }
+    ul i.fa.fa-chevron-right.icon{
+        display: none;
+    }
+    ul.categorydetail{
+        display: none !important;
+    }
+    .carousel-inner{
+        margin-left: -65px;
+        width: 115% !important;
+    }
+    .carousel{
+        padding: 0;
+    }
 }

@@ -264,7 +264,7 @@ export default function Category(props) {
   // };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
+ console.log(parentId);
   return (
     <div className={classes.root}>
       <CreateCategoryModal

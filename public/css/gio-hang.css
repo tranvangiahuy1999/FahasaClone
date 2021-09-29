@@ -405,7 +405,7 @@ ul li a.header{
     float:left;
     margin-left: 19px;
     width: 300px;
-    height: 265px;
+    height: 145px;
 }
 
 
@@ -576,7 +576,8 @@ footer .header {
 }
 
 .cart-item a.img {
-    width: 90px;
+    width: 100px;
+    padding-top: 15px;
     height: auto;
     border: 1px solid  #c8c8c8;
 }
@@ -780,79 +781,50 @@ button.receiptbtn {
     margin-left: 68%;
 }
 /* het css cho cart-steps  */
-/* @media only screen and (min-width: 1200px) {
-    .categorycontent ul li a.tieude {
-        text-decoration: none;
-        color: black;
-        font-weight: 400;
-        margin-bottom: -37px;
-        font-size: 15px;
-        height: 35px;
-        width: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        transition: 0.3s;
-    }
-    .categorycontent {
-        border: 1px solid #b4b2b2;
-        box-sizing: border-box;
-         width: 100%;
-        height: 387px;
-        background: white;
-        text-align: left;
-    }
 
-}
-@media only screen and (max-width: 1024px) {
-    .duoinavbar {
-        height: 40px;
-        width: 94%;
-    }
-    .categorycontent {
-        border: 1px solid #b4b2b2;
-        box-sizing: border-box;
-         width: 100%;
-        height: 387px;
-        background: white;
-        text-align: left;
-    }
-    .categorycontent ul li a.tieude {
-        text-decoration: none;
-        color: black;
-        font-weight: 400;
-        margin-bottom: -37px;
-        font-size: 15px;
-        height: 35px;
-        width: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        transition: 0.3s;
-    }
-    .carousel-inner {
-        position: relative !important;
-        width: 90% !important;
-        overflow: hidden !important;
-        margin-left: 60px !important;
-    }
- 
-} */
 @media (max-width:768px){
     .navbar form .input-group{
         width: 100%!important;
 
+    }
+    .footer_down{
+        width: 100% !important;
+        margin-left: 40px !important;
+    }
+    .nearbottom{
+        width: 100% !important;
+    }
+    .col-md-8.cart{
+        width: 100%;
+    }
+    .col-md-4.cart-steps.pl-0{
+         width: 100%;
+    }
+    #cart-steps-accordion{
+        width: 106% !important;
+        margin-left: -5% !important;
+    }
+    .mobileNewbook{
+        margin-left: 9% !important;
+    }
+    .container.py-4{
+        width: 82% !important;
+        margin-left: 63px !important;
+    }
+    .page-content.my-3{
+        height: 100% !important;
+        padding-bottom: 50px;
     }
     .ptthanhtoan {
         margin-left: -7px !important;
         margin-top: 8px !important;
     }
     .ptthanhtoan a img {
-        width: 336px !important;
+        margin-left: -138% ;
+        margin-top: 90% ;
+    }
+    .all{
+        overflow: hidden;
     }
     .checkout-right {
         margin-bottom: 50px;
@@ -871,7 +843,8 @@ button.receiptbtn {
     .navbar ul li.giohang{
         border-bottom: 1px dashed #CF111A;
         padding-bottom: 0.5rem;
-        margin-right:8px;
+        margin-right:15px;
+        padding-left: 0%;
     }
     .categorycontent1{
         display: none;
@@ -880,6 +853,7 @@ button.receiptbtn {
     .categoryheader:hover .categorycontent1{
         display: none;
     }
+    
 
     /* giohang  */
     .cart-content{
@@ -929,6 +903,7 @@ li.tittle {
 
 .privacy.py-sm-5.py-4.up {
     margin-top: -4%;
+    padding-bottom: 0pc !important;
     margin-bottom: -50px;
 }
 
@@ -938,4 +913,7 @@ button.slick-prev.slick-arrow.slick-disabled {
 
 button.slick-prev.slick-arrow {
     margin-left: 10px;
+}
+.resp-tab-content.hor_1.resp-tab-content-active {
+    box-shadow: none;
 }

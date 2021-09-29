@@ -8,12 +8,12 @@ const  Receipt=()=> {
 
  
         return (
-            <div>
+            <div style={{width:'100%',overflow:'hidden'}}>
                 <Nav/>
               
             {/* giao diện giỏ hàng  */}
       <section className="content my-3" style={{background:'#F0F0F0'}}>
-        <div className="container"style={{background:'#F0F0F0'}}>
+        <div className="container recept_Ip "style={{background:'#F0F0F0',width:'81%'}}>
           <div className="cart-page bg-white"style={{background:'#F0F0F0'}}>
             <div className="row"style={{background:'#F0F0F0'}}>
               {/* giao diện giỏ hàng khi không có item  */}
@@ -191,8 +191,8 @@ const  Receipt=()=> {
       {/* het khoi content  */}
             {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
           
-            <section className="abovefooter text-white" style={{marginLeft:'-20px',background:'#F0F0F0',marginTop:'-16px'}} >
-              <div className="container"style={{backgroundColor: '#64ae55',width:'84%'}}>
+            <section className="abovefooter text-white" style={{marginLeft:'-18px',marginRight:'6px',background:'#F0F0F0',marginTop:'-16px'}} >
+              <div className="container nearbottom"style={{backgroundColor: '#64ae55',width:'79%'}}>
                 <div className="row">
                   <div className="col-lg-3 col-sm-6">
                     <div className="dichvu d-flex align-items-center">
@@ -235,9 +235,9 @@ const  Receipt=()=> {
                 </div>
               </div>
             </section>
-            <div style={{marginLeft:'-20px',background:'#F0F0F0'}}>
+            <div className="new" style={{marginLeft:'-20px',background:'#F0F0F0'}}>
             <footer>
-              <div className="container py-4" style={{background:'white',width:'84%'}}>
+              <div className="container py-4"style={{background:'white',width:'1211px',marginLeft:'162px'}}>
                 <div className="row">
                   <div className="col-md-6 col-xs-6">
                     <div className="gioithieu">
@@ -262,7 +262,7 @@ const  Receipt=()=> {
                   <div className="col-md-3 col-xs-6">
                     <div className="ptthanhtoan">
                     
-                      <a href="#"><img src="images/footer_icon1.png" alt="jcb-payment" /></a>
+                      <a href="#"><img src="images/footer_icon1.png" style={{marginLeft:'-10px'}} alt="jcb-payment" /></a>
                     </div>
                   </div>
                 </div>

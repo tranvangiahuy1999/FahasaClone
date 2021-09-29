@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import shopApis from "../../../apis/ShopApis";
-
+import ProductList from "./ProductList";
 const Header = () => {
   const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
     getCategoryData();
   }, []);
-
+  
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
@@ -19,8 +19,37 @@ const Header = () => {
       console.log(e);
     }
   };
+ const chuyenDoiURL=(str) =>{
+    str = str.toLowerCase();     
+
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+ 
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+ 
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+ 
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+ 
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+ 
+    // return
+    return str;
+}
+
   return (
     <div>
+      
       {/* thanh tieu de "danh muc sach" + hotline + ho tro truc tuyen */}
       <section className="duoinavbar" >
         <div className="container text-white">
@@ -40,7 +69,7 @@ const Header = () => {
         </div>
       </section>
       {/* noi dung danh muc sach(categories) + banner slider */}
-      <section className="header " style={{background:'#F0F0F0 '}}>
+      <section className="header " style={{background:'#F0F0F0',marginLeft:'15px'}}>
         <div className="container">
           <div className="row">
             <div
@@ -56,7 +85,8 @@ const Header = () => {
                       .map((value, index) => (
                         <li key={index}>
                           {" "}
-                          <a href="/danh-sach" className="tieude">
+                          <a href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id } className="tieude">
+                            
                             {" "}
                             {value.name}
                           </a>
@@ -108,7 +138,7 @@ const Header = () => {
               </div>
             </div>
             {/* banner slider  */}
-            <div className="col-md-9 px-0" width="965px">
+            <div className="col-md-9 px-0" style={{width:"955px"}} >
               <div
                 id="carouselId"
                 className="carousel slide"

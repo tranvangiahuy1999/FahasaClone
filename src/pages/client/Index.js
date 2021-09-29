@@ -3,16 +3,17 @@ import Footer from "./Component/Footer";
 import Header from "./Component/Header"
 import Nav from "./Component/Nav";
 function HomePage() {
+  
   return (
-    <div style={{background:'#F0F0F0'}}>
+    <div style={{background:'#F0F0F0'}} className="all">
            <Nav/>
         <Header/>
       
          <div>
         {/* khoi sach moi  */}
         <section className="_1khoi sachmoi "style={{background:'#F0F0F0'}}>
-          <div className="container"style={{width:'82%',background:'white'}}>
-            <div className="noidung" style={{background:'white',marginTop:'35px'}}>
+          <div className="container mobileNewbook"style={{width:'81%',marginLeft:'145px',background:'white'}}>
+            <div className="noidung" style={{background:'white',marginTop:'40px'}}>
               <div className="row">
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
@@ -156,7 +157,7 @@ function HomePage() {
         </section>
         {/* khoi sach combo hot  */}
         <section className="_1khoi combohot mt-4">
-          <div className="container"style={{width: '84%'}}>
+          <div className="container"style={{width: '81%',background:'white'}}>
             <div className="noidung bg-white" style={{width: '100%',marginTop:'39px'}}>
               <div className="row"style={{width: '100%',marginLeft:'0px'}}>
                 {/*header */}
@@ -187,14 +188,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                         
                         </div>
@@ -204,14 +205,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                          
                         </div>
@@ -221,14 +222,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                           
                         </div>
@@ -238,14 +239,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item MarieForleo">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                          
                         </div>
@@ -255,14 +256,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                          
                         </div>
@@ -272,14 +273,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                           
                         </div>
@@ -289,14 +290,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                          
                         </div>
@@ -305,7 +306,7 @@ function HomePage() {
                   </div>
                 </div>
               </div>
-              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-5 btn-sm text-white">Xem tất cả</a>
+              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning bth_inner mt-5 btn-sm text-white">Xem tất cả</a>
                 </div>
                 {/* hetkhoi1 */}
                 {/* khối 2 */}
@@ -315,34 +316,50 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                           
                         </div>
                       </a>
                     </div>
                   </div>
-                 
+                  <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
+                    <div className="card ">
+                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <div className="card-body noidungsp mt-3">
+                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
+                          <small className="tacgia text-muted">Brian Finch</small>
+                          <div className="gia d-flex align-items-baseline">
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
+                          </div>
+                        
+                        </div>
+                      </a>
+                    </div>
+                  </div>
                  
                   
                   <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                         
                         </div>
@@ -352,14 +369,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                         
                         </div>
@@ -369,14 +386,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item SimonSinek">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                           
                         </div>
@@ -385,7 +402,7 @@ function HomePage() {
                   </div>
                 </div>
               </div>
-              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-5 btn-sm text-white">Xem tất cả</a>
+              <a href="sach-moi-tuyen-chon.html" className="btn btn-warning mt-5 bth_inner btn-sm text-white">Xem tất cả</a>
                 </div>
                 {/* het khoi 2 */}
                 {/* Khối 3 */}
@@ -395,34 +412,67 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                          
                         </div>
                       </a>
                     </div>
                   </div>
-                 
+                  <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
+                    <div className="card ">
+                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <div className="card-body noidungsp mt-3">
+                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
+                          <small className="tacgia text-muted">Brian Finch</small>
+                          <div className="gia d-flex align-items-baseline">
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
+                          </div>
+                        
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
+                    <div className="card ">
+                      <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <div className="card-body noidungsp mt-3">
+                          <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
+                          <small className="tacgia text-muted">Brian Finch</small>
+                          <div className="gia d-flex align-items-baseline">
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
+                          </div>
+                        
+                        </div>
+                      </a>
+                    </div>
+                  </div>
                  
                   
                   <div className="col-lg-3 col-md-4 col-xs-6 item DavikClark">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
                             <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                          
                         </div>
@@ -432,14 +482,14 @@ function HomePage() {
                   <div className="col-lg-3 col-md-4 col-xs-6 item TSLêThẩmDương">
                     <div className="card ">
                       <a href="product-item.html" className="motsanpham" style={{textDecoration: 'none', color: 'black'}} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                        <img className="card-img-top anh" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_ipad" src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h6>
                           <small className="tacgia text-muted">Brian Finch</small>
                           <div className="gia d-flex align-items-baseline">
-                            <div className="giamoi">111.200 ₫</div>
-                            <div className="giacu text-muted">139.000 ₫</div>
-                            <div className="sale">-20%</div>
+                            <div className="giamoi">111.200₫</div>
+                            <div className="giacu text-muted">139.000₫</div>
+                            {/* <div className="sale">-20%</div> */}
                           </div>
                         
                         </div>
@@ -468,7 +518,7 @@ function HomePage() {
         </section>
         {/* khoi sach sap phathanh  */}
         <section className="_1khoi sapphathanh  "style={{marginTop: '90px'}}>
-        <div className="container"style={{width: '84%'}}>
+        <div className="container"style={{width: '81%',background:'white'}}>
             <div className="noidung bg-white" style={{width: '100%',marginLeft:'0px'}}>
               <div className="row"style={{width: '100%',marginLeft:'0px'}}>
                 {/*header*/}
@@ -536,7 +586,7 @@ function HomePage() {
         </section>
         {/* div _1khoi -- khoi sachnendoc */}
         <section className="_1khoi sachnendoc mt-5"style={{background:'#F0F0F0'}}>
-          <div className="container bg-light"style={{width: '83%',marginBottom:'40px'}}>
+          <div className="container bg-light"style={{width: '81%',background:'white',marginTop:'-5px',marginBottom:'40px'}}>
             <div className="noidung" style={{width: '100%'}}>
               <div className="row">
                 {/*header*/}
@@ -610,7 +660,7 @@ function HomePage() {
         </section>
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
         <section className="abovefooter text-white" >
-          <div className="container"style={{backgroundColor: '#64ae55',width:'83%'}}>
+          <div className="container index_footer" style={{backgroundColor: '#64ae55',width:'81%'}}>
             <div className="row">
               <div className="col-lg-3 col-sm-6">
                 <div className="dichvu d-flex align-items-center">
