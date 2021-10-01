@@ -45,7 +45,7 @@ export default function Product() {
   const [previewFile, setPreviewFile] = useState([]);
   const [file, setFile] = useState([]);
   const [products, setProducts] = useState([
-    { key: "", value: "", price: 1000, itemFile: null, itemFileName: "" },
+    { key: "", value: "", price: 1000, itemFile: "", itemPreviewFile: "" },
   ]);
   const [submitStateBtn, setSubmitStateBtn] = useState(false);
   const [existImageList, setExistImageList] = useState([]);
@@ -79,17 +79,24 @@ export default function Product() {
   };
 
   const handleChangeItemMedia = (event, index) => {
-    console.log(index);
     if (event.target.files === null) {
       return;
     }
     let tempArray = products;
-    tempArray.map((ele, i) => {
+    tempArray.forEach(async (ele, i) => {
       if (i === index) {
         tempArray[i].itemFile = event.target.files[0];
-        tempArray[i].itemFileName = event.target.files[0].name;
+
+        let result_base64 = await new Promise((resolve) => {
+          let fileReader = new FileReader();
+          fileReader.onload = (e) => resolve(fileReader.result);
+          fileReader.readAsDataURL(event.target.files[0]);
+        });
+
+        tempArray[i].itemPreviewFile = result_base64;
       }
     });
+    console.log(tempArray);
     setProducts([...tempArray]);
   };
 
@@ -160,7 +167,13 @@ export default function Product() {
 
   const addProductsRow = () => {
     let temp = products;
-    temp.push({ key: "", value: "", price: 1000 });
+    temp.unshift({
+      key: "",
+      value: "",
+      price: 1000,
+      itemFile: "",
+      itemPreviewFile: "",
+    });
     setProducts([...temp]);
   };
 
@@ -331,352 +344,348 @@ export default function Product() {
         <div className={classes.paper}>
           <div className={classes.paperContainer}>
             <form onSubmit={onSubmit}>
-              <FormLabel>
-                <span className="addprod-title">Thông tin sản phẩm</span>
-              </FormLabel>
-              <div className="row m-0 p-0 mt-3">
-                <FormGroup className="col-4">
-                  <InputLabel id="demo-simple-select-label">
-                    <span style={{ fontSize: "0.9rem" }}>Danh mục 1</span>
-                  </InputLabel>
-                  <Select
-                    className={classes.selectTemplate}
-                    labelId="demo-simple-select-label"
-                    value={category[0]}
-                    onChange={(e) => handleChangeCategory(0, e.target.value)}
-                    required
-                  >
-                    {categoryList1.length ? (
-                      categoryList1.map((item, index) => (
-                        <MenuItem key={index} value={item._id}>
-                          {item.name}
-                        </MenuItem>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </Select>
-                </FormGroup>
-                <FormGroup className="col-4">
-                  <InputLabel id="demo-simple-select-label">
-                    <span style={{ fontSize: "0.9rem" }}>Danh mục 2</span>
-                  </InputLabel>
-                  <Select
-                    className={classes.selectTemplate}
-                    labelId="demo-simple-select-label"
-                    value={category[1]}
-                    onChange={(e) => handleChangeCategory(1, e.target.value)}
-                    required
-                  >
-                    {categoryList2.length ? (
-                      categoryList2.map((item, index) => (
-                        <MenuItem key={index} value={item._id}>
-                          {item.name}
-                        </MenuItem>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </Select>
-                </FormGroup>
-                <FormGroup className="col-4">
-                  <InputLabel id="demo-simple-select-label">
-                    <span style={{ fontSize: "0.9rem" }}>Danh mục 3</span>
-                  </InputLabel>
-                  <Select
-                    className={classes.selectTemplate}
-                    labelId="demo-simple-select-label"
-                    value={category[2]}
-                    onChange={(e) => handleChangeCategory(2, e.target.value)}
-                    required
-                  >
-                    {categoryList3.length ? (
-                      categoryList3.map((item, index) => (
-                        <MenuItem key={index} value={item._id}>
-                          {item.name}
-                        </MenuItem>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </Select>
-                </FormGroup>
-              </div>
-              <FormGroup className={classes.FormGroup}>
-                <TextField
-                  InputLabelProps={{
-                    classes: {
-                      root: classes.resize,
-                    },
-                  }}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  InputProps={{
-                    classes: {
-                      input: classes.resize,
-                    },
-                  }}
-                  required
-                  label="Tên sản phẩm"
-                />
-              </FormGroup>
+              <div className="row m-0 p-0">
+                <div className="col-7">
+                  <FormLabel>
+                    <span className="addprod-title">Thông tin sản phẩm</span>
+                  </FormLabel>
+                  <FormGroup className="mb-4">
+                    <TextField
+                      InputLabelProps={{
+                        classes: {
+                          root: classes.resize,
+                        },
+                      }}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      InputProps={{
+                        classes: {
+                          input: classes.resize,
+                        },
+                      }}
+                      required
+                      label="Tên sản phẩm"
+                    />
+                  </FormGroup>
+                  <FormLabel>
+                    <span className="addprod-title">Danh mục</span>
+                  </FormLabel>
 
-              <FormGroup>
-                <FormLabel className="mt-5 mb-3">
-                  <span className="addprod-title">Phân loại sản phẩm</span>
-                </FormLabel>
-                {products.map((ele, index) => (
-                  <div className="row m-0 p-0 mt-2" key={index}>
-                    <div className="col-2 text-center pt-3">
-                      <input
-                        accept="image/*"
-                        id={`contained-button-file-${index}`}
-                        hidden
-                        onClick={(event) => {
-                          event.target.value = null;
-                        }}
-                        onChange={(e) => handleChangeItemMedia(e, index)}
-                        type="file"
-                      />
-                      <label htmlFor={`contained-button-file-${index}`}>
-                        <Button
-                          variant="contained"
-                          component="span"
-                          style={{
-                            color: "white",
-                            backgroundColor: LOGO_COLOR,
-                            fontSize: "0.7rem",
-                            padding: "0.3rem",
-                          }}
-                        >
-                          Thêm ảnh
-                        </Button>
-                      </label>
-                      <div className="text-center one-line-text">
-                        {ele.itemFileName}
+                  <FormGroup className="mt-2 mb-2">
+                    <InputLabel id="demo-simple-select-label">
+                      <span style={{ fontSize: "0.9rem" }}>Danh mục 1</span>
+                    </InputLabel>
+                    <Select
+                      className={classes.selectTemplate}
+                      labelId="demo-simple-select-label"
+                      value={category[0]}
+                      onChange={(e) => handleChangeCategory(0, e.target.value)}
+                      required
+                    >
+                      {categoryList1.length ? (
+                        categoryList1.map((item, index) => (
+                          <MenuItem key={index} value={item._id}>
+                            {item.name}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <></>
+                      )}
+                    </Select>
+                  </FormGroup>
+                  <FormGroup className="mt-2 mb-2">
+                    <InputLabel id="demo-simple-select-label">
+                      <span style={{ fontSize: "0.9rem" }}>Danh mục 2</span>
+                    </InputLabel>
+                    <Select
+                      className={classes.selectTemplate}
+                      labelId="demo-simple-select-label"
+                      value={category[1]}
+                      onChange={(e) => handleChangeCategory(1, e.target.value)}
+                      required
+                    >
+                      {categoryList2.length ? (
+                        categoryList2.map((item, index) => (
+                          <MenuItem key={index} value={item._id}>
+                            {item.name}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <></>
+                      )}
+                    </Select>
+                  </FormGroup>
+                  <FormGroup className="mt-2 mb-2">
+                    <InputLabel id="demo-simple-select-label">
+                      <span style={{ fontSize: "0.9rem" }}>Danh mục 3</span>
+                    </InputLabel>
+                    <Select
+                      className={classes.selectTemplate}
+                      labelId="demo-simple-select-label"
+                      value={category[2]}
+                      onChange={(e) => handleChangeCategory(2, e.target.value)}
+                      required
+                    >
+                      {categoryList3.length ? (
+                        categoryList3.map((item, index) => (
+                          <MenuItem key={index} value={item._id}>
+                            {item.name}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <></>
+                      )}
+                    </Select>
+                  </FormGroup>
+
+                  <FormGroup>
+                    <FormLabel className="mt-3 mb-3">
+                      <span className="addprod-title">Thông số kỹ thuật</span>
+                    </FormLabel>
+                    {specify.map((ele, index) => (
+                      <div className="row m-0 p-0 mt-2" key={index}>
+                        <div className="col-5">
+                          <FormGroup>
+                            <TextField
+                              variant="filled"
+                              value={ele.key}
+                              onChange={(e) =>
+                                onChangeSpecify("key", e.target.value, index)
+                              }
+                              required
+                              label="Tên thông số"
+                            />
+                          </FormGroup>
+                        </div>
+                        <div className="col-6">
+                          <FormGroup>
+                            <TextField
+                              variant="filled"
+                              value={ele.value}
+                              onChange={(e) =>
+                                onChangeSpecify("value", e.target.value, index)
+                              }
+                              required
+                              label="Thông số"
+                            />
+                          </FormGroup>
+                        </div>
+                        <div className="col-1">
+                          <IconButton
+                            color="secondary"
+                            onClick={() => deleteSpecifyRow(index)}
+                          >
+                            <IoTrashBin className="text-danger"></IoTrashBin>
+                          </IconButton>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-3">
-                      <FormGroup>
-                        <TextField
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.resize,
-                            },
-                          }}
-                          variant="filled"
-                          value={ele.key}
-                          onChange={(e) =>
-                            onChangeProducts("key", e.target.value, index)
-                          }
-                          InputProps={{
-                            classes: {
-                              input: classes.resize,
-                            },
-                          }}
-                          required
-                          label="Mã phân loại"
-                        />
-                      </FormGroup>
-                    </div>
-                    <div className="col-3">
-                      <FormGroup>
-                        <TextField
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.resize,
-                            },
-                          }}
-                          variant="filled"
-                          value={ele.value}
-                          onChange={(e) =>
-                            onChangeProducts("value", e.target.value, index)
-                          }
-                          InputProps={{
-                            classes: {
-                              input: classes.resize,
-                            },
-                          }}
-                          required
-                          label="Tên phân loại"
-                        />
-                      </FormGroup>
-                    </div>
-                    <div className="col-3">
-                      <FormGroup>
-                        <CurrencyTextField
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.resize,
-                            },
-                          }}
-                          InputProps={{
-                            classes: {
-                              input: classes.resize,
-                            },
-                          }}
-                          variant="filled"
-                          currencySymbol="vnd"
-                          minimumValue="0"
-                          decimalPlaces="0"
-                          outputFormat="string"
-                          digitGroupSeparator=","
-                          value={ele.price}
-                          onChange={(event, value) =>
-                            onChangeProducts("price", value, index)
-                          }
-                          required
-                          label="Giá tiền"
-                        />
-                      </FormGroup>
-                    </div>
-                    <div className="col-1">
-                      <IconButton
-                        color="secondary"
-                        onClick={() => deleteProductsRow(index)}
+                    ))}
+                    <div className="mt-3 text-center">
+                      <Button
+                        type="button"
+                        variant="contained"
+                        onClick={addSpecifyRow}
+                        style={{
+                          fontSize: "0.8rem",
+                          backgroundColor: LOGO_COLOR,
+                          color: "white",
+                        }}
                       >
-                        <IoTrashBin></IoTrashBin>
-                      </IconButton>
+                        Thêm thông số kỹ thuật
+                      </Button>
                     </div>
-                  </div>
-                ))}
-                <div className="mt-3 text-center">
-                  <Button
-                    type="button"
-                    variant="contained"
-                    onClick={addProductsRow}
-                    style={{
-                      fontSize: "0.9rem",
-                      backgroundColor: "#2dbf64",
-                      color: "white",
-                    }}
-                  >
-                    Thêm phân loại sản phẩm
-                  </Button>
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel className="mt-3 mb-3">
+                      <span className="addprod-title">Mô tả sản phẩm</span>
+                    </FormLabel>
+                    <div className="ckeditor">
+                      <CKEditor
+                        editor={ClassicEditor}
+                        fontSize="1.1rem"
+                        onReady={(editor) => {
+                          editor.editing.view.change((writer) => {
+                            writer.setStyle(
+                              "height",
+                              "250px",
+                              editor.editing.view.document.getRoot()
+                            );
+                          });
+                        }}
+                        config={{
+                          toolbar: [
+                            "heading",
+                            "|",
+                            "bold",
+                            "italic",
+                            "blockQuote",
+                            "link",
+                            "numberedList",
+                            "bulletedList",
+                            "insertTable",
+                            "tableColumn",
+                            "tableRow",
+                            "mergeTableCells",
+                          ],
+                        }}
+                        data={desc}
+                        onChange={(event, editor) => {
+                          setDesc(editor.getData());
+                        }}
+                      />
+                    </div>
+                  </FormGroup>
                 </div>
-              </FormGroup>
-
-              <FormGroup>
-                <FormLabel className="mt-3 mb-3">
-                  <span className="addprod-title">Thông số kỹ thuật</span>
-                </FormLabel>
-                {specify.map((ele, index) => (
-                  <div className="row m-0 p-0 mt-2" key={index}>
-                    <div className="col-5">
-                      <FormGroup>
-                        <TextField
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.resize,
-                            },
-                          }}
-                          variant="filled"
-                          value={ele.key}
-                          onChange={(e) =>
-                            onChangeSpecify("key", e.target.value, index)
-                          }
-                          InputProps={{
-                            classes: {
-                              input: classes.resize,
-                            },
-                          }}
-                          required
-                          label="Tên kỹ thuật"
-                        />
-                      </FormGroup>
-                    </div>
-                    <div className="col-6">
-                      <FormGroup>
-                        <TextField
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.resize,
-                            },
-                          }}
-                          variant="filled"
-                          value={ele.value}
-                          onChange={(e) =>
-                            onChangeSpecify("value", e.target.value, index)
-                          }
-                          InputProps={{
-                            classes: {
-                              input: classes.resize,
-                            },
-                          }}
-                          required
-                          label="Thông số"
-                        />
-                      </FormGroup>
-                    </div>
-                    <div className="col-1">
-                      <IconButton
-                        color="secondary"
-                        onClick={() => deleteSpecifyRow(index)}
+                <div className="col-5 parameter-column">
+                  <FormGroup>
+                    <FormLabel className="mb-1">
+                      <span className="addprod-title">Phân loại sản phẩm</span>
+                    </FormLabel>
+                    <div className="mb-3 mt-3 text-center">
+                      <Button
+                        type="button"
+                        variant="contained"
+                        onClick={addProductsRow}
+                        style={{
+                          fontSize: "0.8rem",
+                          backgroundColor: LOGO_COLOR,
+                          color: "white",
+                        }}
                       >
-                        <IoTrashBin></IoTrashBin>
-                      </IconButton>
+                        Thêm phân loại sản phẩm
+                      </Button>
                     </div>
-                  </div>
-                ))}
-                <div className="mt-3 text-center">
-                  <Button
-                    type="button"
-                    variant="contained"
-                    onClick={addSpecifyRow}
-                    style={{
-                      fontSize: "0.9rem",
-                      backgroundColor: "#2dbf64",
-                      color: "white",
-                    }}
-                  >
-                    Thêm thông số kỹ thuật
-                  </Button>
+                    {products.map((ele, index) => (
+                      <div className="row p-4 product-item-manage" key={index}>
+                        <div className="col-3 text-center">
+                          <div className="product-item-image-wrapper">
+                            {ele.itemPreviewFile ? (
+                              <img
+                                className="product-item-image"
+                                alt={ele.itemPreviewFile}
+                                src={ele.itemPreviewFile}
+                              ></img>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                          <div className="mt-1 text-center">
+                            <input
+                              accept="image/*"
+                              id={`contained-button-file-${index}`}
+                              hidden
+                              onClick={(event) => {
+                                event.target.value = null;
+                              }}
+                              onChange={(e) => handleChangeItemMedia(e, index)}
+                              type="file"
+                            />
+                            <label htmlFor={`contained-button-file-${index}`}>
+                              <Button
+                                variant="contained"
+                                component="span"
+                                style={{
+                                  color: "white",
+                                  backgroundColor: "#2dbf64",
+                                  fontSize: "0.7rem",
+                                  padding: "0.3rem",
+                                }}
+                              >
+                                Thêm ảnh
+                              </Button>
+                            </label>
+                          </div>
+                        </div>
+                        <div className="col-8 row m-0 p-0">
+                          <div className="col-12">
+                            <FormGroup>
+                              <TextField
+                                InputLabelProps={{
+                                  classes: {
+                                    root: classes.resize,
+                                  },
+                                }}
+                                value={ele.value}
+                                onChange={(e) =>
+                                  onChangeProducts(
+                                    "value",
+                                    e.target.value,
+                                    index
+                                  )
+                                }
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize,
+                                  },
+                                }}
+                                required
+                                label="Tên phân loại"
+                              />
+                            </FormGroup>
+                          </div>
+                          <div className="col-6 mt-2 mb-3">
+                            <FormGroup>
+                              <TextField
+                                InputLabelProps={{
+                                  classes: {
+                                    root: classes.resize,
+                                  },
+                                }}
+                                value={ele.key}
+                                onChange={(e) =>
+                                  onChangeProducts("key", e.target.value, index)
+                                }
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize,
+                                  },
+                                }}
+                                required
+                                label="Mã phân loại"
+                              />
+                            </FormGroup>
+                          </div>
+                          <div className="col-6 mt-2 mb-3">
+                            <FormGroup>
+                              <CurrencyTextField
+                                InputLabelProps={{
+                                  classes: {
+                                    root: classes.resize,
+                                  },
+                                }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize,
+                                  },
+                                }}
+                                currencySymbol="vnd"
+                                minimumValue="0"
+                                decimalPlaces="0"
+                                outputFormat="string"
+                                digitGroupSeparator=","
+                                value={ele.price}
+                                onChange={(event, value) =>
+                                  onChangeProducts("price", value, index)
+                                }
+                                required
+                                label="Giá tiền"
+                              />
+                            </FormGroup>
+                          </div>
+                        </div>
+                        <div className="col-1 pt-5">
+                          <IconButton
+                            color="secondary"
+                            onClick={() => deleteProductsRow(index)}
+                          >
+                            <IoTrashBin className="text-danger"></IoTrashBin>
+                          </IconButton>
+                        </div>
+                      </div>
+                    ))}
+                  </FormGroup>
                 </div>
-              </FormGroup>
-
-              <FormGroup>
-                <FormLabel className="mt-3 mb-3">
-                  <span className="addprod-title">Mô tả sản phẩm</span>
-                </FormLabel>
-                <div className="ckeditor">
-                  <CKEditor
-                    editor={ClassicEditor}
-                    fontSize="1.1rem"
-                    onReady={(editor) => {
-                      editor.editing.view.change((writer) => {
-                        writer.setStyle(
-                          "height",
-                          "250px",
-                          editor.editing.view.document.getRoot()
-                        );
-                      });
-                    }}
-                    config={{
-                      toolbar: [
-                        "heading",
-                        "|",
-                        "bold",
-                        "italic",
-                        "blockQuote",
-                        "link",
-                        "numberedList",
-                        "bulletedList",
-                        "insertTable",
-                        "tableColumn",
-                        "tableRow",
-                        "mergeTableCells",
-                        "|",
-                        "undo",
-                        "redo",
-                      ],
-                    }}
-                    data={desc}
-                    onChange={(event, editor) => {
-                      setDesc(editor.getData());
-                    }}
-                  />
-                </div>
-              </FormGroup>
+              </div>
               <FormGroup>
                 <FormLabel className="mt-3 mb-3">
                   <span className="addprod-title">Thêm hình ảnh</span>
@@ -781,25 +790,9 @@ const useStyles = makeStyles((theme) => ({
   resize: {
     fontSize: "1rem",
   },
-  buttonLabel: {
-    fontSize: "1rem",
-  },
-  formControl: {
-    margin: "1%",
-    width: "48%",
-  },
-  FormGroup: {
-    marginTop: 10,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
   selectTemplate: {
     padding: 4,
-    fontSize: "1rem",
-  },
-  switchControl: {
-    marginTop: 6,
+    fontSize: "0.9rem",
   },
   modal: {
     display: "flex",
@@ -812,7 +805,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   paperContainer: {
-    padding: theme.spacing(5, 5, 5),
+    padding: theme.spacing(4, 2, 2),
   },
   imageWrapper: {
     display: "flex",
