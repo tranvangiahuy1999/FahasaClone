@@ -601,7 +601,8 @@ footer .header {
 }
 
 .khoithongtin .input-number .soluongsp {
-    width: 38px;
+    width: 35%;
+    height: 87%;
     border: 1px solid #ebebeb;
 }
 
@@ -664,15 +665,16 @@ footer .header {
 }
 
 .khoithongtin .giaban {
-    margin-top: 7px;
+    margin-top: -5%;
     font-size: 22px;
 }
 
 .khoithongtin .giaban .giamoi {
     color: red;
+    width: 100%;
     font-size: 26px;
     position: absolute;
-    top: 37px;
+    top: -5%;
     left: 241px;
 }
 
@@ -989,6 +991,10 @@ h6.card-title.ten {
     .navbar form .input-group{
         width: 100%!important;
     }
+    .footer_detail {
+        width: 100% !important;
+        margin-left: 0% !important;
+    }
     img.card-img-top.anh {
         position: relative;
         height: 100%;
@@ -1071,7 +1077,7 @@ h6.card-title.ten {
         height: 38px;
         width: 180px;
         color: orange !important;
-        margin-left: 18% ;
+        margin-left: 18% !important ;
         background: #f5a6230a;
         font-size: 19px;
     } 
@@ -1223,7 +1229,8 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
     }
   
     .contentList{
-        margin-left: 65px !important; 
+        margin-left: 68px !important;
+        width: 82% !important;
     }
     .breadcrumbbar{
         margin-left: -72px ;

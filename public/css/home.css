@@ -671,12 +671,19 @@ footer .header {
 }
 /* het css cho footer  */
 
-
+.details{
+    margin-top: -10%;
+    margin-left: 20%;
+}
 @media (max-width:767px){
     .navbar form .input-group{
         width: 100%!important;
 
     }
+    div#parentHorizontalTab {
+        padding-bottom: 15%;
+    }
+ 
     .mobileNewbook{
         margin-left: 35px !important;
     }
@@ -767,12 +774,16 @@ i.fa.fa-chevron-right.icon.float-right {
 }
 
 span.input-group-text.btn-spin.btn-inc {
-    padding-left: 5px;
+    height: 68%;
+    width: 90%;
+    padding-left: 8px;
     border-radius: unset;
 }
 
 span.input-group-text.btn-spin.btn-dec {
-    padding-left: 5px;
+    height: 68%;
+    width: 100%;
+    padding-left: 10px;
     border-radius: unset;
 }
 
@@ -843,7 +854,8 @@ a.btn.nutmuathem.mb-3:hover {
         margin-bottom: 50px;
     }
     .col-md-9.col-xs-12{
-        margin-left: -27px;
+        margin-left: -30px;
+        width: 100%;
     }
     .breadcrumbbar{
         margin-left: -115px !important;
