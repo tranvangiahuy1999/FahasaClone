@@ -18,6 +18,7 @@ const CreateCategoryModal = (props) => {
   const classes = useStyles();
   const [editName, setEditName] = useState();
   const [checked, setChecked] = useState(false);
+  const [submitStateBtn, setSubmitStateBtn] = useState(false);
 
   useEffect(() => {
     if (props.cateEditFilter) {
@@ -42,6 +43,7 @@ const CreateCategoryModal = (props) => {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
+      setSubmitStateBtn(true);
       let formData = {};
       let res = null;
       if (props.cateEditFilter) {
@@ -76,6 +78,7 @@ const CreateCategoryModal = (props) => {
     } catch (e) {
       console.log(e);
     }
+    setSubmitStateBtn(false);
     closeModalAfterSave();
   };
 
@@ -138,6 +141,7 @@ const CreateCategoryModal = (props) => {
                   style={{ color: "white", backgroundColor: LOGO_COLOR }}
                   id="material-button-label"
                   type="submit"
+                  disabled={submitStateBtn}
                 >
                   Lưu
                 </Button>
