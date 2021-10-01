@@ -116,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     overflowX: "true",
+    padding: 20,
   },
   paper: {
     width: "100%",
@@ -285,7 +286,7 @@ export default function Product() {
             />
           </div>
           <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-            <Link to="/admin/product/addproduct">
+            <Link to="/admin/product/add-product">
               <Button
                 style={{
                   backgroundColor: LOGO_COLOR,

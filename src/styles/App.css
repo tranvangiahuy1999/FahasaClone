@@ -102,3 +102,33 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+
+.product-item-manage {
+  border-bottom: 1px solid lightgray;
+  padding-top: 5px;
+}
+
+.product-item-image-wrapper {
+  height: 60px;
+  width: 100%;
+  background-color: lightgray;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.product-item-image {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.parameter-column {
+  height: 816px;
+  border-left: 3px solid #242a3a;
+  border-bottom: 1px solid lightgray;
+  /* border-radius: 5px; */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
