@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import Footer from './Footer';
 import shopApis from "../../../apis/ShopApis";
 import { useParams,useLocation } from 'react-router';
+import Pagination from "@material-ui/lab/Pagination";
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -12,22 +13,25 @@ const ProductList = () => {
   const [productId1,setProductId1]=useState();
   const [productCateId,setProductCateId]=useState();
   const [productCateName,setProductCateName]=useState();
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   const params = useParams();
   let query = useQuery();
   const [parentId, setParentId] = useState();
   useEffect(() => {
     getCategoryData();
-    getProductData();
+    getProductData(1);
     const temp = new URLSearchParams(query);
     setParentId(temp.get("parentId"));
   }, []);
 
   
 
-  const getProductData = async () => {
+  const getProductData = async (page) => {
     try {
-    
-      const res = await shopApis.getProductByCate(Number(1),params.id);
+      console.log(page)
+      const res = await shopApis.getProductByCate(page,params.id);
+      
       if (res.status === 200) {
         setProductList(res.data.product)
         console.log(res.data.product);
@@ -38,6 +42,10 @@ const ProductList = () => {
       console.log(e);
     }
   }
+  const pageChange = (event, page) => {
+    getProductData(page);
+    setPage(page);
+  };
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
@@ -96,10 +104,10 @@ const ProductList = () => {
     // return
     return str;
 }
-// console.log(productList); 
+console.log(productList); 
 // console.log(productId1);
 // console.log(productCateId);
-console.log(params.parentId);
+
 
   return (
     <div className="all">
@@ -413,7 +421,7 @@ console.log(params.parentId);
                     {productList.map((value, index) => (
                     <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                     <div className="card list">
-                      <a href="product-item.html" className="motsanpham" style={{ textDecoration: 'none', color: 'black' }} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
+                      <a href={"/chi-tiet/"+chuyenDoiURL(value.name)+"."+ value._id } className="motsanpham" style={{ textDecoration: 'none', color: 'black' }} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                       {value.image.length ? value.image
                       .filter((item, idx) => idx < 1)
                       .map((value, index) => (
@@ -443,13 +451,7 @@ console.log(params.parentId);
                     </div>
 
                     ))}
-                   
-                   
-                   
-                    
-                    
-                  
-                   
+               
                   </div>
                 </div>
                 {/* pagination bar */}
@@ -457,28 +459,13 @@ console.log(params.parentId);
                   <div className="row">
                     <div className="col-12">
                       <nav>
-                        <ul className="pagination justify-content-center">
-                          {/* <li class="page-item disabled">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li> */}
-                          <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                          <li className="page-item"><a className="page-link" href="#">2</a></li>
-                          <li className="page-item">
-                            <a className="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">›</span>
-                              <span className="sr-only">Next</span>
-                            </a>
-                          </li>
-                          <li className="page-item">
-                            <a className="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">»</span>
-                              <span className="sr-only">Next</span>
-                            </a>
-                          </li>
-                        </ul>
+                      <Pagination
+                          count={totalPage}
+                          page={page}
+                          onChange={pageChange}
+                          variant="outlined"
+                          shape="rounded"
+                        />
                       </nav>
                     </div>
                   </div>

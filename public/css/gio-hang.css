@@ -556,7 +556,7 @@ footer .header {
 .soluong .input-number {
     width: 147px;
     height: 30px;
-    margin-top: 18px;
+    margin-top: 12px;
     font-size: 16px;
 }
 
@@ -787,12 +787,43 @@ button.receiptbtn {
         width: 100%!important;
 
     }
+    .detail1{
+        width: 82% !important;
+    }
+    .nd{
+        width: 85% !important ;
+    }
+    .price{
+        width: 270px !important;
+    }
+    .footer_detail {
+        width: 83% !important;
+        margin-left: 9% !important;
+    }
+    .anhfanpage{
+        margin-left: -138% !important;
+    }
+    div#parentHorizontalTab {
+        padding-bottom: 15%;
+    }
+    a.btn.btn-warning.btn-sm.text-white {
+      
+        margin-left: 35% !important;
+     
+    }
     .footer_down{
         width: 100% !important;
         margin-left: 40px !important;
     }
     .nearbottom{
-        width: 100% !important;
+        width: 82% !important;
+    }
+    .new{
+        margin-left: 0px !important;
+    }
+    section.abovefooter.text-white {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
     }
     .col-md-8.cart{
         width: 100%;
@@ -809,14 +840,14 @@ button.receiptbtn {
     }
     .container.py-4{
         width: 82% !important;
-        margin-left: 63px !important;
+        margin-left: 70px !important;
     }
     .page-content.my-3{
         height: 100% !important;
         padding-bottom: 50px;
     }
     .ptthanhtoan {
-        margin-left: -7px !important;
+        margin-left: -1% !important;
         margin-top: 8px !important;
     }
     .ptthanhtoan a img {
@@ -853,7 +884,20 @@ button.receiptbtn {
     .categoryheader:hover .categorycontent1{
         display: none;
     }
-    
+    .khoithongtin .tietkiem {
+        margin-top: 45px !important;
+      
+    }
+    .list-anhchitiet.d-flex.mb-4{
+           margin-left: 40px !important;
+    }
+    .khoithongtin .giaban .giamoi {
+        color: red;
+        font-size: 22px !important;
+        position: absolute;
+        top: 73px !important;
+        left: 6% !important;
+    }
 
     /* giohang  */
     .cart-content{

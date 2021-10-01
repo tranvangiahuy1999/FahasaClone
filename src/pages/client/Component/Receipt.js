@@ -262,7 +262,7 @@ const  Receipt=()=> {
                   <div className="col-md-3 col-xs-6">
                     <div className="ptthanhtoan">
                     
-                      <a href="#"><img src="images/footer_icon1.png" style={{marginLeft:'-10px'}} alt="jcb-payment" /></a>
+                      <a href="#"><img className="anhfanpage" src="images/footer_icon1.png" style={{marginLeft:'-10px'}} alt="jcb-payment" /></a>
                     </div>
                   </div>
                 </div>

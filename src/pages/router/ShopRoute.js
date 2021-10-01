@@ -20,6 +20,7 @@ const ShopRoute =()=> {
                 <Route exact path="/"  component={Homepage}/>
                 <Route exact path="/gio-hang"  component={Receipt}/>
                 <Route exact path="/chi-tiet"  component={ProductDetail}/>
+                <Route  path="/chi-tiet/:slug.:id"  component={ProductDetail}/>
                 <Route exact path="/danh-sach"  component={ProductList}/>
                 <Route  path="/danh-sach/:slug.:id"  component={ProductList}/>
             
