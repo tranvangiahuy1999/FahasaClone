@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {useParams } from 'react-router'
 import {
     Route,
     Switch  
@@ -10,19 +11,21 @@ import ProductDetail from '../client/Component/ProductDetail';
 import ProductList from '../client/Component/ProductList';
 
 
-class ShopRoute extends Component {
-    render() {
+const ShopRoute =()=> {
+    
+   
+        
         return (
             <Switch> 
                 <Route exact path="/"  component={Homepage}/>
                 <Route exact path="/gio-hang"  component={Receipt}/>
                 <Route exact path="/chi-tiet"  component={ProductDetail}/>
                 <Route exact path="/danh-sach"  component={ProductList}/>
-              
-           
+                <Route  path="/danh-sach/:slug.:id"  component={ProductList}/>
+            
             </Switch>
         );
-    }
+    
 }
 
 export default ShopRoute;

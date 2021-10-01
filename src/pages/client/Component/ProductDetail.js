@@ -23,7 +23,7 @@ const ProductDetail=()=> {
     
   };   
         return (
-            <div>
+            <div style={{with:'100%',overflow:'hidden'}}>
                 <Nav/>
                 <section className="duoinavbar"style={{background:'#F0F0F0'}}>
         <div className="container text-white">
@@ -93,17 +93,18 @@ const ProductDetail=()=> {
       </section>
         {/* breadcrumb  */}
         <section className="breadcrumbbar"style={{background:'#F0F0F0',paddingTop:'10px',height:'72px'}}>
-          <div className="container">
+          <div className="container" style={{marginLeft:'110px',marginTop:'35px',width:'85%'}}>
             <ol className="breadcrumb mb-0 p-0 bg-transparent">
               <li className="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-              <li className="breadcrumb-item"><a href="#">Sách kinh tế</a></li>
+              <li className="breadcrumb-item"><a href="#">Sách kinh tếdsdsdsdsds</a></li>
+              <li className="breadcrumb-item"><a href="#">Sách kinh tếdsdsdsdsds</a></li>
               <li className="breadcrumb-item active"><a href="#">Sách kỹ năng làm việc</a></li>
             </ol>
           </div>
         </section>
         {/* nội dung của trang  */}
         <section className="product-page mb-4" style={{background:'#F0F0F0',paddingBottom:'50px'}}>
-          <div className="container">
+          <div className="container" style={{width:'82%'}}>
             {/* chi tiết 1 sản phẩm */}
             <div className="product-detail bg-white p-4">
               <div className="row">
@@ -131,8 +132,8 @@ const ProductDetail=()=> {
                     <div className="col-md-7">
                       <div className="gia">
                         <div className="giabia">Giá bìa:<span className="giacu ml-2">139.000 ₫</span></div>
-                        <div className="giaban">Giá bán tại DealBooks: <span className="giamoi font-weight-bold">111.200 </span><span className="donvitien">₫</span></div>
-                        <div className="tietkiem">Tiết kiệm: <b>27.800 ₫</b> <span className="sale">-20%</span>
+                        <div className="giaban">Giá bán tại DealBooks: <span className="giamoi font-weight-bold">111.200 ₫</span></div>
+                        <div className="tietkiem">Tiết kiệm: <b>27.800 ₫</b> 
                         </div>
                         <div className="danhsach" style={{marginRight:'2px'}}>
                         <button type="button" className="btn btn-outline-success">Tập 1</button>
@@ -174,12 +175,13 @@ const ProductDetail=()=> {
                 {/* decripstion của 1 sản phẩm: giới thiệu , đánh giá độc giả  */}
                 <div className="product-description col-md-12">
                   {/* 2 tab ở trên  */}
-                  <nav>
+                  {/* <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                      <a className="nav-item nav-link active text-uppercase" id="nav-gioithieu-tab" data-toggle="tab" href="#nav-gioithieu" role="tab" aria-controls="nav-gioithieu" aria-selected="true">Giới thiệu</a>
+
                      
                     </div>
-                  </nav>
+                  </nav> */}
+                  <hr style={{ color : 'orange', height:'6px'}}/>
                   {/* nội dung của từng tab  */}
                   <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active ml-3 " id="nav-gioithieu" role="tabpanel" aria-labelledby="nav-gioithieu-tab">
@@ -306,8 +308,8 @@ const ProductDetail=()=> {
         {/* het product-page */}
         {/* khối sản phẩm tương tự */}
         <section className="_1khoi sachmoi" style={{background:'#F0F0F0',paddingBottom:'50px' }}>
-          <div className="container"style={{background:'white',marginTop:'-25px'  }}>
-            <div className="noidung bg-white" style={{width: '100%'}}>
+          <div className="container detail1"style={{background:'white',marginTop:'-25px',width:'1220px'}}>
+            <div className="noidung bg-white" >
               <div className="row">
                 {/*header*/}
                 <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light pt-2" style={{marginTop:'20px'}}>
@@ -463,60 +465,60 @@ const ProductDetail=()=> {
                 </div>
               </div>
             </div>
-            <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white">Xem tất cả</a>
+            <a href="sach-moi-tuyen-chon.html" className="btn btn-warning btn-sm text-white btnRelated">Xem tất cả</a>
           </div>
 
         </section>
         {/* khối sản phẩm đã xem  */}
       
         {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-        <section className="abovefooter text-white mt-3"style={{background:'#F0F0F0' }} >
-          <div className="container"style={{backgroundColor: '#64ae55',width:'100%',marginTop:'-16px'}}>
-            <div className="row">
-              <div className="col-lg-3 col-sm-6">
-                <div className="dichvu d-flex align-items-center">
-                  <img src="images/icon-books.png" alt="icon-books" />
-                  <div className="noidung">
-                    <h6 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH HAY</h6>
-                    <p className="detail">Tuyển chọn bởi DealBooks</p>
+        <section className="abovefooter text-white" style={{marginLeft:'-18px',marginRight:'0px',background:'#F0F0F0',marginTop:'0px'}} >
+              <div className="container footer_down"style={{backgroundColor: '#64ae55',width:'1220px',marginLeft:'168px'}}>
+                <div className="row">
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="images/icon-books.png" alt="icon-books" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH HAY</h6>
+                        <p className="detail">Tuyển chọn bởi DealBooks</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="images/icon-ship.png" alt="icon-ship" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">MIỄN PHÍ GIAO HÀNG</h6>
+                        <p className="detail">Từ 150.000đ ở TP.HCM</p>
+                        <p className="detail">Từ 300.000đ ở tỉnh thành khác</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="images/icon-gift.png" alt="icon-gift" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">QUÀ TẶNG MIỄN PHÍ</h6>
+                        <p className="detail">Tặng Bookmark</p>
+                        <p className="detail">Bao sách miễn phí</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="images/icon-return.png" alt="icon-return" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">ĐỔI TRẢ NHANH CHÓNG</h6>
+                        <p className="detail">Hàng bị lỗi được đổi trả nhanh chóng</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-sm-6">
-                <div className="dichvu d-flex align-items-center">
-                  <img src="images/icon-ship.png" alt="icon-ship" />
-                  <div className="noidung">
-                    <h6 className="tieude font-weight-bold">MIỄN PHÍ GIAO HÀNG</h6>
-                    <p className="detail">Từ 150.000đ ở TP.HCM</p>
-                    <p className="detail">Từ 300.000đ ở tỉnh thành khác</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-6">
-                <div className="dichvu d-flex align-items-center">
-                  <img src="images/icon-gift.png" alt="icon-gift" />
-                  <div className="noidung">
-                    <h6 className="tieude font-weight-bold">QUÀ TẶNG MIỄN PHÍ</h6>
-                    <p className="detail">Tặng Bookmark</p>
-                    <p className="detail">Bao sách miễn phí</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-6">
-                <div className="dichvu d-flex align-items-center">
-                  <img src="images/icon-return.png" alt="icon-return" />
-                  <div className="noidung">
-                    <h6 className="tieude font-weight-bold">ĐỔI TRẢ NHANH CHÓNG</h6>
-                    <p className="detail">Hàng bị lỗi được đổi trả nhanh chóng</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div  style={{background:'#F0F0F0',width:'100%'}} >
-        <footer>
-              <div className="container py-4" style={{background:'white',width:'100%'}}>
+            </section>
+            <div className="new" style={{marginLeft:'-20px',background:'#F0F0F0'}}>
+            <footer>
+              <div className="container py-4"style={{background:'white',width:'79%',marginLeft:'172px'}}>
                 <div className="row">
                   <div className="col-md-6 col-xs-6">
                     <div className="gioithieu">
@@ -541,7 +543,7 @@ const ProductDetail=()=> {
                   <div className="col-md-3 col-xs-6">
                     <div className="ptthanhtoan">
                     
-                      <a href="#"><img src="images/footer_icon1.png" alt="jcb-payment" /></a>
+                      <a href="#"><img src="images/footer_icon1.png" style={{marginLeft:'-10px'}} alt="jcb-payment" /></a>
                     </div>
                   </div>
                 </div>
@@ -551,7 +553,7 @@ const ProductDetail=()=> {
             <div className="fixed-bottom">
               <div className="btn btn-warning float-right rounded-circle nutcuonlen" id="backtotop" href="#" style={{background: '#64ae55'}}><i className="fa fa-chevron-up text-white" /></div>
             </div>
-        </div>
+          </div> 
       </div>
         
         );
