@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bnb-gallery/dist/style.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store from "./Store";
 import { Provider } from "react-redux";
@@ -24,12 +25,10 @@ function App() {
               <Route path="/admin">
                 <AdminIndex></AdminIndex>
               </Route>
-          
-              <Route route="/">              
-               
-                <ShopRoute/>
-                                                      
-            </Route>         
+
+              <Route route="/">
+                <ShopRoute />
+              </Route>
             </Switch>
           </Router>
         </PersistGate>
