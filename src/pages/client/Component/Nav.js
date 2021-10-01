@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Receipt from './Receipt';
-function Nav() {
+const Nav=()=> {
         return (
             <nav className="navbar navbar-expand-md bg-white navbar-light">
         <div className="container">
           {/* logo  */}
-          <a className="navbar-brand" href="/" style={{color: '#64ae55',marginLeft:'27px'}}><b>DealBook</b>.xyz</a>
+          <a className="navbar-brand" href="/" style={{color: '#64ae55',marginLeft:'45px'}}><b>DealBook</b>.xyz</a>
           {/* navbar-toggler  */}
           <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon" /></button>
           <div className="collapse navbar-collapse" id="collapsibleNavId">
