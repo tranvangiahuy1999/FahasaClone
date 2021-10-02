@@ -180,7 +180,7 @@ console.log(productList);
         </div>
       </section>
       <section className="breadcrumbbar" style={{ background: '#F0F0F0', paddingTop: '30px', height: '72px' }}>
-        <div className="container" style={{marginLeft:'108px'}}>
+        <div className="container">
           <ol className="breadcrumb mb-0 p-0 bg-transparent">
             <li className="breadcrumb-item"><a href="index.html">Trang chủ  </a></li>
             
@@ -299,13 +299,13 @@ console.log(productList);
       </section>
       {/* khối sản phẩm  */}
       <section className="content my-4" style={{ background: '#F0F0F0' }}>
-        <div className="container contentList" style={{ marginTop: '-24px', width: '81%', marginLeft: '132px' }}>
-          <div className="noidung bg-white" style={{ width: '101%' }}>
+        <div className="container contentList" style={{ marginTop: '-24px', width: '81%',marginBottom:'3%' }}>
+          <div className="noidung bg-white" >
             {/* header của khối sản phẩm : tag(tác giả), bộ lọc và sắp xếp  */}
 
             {/* các sản phẩm  */}
-            <div className="row" style={{ background: '#F0F0F0', marginBottom: '-35px' }}>
-              <div className='col-md-3 col-xs-12'>
+            <div className="row" style={{ background: '#F0F0F0' }}>
+              <div className='col-md-3 col-xs-12' style={{padding:'0%',paddingRight:'1%'}}>
 
                 <div className="thongtinsach1" style={{ background: 'white', border: 'none',height:'auto' }}>
                   <h1 style={{ fontSize: '19px', marginTop: '6px', marginLeft: '3px', fontWeight: 'bold' }}>Nhóm Sản Phẩm</h1>
@@ -416,8 +416,8 @@ console.log(productList);
                     </div>
                   </div>
                 </div>
-                <div className="items">
-                  <div className="row" style={{ marginRight: '25px' }}>
+                <div className="items" style={{marginLeft :'-2%'}}>
+                  <div className="row" style={{overflow:'hidden'}}>
                     {productList.map((value, index) => (
                     <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                     <div className="card list">
@@ -433,7 +433,7 @@ console.log(productList);
 
                         <div className="card-body noidungsp mt-3">
                           <h6 className="card-title ten">{value.name}</h6>
-                          <small className="tacgia text-muted">{value.description}</small>
+                          <small className="tacgia text-muted" dangerouslySetInnerHTML={{ __html: value.description }}></small>
                           <div className="gia d-flex align-items-baseline">
                              {value.parameters
                                 .filter((item, idx) => idx < 1)
@@ -442,7 +442,7 @@ console.log(productList);
                              
                              ))}
                            
-                            <div className="sale List">-20%</div>
+                            {/* <div className="sale List">-20%</div> */}
                           </div>
 
                         </div>
@@ -481,89 +481,88 @@ console.log(productList);
         {/*het container*/}
       </section>
       {/*het _1khoi*/}
-      <section className="abovefooter text-white" style={{ background: '#F0F0F0', paddingTop: '60px' }} >
-        <div className="container index_footer" style={{ backgroundColor: '#64ae55', width: '81%' }}>
-          <div className="row">
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-books.png" alt="icon-books" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH </h6>
-                  <p className="detail">Tuyển chọn bởi DealBooks</p>
+      <section className="abovefooter text-white" style={{background:'#F0F0F0',marginTop:'-3%'}} >
+              <div className="container nearbottom"style={{backgroundColor: '#64ae55',width:'81%'}}>
+                <div className="row">
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="/images/icon-books.png" alt="icon-books" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">HƠN 14.000 TỰA SÁCH HAY</h6>
+                        <p className="detail">Tuyển chọn bởi DealBooks</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="/images/icon-ship.png" alt="icon-ship" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">MIỄN PHÍ GIAO HÀNG</h6>
+                        <p className="detail">Từ 150.000đ ở TP.HCM</p>
+                        <p className="detail">Từ 300.000đ ở tỉnh thành khác</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="/images/icon-gift.png" alt="icon-gift" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">QUÀ TẶNG MIỄN PHÍ</h6>
+                        <p className="detail">Tặng Bookmark</p>
+                        <p className="detail">Bao sách miễn phí</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-sm-6">
+                    <div className="dichvu d-flex align-items-center">
+                      <img src="/images/icon-return.png" alt="icon-return" />
+                      <div className="noidung">
+                        <h6 className="tieude font-weight-bold">ĐỔI TRẢ NHANH CHÓNG</h6>
+                        <p className="detail">Hàng bị lỗi được đổi trả nhanh chóng</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </section>
+            <div className="new" style={{marginTop:'-16px',background:'#F0F0F0'}}>
+            <footer>
+              <div className="container py-4"style={{background:'white',width:'81%'}}>
+                <div className="row">
+                  <div className="col-md-6 col-xs-6">
+                    <div className="gioithieu">
+                      <h3 className="header text-uppercase font-weight-bold">Về DealBook</h3>
+                      <a href="#">Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM</a>
+                      <a href="#">Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.</a>
+                      <a href="#"><img src="/images/dang-ky-bo-cong-thuong.png" alt="jcb-payment" /></a>
+                      <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
+                    </div>
+                  </div>
+                  <div className="col-md-3 col-xs-6">
+                    <div className="hotrokh">
+                      <h3 className="header text-uppercase font-weight-bold">HỖ TRỢ KHÁCH HÀNG</h3>
+                      <a href="#">Hướng dẫn đặt hàng</a>
+                      <a href="#">Phương thức thanh toán</a>
+                      <a href="#">Phương thức vận chuyển</a>
+                      <a href="#">Chính sách đổi trả</a>
+                    
+                    </div>
+                  </div>
+                
+                  <div className="col-md-3 col-xs-6">
+                    <div className="ptthanhtoan">
+                    
+                      <a href="#"><img className="anhfanpage" src="/images/footer_icon1.png" style={{marginLeft:'-10px'}} alt="jcb-payment" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </footer>
+            {/* nut cuon len dau trang */}
+            <div className="fixed-bottom">
+              <div className="btn btn-warning float-right rounded-circle nutcuonlen" id="backtotop" href="#" style={{background: '#64ae55'}}><i className="fa fa-chevron-up text-white" /></div>
             </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-ship.png" alt="icon-ship" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">MIỄN PHÍ GIAO HÀNG</h6>
-                  <p className="detail">Từ 150.000đ ở TP.HCM</p>
-                  <p className="detail">Từ 300.000đ ở TP.HN</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-gift.png" alt="icon-gift" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">QUÀ TẶNG MIỄN PHÍ</h6>
-                  <p className="detail">Tặng Bookmark</p>
-                  <p className="detail">Bao sách miễn phí</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-return.png" alt="icon-return" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">ĐỔI TRẢ NHANH CHÓNG</h6>
-                  <p className="detail">Hàng bị lỗi được đổi trả nhanh chóng</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div style={{ background: '#F0F0F0' }} >
-
-        <footer>
-          <div className="container py-4" style={{ background: 'white', width: '81%' }}>
-            <div className="row">
-              <div className="col-md-6 col-xs-6">
-                <div className="gioithieu">
-                  <h3 className="header text-uppercase font-weight-bold">Về DealBook</h3>
-                  <a href="#">Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM</a>
-                  <a href="#">Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.</a>
-                  <a href="#"><img src="/images/dang-ky-bo-cong-thuong.png" alt="jcb-payment" /></a>
-                  <div className="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/" data-width="300px" data-layout="button" data-action="like" data-size="small" data-share="true" />
-                </div>
-              </div>
-              <div className="col-md-3 col-xs-6">
-                <div className="hotrokh">
-                  <h3 className="header text-uppercase font-weight-bold">HỖ TRỢ KHÁCH HÀNG</h3>
-                  <a href="#">Hướng dẫn đặt hàng</a>
-                  <a href="#">Phương thức thanh toán</a>
-                  <a href="#">Phương thức vận chuyển</a>
-                  <a href="#">Chính sách đổi trả</a>
-
-                </div>
-              </div>
-
-              <div className="col-md-3 col-xs-6">
-                <div className="ptthanhtoan">
-
-                  <a href="#"><img src="/images/footer_icon1.png" alt="jcb-payment" /></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-        {/* nut cuon len dau trang */}
-        <div className="fixed-bottom">
-          <div className="btn btn-warning float-right rounded-circle nutcuonlen" id="backtotop" href="#" style={{ background: '#64ae55' }}><i className="fa fa-chevron-up text-white" /></div>
-        </div>
-      </div>
+          </div> 
     </div>
   );
 }
