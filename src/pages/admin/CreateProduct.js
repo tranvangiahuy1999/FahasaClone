@@ -23,6 +23,7 @@ import { IoTrashBin } from "react-icons/io5";
 import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { LOGO_COLOR, ICON_COLOR } from "../../constants/index";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export default function Product() {
@@ -45,7 +46,14 @@ export default function Product() {
   const [previewFile, setPreviewFile] = useState([]);
   const [file, setFile] = useState([]);
   const [products, setProducts] = useState([
-    { key: "", value: "", price: 1000, itemFile: "", itemPreviewFile: "" },
+    {
+      key: "",
+      value: "",
+      price: 1000,
+      itemFile: null,
+      itemPreviewFile: null,
+      itemId: null,
+    },
   ]);
   const [submitStateBtn, setSubmitStateBtn] = useState(false);
   const [existImageList, setExistImageList] = useState([]);
@@ -85,19 +93,16 @@ export default function Product() {
     let tempArray = products;
     tempArray.forEach(async (ele, i) => {
       if (i === index) {
-        tempArray[i].itemFile = event.target.files[0];
-
         let result_base64 = await new Promise((resolve) => {
           let fileReader = new FileReader();
           fileReader.onload = (e) => resolve(fileReader.result);
           fileReader.readAsDataURL(event.target.files[0]);
         });
-
+        tempArray[i].itemFile = event.target.files[0];
         tempArray[i].itemPreviewFile = result_base64;
+        setProducts([...tempArray]);
       }
     });
-    console.log(tempArray);
-    setProducts([...tempArray]);
   };
 
   const handleChangeMedia = (e) => {
@@ -171,8 +176,9 @@ export default function Product() {
       key: "",
       value: "",
       price: 1000,
-      itemFile: "",
-      itemPreviewFile: "",
+      itemFile: null,
+      itemPreviewFile: null,
+      itemId: null,
     });
     setProducts([...temp]);
   };
@@ -269,34 +275,62 @@ export default function Product() {
     }
   };
 
-  const formatProducts = (data) => {
+  const formatProducts = async (data) => {
     let parameter = [];
-    data.forEach((ele) => {
-      let entity = {
-        bar_code: ele.key,
-        name: ele.value,
-        price: ele.price,
-      };
+    for (let ele of data) {
+      let entity = {};
+      if (ele.itemFile !== null) {
+        const res = await uploadImageToCloudinary(ele.itemFile);
+        if (res.status === 200) {
+          entity = {
+            bar_code: ele.key,
+            name: ele.value,
+            price: ele.price,
+            image: res.data.url,
+            id_image: res.data.public_id,
+          };
+        } else {
+          entity = {
+            bar_code: ele.key,
+            name: ele.value,
+            price: ele.price,
+            image: "",
+            id_image: "",
+          };
+        }
+      } else {
+        entity = {
+          bar_code: ele.key,
+          name: ele.value,
+          price: ele.price,
+          image: "",
+          id_image: "",
+        };
+      }
       parameter.push(entity);
-    });
+    }
     return parameter;
   };
 
-  const formatForm = (data) => {
+  const formatForm = async () => {
+    const productsData = products;
+    const parameter = await formatProducts(productsData);
     const formdata = new FormData();
-    const parameter = formatProducts(products);
-
     formdata.append("name", name);
     formdata.append("description", desc);
-    specify.map((ele, index) => {
+    specify.forEach((ele, index) => {
       formdata.append(`details[${ele.key}]`, ele.value);
     });
-    parameter.map((value, index) => {
+    // console.log(parameter.length, parameter[0]);
+    parameter.forEach((value, index) => {
       formdata.append(`parameter[${index}].bar_code`, value.bar_code);
       formdata.append(`parameter[${index}].name`, value.name);
       formdata.append(`parameter[${index}].price`, value.price);
+      formdata.append(`parameter[${index}].image`, value.image);
+      formdata.append(`parameter[${index}].id_image`, value.id_image);
     });
-    category.map((value, index) => {
+
+    category.forEach((value, index) => {
       let temp = value;
       if (value === "null") {
         temp = "";
@@ -309,6 +343,17 @@ export default function Product() {
     });
 
     return formdata;
+  };
+
+  const uploadImageToCloudinary = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "bookshopimages");
+    const res = await axios.post(
+      "https://api.cloudinary.com/v1_1/bookshop/image/upload",
+      data
+    );
+    return res;
   };
 
   const onSubmit = async (e) => {
@@ -324,6 +369,11 @@ export default function Product() {
 
     try {
       const formData = await formatForm();
+
+      // for (var value of formData.values()) {
+      //   console.log(value);
+      // }
+
       const res = await adminApis.createProduct(formData);
       if (res.status === 200) {
         alert({
@@ -562,7 +612,8 @@ export default function Product() {
                             {ele.itemPreviewFile ? (
                               <img
                                 className="product-item-image"
-                                alt={ele.itemPreviewFile}
+                                key={ele.itemPreviewFile}
+                                alt=""
                                 src={ele.itemPreviewFile}
                               ></img>
                             ) : (
@@ -591,7 +642,7 @@ export default function Product() {
                                   padding: "0.3rem",
                                 }}
                               >
-                                Thêm ảnh
+                                {!ele.itemPreviewFile ? "Thêm ảnh" : "Đổi ảnh"}
                               </Button>
                             </label>
                           </div>
