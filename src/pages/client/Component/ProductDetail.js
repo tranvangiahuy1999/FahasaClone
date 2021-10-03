@@ -33,6 +33,7 @@ const ProductDetail = () => {
     try {
 
       const res = await shopApis.getProductDetail(params.id);
+      console.log(res);
       if (res.status === 200) {
         // setProductList(res.data.product)
         console.log(res.data);
@@ -42,7 +43,6 @@ const ProductDetail = () => {
             "price": value.parameters[0].price,
             "_id": value.parameters[0]._id,
           })
-
 
         })
         setProductDeatil(res.data);

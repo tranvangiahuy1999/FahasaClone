@@ -100,7 +100,7 @@ const Header = () => {
                                     <div className="col-4" key={index}>
                                       <li className="liheader1">
                                         <a
-                                          href="/danh-sach"
+                                          href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id }
                                           className="header text-uppercase"
                                         >
                                           {" "}
@@ -113,7 +113,7 @@ const Header = () => {
                                             .filter((item, idx) => idx < 5)
                                             .map((value, index) => (
                                               <li key={index}>
-                                                <a href="/danh-sach">
+                                                <a href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id }>
                                                   {value.name}
                                                 </a>
                                               </li>
