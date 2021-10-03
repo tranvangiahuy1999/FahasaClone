@@ -33,6 +33,7 @@ const ProductDetail = () => {
     try {
 
       const res = await shopApis.getProductDetail(params.id);
+      console.log(res);
       if (res.status === 200) {
         // setProductList(res.data.product)
         console.log(res.data);
@@ -42,7 +43,6 @@ const ProductDetail = () => {
             "price": value.parameters[0].price,
             "_id": value.parameters[0]._id,
           })
-
 
         })
         setProductDeatil(res.data);
@@ -126,8 +126,8 @@ const ProductDetail = () => {
         </div>
       </section>
       {/* breadcrumb  */}
-      <section className="breadcrumbbar" style={{ background: '#F0F0F0', paddingTop: '10px', height: '72px' }}>
-        <div className="container" style={{ marginLeft: '110px', marginTop: '35px', width: '85%' }}>
+      <section className="breadcrumbbar" style={{ background: '#F0F0F0', paddingTop: '30px', height: '72px' }}>
+        <div className="container" >
           <ol className="breadcrumb mb-0 p-0 bg-transparent">
             <li className="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
             <li className="breadcrumb-item"><a href="#">Sách kinh tếdsdsdsdsds</a></li>
@@ -326,9 +326,9 @@ const ProductDetail = () => {
       </section>
       {/* het product-page */}
       {/* khối sản phẩm tương tự */}
-      <section className="_1khoi sachmoi" style={{ background: '#F0F0F0', paddingBottom: '50px' }}>
-        <div className="container detail1" style={{ background: 'white', marginTop: '-25px', width: '1220px' }}>
-          <div className="noidung bg-white" >
+      <section className="_1khoi sachmoi" style={{ background: '#F0F0F0' ,marginBottom:'-1%' }}>
+        <div className="container detail1" style={{  marginTop: '-25px', width: '82%' }}>
+          <div className="noidung bg-white" style={{padding:'1%'}} >
             <div className="row">
               {/*header*/}
               <div className="col-12 d-flex justify-content-between align-items-center pb-2 bg-light pt-2" style={{ marginTop: '20px' }}>
@@ -336,7 +336,7 @@ const ProductDetail = () => {
 
               </div>
             </div>
-            <div className="khoisanpham" style={{ paddingBottom: '2rem' }}>
+            <div className="khoisanpham" style={{ paddingBottom: '5rem' }}>
               {/* 1 sản phẩm */}
               <div className="card">
                 <a href="Lap-trinh-ke-hoach-kinh-doanh-hieu-qua.html" className="motsanpham" style={{ textDecoration: 'none', color: 'black' }} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
@@ -473,8 +473,8 @@ const ProductDetail = () => {
       {/* khối sản phẩm đã xem  */}
 
       {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-      <section className="abovefooter text-white" style={{ marginLeft: '-18px', marginRight: '0px', background: '#F0F0F0', marginTop: '0px' }} >
-        <div className="container footer_detail" style={{ backgroundColor: '#64ae55', width: '1220px', marginLeft: '168px' }}>
+      <section className="abovefooter text-white" style={{  marginBottom: '-1%', background: '#F0F0F0',padding:'1%' }} >
+        <div className="container footer_detail" style={{ backgroundColor: '#64ae55', width: '82%'}}>
           <div className="row">
             <div className="col-lg-3 col-sm-6">
               <div className="dichvu d-flex align-items-center">
@@ -517,9 +517,9 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
-      <div className="new" style={{ marginLeft: '-20px', background: '#F0F0F0' }}>
+      <div className="new" style={{ padding:'1%', background: '#F0F0F0' }}>
         <footer>
-          <div className="container py-4" style={{ background: 'white', width: '79%', marginLeft: '172px' }}>
+          <div className="container py-4" style={{ background: 'white', width: '82%',marginTop:'-1%' }}>
             <div className="row">
               <div className="col-md-6 col-xs-6">
                 <div className="gioithieu">

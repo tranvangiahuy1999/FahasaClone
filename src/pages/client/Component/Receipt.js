@@ -235,9 +235,9 @@ const  Receipt=()=> {
                 </div>
               </div>
             </section>
-            <div className="new" style={{marginLeft:'-20px',background:'#F0F0F0'}}>
+            <div className="new" style={{marginRight:'17px',marginTop:'0px',background:'#F0F0F0'}}>
             <footer>
-              <div className="container py-4"style={{background:'white',width:'1211px',marginLeft:'162px'}}>
+              <div className="container py-4"style={{background:'white',width:'81%'}}>
                 <div className="row">
                   <div className="col-md-6 col-xs-6">
                     <div className="gioithieu">
