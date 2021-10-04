@@ -91,7 +91,7 @@ const AdminIndex = (props) => {
     {
       path: "/admin/product/edit-product/:id",
       exact: true,
-      main: () => <Product></Product>,
+      main: () => <CreateProduct></CreateProduct>,
     },
     {
       path: "/admin/receipt",

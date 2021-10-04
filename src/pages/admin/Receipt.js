@@ -3,10 +3,8 @@ import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
-
 import SwipeableViews from "react-swipeable-views";
 import { AppBar, useTheme, Tabs, Tab, IconButton } from "@material-ui/core";
-
 import Pagination from "@material-ui/lab/Pagination";
 import { IoSearch } from "react-icons/io5";
 import ReceiptProccess from "../../components/ReceiptProccess";
