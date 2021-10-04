@@ -358,12 +358,14 @@ export default function Product() {
                         <span>{row.parameters.length} phân loại</span>
                       </TableCell> */}
                       <TableCell align="center">
-                        <IconButton
-                          color="primary"
-                          aria-label="update category"
-                        >
-                          <FaRegEdit color={LOGO_COLOR} size={18} />
-                        </IconButton>
+                        <Link to={`/admin/product/edit-product/${row._id}`}>
+                          <IconButton
+                            color="primary"
+                            aria-label="update category"
+                          >
+                            <FaRegEdit color={LOGO_COLOR} size={18} />
+                          </IconButton>
+                        </Link>
 
                         <IconButton
                           color="secondary"

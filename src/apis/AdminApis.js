@@ -36,6 +36,14 @@ const adminApis = {
     const url = `/api/product/delete/${id}`;
     return axiosClient.delete(url);
   },
+  getProductDetail(id) {
+    const url = `/api/product/get/${id}`;
+    return axiosClient.get(url);
+  },
+  getReceiptByPageAndState(page, state) {
+    const url = `/api/receipt/search?page=${page}&in_process=${state}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default adminApis;

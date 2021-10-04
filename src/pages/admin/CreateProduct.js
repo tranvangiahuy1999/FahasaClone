@@ -24,9 +24,10 @@ import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { LOGO_COLOR, ICON_COLOR } from "../../constants/index";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export default function Product() {
+  let { id } = useParams();
   const classes = useStyles();
   const fileRef = useRef();
   const history = useHistory();
@@ -321,7 +322,6 @@ export default function Product() {
     specify.forEach((ele, index) => {
       formdata.append(`details[${ele.key}]`, ele.value);
     });
-    // console.log(parameter.length, parameter[0]);
     parameter.forEach((value, index) => {
       formdata.append(`parameter[${index}].bar_code`, value.bar_code);
       formdata.append(`parameter[${index}].name`, value.name);
