@@ -244,8 +244,7 @@ label.error {
 
 .categoryheader {
     height: 40px;
-    width: 280px;
-    margin-left: 33px;
+    width: 100%;
     background-color: 	#006400;
 }
 
@@ -281,9 +280,8 @@ label.error {
 .categorycontent{
     border: 1px solid #b4b2b2;
     box-sizing: border-box;
-    height: 387px;
+    height: 100%;
     background: white;
-    margin-left: 3px;
     text-align: left;
 }
 
@@ -325,13 +323,13 @@ label.error {
 .categorycontent ul li ul{
     display: none;
     height: 387px;
-    width: 970px;
+    width: 305%;
     border: 1px solid #d1d1d1;
     position: absolute;
     z-index: 99;
     top: 0px;
     left: 0px;
-    margin-left: 316px;
+    margin-left: 100%;
     box-shadow: 0px 1px 3px #e7dddd;
     background-color: white;
 }
@@ -680,6 +678,13 @@ footer .header {
         width: 100%!important;
 
     }
+    .danhsach {
+        margin-top: 20%;
+    }
+    .details {
+        margin-top: -20%;
+        margin-left: 20%;
+    }
     div#parentHorizontalTab {
         padding-bottom: 15%;
     }
@@ -747,7 +752,7 @@ i.fas.fa-comments-dollar {
 }
 
 .carousel-inner {
-    margin-left: -13px;
+    margin-left: 0%;
     width: 100% !important;
 }
 
@@ -906,4 +911,4 @@ a.btn.nutmuathem.mb-3:hover {
     .carousel{
         padding: 0;
     }
-}
+}   

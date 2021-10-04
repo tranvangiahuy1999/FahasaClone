@@ -52,9 +52,9 @@ const Header = () => {
       
       {/* thanh tieu de "danh muc sach" + hotline + ho tro truc tuyen */}
       <section className="duoinavbar" >
-        <div className="container text-white">
+        <div className="container text-white"style={{background:'white',width:'81%'}}>
           <div className="row justify">
-            <div className="col-md-3">
+            <div className="col-md-3"  style={{padding:'0%'}}>
               <div className="categoryheader">
                 <div className="noidungheader text-white">
                   <i className="fa fa-bars" id=" menuId" />
@@ -69,12 +69,12 @@ const Header = () => {
         </div>
       </section>
       {/* noi dung danh muc sach(categories) + banner slider */}
-      <section className="header " style={{background:'#F0F0F0',marginLeft:'15px'}}>
-        <div className="container">
+      <section className="header " style={{background:'#F0F0F0'}}>
+        <div className="container" style={{background:'white',width:'81%'}}>
           <div className="row">
             <div
               className="col-md-3"
-              style={{ marginRight: "0px", paddingLeft: "35px" }}
+              style={{padding:'0%'}}
             >
               {/* CATEGORIES */}
               <div className="categorycontent display">
@@ -100,7 +100,7 @@ const Header = () => {
                                     <div className="col-4" key={index}>
                                       <li className="liheader1">
                                         <a
-                                          href="/danh-sach"
+                                          href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id }
                                           className="header text-uppercase"
                                         >
                                           {" "}
@@ -113,7 +113,7 @@ const Header = () => {
                                             .filter((item, idx) => idx < 5)
                                             .map((value, index) => (
                                               <li key={index}>
-                                                <a href="/danh-sach">
+                                                <a href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id }>
                                                   {value.name}
                                                 </a>
                                               </li>
@@ -138,7 +138,7 @@ const Header = () => {
               </div>
             </div>
             {/* banner slider  */}
-            <div className="col-md-9 px-0" style={{width:"955px"}} >
+            <div className="col-md-9 px-0" >
               <div
                 id="carouselId"
                 className="carousel slide"
@@ -155,38 +155,38 @@ const Header = () => {
                 </ol>
                 <div
                   className="carousel-inner"
-                  width="950px"
+                
                   style={{ marginTop: "-40px" }}
                 >
-                  <div className="carousel-item active" width="800px">
+                  <div className="carousel-item active">
                     <a href="#">
                       <img
                         src="images/banner-sach-moi.jpg"
                         className="img-fluid"
-                        style={{ height: "427px" }}
-                        width="950px"
+                        style={{ height: "427px",width:'100%' }}
+                       
                         alt="First slide"
                       />
                     </a>
                   </div>
-                  <div className="carousel-item" width="950px">
+                  <div className="carousel-item" >
                     <a href="#">
                       <img
                         src="images/banner-beethoven.jpg"
                         className="img-fluid"
-                        style={{ height: "427px" }}
-                        width="950px"
+                        style={{ height: "427px",width:'100%' }}
+                       
                         alt="Second slide"
                       />
                     </a>
                   </div>
-                  <div className="carousel-item" width="950px">
+                  <div className="carousel-item" >
                     <a href="#">
                       <img
                         src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg"
                         className="img-fluid"
-                        style={{ height: "427px" }}
-                        width="950px"
+                        style={{ height: "427px",width:'100%' }}
+                     
                         alt="Third slide"
                       />
                     </a>

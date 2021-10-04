@@ -12,7 +12,7 @@ function HomePage() {
          <div>
         {/* khoi sach moi  */}
         <section className="_1khoi sachmoi "style={{background:'#F0F0F0'}}>
-          <div className="container mobileNewbook"style={{width:'81%',marginLeft:'145px',background:'white'}}>
+          <div className="container mobileNewbook"style={{width:'81%',background:'white'}}>
             <div className="noidung" style={{background:'white',marginTop:'40px'}}>
               <div className="row">
                 {/*header*/}

@@ -106,7 +106,6 @@ i.fa.fa-shopping-cart {
 
 a.btn.btn-secondary.rounded-circle {
     width: 42px;
-    margin-right: 8px;
     height: 40px;
     background-color: #dfdfdf;
     border: #cacaca;
@@ -869,7 +868,8 @@ a.btn.btn-warning.btn-sm.text-white {
     width: 180px;
     color: orange !important;
     margin-left: 44%;
-    margin-bottom: 35px;
+    margin-bottom: 6%;
+    margin-top: -5%;
     background: #f5a6230a;
     font-size: 19px;
 } 
@@ -881,8 +881,8 @@ a.btn.btn-warning.btn-sm.text-white {
 
 img.card-img-top.anh {
     position: relative;
-    height: 235px;
     top: 15px;
+    height: 235px;
     transition: 0.3s;
 }
 
@@ -941,10 +941,7 @@ small.tacgia.text-muted {
     transition: 0.3s;
     padding: 3px 0px;
 }
-li.nav-item.giohang {
-    padding-left: 137px;
-    margin-right: 43px;
-}
+li.nav-item.giohang {margin-left: -42%;}
 h6.card-title.ten {
     font-weight: 400;
     margin-bottom: 4px;
@@ -1036,7 +1033,7 @@ h6.card-title.ten {
                 color: red;
                 font-size: 26px;
                 position: absolute;
-                top: 80px;
+                top: 30px !important;
                 left: 14px;
     }
     .the-loai-sach ul{
@@ -1216,6 +1213,7 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
 
 .card.list {
     border: none;
+    
 }
 @media only screen and (max-width: 1024px){
     .ptthanhtoan{
@@ -1283,3 +1281,4 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
     }
 
 }
+
