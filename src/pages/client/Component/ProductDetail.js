@@ -76,7 +76,7 @@ const ProductDetail = () => {
                       categoryList
                         .filter((item, idx) => idx < 11)
                         .map((value, index) => (
-                          <li key={index}> <a href="/danh-sach" className="tieude"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
+                          <li key={index}> <a href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id } className="tieude"> {value.name}</a><i className="fa fa-chevron-right icon float-right" />
                             <ul className="categorydetail container">
                               <div className="row " style={{ height: '185px' }} >
                                 {value.subCate.length ? (
@@ -85,14 +85,14 @@ const ProductDetail = () => {
                                     .map((value, index) => (
 
                                       <div className="col-4" key={index}>
-                                        <li className="liheader"><a href="/danh-sach" className="header text-uppercase"> {value.name}
+                                        <li className="liheader"><a href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id } className="header text-uppercase"> {value.name}
                                         </a></li>
                                         <div className="content trai">
                                           {value.subCate.length ? (
                                             value.subCate
                                               .filter((item, idx) => idx < 5)
                                               .map((value, index) => (
-                                                <li key={index}><a href="/danh-sach">{value.name}</a></li>
+                                                <li key={index}><a href={"/danh-sach/"+chuyenDoiURL(value.name)+"."+ value._id }>{value.name}</a></li>
                                               ))
                                           ) : (
                                             <></>
