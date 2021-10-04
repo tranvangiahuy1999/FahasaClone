@@ -47,9 +47,9 @@ export default function Receipt() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
-  const [in_proccess,setIn_Proccess]=useState(true);
-  const [receiptProccess,setReceiptProccess]=useState([]);
-  const [receiptCancel,setReceiptCancel]=useState([]);
+  const [in_proccess, setIn_Proccess] = useState(true);
+  const [receiptProccess, setReceiptProccess] = useState([]);
+  const [receiptCancel, setReceiptCancel] = useState([]);
   useEffect(() => {
     window.scrollTo(0, 0);
     getReceiptData();
@@ -57,11 +57,10 @@ export default function Receipt() {
   }, []);
   const getReceiptData = async () => {
     try {
-  
-      const res = await AdminApi.getListReceipt(1,true);
+      const res = await AdminApi.getListReceipt(1, true);
       if (res.status === 200) {
-        console.log(res.data)
-        setReceiptProccess(res.data.receipts)
+        console.log(res.data);
+        setReceiptProccess(res.data.receipts);
       }
     } catch (e) {
       console.log(e);
@@ -69,11 +68,10 @@ export default function Receipt() {
   };
   const getReceiptCancel = async () => {
     try {
-  
-      const res = await AdminApi.getListReceipt(1,false);
+      const res = await AdminApi.getListReceipt(1, false);
       if (res.status === 200) {
-        console.log(res.data)
-        setReceiptCancel(res.data.receipts)
+        console.log(res.data);
+        setReceiptCancel(res.data.receipts);
       }
     } catch (e) {
       console.log(e);
@@ -113,47 +111,45 @@ export default function Receipt() {
         />
       </div>
 
-      <div style={{marginTop:'3%'}}>
-      <AppBar position="static" color="white">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor=""
-          textColor="primary"
-          centered
+      <div style={{ marginTop: "3%" }}>
+        <AppBar position="static" color="white">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor=""
+            textColor="primary"
+            centered
+          >
+            <Tab label={<h4>Đơn Đang Xử Lí</h4>} {...a11yProps(0)} />
+            <Tab label={<h4>Đơn Hủy</h4>} {...a11yProps(1)} />
+          </Tabs>
+        </AppBar>
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
         >
-          <Tab label={<h4>Đơn Đang Xử Lí</h4>} {...a11yProps(0)} />
-          <Tab label={<h4>Đơn Hủy</h4>}{...a11yProps(1)}/>
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-      >
-       <ReceiptProccess
-          value={value}
-          index={0}
-          dir={theme.direction}
-          reloadData={receiptProccess}
-          handleOpenAddModal={handleOpenAddModal}
-          closeAfterSave={closeAfterSave}
-          open={open}
-          handleCloseAddModal={handleCloseAddModal}
-        ></ReceiptProccess>
-        <ReceiptCancel
-     
-          value={value}
-          index={1}
-          dir={theme.direction}
-          open={open}
-          handleCloseAddModal={handleCloseAddModal}
-          closeAfterSave={closeAfterSave}
-          reloadData={receiptCancel}
-          handleOpenAddModal={handleOpenAddModal}
-        ></ReceiptCancel>
-      </SwipeableViews>
-      
-    </div>
+          <ReceiptProccess
+            value={value}
+            index={0}
+            dir={theme.direction}
+            reloadData={receiptProccess}
+            handleOpenAddModal={handleOpenAddModal}
+            closeAfterSave={closeAfterSave}
+            open={open}
+            handleCloseAddModal={handleCloseAddModal}
+          ></ReceiptProccess>
+          <ReceiptCancel
+            value={value}
+            index={1}
+            dir={theme.direction}
+            open={open}
+            handleCloseAddModal={handleCloseAddModal}
+            closeAfterSave={closeAfterSave}
+            reloadData={receiptCancel}
+            handleOpenAddModal={handleOpenAddModal}
+          ></ReceiptCancel>
+        </SwipeableViews>
+      </div>
     </div>
   );
 }
