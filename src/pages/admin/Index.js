@@ -33,7 +33,7 @@ import {
 import Category from "./Category";
 import Product from "./Product";
 import Receipt from "./Receipt";
-import CreateProduct from './CreateProduct';
+import CreateProduct from "./CreateProduct";
 
 import {
   BrowserRouter as Router,
@@ -57,7 +57,7 @@ import { setCategoryData } from "../../reducers/AdminReducer";
 import { userlogoutsuccess } from "../../reducers/UserReducer";
 import adminApis from "../../apis/AdminApis";
 
-const drawerWidth = 250;
+const drawerWidth = 230;
 
 const AdminIndex = (props) => {
   const { window } = props;
@@ -85,37 +85,27 @@ const AdminIndex = (props) => {
     },
     {
       path: "/admin/product",
+      exact: true,
+      main: () => <Product></Product>,
+    },
+    {
+      path: "/admin/product/edit-product/:id",
+      exact: true,
       main: () => <Product></Product>,
     },
     {
       path: "/admin/receipt",
       main: () => <Receipt></Receipt>,
     },
-	{
-      path: "/admin/AddProduct",
+    {
+      path: "/admin/product/add-product",
       main: () => <CreateProduct></CreateProduct>,
     },
   ];
 
   const drawer = (
     <div>
-      <Toolbar>
-        <div style={{ width: "100%" }}>
-          <Avatar
-            icon={<FaUserCircle />}
-            style={{ margin: "auto", marginTop: "16px", marginBottom: "10px" }}
-          />
-          <h5 style={style.sidebarHeaderTitle}>Xin chào</h5>
-          <Link to="/admin/receipt" style={{ textDecoration: "none" }}>
-            <div className="custom-link" style={style.sidebarHeader}>
-              Bạn có 6 đơn hàng mới{" "}
-              <span>
-                <FaBell color="#ffff33"></FaBell>
-              </span>
-            </div>
-          </Link>
-        </div>
-      </Toolbar>
+      <div className={styles.toolbar}></div>
       <List>
         <Divider />
         <ListItem
@@ -335,13 +325,6 @@ const AdminIndex = (props) => {
               ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
               }}
-              // sx={{
-              //   display: { xs: "block", sm: "none" },
-              //   "& .MuiDrawer-paper": {
-              //     boxSizing: "border-box",
-              //     width: drawerWidth,
-              //   },
-              // }}
             >
               {drawer}
             </Drawer>
@@ -350,13 +333,6 @@ const AdminIndex = (props) => {
             <Drawer
               classes={{ paper: styles.drawerPaper }}
               variant="permanent"
-              // sx={{
-              //   display: { xs: "none", sm: "block" },
-              //   "& .MuiDrawer-paper": {
-              //     boxSizing: "border-box",
-              //     width: drawerWidth,
-              //   },
-              // }}
               open
             >
               {drawer}
@@ -420,6 +396,7 @@ const style = {
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     background: PRIMARY_COLOR,
+    width: drawerWidth,
   },
   drawerToolbar: {
     backgroundColor: PRIMARY_COLOR,
@@ -429,7 +406,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    minWidth: "1100px",
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -446,6 +423,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  toolbar: theme.mixins.toolbar,
   appBar: {
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,

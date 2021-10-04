@@ -100,7 +100,7 @@ export default function Receipt() {
   return (
     <div className={classes.root}>
       <h5>Danh sách đơn hàng</h5>
-      <div className="mb-2">
+      <div className="mb-4 mt-3">
         <TextField
           id="input-with-icon-textfield"
           placeholder="Tìm kiếm đơn hàng"
