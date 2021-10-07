@@ -358,7 +358,7 @@ export default function Product() {
                         <span>{row.parameters.length} phân loại</span>
                       </TableCell> */}
                       <TableCell align="center">
-                        <Link to={`/admin/product/edit-product/${row._id}`}>
+                        <Link to={`/admin/product/update-product/${row._id}`}>
                           <IconButton
                             color="primary"
                             aria-label="update category"

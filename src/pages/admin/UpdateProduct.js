@@ -23,9 +23,10 @@ import { IoTrashBin } from "react-icons/io5";
 import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { LOGO_COLOR, ICON_COLOR } from "../../constants/index";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-export default function Product() {
+export default function UpdateProduct() {
+  let { id } = useParams();
   const classes = useStyles();
   const fileRef = useRef();
   const history = useHistory();
@@ -41,22 +42,16 @@ export default function Product() {
   const [categoryList3, setCategoryList3] = useState([
     { _id: "null", name: "Không có" },
   ]);
-  const [specify, setSpecify] = useState([{ key: "", value: "" }]);
+  const [specify, setSpecify] = useState([]);
   const [previewFile, setPreviewFile] = useState([]);
   const [file, setFile] = useState([]);
-  const [products, setProducts] = useState([
-    {
-      key: "",
-      value: "",
-      price: 1000,
-      itemFile: null,
-      itemPreviewFile: null,
-    },
-  ]);
+  const [products, setProducts] = useState([]);
   const [submitStateBtn, setSubmitStateBtn] = useState(false);
+  const [deletedImage, setDeletedImageList] = useState([]);
 
   useEffect(() => {
     getCategoryLevel1();
+    getProductDetail();
   }, []);
 
   useEffect(() => {
@@ -76,6 +71,89 @@ export default function Product() {
       setCategoryList3([{ _id: "null", name: "Không có" }]);
     }
   }, [category[1]]);
+
+  const getProductDetail = async () => {
+    try {
+      const res = await adminApis.getProductDetail(id);
+      if (res.status === 200) {
+        if (res.data.length) {
+          setName(res.data[0].name);
+          setDesc(res.data[0].description);
+          parseInitCate(
+            res.data[0].cate1,
+            res.data[0].cate2,
+            res.data[0].cate3
+          );
+          parseInitDetail(res.data[0].details);
+          parseInitImage(res.data[0].image);
+          parseInitParameter(res.data[0].parameters);
+        } else {
+          alert({
+            icon: "error",
+            title: "Đã có lỗi xảy ra với sản phẩm",
+          });
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const parseInitCate = (cate1, cate2, cate3) => {
+    let tempCateArr = category;
+    tempCateArr.map((ele, index) => {
+      if (index === 0) {
+        tempCateArr[index] = checkCateExist(cate1);
+      } else if (index === 1) {
+        tempCateArr[index] = checkCateExist(cate2);
+      } else if (index === 2) {
+        tempCateArr[index] = checkCateExist(cate3);
+      }
+    });
+    setCategory([...tempCateArr]);
+  };
+
+  const parseInitParameter = (parameterData) => {
+    let tempArr = products;
+    parameterData.map((ele, index) => {
+      tempArr.push({
+        key: ele.bar_code,
+        value: ele.name,
+        price: ele.price,
+        itemFile: "",
+        itemPreviewFile: ele.image,
+      });
+    });
+    setProducts([...tempArr]);
+  };
+
+  const checkCateExist = (cateObject) => {
+    if (cateObject !== null) {
+      return cateObject._id;
+    } else {
+      return "null";
+    }
+  };
+
+  const parseInitDetail = (detailObject) => {
+    let tempArr = [];
+    Object.keys(detailObject).map((ele) => {
+      tempArr.push({ key: ele, value: detailObject[ele] });
+    });
+    setSpecify([...tempArr]);
+  };
+
+  const parseInitImage = (files) => {
+    let tempFile = [];
+    let tempPreviewFile = [];
+    files.map((ele) => {
+      tempFile.push("");
+      tempPreviewFile.push(ele.url);
+    });
+
+    setFile([...tempFile]);
+    setPreviewFile([...tempPreviewFile]);
+  };
 
   const resetCategoryValue = (i) => {
     let temp = category;
@@ -244,9 +322,9 @@ export default function Product() {
     }
   };
 
-  const getCategoryLevel2WithParent = async (id) => {
+  const getCategoryLevel2WithParent = async (pid) => {
     try {
-      const query = `?parentId=${id}`;
+      const query = `?parentId=${pid}`;
       const res = await adminApis.getCategoryByParent(query);
       let temp = [{ _id: "null", name: "Không có" }];
       if (res.status === 200) {
@@ -259,9 +337,9 @@ export default function Product() {
     }
   };
 
-  const getCategoryLevel3WithParent = async (id) => {
+  const getCategoryLevel3WithParent = async (pid) => {
     try {
-      const query = `?parentId=${id}`;
+      const query = `?parentId=${pid}`;
       const res = await adminApis.getCategoryByParent(query);
       let temp = [{ _id: "null", name: "Không có" }];
       if (res.status === 200) {
@@ -372,7 +450,7 @@ export default function Product() {
                   <FormLabel>
                     <span className="addprod-title">Thông tin sản phẩm</span>
                   </FormLabel>
-                  <FormGroup className="mb-4">
+                  <FormGroup className="mb-4 mt-2">
                     <TextField
                       InputLabelProps={{
                         classes: {
@@ -387,7 +465,7 @@ export default function Product() {
                         },
                       }}
                       required
-                      label="Tên sản phẩm"
+                      placeholder="Tên sản phẩm"
                     />
                   </FormGroup>
                   <FormLabel>
@@ -737,7 +815,7 @@ export default function Product() {
                         >
                           {previewFile.map((item, index) => (
                             <ImageListItem key={item.img}>
-                              <img src={item} alt={item.name} />
+                              <img src={item} alt={item.title} />
                               <ImageListItemBar
                                 title={item.title}
                                 classes={{

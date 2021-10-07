@@ -15,9 +15,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
 import { HiViewList } from "react-icons/hi";
-import { FaUserCircle, FaBell } from "react-icons/fa";
 import { IoIosArrowUp, IoIosArrowBack } from "react-icons/io";
 import { IoFileTrayStackedSharp } from "react-icons/io5";
 import { FiBook, FiBookmark } from "react-icons/fi";
@@ -25,22 +23,22 @@ import { BiReceipt } from "react-icons/bi";
 import { RiZzzLine, RiUserReceivedFill } from "react-icons/ri";
 import {
   AiOutlineFileDone,
-  AiOutlineFileSync,
   AiOutlineSetting,
   AiOutlineTag,
 } from "react-icons/ai";
 
 import Category from "./Category";
 import Product from "./Product";
-import Receipt from "./Receipt";
+import ReceiptUndone from "./ReceiptUndone";
+import ReceiptCancel from "./ReceiptCancel";
 import CreateProduct from "./CreateProduct";
+import UpdateProduct from "./UpdateProduct";
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   NavLink,
-  Link,
 } from "react-router-dom";
 
 import {
@@ -95,11 +93,24 @@ const AdminIndex = (props) => {
     },
     {
       path: "/admin/receipt",
-      main: () => <Receipt></Receipt>,
+      exact: true,
+      main: () => <ReceiptUndone></ReceiptUndone>,
+    },
+    {
+      path: "/admin/receipt/undone",
+      main: () => <ReceiptUndone></ReceiptUndone>,
+    },
+    {
+      path: "/admin/receipt/cancel",
+      main: () => <ReceiptCancel></ReceiptCancel>,
     },
     {
       path: "/admin/product/add-product",
       main: () => <CreateProduct></CreateProduct>,
+    },
+    {
+      path: "/admin/product/update-product/:id",
+      main: () => <UpdateProduct></UpdateProduct>,
     },
   ];
 
@@ -108,13 +119,7 @@ const AdminIndex = (props) => {
       <div className={styles.toolbar}></div>
       <List>
         <Divider />
-        <ListItem
-          button
-          to="/admin/receipt"
-          component={NavLink}
-          activeClassName="Mui-selected"
-          exact
-        >
+        <ListItem>
           <ListItemIcon>
             <BiReceipt style={style.drawnerItemIcon}></BiReceipt>
           </ListItemIcon>
@@ -130,7 +135,12 @@ const AdminIndex = (props) => {
 
         <Collapse in={openReceiptNest} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem button style={style.nested}>
+            <ListItem
+              button
+              style={style.nested}
+              component={NavLink}
+              to="/admin/receipt/undone"
+            >
               <ListItemIcon>
                 <RiZzzLine style={style.nestedIcon}></RiZzzLine>
               </ListItemIcon>
@@ -139,16 +149,12 @@ const AdminIndex = (props) => {
                 classes={{ primary: styles.listItemText }}
               />
             </ListItem>
-            <ListItem button style={style.nested}>
-              <ListItemIcon>
-                <AiOutlineFileSync style={style.nestedIcon}></AiOutlineFileSync>
-              </ListItemIcon>
-              <ListItemText
-                primary="Đang xử lý"
-                classes={{ primary: styles.listItemText }}
-              />
-            </ListItem>
-            <ListItem button style={style.nested}>
+            <ListItem
+              button
+              style={style.nested}
+              component={NavLink}
+              to="/admin/receipt/cancel"
+            >
               <ListItemIcon>
                 <AiOutlineFileDone style={style.nestedIcon}></AiOutlineFileDone>
               </ListItemIcon>
@@ -160,13 +166,7 @@ const AdminIndex = (props) => {
           </List>
         </Collapse>
 
-        <ListItem
-          button
-          component={NavLink}
-          to="/admin/category"
-          activeClassName="Mui-selected"
-          exact
-        >
+        <ListItem>
           <ListItemIcon>
             <FiBookmark style={style.drawnerItemIcon}></FiBookmark>
           </ListItemIcon>
@@ -182,7 +182,12 @@ const AdminIndex = (props) => {
 
         <Collapse in={openCateNest} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem button style={style.nested}>
+            <ListItem
+              button
+              style={style.nested}
+              component={NavLink}
+              to="/admin/category"
+            >
               <ListItemIcon>
                 <IoFileTrayStackedSharp
                   style={style.nestedIcon}
