@@ -104,10 +104,6 @@ const ProductList = () => {
     // return
     return str;
 }
-console.log(productList); 
-// console.log(productId1);
-// console.log(productCateId);
-
 
   return (
     <div className="all">

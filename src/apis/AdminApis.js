@@ -16,10 +16,32 @@ const adminApis = {
     const url = "/api/category/create";
     return axiosClient.post(url, data);
   },
-  updateCategory(body, id) {
+  updateCategory(data, id) {
     const url = `/api/category/update/${id}`;
-    return axiosClient.put(url, body);
+    return axiosClient.put(url, data);
   },
+  createProduct(data) {
+    const url = "/api/product/create";
+    return axiosClient.post(url, data);
+  },
+  getProductByPageAndBarcode(page, query) {
+    const url = `/api/product/search?page=${page}&search=${query}`;
+    return axiosClient.get(url);
+  },
+  getAllProducts(page) {
+    const url = `/api/product/get/all/${page}`;
+    return axiosClient.get(url);
+  },
+  deleteProduct(id) {
+    const url = `/api/product/delete/${id}`;
+    return axiosClient.delete(url);
+  },
+
+  getProductDetail(id) {
+    const url = `/api/product/get/${id}`;
+    return axiosClient.get(url);
+  },
+  
   getListReceipt(page, in_proccess) {
     const url = `/api/receipt/search?page=${page}&in_process=${in_proccess}`;
     return axiosClient.get(url);
@@ -27,6 +49,7 @@ const adminApis = {
   updateListReceipt(id,data) {
     const url = `/api/receipt/update/${id}`;
     return axiosClient.put(url,data);
+
   },
 };
 

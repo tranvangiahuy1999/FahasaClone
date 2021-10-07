@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import Button from "@material-ui/core/Button";
@@ -13,29 +14,15 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Pagination from "@material-ui/lab/Pagination";
 import Paper from "@material-ui/core/Paper";
+import { IoTrashBin } from "react-icons/io5";
 import { GoPlus } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
+import ReactBnbGallery from "react-bnb-gallery";
 import { LOGO_COLOR } from "../../constants/index";
-import CreateProduct from "../admin/CreateProduct";
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Jelly Bean", 375, 0.0, 94, 0.0),
-  createData("KitKat", 518, 26.0, 65, 7.0),
-  createData("Lollipop", 392, 0.2, 98, 0.0),
-  createData("Marshmallow", 318, 0, 81, 2.0),
-  createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0),
-];
+import { Link } from "react-router-dom";
+import adminApis from "../../apis/AdminApis";
+import alert from "../../utils/Alert";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,12 +55,9 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Dessert (100g serving)",
+    label: "Tên sản phẩm",
   },
-  { id: "calories", numeric: true, disablePadding: false, label: "Calories" },
-  { id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
-  { id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
-  { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" },
+  { id: "date", numeric: true, disablePadding: false, label: "Ngày tạo" },
 ];
 
 function EnhancedTableHead(props) {
@@ -85,8 +69,11 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <div className="text-center">STT</div>
+        <TableCell padding="checkbox" align="center">
+          <span>STT</span>
+        </TableCell>
+        <TableCell padding="normal" align="center">
+          <span>Hình ảnh</span>
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -109,6 +96,9 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell padding="normal" align="center">
+          <span>Tùy chỉnh</span>
+        </TableCell>
       </TableRow>
     </TableHead>
   );
@@ -116,9 +106,7 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -128,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     overflowX: "true",
+    padding: 20,
   },
   paper: {
     width: "100%",
@@ -153,11 +142,20 @@ export default function Product() {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("calories");
-  const [selected, setSelected] = useState([]);
-  const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [productList, setProductList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [search, setSearch] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoData, setPhotoData] = useState([]);
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    getAllProducts(page);
   }, []);
+
+  useEffect(() => {
+    searchProductByPageAndBarcode(1, search);
+  }, [search]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -165,52 +163,111 @@ export default function Product() {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
-      setSelected(newSelecteds);
+  const getAllProducts = async (page) => {
+    try {
+      const res = await adminApis.getAllProducts(page);
+      if (res.status === 200) {
+        setProductList([...res.data.product]);
+        setTotalPage(res.data.total_page);
+      } else {
+        setProductList([]);
+        setTotalPage(1);
+      }
+      setPage(page);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleDeleteRerender = (id) => {
+    let temp = productList;
+    let res = temp.filter((ele) => {
+      return ele._id !== id;
+    });
+    return res;
+  };
+
+  const searchProductByPageAndBarcode = async (page, value) => {
+    try {
+      if (!value) {
+        getAllProducts(1);
+        return;
+      }
+      const res = await adminApis.getProductByPageAndBarcode(page, value);
+      if (res.status === 200) {
+        setProductList([...res.data.products]);
+        setTotalPage(res.data.total_page);
+      } else {
+        setProductList([]);
+        setTotalPage(1);
+      }
+      setPage(page);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      const res = await adminApis.deleteProduct(id);
+      if (res.status === 200) {
+        alert({ icon: "success", title: "Đã xóa thành công" });
+        setProductList([...handleDeleteRerender(id)]);
+      } else {
+        alert({ icon: "error", title: "Đã có lỗi xảy ra" });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const openWidePhoto = (photo) => {
+    let array = [];
+    photo.forEach((item) => {
+      array.push(item.url);
+    });
+    setIsOpen(true);
+    setPhotoData(array);
+  };
+
+  const formatSingleDayMonth = (string) => {
+    let stringtemp = string.toString();
+    if (stringtemp.length < 2) {
+      const temp = "0" + stringtemp;
+      return temp;
+    }
+    return stringtemp;
+  };
+
+  const convertTime = (unformatTime) => {
+    let date = new Date(unformatTime);
+    const formatedTime =
+      formatSingleDayMonth(date.getDate()) +
+      " / " +
+      formatSingleDayMonth(date.getMonth() + 1) +
+      " / " +
+      date.getFullYear();
+    return formatedTime;
+  };
+
+  const pageChange = (event, page) => {
+    if (search) {
+      searchProductByPageAndBarcode(page, search);
       return;
     }
-    setSelected([]);
+    getAllProducts(page);
   };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
-  const createModalHandleOpen = () => {
-    setOpenCreateModal(true);
-  };
-
-  const createModalHandleClose = () => {
-    setOpenCreateModal(false);
-  };
-
-  const createModalHandleCloseAfterSave = () => {
-    createModalHandleClose();
-  };
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   return (
     <div className={classes.root}>
       <div className="row mb-2">
+        <ReactBnbGallery
+          opacity={0.8}
+          show={isOpen}
+          photos={photoData}
+          onClose={() => setIsOpen(false)}
+        />
         <h5>Danh sách sản phẩm</h5>
-
         <div className="row mb-2">
           <div className="col-lg-6 col-md-6 pt-2 pb-2">
             <TextField
@@ -223,22 +280,25 @@ export default function Product() {
                   </InputAdornment>
                 ),
               }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               variant="standard"
             />
           </div>
           <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-            <Button
-              style={{
-                backgroundColor: LOGO_COLOR,
-                color: "white",
-              }}
-              size="small"
-              onClick={createModalHandleOpen}
-              variant="contained"
-              startIcon={<GoPlus></GoPlus>}
-            >
-              Thêm danh mục
-            </Button>
+            <Link to="/admin/product/add-product">
+              <Button
+                style={{
+                  backgroundColor: LOGO_COLOR,
+                  color: "white",
+                }}
+                size="small"
+                variant="contained"
+                startIcon={<GoPlus></GoPlus>}
+              >
+                Thêm sản phẩm
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -253,31 +313,34 @@ export default function Product() {
           >
             <EnhancedTableHead
               classes={classes}
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={productList.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy)).map(
+              {stableSort(productList, getComparator(order, orderBy)).map(
                 (row, index) => {
-                  const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.name)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <div className="text-center">{index + 1}</div>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                      <TableCell padding="checkbox" align="center">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell padding="none" align="center">
+                        {row.image[0] ? (
+                          <div
+                            className="img-wrapper"
+                            onClick={() => openWidePhoto(row.image)}
+                          >
+                            <img alt="" src={row.image[0].url}></img>
+                          </div>
+                        ) : (
+                          <span className="img-broke-wrapper">
+                            Không có hình ảnh
+                          </span>
+                        )}
                       </TableCell>
                       <TableCell
                         component="th"
@@ -288,10 +351,29 @@ export default function Product() {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="center">{row.calories}</TableCell>
-                      <TableCell align="center">{row.fat}</TableCell>
-                      <TableCell align="center">{row.carbs}</TableCell>
-                      <TableCell align="center">{row.protein}</TableCell>
+                      <TableCell align="center">
+                        {convertTime(row.createdAt)}
+                      </TableCell>
+                      {/* <TableCell align="center">
+                        <span>{row.parameters.length} phân loại</span>
+                      </TableCell> */}
+                      <TableCell align="center">
+                        <Link to={`/admin/product/edit-product/${row._id}`}>
+                          <IconButton
+                            color="primary"
+                            aria-label="update category"
+                          >
+                            <FaRegEdit color={LOGO_COLOR} size={18} />
+                          </IconButton>
+                        </Link>
+
+                        <IconButton
+                          color="secondary"
+                          onClick={() => deleteProduct(row._id)}
+                        >
+                          <IoTrashBin size={18}></IoTrashBin>
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   );
                 }
@@ -299,8 +381,17 @@ export default function Product() {
             </TableBody>
           </Table>
         </TableContainer>
+        {productList.length === 0 && (
+          <div className="empty-data-text">Chưa có dữ liệu</div>
+        )}
         <div className="p-4 right-wrapper">
-          <Pagination count={10} variant="outlined" shape="rounded" />
+          <Pagination
+            count={totalPage}
+            page={page}
+            onChange={pageChange}
+            variant="outlined"
+            shape="rounded"
+          />
         </div>
       </Paper>
     </div>
