@@ -25,8 +25,6 @@ const ProductList = () => {
     setParentId(temp.get("parentId"));
   }, []);
 
-  
-
   const getProductData = async (page) => {
     try {
       console.log(page)
@@ -42,10 +40,12 @@ const ProductList = () => {
       console.log(e);
     }
   }
+
   const pageChange = (event, page) => {
     getProductData(page);
     setPage(page);
   };
+
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
@@ -58,8 +58,7 @@ const ProductList = () => {
             if(value._id===params.id){
               console.log(value.parent_cate)
               setProductId1(value.parent_cate)
-            }
-           
+            }           
      
             value.subCate.map((value, index) => {
               if(value._id===params.id){
@@ -77,6 +76,7 @@ const ProductList = () => {
     }
 
   };
+  
   const chuyenDoiURL=(str) =>{
     str = str.toLowerCase();     
 
@@ -104,10 +104,6 @@ const ProductList = () => {
     // return
     return str;
 }
-console.log(productList); 
-// console.log(productId1);
-// console.log(productCateId);
-
 
   return (
     <div className="all">
