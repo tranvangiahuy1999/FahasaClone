@@ -378,102 +378,102 @@ $(function () {
         }
     }
 
-    function displayCart() {
-        let cartItems = localStorage.getItem("productsInCart");
-        cartItems = JSON.parse(cartItems);
-        let cartContent = document.querySelector(".cart-content");
-        let cartCost = localStorage.getItem('totalCost');
-        let productNumbers = localStorage.getItem('cartNumbers');
+    // function displayCart() {
+    //     let cartItems = localStorage.getItem("productsInCart");
+    //     cartItems = JSON.parse(cartItems);
+    //     let cartContent = document.querySelector(".cart-content");
+    //     let cartCost = localStorage.getItem('totalCost');
+    //     let productNumbers = localStorage.getItem('cartNumbers');
 
-        if (cartItems == null) {
-            $(".cart-empty").removeClass("d-none");
-            $('.cart').addClass('d-none');
-            $('.cart-steps').addClass('d-none');
-        }
-        if (cartItems && cartContent) {
-            $(".cart-empty").addClass("d-none");
-            $('.cart').removeClass('d-none');
-            $('.cart-steps').removeClass('d-none');
+    //     if (cartItems == null) {
+    //         $(".cart-empty").removeClass("d-none");
+    //         $('.cart').addClass('d-none');
+    //         $('.cart-steps').addClass('d-none');
+    //     }
+    //     if (cartItems && cartContent) {
+    //         $(".cart-empty").addClass("d-none");
+    //         $('.cart').removeClass('d-none');
+    //         $('.cart-steps').removeClass('d-none');
 
-            cartContent.innerHTML = '';
+    //         cartContent.innerHTML = '';
 
-            cartContent.innerHTML += `
-            <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(${productNumbers} sản phẩm)</span></h6>
-            <div class="cart-list-items">
-            `
-            Object.values(cartItems).map(item => {
-                cartContent.innerHTML += `
-                    <div class="cart-item d-flex">
-                        <a href="product-item.html" class="img">
-                            <img src="images/${item.tag}.jpg" class="img-fluid" alt="${item.tag}">
-                        </a>
-                        <div class="item-caption d-flex w-100">
-                            <div class="item-info ml-3">
-                                <a href="product-item.html"style="font-size: 18px" class="ten">${item.name}</a>
-                                <button type="button" style="font-size: 11px" class="btn btn-outline-success">Tập 1</button>
-                                <div class="soluong d-flex">
-                                    <div class="input-number input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text btn-spin btn-dec">-</span>
-                                        </div>
-                                        <input type="text" value="${item.inCart}" class="soluongsp  text-center">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text btn-spin btn-inc">+</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-price ml-auto d-flex flex-column align-items-end">
-                                <div class="giamoi">${parseFloat(item.price).toFixed(3)} ₫</div>
-                                <div class="giacu">${parseFloat(item.old_price).toFixed(3)} ₫</div>
-                                <span class="remove mt-auto"><i class="far fa-trash-alt"></i></span>
+    //         cartContent.innerHTML += `
+    //         <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(${productNumbers} sản phẩm)</span></h6>
+    //         <div class="cart-list-items">
+    //         `
+    //         Object.values(cartItems).map(item => {
+    //             cartContent.innerHTML += `
+    //                 <div class="cart-item d-flex">
+    //                     <a href="product-item.html" class="img">
+    //                         <img src="images/${item.tag}.jpg" class="img-fluid" alt="${item.tag}">
+    //                     </a>
+    //                     <div class="item-caption d-flex w-100">
+    //                         <div class="item-info ml-3">
+    //                             <a href="product-item.html"style="font-size: 18px" class="ten">${item.name}</a>
+    //                             <button type="button" style="font-size: 11px" class="btn btn-outline-success">Tập 1</button>
+    //                             <div class="soluong d-flex">
+    //                                 <div class="input-number input-group mb-3">
+    //                                     <div class="input-group-prepend">
+    //                                         <span class="input-group-text btn-spin btn-dec">-</span>
+    //                                     </div>
+    //                                     <input type="text" value="${item.inCart}" class="soluongsp  text-center">
+    //                                     <div class="input-group-append">
+    //                                         <span class="input-group-text btn-spin btn-inc">+</span>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                         <div class="item-price ml-auto d-flex flex-column align-items-end">
+    //                             <div class="giamoi">${parseFloat(item.price).toFixed(3)} ₫</div>
+    //                             <div class="giacu">${parseFloat(item.old_price).toFixed(3)} ₫</div>
+    //                             <span class="remove mt-auto"><i class="far fa-trash-alt"></i></span>
                                 
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                `
-            })
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 <hr>
+    //             `
+    //         })
 
-            cartContent.innerHTML += `
-            </div>
+    //         cartContent.innerHTML += `
+    //         </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="index.html" class="btn nutmuathem mb-3">Mua thêm</a>
-                </div>
-                <div class="col-md-5 offset-md-4">
-                    <div class="tonggiatien">
-                        <div class="group d-flex justify-content-between">
-                            <p class="label">Tạm tính:</p>
-                            <p class="tamtinh">${parseFloat(cartCost).toFixed(3)} ₫</p>
-                        </div>
-                        <div class="group d-flex justify-content-between">
-                            <p class="label">Giảm giá:</p>
-                            <p class="giamgia">0 ₫</p>
-                        </div>
-                        <div class="group d-flex justify-content-between">
-                            <p class="label">Phí vận chuyển:</p>
-                            <p class="phivanchuyen">0 ₫</p>
-                        </div>
-                        <div class="group d-flex justify-content-between">
-                            <p class="label">Phí dịch vụ:</p>
-                            <p class="phidicvu">0 ₫</p>
-                        </div>
-                        <div class="group d-flex justify-content-between align-items-center">
-                            <strong class="text-uppercase">Tổng cộng:</strong>
-                            <p class="tongcong">${parseFloat(cartCost).toFixed(3)} ₫</p>
-                        </div>
-                        <small class="note d-flex justify-content-end text-muted">
-                            (Giá đã bao gồm VAT)
+    //         <div class="row">
+    //             <div class="col-md-3">
+    //                 <a href="index.html" class="btn nutmuathem mb-3">Mua thêm</a>
+    //             </div>
+    //             <div class="col-md-5 offset-md-4">
+    //                 <div class="tonggiatien">
+    //                     <div class="group d-flex justify-content-between">
+    //                         <p class="label">Tạm tính:</p>
+    //                         <p class="tamtinh">${parseFloat(cartCost).toFixed(3)} ₫</p>
+    //                     </div>
+    //                     <div class="group d-flex justify-content-between">
+    //                         <p class="label">Giảm giá:</p>
+    //                         <p class="giamgia">0 ₫</p>
+    //                     </div>
+    //                     <div class="group d-flex justify-content-between">
+    //                         <p class="label">Phí vận chuyển:</p>
+    //                         <p class="phivanchuyen">0 ₫</p>
+    //                     </div>
+    //                     <div class="group d-flex justify-content-between">
+    //                         <p class="label">Phí dịch vụ:</p>
+    //                         <p class="phidicvu">0 ₫</p>
+    //                     </div>
+    //                     <div class="group d-flex justify-content-between align-items-center">
+    //                         <strong class="text-uppercase">Tổng cộng:</strong>
+    //                         <p class="tongcong">${parseFloat(cartCost).toFixed(3)} ₫</p>
+    //                     </div>
+    //                     <small class="note d-flex justify-content-end text-muted">
+    //                         (Giá đã bao gồm VAT)
                       
-                    </div>
-                </div>
-            </div>
-            `
+    //                 </div>
+    //             </div>
+    //         </div>
+    //         `
             
-        }
-    }
+    //     }
+    // }
 
     $(".btn-checkout").click(function (e) {
         localStorage.clear();

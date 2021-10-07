@@ -309,7 +309,7 @@ console.log(productList);
 
                 <div className="thongtinsach1" style={{ background: 'white', border: 'none',height:'auto' }}>
                   <h1 style={{ fontSize: '19px', marginTop: '6px', marginLeft: '3px', fontWeight: 'bold' }}>Nhóm Sản Phẩm</h1>
-                  <h3 style={{ fontSize: '17px', marginLeft: '13px' }}>Tất Cả Sản Phẩm</h3>
+                  <h3 className="title" style={{ fontSize: '17px', marginLeft: '13px' }}>Tất Cả Sản Phẩm</h3>
                   <ul>
                     {
                       categoryList.length ? (
@@ -416,7 +416,7 @@ console.log(productList);
                     </div>
                   </div>
                 </div>
-                <div className="items" style={{marginLeft :'-2%'}}>
+                <div className="items" style={{marginLeft :'0%',width:'100%'}}>
                   <div className="row" style={{overflow:'hidden'}}>
                     {productList.map((value, index) => (
                     <div className="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
@@ -426,9 +426,9 @@ console.log(productList);
                       .filter((item, idx) => idx < 1)
                       .map((value, index) => (
                         
-                        <img className="card-img-top anh" src={value.url} alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_list" src={value.url} alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         )):
-                        <img className="card-img-top anh" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
+                        <img className="card-img-top anh img_list" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                         }
 
                         <div className="card-body noidungsp mt-3">

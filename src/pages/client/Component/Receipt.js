@@ -17,81 +17,82 @@ const  Receipt=()=> {
           <div className="cart-page bg-white"style={{background:'#F0F0F0'}}>
             <div className="row"style={{background:'#F0F0F0'}}>
               {/* giao diện giỏ hàng khi không có item  */}
-              <div className="col-12 cart-empty d-none">
-                <div className="py-3 pl-3">
+              {/* <div className="col-12 cart-empty d-none">
+                {/* <div className="py-3 pl-3">
                   <h6 className="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(0 sản phẩm)</span></h6>
                   <div className="cart-empty-content w-100 text-center justify-content-center">
                     <img src="images/shopping-cart-not-product.png" alt="shopping-cart-not-product" />
                     <p>Chưa có sản phẩm nào trong giở hàng của bạn</p>
                   
                   </div>
-                </div>
-              </div>
+                </div> 
+              </div> */}
               {/* giao diện giỏ hàng khi có hàng (phần comment màu xanh bên dưới là phần 2 sản phẩm trong giỏ hàng nhưng giờ đã demo bằng jquery) */}
               <div className="col-md-8 cart"style={{background:'white'}}>
                 <div className="cart-content py-3 pl-3">
-                  {/* <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(1 sản phẩm)</span></h6>
-                            <div class="cart-list-items">
-                                <div class="cart-item d-flex">
-                                    <a href="product-item.html" class="img">
-                                        <img src="images/anhsp1.jpg" class="img-fluid" alt="anhsp1">
-                                    </a>
-                                    <div class="item-caption d-flex w-100">
-                                        <div class="item-info ml-3">
-                                            <a href="product-item.html" class="ten">Lập kế hoạch kinh doanh hiệu quả</a>
-                                            <div class="soluong d-flex">
-                                                <div class="input-number input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text btn-spin btn-dec">-</span>
-                                                    </div>
-                                                    <input type="text" value="1" class="soluongsp  text-center">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text btn-spin btn-inc">+</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-price ml-auto d-flex flex-column align-items-end">
-                                            <div class="giamoi">111.200 ₫</div>
-                                            <div class="giacu">139.000 ₫</div>
-                                            <span class="remove mt-auto"><i class="far fa-trash-alt"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div> */}
-                  {/* <div class="row">
-                                <div class="col-md-3">
-                                    <a href="index.html" class="btn nutmuathem mb-3">Mua thêm</a>
-                                </div>
-                                <div class="col-md-5 offset-md-4">
-                                    <div class="tonggiatien">
-                                        <div class="group d-flex justify-content-between">
-                                            <p class="label">Tạm tính:</p>
-                                            <p class="tamtinh">328.000 ₫</p>
-                                        </div>
-                                        <div class="group d-flex justify-content-between">
-                                            <p class="label">Giảm giá:</p>
-                                            <p class="giamgia">0 ₫</p>
-                                        </div>
-                                        <div class="group d-flex justify-content-between">
-                                            <p class="label">Phí vận chuyển:</p>
-                                            <p class="phivanchuyen">0 ₫</p>
-                                        </div>
-                                        <div class="group d-flex justify-content-between">
-                                            <p class="label">Phí dịch vụ:</p>
-                                            <p class="phidicvu">0 ₫</p>
-                                        </div>
-                                        <div class="group d-flex justify-content-between align-items-center">
-                                            <strong class="text-uppercase">Tổng cộng:</strong>
-                                            <p class="tongcong">328.000 ₫</p>
-                                        </div>
-                                        <small class="note d-flex justify-content-end text-muted">
-                                            (Giá đã bao gồm VAT)
-                                        </small>
-                                    </div>
-                                </div>
-                            </div> */}
+                <h6 className="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(1 sản phẩm)</span></h6>
+        <div className="cart-list-items">
+          <div className="cart-item d-flex">
+            <a href="product-item.html" className="img">
+              <img src="images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" className="img-fluid" alt="anhsp1" />
+            </a>
+            <div className="item-caption d-flex w-100">
+              <div className="item-info ml-3">
+                <a href="product-item.html" className="ten">Lập kế hoạch kinh doanh hiệu quả</a>
+                <div className="soluong d-flex">
+                  <div className="input-number input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text btn-spin btn-dec">-</span>
+                    </div>
+                    <input style={{height:'88%'}} type="text" defaultValue={1} className="soluongsp  text-center" />
+                    <div className="input-group-append">
+                      <span className="input-group-text btn-spin btn-inc">+</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="item-price ml-auto d-flex flex-column align-items-end">
+                <div className="giamoi">111.200 ₫</div>
+                <div className="giacu">139.000 ₫</div>
+                <span className="remove mt-auto"><i className="far fa-trash-alt" /></span>
+              </div>
+            </div>
+          </div>
+          <hr />
+        </div> 
+        <div className="row">
+          <div className="col-md-3">
+            <a href="index.html" className="btn nutmuathem mb-3">Mua thêm</a>
+          </div>
+          <div className="col-md-5 offset-md-4">
+            <div className="tonggiatien">
+              <div className="group d-flex justify-content-between">
+                <p className="label">Tạm tính:</p>
+                <p className="tamtinh">328.000 ₫</p>
+              </div>
+              <div className="group d-flex justify-content-between">
+                <p className="label">Giảm giá:</p>
+                <p className="giamgia">0 ₫</p>
+              </div>
+              <div className="group d-flex justify-content-between">
+                <p className="label">Phí vận chuyển:</p>
+                <p className="phivanchuyen">0 ₫</p>
+              </div>
+              <div className="group d-flex justify-content-between">
+                <p className="label">Phí dịch vụ:</p>
+                <p className="phidicvu">0 ₫</p>
+              </div>
+              <div className="group d-flex justify-content-between align-items-center">
+                <strong className="text-uppercase">Tổng cộng:</strong>
+                <p className="tongcong">328.000 ₫</p>
+              </div>
+              <small className="note d-flex justify-content-end text-muted">
+                (Giá đã bao gồm VAT)
+              </small>
+            </div>
+          </div>
+        </div> 
+     
                 </div>
               </div>
               {/* giao diện phần thanh toán nằm bên phải  */}

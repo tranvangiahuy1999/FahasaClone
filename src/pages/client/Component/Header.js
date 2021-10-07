@@ -54,7 +54,7 @@ const Header = () => {
       <section className="duoinavbar" >
         <div className="container text-white"style={{background:'white',width:'81%'}}>
           <div className="row justify">
-            <div className="col-md-3"  style={{padding:'0%'}}>
+            <div className="col-md-12 col-lg-3"  style={{padding:'0%'}}>
               <div className="categoryheader">
                 <div className="noidungheader text-white">
                   <i className="fa fa-bars" id=" menuId" />
@@ -138,7 +138,7 @@ const Header = () => {
               </div>
             </div>
             {/* banner slider  */}
-            <div className="col-md-9 px-0" >
+            <div className="col-lg-9 col-md-12 px-0" >
               <div
                 id="carouselId"
                 className="carousel slide"

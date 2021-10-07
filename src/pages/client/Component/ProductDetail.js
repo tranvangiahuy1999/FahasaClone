@@ -53,8 +53,33 @@ const ProductDetail = () => {
       console.log(e);
     }
   }
+  const chuyenDoiURL=(str) =>{
+    str = str.toLowerCase();     
 
-
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+ 
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+ 
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+ 
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+ 
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+ 
+    // return
+    return str;
+}
   console.log(defaultPrice);
   return (
     <div style={{ with: '100%', overflow: 'hidden' }}>
@@ -202,7 +227,7 @@ const ProductDetail = () => {
 
                         <div className="danhsach" style={{ marginRight: '2px' }}>
 
-                          {value.parameters.map((value, index) => {
+                          {value.parameters.length >= 2 && value.parameters.map((value, index) => {
 
                             if (value._id === defaultPrice._id) {
                               return (
@@ -338,7 +363,7 @@ const ProductDetail = () => {
             </div>
             <div className="khoisanpham" style={{ paddingBottom: '5rem' }}>
               {/* 1 sản phẩm */}
-              <div className="card">
+              <div className="card" >
                 <a href="Lap-trinh-ke-hoach-kinh-doanh-hieu-qua.html" className="motsanpham" style={{ textDecoration: 'none', color: 'black' }} data-toggle="tooltip" data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                   <img className="card-img-top anh" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua" />
                   <div className="card-body noidungsp mt-3">

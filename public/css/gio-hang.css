@@ -787,6 +787,23 @@ button.receiptbtn {
         width: 100%!important;
 
     }
+    .card-body.noidungsp {
+       
+        width: 60%;
+    }
+    .thongtinsach1{
+        font-size: 12px;
+    }
+    .title{
+        font-size: 14px !important;
+    }
+    img.img_list {
+        position: relative;
+        top: 15px;
+        width: 55% !important;
+        height: auto !important;
+        transition: 0.3s;
+    }
     .new{
         margin-right: 0px !important;
     }
