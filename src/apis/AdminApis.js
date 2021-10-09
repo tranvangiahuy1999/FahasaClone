@@ -36,17 +36,18 @@ const adminApis = {
     const url = `/api/product/delete/${id}`;
     return axiosClient.delete(url);
   },
-
   getProductDetail(id) {
     const url = `/api/product/get/${id}`;
     return axiosClient.get(url);
   },
-
+  updateProduct(id, data) {
+    const url = `/api/product/update/${id}`;
+    return axiosClient.put(url, data);
+  },
   getListReceipt(page, in_proccess) {
     const url = `/api/receipt/search?page=${page}&in_process=${in_proccess}`;
     return axiosClient.get(url);
   },
-
   updateListReceipt(id, data) {
     const url = `/api/receipt/update/${id}`;
     return axiosClient.put(url, data);

@@ -13,6 +13,7 @@ import Fade from "@material-ui/core/Fade";
 import AdminApi from "../apis/AdminApis";
 import alert from "../utils/Alert";
 import { LOGO_COLOR, ICON_COLOR } from "../constants/index";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const CreateCategoryModal = (props) => {
   const classes = useStyles();
@@ -143,7 +144,14 @@ const CreateCategoryModal = (props) => {
                   type="submit"
                   disabled={submitStateBtn}
                 >
-                  Lưu
+                  {submitStateBtn ? (
+                    <CircularProgress
+                      size="1.6rem"
+                      style={{ color: "white" }}
+                    />
+                  ) : (
+                    "Lưu"
+                  )}
                 </Button>
               </FormGroup>
             </form>

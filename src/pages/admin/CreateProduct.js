@@ -24,6 +24,7 @@ import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { LOGO_COLOR, ICON_COLOR } from "../../constants/index";
 import { useHistory } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Product() {
   const classes = useStyles();
@@ -49,8 +50,8 @@ export default function Product() {
       key: "",
       value: "",
       price: 1000,
-      itemFile: null,
-      itemPreviewFile: null,
+      itemFile: "",
+      itemPreviewFile: "",
     },
   ]);
   const [submitStateBtn, setSubmitStateBtn] = useState(false);
@@ -109,7 +110,7 @@ export default function Product() {
 
     if (!files.length) return;
 
-    if (file.length === 5) {
+    if (file.length + files.length > 5) {
       alert({
         icon: "error",
         title: "Đã vượt quá số lượng ảnh",
@@ -176,8 +177,8 @@ export default function Product() {
       key: "",
       value: "",
       price: 1000,
-      itemFile: null,
-      itemPreviewFile: null,
+      itemFile: "",
+      itemPreviewFile: "",
     });
     setProducts([...temp]);
   };
@@ -278,21 +279,12 @@ export default function Product() {
     let parameter = [];
     for (let ele of data) {
       let entity = {};
-      if (ele.itemFile !== null) {
-        entity = {
-          bar_code: ele.key,
-          name: ele.value,
-          price: ele.price,
-          file: ele.itemFile,
-        };
-      } else {
-        entity = {
-          bar_code: ele.key,
-          name: ele.value,
-          price: ele.price,
-          file: "",
-        };
-      }
+      entity = {
+        bar_code: ele.key,
+        name: ele.value,
+        price: ele.price,
+        file: ele.itemFile,
+      };
       parameter.push(entity);
     }
     return parameter;
@@ -343,9 +335,9 @@ export default function Product() {
     try {
       const formData = await formatForm();
 
-      // for (var value of formData.values()) {
-      //   console.log(value);
-      // }
+      for (var value of formData.values()) {
+        console.log(value);
+      }
 
       const res = await adminApis.createProduct(formData);
       if (res.status === 200) {
@@ -745,13 +737,18 @@ export default function Product() {
                                   title: classes.title,
                                 }}
                                 actionIcon={
-                                  <IconButton
+                                  <Button
                                     onClick={() => handleRemoveMedia(index)}
+                                    style={{
+                                      fontSize: "0.6rem",
+                                      fontWeight: "bold",
+                                    }}
+                                    variant="contained"
+                                    type="button"
+                                    color="secondary"
                                   >
-                                    <AiOutlineCloseCircle
-                                      className={classes.title}
-                                    />
-                                  </IconButton>
+                                    Xóa
+                                  </Button>
                                 }
                               />
                             </ImageListItem>
@@ -795,7 +792,14 @@ export default function Product() {
                     color: "white",
                   }}
                 >
-                  Lưu sản phẩm
+                  {submitStateBtn ? (
+                    <CircularProgress
+                      size="1.6rem"
+                      style={{ color: "white" }}
+                    />
+                  ) : (
+                    "Lưu sản phẩm"
+                  )}
                 </Button>
               </div>
             </form>

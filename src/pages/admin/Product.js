@@ -22,6 +22,7 @@ import ReactBnbGallery from "react-bnb-gallery";
 import { LOGO_COLOR } from "../../constants/index";
 import { Link } from "react-router-dom";
 import adminApis from "../../apis/AdminApis";
+import ConfirmModal from "../../components/ConfirmModal";
 import alert from "../../utils/Alert";
 
 function descendingComparator(a, b, orderBy) {
@@ -148,6 +149,8 @@ export default function Product() {
   const [search, setSearch] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [photoData, setPhotoData] = useState([]);
+  const [actionItemId, setActionItemId] = useState();
+  const [confirmModalState, setConfirmModalState] = useState(false);
 
   useEffect(() => {
     getAllProducts(page);
@@ -216,6 +219,7 @@ export default function Product() {
       } else {
         alert({ icon: "error", title: "Đã có lỗi xảy ra" });
       }
+      setConfirmModalState(false);
     } catch (e) {
       console.log(e);
     }
@@ -258,6 +262,11 @@ export default function Product() {
     getAllProducts(page);
   };
 
+  const handleDeleteItem = (id) => {
+    setConfirmModalState(true);
+    setActionItemId(id);
+  };
+
   return (
     <div className={classes.root}>
       <div className="row mb-2">
@@ -267,6 +276,11 @@ export default function Product() {
           photos={photoData}
           onClose={() => setIsOpen(false)}
         />
+        <ConfirmModal
+          open={confirmModalState}
+          handleClose={() => setConfirmModalState(false)}
+          accept={() => deleteProduct(actionItemId)}
+        ></ConfirmModal>
         <h5>Danh sách sản phẩm</h5>
         <div className="row mb-2">
           <div className="col-lg-6 col-md-6 pt-2 pb-2">
@@ -354,9 +368,6 @@ export default function Product() {
                       <TableCell align="center">
                         {convertTime(row.createdAt)}
                       </TableCell>
-                      {/* <TableCell align="center">
-                        <span>{row.parameters.length} phân loại</span>
-                      </TableCell> */}
                       <TableCell align="center">
                         <Link to={`/admin/product/update-product/${row._id}`}>
                           <IconButton
@@ -367,11 +378,11 @@ export default function Product() {
                           </IconButton>
                         </Link>
 
-                        <IconButton
-                          color="secondary"
-                          onClick={() => deleteProduct(row._id)}
-                        >
-                          <IoTrashBin size={18}></IoTrashBin>
+                        <IconButton color="secondary">
+                          <IoTrashBin
+                            size={18}
+                            onClick={() => handleDeleteItem(row._id)}
+                          ></IoTrashBin>
                         </IconButton>
                       </TableCell>
                     </TableRow>

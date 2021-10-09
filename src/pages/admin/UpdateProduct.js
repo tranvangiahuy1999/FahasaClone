@@ -13,7 +13,7 @@ import Select from "@material-ui/core/Select";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
-import { AiOutlineCloseCircle, AiOutlineCloudUpload } from "react-icons/ai";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 
@@ -24,6 +24,7 @@ import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { LOGO_COLOR, ICON_COLOR } from "../../constants/index";
 import { useHistory, useParams } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function UpdateProduct() {
   let { id } = useParams();
@@ -45,9 +46,12 @@ export default function UpdateProduct() {
   const [specify, setSpecify] = useState([]);
   const [previewFile, setPreviewFile] = useState([]);
   const [file, setFile] = useState([]);
+  const [fileId, setFileId] = useState([]);
   const [products, setProducts] = useState([]);
   const [submitStateBtn, setSubmitStateBtn] = useState(false);
-  const [deletedImage, setDeletedImageList] = useState([]);
+  const [deletedImage, setDeletedImageList] = useState([""]);
+  const [checkFirstCate2Init, setCheckFirstCate2Init] = useState(true);
+  const [checkFirstCate3Init, setCheckFirstCate3Init] = useState(true);
 
   useEffect(() => {
     getCategoryLevel1();
@@ -55,18 +59,25 @@ export default function UpdateProduct() {
   }, []);
 
   useEffect(() => {
-    resetCategoryValue(1);
+    if (checkFirstCate2Init === false) {
+      resetCategoryValue(1);
+    }
     if (category[0] !== "null") {
       getCategoryLevel2WithParent(category[0]);
+      setCheckFirstCate2Init(false);
     } else {
       setCategoryList2([{ _id: "null", name: "Không có" }]);
     }
   }, [category[0]]);
 
   useEffect(() => {
-    resetCategoryValue(2);
+    if (checkFirstCate3Init === false) {
+      resetCategoryValue(2);
+    }
+
     if (category[1] !== "null") {
       getCategoryLevel3WithParent(category[1]);
+      setCheckFirstCate3Init(false);
     } else {
       setCategoryList3([{ _id: "null", name: "Không có" }]);
     }
@@ -79,6 +90,7 @@ export default function UpdateProduct() {
         if (res.data.length) {
           setName(res.data[0].name);
           setDesc(res.data[0].description);
+
           parseInitCate(
             res.data[0].cate1,
             res.data[0].cate2,
@@ -122,6 +134,8 @@ export default function UpdateProduct() {
         price: ele.price,
         itemFile: "",
         itemPreviewFile: ele.image,
+        itemUrl: ele.image,
+        imageId: ele.id_image,
       });
     });
     setProducts([...tempArr]);
@@ -145,13 +159,16 @@ export default function UpdateProduct() {
 
   const parseInitImage = (files) => {
     let tempFile = [];
+    let tempFileId = [];
     let tempPreviewFile = [];
     files.map((ele) => {
       tempFile.push("");
+      tempFileId.push(ele.id_image);
       tempPreviewFile.push(ele.url);
     });
 
     setFile([...tempFile]);
+    setFileId([...tempFileId]);
     setPreviewFile([...tempPreviewFile]);
   };
 
@@ -187,7 +204,7 @@ export default function UpdateProduct() {
 
     if (!files.length) return;
 
-    if (file.length === 5) {
+    if (file.length + files.length > 5) {
       alert({
         icon: "error",
         title: "Đã vượt quá số lượng ảnh",
@@ -232,6 +249,12 @@ export default function UpdateProduct() {
   };
 
   const handleRemoveMedia = (index) => {
+    if (file[index] === "") {
+      let temp = deletedImage;
+      temp.push(fileId[index]);
+      setDeletedImageList([...temp]);
+      setFileId(fileId.filter((_, i) => i !== index));
+    }
     setPreviewFile(previewFile.filter((_, i) => i !== index));
     setFile(file.filter((_, i) => i !== index));
   };
@@ -254,8 +277,10 @@ export default function UpdateProduct() {
       key: "",
       value: "",
       price: 1000,
-      itemFile: null,
-      itemPreviewFile: null,
+      itemFile: "",
+      itemPreviewFile: "",
+      itemUrl: "",
+      imageId: "",
     });
     setProducts([...temp]);
   };
@@ -356,21 +381,14 @@ export default function UpdateProduct() {
     let parameter = [];
     for (let ele of data) {
       let entity = {};
-      if (ele.itemFile !== null) {
-        entity = {
-          bar_code: ele.key,
-          name: ele.value,
-          price: ele.price,
-          file: ele.itemFile,
-        };
-      } else {
-        entity = {
-          bar_code: ele.key,
-          name: ele.value,
-          price: ele.price,
-          file: "",
-        };
-      }
+      entity = {
+        bar_code: ele.key,
+        name: ele.value,
+        price: ele.price,
+        file: ele.itemFile,
+        image: ele.itemUrl,
+        id_image: ele.imageId,
+      };
       parameter.push(entity);
     }
     return parameter;
@@ -382,14 +400,18 @@ export default function UpdateProduct() {
     const formdata = new FormData();
     formdata.append("name", name);
     formdata.append("description", desc);
+
     specify.forEach((ele, index) => {
       formdata.append(`details[${ele.key}]`, ele.value);
     });
+
     parameter.forEach((value, index) => {
       formdata.append(`parameter[${index}].bar_code`, value.bar_code);
       formdata.append(`parameter[${index}].name`, value.name);
       formdata.append(`parameter[${index}].price`, value.price);
       formdata.append(`parameter[${index}].file`, value.file);
+      formdata.append(`parameter[${index}].image`, value.image);
+      formdata.append(`parameter[${index}].id_image`, value.id_image);
     });
 
     category.forEach((value, index) => {
@@ -400,8 +422,14 @@ export default function UpdateProduct() {
       formdata.append(`cate${index + 1}`, temp);
     });
 
+    deletedImage.forEach((value) => {
+      formdata.append("delete_image", value);
+    });
+
     file.forEach((item) => {
-      formdata.append("file", item);
+      if (item) {
+        formdata.append("file", item);
+      }
     });
 
     return formdata;
@@ -421,11 +449,11 @@ export default function UpdateProduct() {
     try {
       const formData = await formatForm();
 
-      // for (var value of formData.values()) {
-      //   console.log(value);
-      // }
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
 
-      const res = await adminApis.createProduct(formData);
+      const res = await adminApis.updateProduct(id, formData);
       if (res.status === 200) {
         alert({
           icon: "success",
@@ -823,13 +851,18 @@ export default function UpdateProduct() {
                                   title: classes.title,
                                 }}
                                 actionIcon={
-                                  <IconButton
+                                  <Button
                                     onClick={() => handleRemoveMedia(index)}
+                                    style={{
+                                      fontSize: "0.6rem",
+                                      fontWeight: "bold",
+                                    }}
+                                    variant="contained"
+                                    type="button"
+                                    color="secondary"
                                   >
-                                    <AiOutlineCloseCircle
-                                      className={classes.title}
-                                    />
-                                  </IconButton>
+                                    Xóa
+                                  </Button>
                                 }
                               />
                             </ImageListItem>
@@ -873,7 +906,14 @@ export default function UpdateProduct() {
                     color: "white",
                   }}
                 >
-                  Lưu sản phẩm
+                  {submitStateBtn ? (
+                    <CircularProgress
+                      size="1.6rem"
+                      style={{ color: "white" }}
+                    />
+                  ) : (
+                    "Cập nhật sản phẩm"
+                  )}
                 </Button>
               </div>
             </form>

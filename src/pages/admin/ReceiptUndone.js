@@ -309,15 +309,9 @@ export default function ReceiptUndone() {
                               </div>
                               <div className="row">
                                 <div className="col-6 font-weight-bold">
-                                  Số điện thoại:
+                                  Mã đơn hàng:
                                 </div>
-                                <div className="col-6">{row.phone}</div>
-                              </div>
-                              <div className="row">
-                                <div className="col-6 font-weight-bold">
-                                  Địa chỉ:
-                                </div>
-                                <div className="col-6">{row.address}</div>
+                                <div className="col-6">{row.id_receipt}</div>
                               </div>
                               <div className="row">
                                 <div className="col-6 font-weight-bold">

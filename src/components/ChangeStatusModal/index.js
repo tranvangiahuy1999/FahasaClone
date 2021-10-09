@@ -11,6 +11,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { TextField, FormGroup } from "@material-ui/core";
 import { ICON_COLOR, LOGO_COLOR } from "../../constants/index";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ChangePasswordModal = (props) => {
   const classes = useStyles();
@@ -143,7 +144,14 @@ const ChangePasswordModal = (props) => {
                     backgroundColor: ICON_COLOR,
                   }}
                 >
-                  Cập nhật
+                  {btnState ? (
+                    <CircularProgress
+                      size="1.6rem"
+                      style={{ color: "white" }}
+                    />
+                  ) : (
+                    "Cập nhật"
+                  )}
                 </Button>
               </div>
             </div>
