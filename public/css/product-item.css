@@ -1213,7 +1213,7 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
 
 .card.list {
     border: none;
-    
+    width: 100%;
 }
 @media only screen and (max-width: 1024px){
     .ptthanhtoan{

@@ -13,6 +13,10 @@ const shopApis = {
     const url = `/api/product/get/${id}`;
     return axiosClient.get(url);
   },
+  getProductBySearch(page,name) {
+    const url = `/api/product/search?page=${page}&search=${name}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default shopApis;
