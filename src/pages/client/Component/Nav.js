@@ -1,6 +1,18 @@
-import React, { Component } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import Receipt from './Receipt';
+import Input from '@material-ui/core/Input';
+
 const Nav=()=> {
+  const [valueProduct, setValueProduct] = useState();
+
+  const inputChange = (e) => {
+    // prepare value
+    let { target: { name: fieldName, value } } = e;   
+     setValueProduct(value)
+    console.log("value", value);
+  };
+
         return (
             <nav className="navbar navbar-expand-md bg-white navbar-light">
         <div className="container">
@@ -12,12 +24,18 @@ const Nav=()=> {
             {/* form tìm kiếm  */}
             <form className="form-inline ml-auto my-2 my-lg-0 mr-3">
               <div className="input-group" style={{width: '630px'}}>
-                <input type="text" className="form-control" aria-label="Small" placeholder="Nhập sách cần tìm kiếm..." />
+                {/* <input type="text" className="form-control" aria-label="Small" value={valueProduct} placeholder="Nhập sách cần tìm kiếm..." /> */}
+                <Input    type="text"
+                          name="name"
+                          className="form-control" aria-label="Small"
+                          placeholder="Nhập sách cần tìm kiếm..."
+                          onChange={inputChange}
+                          value={valueProduct}/>
                 <div className="input-group-append">
-                  <button type="button" className="btn" style={{backgroundColor: '#64ae55', color: 'white'}}>
+                  <a type="button" className="btn" href={"/ket-qua/"+valueProduct} style={{backgroundColor: '#64ae55', color: 'white'}}>
                     <i className="fa fa-search" />
-                  </button>
-                  
+                  </a>
+                  {/* <ProductSearchList value={valueProduct}></ProductSearchList> */}
                 </div>
               </div>
             </form>

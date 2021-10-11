@@ -59,15 +59,17 @@ h6 {
     font-family: 'Lato', sans-serif;
 }
 
-p {
+/* p {
     margin: 0;
     letter-spacing: 1px;
     font-size: 15px;
     line-height: 1.9;
     color: #999;
     font-family: 'Open Sans', sans-serif;
+} */
+p{
+    margin-bottom: 0px !important;
 }
-
 ul {
     margin: 0;
     padding: 0;

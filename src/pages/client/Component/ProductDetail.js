@@ -211,13 +211,14 @@ const ProductDetail = () => {
               {/* ảnh  */}
               {productDetail.map((value, index) => (
                 <div className="col-md-6 khoianh">
-                  <div className="anhto mb-4">
+                  <div className="anhto mb-4" style={{marginLeft:'11%',width:'70%'}}>
                     <Carousel
                       NextIcon={<FcNext size={20} />}
                       PrevIcon={<FcPrevious size={20} />}
                     >
                       {value.image.map((value, index) => (
                         <CardMedia
+                        style={{width:'400px',height:'400px'}}
                           key={index}
                           component="img"
                           image={value.url}
@@ -257,7 +258,7 @@ const ProductDetail = () => {
                           className="danhsach"
                           style={{ marginRight: "2px" }}
                         >
-                          {value.parameters.map((value, index) => {
+                          {value.parameters.length >=2 && value.parameters.map((value, index) => {
                             if (value._id === defaultPrice._id) {
                               return (
                                 <button
