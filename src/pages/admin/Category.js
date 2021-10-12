@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
@@ -12,7 +13,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { GoPlus } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
@@ -21,34 +21,10 @@ import { LOGO_COLOR } from "../../constants/index";
 import CreateCategoryModal from "../../components/CreateCategoryModal";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { FaRegEdit } from "react-icons/fa";
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const headCells = [
   {
@@ -69,11 +45,6 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
   return (
     <TableHead>
       <TableRow>
@@ -85,20 +56,8 @@ function EnhancedTableHead(props) {
             key={headCell.id}
             align="center"
             padding={headCell.disablePadding ? "none" : "normal"}
-            sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </span>
-              ) : null}
-            </TableSortLabel>
+            {headCell.label}
           </TableCell>
         ))}
         <TableCell align="center" padding="normal">
@@ -126,12 +85,12 @@ export default function Category(props) {
   let query = useQuery();
   const cateList = useSelector((state) => state.admin);
   const classes = useStyles();
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("name");
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [categoryList, getCategoryList] = useState([]);
   const [parentId, setParentId] = useState();
   const [editCateData, setEditCateData] = useState();
+  const [updateBtnState, setUpdateBtnState] = useState(true);
+  const [updateBtnLoad, setUpdateBtnLoad] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -200,10 +159,45 @@ export default function Category(props) {
     return formatedTime;
   };
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    setUpdateBtnState(false);
+    const items = Array.from(categoryList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    getCategoryList([...items]);
+  };
+
+  const updateCategoryPosition = async () => {
+    try {
+      if (!categoryList.length) return;
+
+      const reqArray = formatUpdateCategoryData(categoryList);
+      const reqData = { cateList: reqArray };
+      setUpdateBtnState(true);
+      setUpdateBtnLoad(true);
+      const res = await adminApis.updateCategoryPosition(reqData);
+      if (res.status === 200) {
+        alert({
+          icon: "success",
+          title: "Cập nhật thứ tự danh mục thành công",
+        });
+      } else {
+        alert({ icon: "error", title: "Cập nhật thứ tự danh mục thất bại" });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    setUpdateBtnLoad(false);
+    setUpdateBtnState(false);
+  };
+
+  const formatUpdateCategoryData = (array) => {
+    let temp = [];
+    array.map((value) => {
+      temp.push(value._id);
+    });
+    return temp;
   };
 
   return (
@@ -261,19 +255,39 @@ export default function Category(props) {
             variant="standard"
           />
         </div>
-        <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-          <Button
-            style={{
-              backgroundColor: LOGO_COLOR,
-              color: "white",
-            }}
-            size="small"
-            onClick={createModalHandleOpen}
-            variant="contained"
-            startIcon={<GoPlus></GoPlus>}
-          >
-            Thêm danh mục
-          </Button>
+        <div className="col-lg-6 col-md-6 pt-2 pb-2 row ">
+          <div className="col-6 right-wrapper">
+            <Button
+              style={{
+                color: "white",
+                backgroundColor: updateBtnState ? "lightgray" : LOGO_COLOR,
+              }}
+              disabled={updateBtnState}
+              size="small"
+              onClick={updateCategoryPosition}
+              variant="contained"
+            >
+              {updateBtnLoad ? (
+                <CircularProgress size="1.6rem" style={{ color: "white" }} />
+              ) : (
+                "Cập nhật thứ tự"
+              )}
+            </Button>
+          </div>
+          <div className="col-6 right-wrapper">
+            <Button
+              style={{
+                backgroundColor: LOGO_COLOR,
+                color: "white",
+              }}
+              size="small"
+              onClick={createModalHandleOpen}
+              variant="contained"
+              startIcon={<GoPlus></GoPlus>}
+            >
+              Thêm danh mục
+            </Button>
+          </div>
         </div>
       </div>
       <Paper className={classes.paper}>
@@ -286,79 +300,96 @@ export default function Category(props) {
           >
             <EnhancedTableHead
               classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
               rowCount={categoryList.length}
             />
-            {categoryList.length ? (
-              <TableBody>
-                {stableSort(categoryList, getComparator(order, orderBy)).map(
-                  (row, index) => {
-                    const labelId = `enhanced-table-checkbox-${index}`;
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+              <Droppable droppableId="characters">
+                {(provided) => (
+                  <TableBody
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {categoryList.length ? (
+                      categoryList.map((row, index) => {
+                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.name}
-                      >
-                        <TableCell padding="checkbox" align="center">
-                          {index + 1}
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
-                          align="center"
-                        >
-                          {row.level === 3 ? (
-                            <span>{row.name}</span>
-                          ) : (
-                            <Link
-                              to={
-                                parentId
-                                  ? `/admin/category/${row._id}?parentId=${parentId}`
-                                  : `/admin/category/${row._id}?parentId=${row._id}`
-                              }
-                            >
-                              {row.name}
-                            </Link>
-                          )}
-                        </TableCell>
-                        <TableCell align="center">{row.level}</TableCell>
-                        <TableCell align="center">
-                          {convertTime(row.createdAt)}
-                        </TableCell>
-                        <TableCell align="center">
-                          <span>{row.subCate.length} danh mục</span>
-                        </TableCell>
-                        <TableCell align="center">
-                          {row.active ? (
-                            <span>Đang được bày bán</span>
-                          ) : (
-                            <span>Không được bày bán</span>
-                          )}
-                        </TableCell>
-                        <TableCell align="center">
-                          <IconButton
-                            color="primary"
-                            aria-label="update category"
-                            onClick={() => editModalHandleOpen(row)}
+                        return (
+                          <Draggable
+                            key={row._id}
+                            draggableId={row._id}
+                            index={index}
                           >
-                            <FaRegEdit color={LOGO_COLOR} size={18} />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  }
+                            {(provided) => (
+                              <TableRow
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                ref={provided.innerRef}
+                                hover
+                                role="checkbox"
+                                tabIndex={-1}
+                              >
+                                <TableCell padding="checkbox" align="center">
+                                  {index + 1}
+                                </TableCell>
+                                <TableCell
+                                  component="th"
+                                  id={labelId}
+                                  scope="row"
+                                  padding="none"
+                                  align="center"
+                                >
+                                  {row.level === 3 ? (
+                                    <span>{row.name}</span>
+                                  ) : (
+                                    <Link
+                                      to={
+                                        parentId
+                                          ? `/admin/category/${row._id}?parentId=${parentId}`
+                                          : `/admin/category/${row._id}?parentId=${row._id}`
+                                      }
+                                    >
+                                      {row.name}
+                                    </Link>
+                                  )}
+                                </TableCell>
+                                <TableCell align="center">
+                                  {row.level}
+                                </TableCell>
+                                <TableCell align="center">
+                                  {convertTime(row.createdAt)}
+                                </TableCell>
+                                <TableCell align="center">
+                                  <span>{row.subCate.length} danh mục</span>
+                                </TableCell>
+                                <TableCell align="center">
+                                  {row.active ? (
+                                    <span>Đang được bày bán</span>
+                                  ) : (
+                                    <span>Không được bày bán</span>
+                                  )}
+                                </TableCell>
+                                <TableCell align="center">
+                                  <IconButton
+                                    color="primary"
+                                    aria-label="update category"
+                                    onClick={() => editModalHandleOpen(row)}
+                                  >
+                                    <FaRegEdit color={LOGO_COLOR} size={18} />
+                                  </IconButton>
+                                </TableCell>
+                              </TableRow>
+                            )}
+                          </Draggable>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
+                    {provided.placeholder}
+                  </TableBody>
                 )}
-              </TableBody>
-            ) : (
-              <></>
-            )}
+              </Droppable>
+            </DragDropContext>
           </Table>
         </TableContainer>
         {categoryList.length === 0 && (
