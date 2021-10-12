@@ -1,32 +1,31 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
-    
+    font-family: 'Sora', sans-serif;
 }
 
 /* css cho navbar  */
-body,html{
-    background-color: #F8F9FA;
+body,
+html {
+    background-color: #f8f9fa;
 }
 
-.navbar-nav li .nav-link{
-   font-size: 13px;
-   padding-top: 17px;
-   font-weight: 400;
+.navbar-nav li .nav-link {
+    font-size: 13px;
+    padding-top: 17px;
+    font-weight: 400;
 }
 
 .navbar input.form-control {
-    border: 2px solid #64ae55!important;
-    
+    border: 2px solid #b3dee2 !important;
 }
 
-li.nav-item a{
+li.nav-item a {
     transition: 0.2s;
 }
 
 li.nav-item:hover a {
-    color: #F5A623!important;
+    color: #f5a623 !important;
 }
 
 a.nav-link {
@@ -37,14 +36,16 @@ a.navbar-brand {
     font-size: 34px;
 }
 
-li.nav-item.account {margin-right: 0.5rem;}
+li.nav-item.account {
+    margin-right: 0.5rem;
+}
 
 a.nav-link {
     margin-left: -0.5rem;
 }
 
-.navbar-expand-md .navbar-nav .nav-link.giohang{
-    padding-right: 0!important;
+.navbar-expand-md .navbar-nav .nav-link.giohang {
+    padding-right: 0 !important;
 }
 
 i.fa.fa-shopping-cart {
@@ -60,11 +61,11 @@ a.btn.btn-secondary.rounded-circle {
     border: #cacaca;
 }
 
-.cart-amount{
+.cart-amount {
     height: 18px;
     width: 18px;
     border-radius: 50%;
-    background: #F5A623;
+    background: #f5a623;
     font-size: 12px;
     position: relative;
     left: 19px;
@@ -72,7 +73,7 @@ a.btn.btn-secondary.rounded-circle {
     transition: 0.2s;
 }
 
-.nav-item.giohang:hover .cart-amount{
+.nav-item.giohang:hover .cart-amount {
     background: #64ae55;
     color: white;
 }
@@ -83,7 +84,7 @@ a.btn.btn-secondary.rounded-circle {
 }
 
 a.dropdown-item {
-    background: #F5A623;
+    background: #f5a623;
     border-radius: 4px;
     font-size: 14px;
     color: white;
@@ -91,27 +92,27 @@ a.dropdown-item {
 }
 
 a.dropdown-item:hover {
-    background: #F5A623;
+    background: #f5a623;
     color: white;
-    box-shadow: 0px 2px 5px #F5A623;
+    box-shadow: 0px 2px 5px #f5a623;
 }
 
-.navbar-nav .nav-item.active a{
-    color: #F5A623;
+.navbar-nav .nav-item.active a {
+    color: #f5a623;
 }
 
-.nutcuonlen{
+.nutcuonlen {
     visibility: hidden;
     opacity: 0;
     transition: 0.5s;
 }
 
-.nutcuonlen.hienthi{
+.nutcuonlen.hienthi {
     visibility: visible;
     opacity: 1;
 }
 
-.navbar.fixed-top{
+.navbar.fixed-top {
     box-shadow: 0px 5px 20px grey;
 }
 /* het css cho navbar  */
@@ -128,18 +129,26 @@ ul.tabs li.tab a {
 }
 
 ul.tabs li:hover a {
-    color: #F5A623;
+    color: #f5a623;
 }
 
-ul.tabs li:hover{
+ul.tabs li:hover {
     cursor: pointer;
 }
 
-ul.tabs li hr {position: relative;width: 50%;top: 0px;left: 25%;visibility: hidden;border-top: 2px solid #F5A623;transition: 0.2s;}
+ul.tabs li hr {
+    position: relative;
+    width: 50%;
+    top: 0px;
+    left: 25%;
+    visibility: hidden;
+    border-top: 2px solid #f5a623;
+    transition: 0.2s;
+}
 
 ul.tabs li:hover hr {
     visibility: visible;
-    border-top: 2px solid #F5A623;
+    border-top: 2px solid #f5a623;
     width: 100%;
     left: 0;
 }
@@ -154,12 +163,12 @@ ul.tabs li {
     height: 100%;
 }
 
-ul.tabs li.active a{
-    color: #F5A623;
+ul.tabs li.active a {
+    color: #f5a623;
 }
 ul.tabs li.active hr {
     visibility: visible;
-    border-top: 2px solid #F5A623;
+    border-top: 2px solid #f5a623;
     width: 100%;
     left: 0;
 }
@@ -168,16 +177,16 @@ ul.tabs li.active hr {
 /* css cho formdangnhap dangky*/
 .form-signin {
     width: 100%;
-  }
-  
+}
+
 .form-signin .btn {
     font-size: 80%;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     font-weight: bold;
     padding: 1rem;
     transition: all 0.2s;
 }
-  
+
 .form-label-group {
     position: relative;
     margin-bottom: 1rem;
@@ -187,7 +196,7 @@ ul.tabs li.active hr {
     color: white;
     background-color: #ea4335;
 }
-  
+
 .btn-facebook {
     color: white;
     background-color: #3b5998;
@@ -199,9 +208,8 @@ ul.tabs li.active hr {
 }
 
 .btn-signin:hover {
-    color: black!important;
+    color: black !important;
 }
-
 
 #formdangky .form-signin p {
     margin-bottom: 3px;
@@ -215,20 +223,18 @@ ul.tabs li.active hr {
 
 label.error {
     display: inline-block;
-    color:red;
+    color: red;
     width: 300px;
-    
-    margin-top:5px;
+
+    margin-top: 5px;
     margin-bottom: 0;
     font-size: 13px;
 }
 
 /* het css cho form dang nhap dangky */
 
-
-
 /* .duoinavbar  */
-.duoinavbar{
+.duoinavbar {
     background-color: #fdfefd;
 }
 
@@ -245,7 +251,7 @@ label.error {
 .categoryheader {
     height: 40px;
     width: 100%;
-    background-color: 	#006400;
+    background-color: #218338;
 }
 
 .duoinavbar .container .row {
@@ -256,28 +262,28 @@ label.error {
     height: 40px;
 }
 
-.hotline{
+.hotline {
     display: inline-block;
     position: relative;
     margin-right: 11px;
 }
 
-.hotline:after{
-    content:"|";
+.hotline:after {
+    content: "|";
     position: absolute;
-    color:white;
+    color: white;
     top: -1px;
     right: -10px;
     font-size: 22px;
 }
 
-.benphai a{
+.benphai a {
     color: white;
 }
 /* het css .duoinavbar  */
 
 /* css category  */
-.categorycontent{
+.categorycontent {
     border: 1px solid #b4b2b2;
     box-sizing: border-box;
     height: 100%;
@@ -285,42 +291,42 @@ label.error {
     text-align: left;
 }
 
-.categorycontent ul{
+.categorycontent ul {
     list-style: none;
     padding-left: 0px;
     background: white;
 }
 
-.categorycontent > ul > li:hover{
-    background-color: #64ae55;
+.categorycontent > ul > li:hover {
+    background-color: #bee3db;
     cursor: pointer;
 }
 
-.categorycontent > ul > li:hover > a{
-    color:white;
+.categorycontent > ul > li:hover > a {
+    color: white;
 }
 
-.categorycontent ul li:hover i.fa.fa-chevron-right{
-    color:white;
+.categorycontent ul li:hover i.fa.fa-chevron-right {
+    color: white;
 }
 
-.categorycontent > ul > li{
+.categorycontent > ul > li {
     border-bottom: 1px solid #f8e1e1;
     height: 35px;
 }
 
-.categorycontent > ul > li:last-child{
-    border-bottom: none
+.categorycontent > ul > li:last-child {
+    border-bottom: none;
 }
 
-.categorycontent  ul  li  a{
+.categorycontent ul li a {
     line-height: 35px;
     padding-left: 16px;
     font-weight: 400;
     font-size: 13px;
 }
 
-.categorycontent ul li ul{
+.categorycontent ul li ul {
     display: none;
     height: 387px;
     width: 305%;
@@ -334,11 +340,11 @@ label.error {
     background-color: white;
 }
 
-.categorycontent ul li ul:hover{
+.categorycontent ul li ul:hover {
     cursor: auto;
 }
 
-.categorycontent ul li a.tieude{
+.categorycontent ul li a.tieude {
     text-decoration: none;
     color: black;
     font-weight: 400;
@@ -353,7 +359,7 @@ label.error {
     -webkit-box-orient: vertical;
     transition: 0.3s;
 }
-.categorycontent ul li a{
+.categorycontent ul li a {
     text-decoration: none;
     color: black;
     font-weight: 400;
@@ -362,68 +368,64 @@ label.error {
     height: 35px;
 }
 
-.categorycontent ul li:hover ul{
-    display:block;
-
+.categorycontent ul li:hover ul {
+    display: block;
 }
 
-ul i.fa.fa-chevron-right.icon{
-    font-size: 10px ;
+ul i.fa.fa-chevron-right.icon {
+    font-size: 10px;
     color: #d1d1d1;
-    line-height: 10px!important;
+    line-height: 10px !important;
     padding-right: 20px;
 }
 /* het css category  */
 
 /* danhmucan */
 
-.categorycontent ul li ul li:first-child{
+.categorycontent ul li ul li:first-child {
     margin-top: 3px;
 }
 
-.categorycontent ul li ul li.liheader{
+.categorycontent ul li ul li.liheader {
     margin-top: 16px;
     margin-left: 0%;
     text-align: left;
 }
-.categorycontent ul li ul li.liheader1{
+.categorycontent ul li ul li.liheader1 {
     margin-top: 10px !important;
     margin-left: 16px;
 }
-ul li a.header{
+ul li a.header {
     font-size: 15px;
     padding-left: 33px;
     color: #64ae55;
 }
 
-.categorycontent ul li ul .content{
-    float:left;
+.categorycontent ul li ul .content {
+    float: left;
     margin-left: 20px;
     width: 342px;
     height: 265px;
     text-align: left;
 }
 
-
-.categorycontent ul li ul .content.phai{
+.categorycontent ul li ul .content.phai {
     margin-left: 20px;
 }
 
-
-.categorycontent ul li ul .content li a:hover{
-    color: #F5A623;
+.categorycontent ul li ul .content li a:hover {
+    color: #f5a623;
 }
 /* danhmucan */
 
 /* css cho carousel */
-.nutcarousel.carousel-indicators li{
-        height: 8px;
-        width: 8px;
-        border-radius: 50%;
+.nutcarousel.carousel-indicators li {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
 }
 
 /* het css cho carousel */
-
 
 /* css cho _1khoi */
 
@@ -447,9 +449,9 @@ ul li a.header{
 a.btn.btn-warning.btn-sm.text-white {
     height: 25px;
     width: 77px;
-    background: #F5A623;
+    background: #df9927;
     font-size: 11px;
-} 
+}
 /* het css cho nut xem tat ca  */
 
 .card:hover .anh {
@@ -466,7 +468,7 @@ ul span.text-muted {
     font-size: 11px;
     padding-top: 6px;
     padding-left: 12px;
-    color: #919191!important;
+    color: #919191 !important;
 }
 
 i.fa.fa-star {
@@ -475,23 +477,23 @@ i.fa.fa-star {
 }
 
 li.active .fa-star {
-    color: #F5A623;
+    color: #f5a623;
 }
 
 .sale {
-    background: #F5A623;
+    background: #f5a623;
     border-radius: 6px;
-    font-size: 11px;color: white;
+    font-size: 11px;
+    color: white;
     padding: 1px 4px;
     position: absolute;
-    right: 0
-    ;
+    right: 0;
     top: 2px;
 }
 
 .giacu.text-muted {
     font-size: 13px;
-    color: #919191!important;
+    color: #919191 !important;
 }
 
 .giamoi {
@@ -538,13 +540,13 @@ h3.card-title.ten {
 }
 
 .card:hover .ten {
-    color: #F5A623;
+    color: #f5a623;
 }
 
 /* het css cho _1khoi  */
 
 /* css cho margin slick */
-.card{
+.card {
     margin: 0 10px;
 }
 
@@ -555,7 +557,7 @@ h3.card-title.ten {
 li.breadcrumb-item {
     margin-top: -24px;
 }
-                        /* ////xu li css */
+/* ////xu li css */
 .phu {
     margin-bottom: 3px;
     font-size: 16px;
@@ -572,15 +574,14 @@ li.breadcrumb-item {
 /* css cho 1 khoi san pham - slick */
 
 /* css rieng cho phan combo phat hanh - card-border*/
-.combohot .card{
+.combohot .card {
     border: none;
 }
 
-.sapphathanh .card{
+.sapphathanh .card {
     border: none;
 }
 /* het css cho phan combo  */
-
 
 /* css cho khoi sach nen doc  */
 .sachnendoc .card-body.noidungsp.mt-3 {
@@ -590,10 +591,13 @@ li.breadcrumb-item {
 .sachnendoc a.detail {
     font-size: 13px;
     text-decoration: none;
-    color: #F5A623;
+    color: #f5a623;
 }
 
-.sachnendoc .thoigian {display: inline-block;padding-top: 7px;}
+.sachnendoc .thoigian {
+    display: inline-block;
+    padding-top: 7px;
+}
 
 .sachnendoc h3.card-title.ten {
     margin-top: -12px;
@@ -610,7 +614,11 @@ li.breadcrumb-item {
     border: none;
 }
 
-hr {margin-bottom: 0;position: relative;top: -16px;}
+hr {
+    margin-bottom: 0;
+    position: relative;
+    top: -16px;
+}
 
 .sachnendoc .col-lg {
     padding-bottom: 30px;
@@ -660,7 +668,7 @@ footer .row a {
 }
 
 footer .row a:hover {
-    color:  #F5A623;
+    color: #f5a623;
 }
 
 footer .header {
@@ -669,14 +677,13 @@ footer .header {
 }
 /* het css cho footer  */
 
-.details{
+.details {
     margin-top: -10%;
     margin-left: 20%;
 }
-@media (max-width:767px){
-    .navbar form .input-group{
-        width: 100%!important;
-
+@media (max-width: 767px) {
+    .navbar form .input-group {
+        width: 100% !important;
     }
     .danhsach {
         margin-top: 20%;
@@ -688,43 +695,40 @@ footer .header {
     div#parentHorizontalTab {
         padding-bottom: 15%;
     }
- 
-    .mobileNewbook{
+
+    .mobileNewbook {
         margin-left: 35px !important;
     }
-    .navbar ul li a.nav-link{
-        margin-left:0.25rem!important;
+    .navbar ul li a.nav-link {
+        margin-left: 0.25rem !important;
     }
 
-    .navbar ul li.account{
-        border-top: 1px dashed #CF111A;
-        border-bottom: 1px dashed #CF111A;
+    .navbar ul li.account {
+        border-top: 1px dashed #cf111a;
+        border-bottom: 1px dashed #cf111a;
         padding-bottom: 0.5rem;
         margin-bottom: 0.25rem;
     }
-    .navbar ul li.giohang{
-        border-bottom: 1px dashed #CF111A;
+    .navbar ul li.giohang {
+        border-bottom: 1px dashed #cf111a;
         padding-bottom: 0.5rem;
-        margin-right:8px;
+        margin-right: 8px;
     }
-    .categorycontent{
+    .categorycontent {
         display: block;
     }
-    ul i.fa.fa-chevron-right.icon{
+    ul i.fa.fa-chevron-right.icon {
         display: none;
     }
-    ul.categorydetail{
+    ul.categorydetail {
         display: none !important;
     }
-    .categoryheader{
+    .categoryheader {
         width: 100%;
         margin-top: 0%;
         margin-left: 10px;
     }
 }
-
-
-
 
 .privacy.py-sm-5.py-4 {
     margin-top: -2%;
@@ -807,62 +811,61 @@ a.btn.nutmuathem.mb-3:hover {
     margin-top: 10px;
     margin-right: 3px;
 }
-@media only screen and (min-width:769px) and (max-width: 1024px){
-
-    .header.container-header{
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .header.container-header {
         width: 100%;
         background-color: #006400;
         padding: 0;
         overflow: hidden;
     }
- 
-    .header.container-header .container{
+
+    .header.container-header .container {
         max-width: 100%;
         width: 100%;
         padding: 0;
     }
-    .carousel-inner{
+    .carousel-inner {
         max-height: 45vh;
         margin-left: 0px !important;
     }
-    .mobileNewbook{
+    .mobileNewbook {
         margin-left: 70px !important;
     }
- 
-    li.nav-item.giohang{
-        padding-left: 0!important;
+
+    li.nav-item.giohang {
+        padding-left: 0 !important;
         width: 100%;
         display: flex;
         justify-content: start;
         align-items: center;
     }
-    a.btn.btn-secondary.rounded-circle{
+    a.btn.btn-secondary.rounded-circle {
         display: block;
         width: 45px;
     }
-    .flex-mid{
+    .flex-mid {
         display: flex;
         align-items: center;
     }
 }
 /* mobile */
-@media only screen and (max-width:740px){
-    .navbar form .input-group{
-        width: 100%!important;
+@media only screen and (max-width: 740px) {
+    .navbar form .input-group {
+        width: 100% !important;
     }
-    .index_footer{
-        width: 100% !important; 
+    .index_footer {
+        width: 100% !important;
     }
-    .thongtinsach1{
-        width: 106% ;
+    .thongtinsach1 {
+        width: 106%;
         margin-left: -40px;
         margin-bottom: 50px;
     }
-    .col-md-9.col-xs-12{
+    .col-md-9.col-xs-12 {
         margin-left: -30px;
         width: 100%;
     }
-    .breadcrumbbar{
+    .breadcrumbbar {
         margin-left: -115px !important;
     }
     .ptthanhtoan a img {
@@ -870,45 +873,46 @@ a.btn.nutmuathem.mb-3:hover {
         margin-top: 0px !important;
         margin-left: -7% !important;
     }
-    .navbar ul li a.nav-link{
-        margin-left:0.25rem!important;
+    .navbar ul li a.nav-link {
+        margin-left: 0.25rem !important;
     }
-    .carousel-inner{
+    .carousel-inner {
         max-height: 35vh; /* Them vao */
     }
-    .card.list{ /* Thêm vào */
+    .card.list {
+        /* Thêm vào */
         justify-content: center;
         width: 100%;
     }
-    .navbar ul li.account{
-        border-top: 1px dashed #CF111A;
-        border-bottom: 1px dashed #CF111A;
+    .navbar ul li.account {
+        border-top: 1px dashed #cf111a;
+        border-bottom: 1px dashed #cf111a;
         padding-bottom: 0.5rem;
         margin-bottom: 0.25rem;
     }
-    .navbar ul li.giohang{
-        border-bottom: 1px dashed #CF111A;
+    .navbar ul li.giohang {
+        border-bottom: 1px dashed #cf111a;
         padding-bottom: 0.5rem;
-        margin-right:8px;
+        margin-right: 8px;
     }
-    .duoinavbar{
+    .duoinavbar {
         display: block;
         margin-left: -20px !important;
     }
-    .categorycontent{
+    .categorycontent {
         display: none;
     }
-    ul i.fa.fa-chevron-right.icon{
+    ul i.fa.fa-chevron-right.icon {
         display: none;
     }
-    ul.categorydetail{
+    ul.categorydetail {
         display: none !important;
     }
-    .carousel-inner{
+    .carousel-inner {
         margin-left: -65px;
         width: 115% !important;
     }
-    .carousel{
+    .carousel {
         padding: 0;
     }
-}   
+}
