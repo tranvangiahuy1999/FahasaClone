@@ -911,4 +911,16 @@ a.btn.nutmuathem.mb-3:hover {
     .carousel{
         padding: 0;
     }
-}   
+}  
+
+
+
+
+button.element.btn.btn-outline-success {
+    margin-top: 12%;
+    font-size: 15px;
+    width: 75px;
+    height: 32px;
+    margin-left: -21%;
+    margin-bottom: 2%;
+}
