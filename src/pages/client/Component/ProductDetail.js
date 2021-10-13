@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
-import Footer from "./Footer";
-import Header from "./Header";
 import { FcNext, FcPrevious } from "react-icons/fc";
 import shopApis from "../../../apis/ShopApis";
-import { useParams, useLocation } from "react-router";
+import { useParams } from "react-router";
 import Carousel from "react-material-ui-carousel";
 import CardMedia from "@material-ui/core/CardMedia";
+
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+];
+
 const ProductDetail = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [productDetail, setProductDeatil] = useState([]);
@@ -62,7 +79,6 @@ const ProductDetail = () => {
       const res = await shopApis.getProductDetail(params.id);
       console.log(res);
       if (res.status === 200) {
-        // setProductList(res.data.product)
         console.log(res.data);
         res.data.map((value, index) => {
           setDefaultPrice({
@@ -77,7 +93,6 @@ const ProductDetail = () => {
     }
   };
 
-  console.log(defaultPrice);
   return (
     <div style={{ with: "100%", overflow: "hidden" }}>
       <Nav />
@@ -211,14 +226,17 @@ const ProductDetail = () => {
               {/* ảnh  */}
               {productDetail.map((value, index) => (
                 <div className="col-md-6 khoianh">
-                  <div className="anhto mb-4" style={{marginLeft:'11%',width:'70%'}}>
+                  <div
+                    className="anhto mb-4"
+                    style={{ marginLeft: "11%", width: "70%" }}
+                  >
                     <Carousel
                       NextIcon={<FcNext size={20} />}
                       PrevIcon={<FcPrevious size={20} />}
                     >
                       {value.image.map((value, index) => (
                         <CardMedia
-                        style={{width:'400px',height:'400px'}}
+                          style={{ width: "400px", height: "400px" }}
                           key={index}
                           component="img"
                           image={value.url}
@@ -226,12 +244,6 @@ const ProductDetail = () => {
                       ))}
                     </Carousel>
                   </div>
-                  {/* <div className="list-anhchitiet d-flex mb-4" style={{marginLeft: '90px'}}>
-                  <img className="thumb-img thumb1 mr-3" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua-mt.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-mt" />
-                    <img className="thumb-img thumb2" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua-ms.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-ms" />             
-                   
-                   
-                  </div> */}
                 </div>
               ))}
               {/* thông tin sản phẩm: tên, giá bìa giá bán tiết kiệm, các khuyến mãi, nút chọn mua.... */}
@@ -239,16 +251,39 @@ const ProductDetail = () => {
                 <div className="col-md-6 khoithongtin">
                   <div className="row">
                     <div className="col-md-12 header">
-                      <h4 className="ten">{value.name}</h4>
-
+                      <h4 style={{ fontWeight: "550", fontSize: "24px" }}>
+                        {value.name}
+                      </h4>
                       <hr />
                     </div>
+
                     <div className="col-md-7 price">
-                      <div className="gia">
-                        <div className="giaban">
-                          Giá bán tại DealBooks:
+                      <div
+                        className="gia"
+                        style={{
+                          width: "500px",
+                          marginTop: "-20px",
+                          backgroundColor: "#f8f9fa",
+                          height: "60px",
+                          padding: "5px 0px 25px 0px",
+                        }}
+                      >
+                        <div
+                          className="giaban"
+                          style={{
+                            marginTop: "10px",
+                            fontSize: "20px",
+                            color: "#38383D",
+                            fontWeight: "500",
+                            marginLeft: "15px",
+                          }}
+                        >
+                          Giá bán tại Nhà sách Kiên Giang:
                           {value.parameters.map((value, index) => (
-                            <span className="giamoi font-weight-bold">
+                            <span
+                              className="giamoi font-weight-bold"
+                              style={{ color: "#f94144", marginLeft: "100px" }}
+                            >
                               {defaultPrice.price}₫
                             </span>
                           ))}
@@ -256,66 +291,112 @@ const ProductDetail = () => {
 
                         <div
                           className="danhsach"
-                          style={{ marginRight: "2px" }}
+                          style={{
+                            paddingBottom: "5px",
+                          }}
                         >
-                          {value.parameters.length >=2 && value.parameters.map((value, index) => {
-                            if (value._id === defaultPrice._id) {
-                              return (
-                                <button
-                                  style={{
-                                    background: "#198754",
-                                    color: "white",
-                                  }}
-                                  type="button"
-                                  onClick={() =>
-                                    setDefaultPrice({
-                                      price: value.price,
-                                      _id: value._id,
-                                    })
-                                  }
-                                  className="btn btn-outline-success"
-                                >
-                                  {value.name}
-                                </button>
-                              );
-                            } else {
-                              return (
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setDefaultPrice({
-                                      price: value.price,
-                                      _id: value._id,
-                                    })
-                                  }
-                                  className="btn btn-outline-success"
-                                >
-                                  {value.name}
-                                </button>
-                              );
-                            }
-                          })}
+                          {value.parameters.length >= 2 &&
+                            value.parameters.map((value, index) => {
+                              if (value._id === defaultPrice._id) {
+                                return (
+                                  <button
+                                    style={{
+                                      borderRadius: "unset",
+                                      fontWeight: "bold",
+                                      marginRight: "10px",
+                                    }}
+                                    type="button"
+                                    onClick={() =>
+                                      setDefaultPrice({
+                                        price: value.price,
+                                        _id: value._id,
+                                      })
+                                    }
+                                    className="btn btn-outline-success"
+                                  >
+                                    {value.name}
+                                  </button>
+                                );
+                              } else {
+                                return (
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setDefaultPrice({
+                                        price: value.price,
+                                        _id: value._id,
+                                      })
+                                    }
+                                    className="btn btn-outline-success"
+                                    style={{
+                                      marginRight: "10px",
+                                      borderRadius: "unset",
+                                    }}
+                                  >
+                                    {value.name}
+                                  </button>
+                                );
+                              }
+                            })}
                         </div>
                       </div>
-                      <div className="uudai my-3">
-                        <h6 className="header font-weight-bold">
-                          Tại DealBook:
-                        </h6>
-                        <ul>
-                          <li>
-                            <b>Giao hàng </b>cho đơn hàng ở TP.HCM và ở
-                            Tỉnh/Thành khác{" "}
-                          </li>
-                          <li>
-                            <b>Combo sách HOT - GIẢM 25% </b>
-                            <a href="#">&gt;&gt;Xem ngay</a>
-                          </li>
-                        </ul>
+
+                      <div
+                        class="detail-discount"
+                        style={{
+                          height: "100px",
+                          width: "500px",
+                          marginTop: "70px",
+                          padding: "10px 0px 0px 10px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          border: "2px solid #ffa50094",
+                          borderRadius: "5px",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        <div
+                          class="detail-discount-container"
+                          style={{
+                            flex: "1",
+                            color: "gray",
+                          }}
+                        >
+                          <h6 className="header font-weight-bold">
+                            Tại Nhà sách Kiên Giang:
+                          </h6>
+                          <ul>
+                            <li>
+                              <b>Giao hàng </b>cho đơn hàng ở Rạch Giá và ở
+                              Tỉnh/Thành khác{" "}
+                            </li>
+                            <li>
+                              <b>Combo sách HOT - GIẢM 25% </b>
+                              <a href="#">&gt;&gt;Xem ngay</a>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
-                      <div className="soluong d-flex">
-                        <label className="font-weight-bold">Số lượng: </label>
+                      <div
+                        className="soluong d-flex"
+                        style={{ marginTop: "0px" }}
+                      >
+                        <label
+                          style={{
+                            fontSize: "18px",
+                            color: "gray",
+                            fontWeight: "500",
+                            marginTop: "15px",
+                          }}
+                        >
+                          Số Lượng:{" "}
+                        </label>
                         <div className="input-number input-group mb-3">
-                          <div className="input-group-prepend">
+                          <div
+                            className="input-group-prepend"
+                            style={{ borderRadius: "10px" }}
+                          >
                             <span className="input-group-text btn-spin btn-dec">
                               -
                             </span>
@@ -323,7 +404,7 @@ const ProductDetail = () => {
                           <input
                             type="text"
                             defaultValue={1}
-                            className="soluongsp  text-center"
+                            className="soluongsp text-center"
                           />
                           <div className="input-group-append">
                             <span className="input-group-text btn-spin btn-inc">
@@ -335,10 +416,7 @@ const ProductDetail = () => {
                       <div className="nutmua btn w-100 text-uppercase">
                         Chọn mua
                       </div>
-                      <a
-                        className="huongdanmuahang text-decoration-none"
-                        href="#"
-                      >
+                      <a className="huongdanmuahang" href="#">
                         (Vui lòng xem hướng dẫn mua hàng)
                       </a>
 
@@ -352,6 +430,7 @@ const ProductDetail = () => {
                         data-share="true"
                       />
                     </div>
+
                     {/* thông tin khác của sản phẩm:  tác giả, ngày xuất bản, kích thước ....  */}
                   </div>
                 </div>
@@ -375,31 +454,68 @@ const ProductDetail = () => {
                       role="tabpanel"
                       aria-labelledby="nav-gioithieu-tab"
                     >
-                      <div className="row">
-                        <h3 style={{ marginTop: "5px", marginBottom: "-15px" }}>
-                          Chi Tiết Sản Phẩm
-                        </h3>
-                        <div className="col-md-5 mt-4 giua ">
-                          <div className="tonggiatien">
-                            {Object.keys(value.details).map((value, index) => (
-                              <div className="group d-flex justify-content-between">
-                                <span className="label">{value}</span>
-                              </div>
-                            ))}
-                            <div className="details">
-                              {Object.values(value.details).map(
-                                (value, index) => (
-                                  <div className="group d-flex justify-content-right">
-                                    <span className="label">{value}</span>
-                                  </div>
-                                )
-                              )}
-                            </div>
-                          </div>
+                      <div className="row" style={{ marginTop: "-15px" }}>
+                        <div
+                          class="product-detail-container"
+                          style={{
+                            height: "50px",
+                            marginBottom: "0px",
+                          }}
+                        >
+                          <h5
+                            style={{
+                              fontWeight: "bold",
+                              marginTop: "10px",
+                            }}
+                          >
+                            Thông Tin Chi Tiết
+                          </h5>
                         </div>
+
+                        <Paper
+                          className="container"
+                          style={{ marginLeft: "-10px", fontSize: "16px" }}
+                          elevation={0}
+                        >
+                          <Table>
+                            <TableBody>
+                              {Object.keys(value.details).map((key, index) => (
+                                <TableRow key={index}>
+                                  <TableCell
+                                    style={{
+                                      maxWidth: "80px",
+                                      fontWeight: "bold",
+                                      backgroundColor: "#f9f9f9",
+                                      borderColor: "#f9f9f9",
+                                      color: "gray",
+                                    }}
+                                  >
+                                    {key}
+                                  </TableCell>
+                                  <TableCell>{value.details[key]}</TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </Paper>
                       </div>
+
                       <hr style={{ marginTop: "50px" }} />
-                      <h3>Mô Tả Sản Phẩm</h3>
+                      <div
+                        class="produc-tdescribe-container"
+                        style={{
+                          height: "50px",
+                        }}
+                      >
+                        <h5
+                          style={{
+                            fontWeight: "bold",
+                            marginTop: "10px",
+                          }}
+                        >
+                          Mô Tả Sản Phẩm
+                        </h5>
+                      </div>
                       <h6 className="tieude font-weight-bold">{value.name}</h6>
                       <p>
                         <span
@@ -744,6 +860,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
+
       <div className="new" style={{ padding: "1%", background: "#F0F0F0" }}>
         <footer>
           <div

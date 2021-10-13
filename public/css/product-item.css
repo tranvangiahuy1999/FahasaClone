@@ -600,8 +600,9 @@ footer .header {
 }
 
 .khoithongtin .input-number .soluongsp {
-    width: 35%;
-    height: 87%;
+    width: 50px;
+    height: 32px;
+    font-size: 16px;
     border: 1px solid #ebebeb;
 }
 
@@ -664,16 +665,16 @@ footer .header {
 }
 
 .khoithongtin .giaban {
-    margin-top: -5%;
-    font-size: 22px;
+    margin-top: -10%;
+    font-size: 18px;
 }
 
 .khoithongtin .giaban .giamoi {
     color: red;
     width: 100%;
-    font-size: 26px;
+    font-size: 30px;
+    margin-top: -10px;
     position: absolute;
-    top: -5%;
     left: 241px;
 }
 
@@ -716,21 +717,22 @@ footer .header {
 }
 
 .khoithongtin .huongdanmuahang {
-    color: #F7A623;
+    color: #6a040f;
     font-size: 13px;
     margin: 10px 0px;
     display: block;
 }
 
 .khoithongtin .nutmua {
-    background: linear-gradient(#f5a623,#fd8205);
+    background: #f48c06;
     color: white;
     font-weight: bold;
     font-size: 15px;
 }
 
 .khoithongtin .nutmua:hover {
-    box-shadow: 0px 11px 20px -10px #fd8205;
+    color: white;
+    background: #faaa41;
 }
 /*het css cho khoi thong tin cua product-page*/
 
