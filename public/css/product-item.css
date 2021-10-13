@@ -673,7 +673,7 @@ footer .header {
     width: 100%;
     font-size: 26px;
     position: absolute;
-    top: -5%;
+    top: -15%;
     left: 241px;
 }
 
@@ -925,6 +925,7 @@ li.active .fa-star {
     font-size: 15px;
     font-weight: 500;
     padding-right: 10px;
+    margin-top: 10%;
 }
 
 .gia.d-flex {

@@ -17,6 +17,10 @@ const shopApis = {
     const url = `/api/product/search?page=${page}&search=${name}`;
     return axiosClient.get(url);
   },
+  createReceipt(data) {
+    const url = "/api/receipt/create";
+    return axiosClient.post(url, data);
+  },
 };
 
 export default shopApis;

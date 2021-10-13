@@ -1,26 +1,59 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
+import {TextField} from '@material-ui/core';
 import Header from "./Header";
+import NumberFormat from 'react-number-format';
 import { FcNext, FcPrevious } from "react-icons/fc";
 import shopApis from "../../../apis/ShopApis";
 import { useParams, useLocation } from "react-router";
 import Carousel from "react-material-ui-carousel";
 import CardMedia from "@material-ui/core/CardMedia";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+  
+   return (
+          <NumberFormat
+              {...other}
+              getInputRef={inputRef}
+              allowNegative={false}
+              onValueChange={(values) => {
+                  onChange({
+                      target: {
+                          name: props.name,
+                          value: values.value,
+                      },
+                  });
+              }}
+              isNumericString
+          />
+      );
+}
 const ProductDetail = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [productDetail, setProductDeatil] = useState([]);
   const params = useParams();
   const [defaultPrice, setDefaultPrice] = useState([]);
+  const [defaultValue,setDeFaultValue]=useState([]);
+  const [default1,setDeFault1]=useState([])
+  const [count,setCount]=useState(1)
+  const [parentId,setParentId]=useState([]);
   useEffect(() => {
     getCategoryData();
     getProductDetail();
+ 
   }, []);
 
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         setCategoryList(res.data);
       }
@@ -28,7 +61,77 @@ const ProductDetail = () => {
       console.log(e);
     }
   };
+  const handleChange=(e)=>{
+    if(e==="in"){
+       setCount(count+1);
+    }
+    else{
+      if(count-1<=0){
+        return 
+      }
+      setCount(count-1);
+    }
+  }
+  const Data_Middle=()=>{
+     if(localStorage.getItem('Cart')===null){
+       
 
+     
+      let value=({
+        parameter:defaultValue._id,
+        price:defaultValue.price,
+        nameParam:defaultPrice.name,
+        name:defaultValue.name,
+        image:defaultValue.image,
+        id:params.id,
+        count:count+1,
+      });
+    
+      console.log(value);
+     let aray= default1;
+     console.log(aray);
+     aray.push(value)
+      
+      //  setDeFault1(aray)
+    //  console.log(default1);
+    
+  localStorage.setItem('Cart',JSON.stringify(aray));
+    
+     }
+  else{
+     var temp=JSON.parse(localStorage.getItem('Cart'));
+
+      temp.map((value,index)=>{
+        if(value.id===parentId){
+          temp[index].count+=count;
+          console.log(temp);  
+          localStorage.setItem('Cart',JSON.stringify(temp));
+          return
+        }
+       })
+     console.log(default1);
+     let value=({
+      parameter:defaultPrice._id,
+      price:defaultPrice.price,
+      nameParam:defaultPrice.name,
+      name:defaultValue.name,
+      image:defaultValue.image,
+      id:params.id,
+      count:Number(count),
+    });
+     console.log(value);
+    let aray= temp; 
+    console.log(aray);
+    aray.push(value)
+     
+      // setDeFault1(aray)
+    // console.log(default1);
+   
+ localStorage.setItem('Cart',JSON.stringify(aray));
+ 
+  }
+
+  }
   const chuyenDoiURL = (str) => {
     str = str.toLowerCase();
 
@@ -65,11 +168,20 @@ const ProductDetail = () => {
         // setProductList(res.data.product)
         console.log(res.data);
         res.data.map((value, index) => {
+          setParentId(value._id);
           setDefaultPrice({
             price: value.parameters[0].price,
             _id: value.parameters[0]._id,
+            name:value.parameters[0].name,
           });
+         setDeFaultValue({
+          price: value.parameters[0].price,
+          _id: value.parameters[0]._id,
+          name:value.name,
+          image:value.image[0].url,
+         })
         });
+      
         setProductDeatil(res.data);
       }
     } catch (e) {
@@ -77,7 +189,8 @@ const ProductDetail = () => {
     }
   };
 
-  console.log(defaultPrice);
+  console.log(count);
+  
   return (
     <div style={{ with: "100%", overflow: "hidden" }}>
       <Nav />
@@ -271,6 +384,7 @@ const ProductDetail = () => {
                                     setDefaultPrice({
                                       price: value.price,
                                       _id: value._id,
+                                      name:value.name,
                                     })
                                   }
                                   className="btn btn-outline-success"
@@ -286,6 +400,7 @@ const ProductDetail = () => {
                                     setDefaultPrice({
                                       price: value.price,
                                       _id: value._id,
+                                      name:value.name,
                                     })
                                   }
                                   className="btn btn-outline-success"
@@ -312,29 +427,38 @@ const ProductDetail = () => {
                           </li>
                         </ul>
                       </div>
-                      <div className="soluong d-flex">
-                        <label className="font-weight-bold">Số lượng: </label>
-                        <div className="input-number input-group mb-3">
-                          <div className="input-group-prepend">
-                            <span className="input-group-text btn-spin btn-dec">
-                              -
-                            </span>
-                          </div>
-                          <input
-                            type="text"
-                            defaultValue={1}
-                            className="soluongsp  text-center"
-                          />
-                          <div className="input-group-append">
-                            <span className="input-group-text btn-spin btn-inc">
-                              +
-                            </span>
+                  {/* <TextField
+                      label="Số Lượng"
+                      value={count}
+                      type='number'
+                      onChange={(e) => setCount(e.target.value)}
+                      name="numberformat"
+                      id="formatted-numberformat-input"
+                      InputProps={{
+                            inputComponent: NumberFormatCustom,
+                      }}
+                  /> */}
+                          <div className="item-info ml-3">
+                      
+                        <div className="soluong d-flex">
+                          <div className="input-number input-group mb-3">
+                            <div className="input-group-prepend" onClick={()=>handleChange("de")}>
+                              <span className="input-group-text btn-spin btn-dec">-</span>
+                            </div>
+                            <input value={count} type="text" style={{ height: '86%' }} defaultValue={1}  className="soluongsp  text-center" />
+                            <div className="input-group-append" onClick={()=>handleChange("in")} >
+                              <span  className="input-group-text btn-spin btn-inc">+</span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div className="nutmua btn w-100 text-uppercase">
+                      <Link to="/gio-hang"><button style={{marginTop:'5%'}} className="btn btn-outline-success w-100 text-uppercase" >
+                        Mua Ngay
+                      </button></Link>
+                      <button className="nutmua btn w-100 text-uppercase" onClick={()=>Data_Middle()}>
                         Chọn mua
-                      </div>
+                      </button>
+                    
                       <a
                         className="huongdanmuahang text-decoration-none"
                         href="#"
