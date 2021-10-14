@@ -859,70 +859,81 @@ a.btn.nutmuathem.mb-3:hover {
   }
 }
 /* mobile */
-@media only screen and (max-width: 740px) {
-  .navbar form .input-group {
-    width: 100% !important;
-  }
-  .index_footer {
-    width: 100% !important;
-  }
-  .thongtinsach1 {
-    width: 106%;
-    margin-left: -40px;
-    margin-bottom: 50px;
-  }
-  .col-md-9.col-xs-12 {
-    margin-left: -30px;
-    width: 100%;
-  }
-  .breadcrumbbar {
-    margin-left: -115px !important;
-  }
-  .ptthanhtoan a img {
-    width: 291px !important;
-    margin-top: 0px !important;
-    margin-left: -7% !important;
-  }
-  .navbar ul li a.nav-link {
-    margin-left: 0.25rem !important;
-  }
-  .carousel-inner {
-    max-height: 35vh; /* Them vao */
-  }
-  .card.list {
-    /* Thêm vào */
-    justify-content: center;
-    width: 100%;
-  }
-  .navbar ul li.account {
-    border-top: 1px dashed #cf111a;
-    border-bottom: 1px dashed #cf111a;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.25rem;
-  }
-  .navbar ul li.giohang {
-    border-bottom: 1px dashed #cf111a;
-    padding-bottom: 0.5rem;
-    margin-right: 8px;
-  }
-  .duoinavbar {
-    display: block;
-    margin-left: -20px !important;
-  }
-  .categorycontent {
-    display: none;
-  }
-  ul i.fa.fa-chevron-right.icon {
-    display: none;
-  }
-  ul.categorydetail {
-    display: none !important;
-  }
-  .carousel-inner {
-    margin-left: -65px;
-    width: 115% !important;
-  }
-  .carousel {
-    padding: 0;
-  }
+@media only screen and (max-width:740px){
+    .navbar form .input-group{
+        width: 100%!important;
+    }
+    .index_footer{
+        width: 100% !important; 
+    }
+    .thongtinsach1{
+        width: 106% ;
+        margin-left: -40px;
+        margin-bottom: 50px;
+    }
+    .col-md-9.col-xs-12{
+        margin-left: -30px;
+        width: 100%;
+    }
+    .breadcrumbbar{
+        margin-left: -115px !important;
+    }
+    .ptthanhtoan a img {
+        width: 291px !important;
+        margin-top: 0px !important;
+        margin-left: -7% !important;
+    }
+    .navbar ul li a.nav-link{
+        margin-left:0.25rem!important;
+    }
+    .carousel-inner{
+        max-height: 35vh; /* Them vao */
+    }
+    .card.list{ /* Thêm vào */
+        justify-content: center;
+        width: 100%;
+    }
+    .navbar ul li.account{
+        border-top: 1px dashed #CF111A;
+        border-bottom: 1px dashed #CF111A;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+    .navbar ul li.giohang{
+        border-bottom: 1px dashed #CF111A;
+        padding-bottom: 0.5rem;
+        margin-right:8px;
+    }
+    .duoinavbar{
+        display: block;
+        margin-left: -20px !important;
+    }
+    .categorycontent{
+        display: none;
+    }
+    ul i.fa.fa-chevron-right.icon{
+        display: none;
+    }
+    ul.categorydetail{
+        display: none !important;
+    }
+    .carousel-inner{
+        margin-left: -65px;
+        width: 115% !important;
+    }
+    .carousel{
+        padding: 0;
+    }
+}  
+
+
+
+
+button.element.btn.btn-outline-success {
+    margin-top: 12%;
+    font-size: 15px;
+    width: 75px;
+    height: 32px;
+    margin-left: -21%;
+    margin-bottom: 2%;
 }

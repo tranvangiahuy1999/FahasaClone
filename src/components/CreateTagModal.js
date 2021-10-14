@@ -1,72 +1,72 @@
 import React, { useState, useEffect } from "react";
-import {
-  TextField,
-  Button,
-  FormGroup,
-  Switch,
-  FormControlLabel,
-  makeStyles,
-} from "@material-ui/core";
+import { TextField, Button, FormGroup, makeStyles } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import AdminApi from "../apis/AdminApis";
 import alert from "../utils/Alert";
 import { LOGO_COLOR, ICON_COLOR } from "../constants/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const CreateCategoryModal = (props) => {
+const CreateTagModal = (props) => {
   const classes = useStyles();
   const [editName, setEditName] = useState();
-  const [checked, setChecked] = useState(false);
+  const [cateList, setCateList] = useState([]);
+  const [cate, setCate] = useState();
   const [submitStateBtn, setSubmitStateBtn] = useState(false);
 
   useEffect(() => {
-    if (props.cateEditFilter) {
-      setEditName(props.cateEditFilter.name);
-      setChecked(props.cateEditFilter.active);
-    }
-  }, [props.cateEditFilter]);
+    getCateList();
+  }, []);
 
-  const handleSwitch = () => {
-    setChecked(!checked);
-  };
+  useEffect(() => {
+    if (props.tagEditFilter) {
+      setEditName(props.tagEditFilter.name);
+      setCate(props.tagEditFilter._id);
+    }
+  }, [props.tagEditFilter]);
 
   const resetModal = () => {
     setEditName();
-    setChecked(false);
+    setCate();
   };
 
   const convertFirstCharUppercase = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  const getCateList = async () => {
+    try {
+      const res = await AdminApi.getAllCategory();
+      if (res.status === 200) {
+        setCateList(res.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      setSubmitStateBtn(true);
+      if (!cate) return;
+
       let formData = {};
       let res = null;
-      if (props.cateEditFilter) {
+      setSubmitStateBtn(true);
+      if (props.tagEditFilter) {
         formData = {
           name: convertFirstCharUppercase(editName),
-          active: checked,
         };
-        res = await AdminApi.updateCategory(formData, props.cateEditFilter._id);
+        res = await AdminApi.updateTag(formData);
       } else {
-        if (props.parentId) {
-          formData = {
-            name: convertFirstCharUppercase(editName),
-            parentId: props.parentId,
-            active: checked,
-          };
-        } else {
-          formData = {
-            name: convertFirstCharUppercase(editName),
-            active: checked,
-          };
-        }
-        res = await AdminApi.createCategory(formData);
+        formData = {
+          name: convertFirstCharUppercase(editName),
+          category: cate,
+        };
+        console.log(formData);
+        res = await AdminApi.createTag(formData);
       }
 
       if (res.status === 200) {
@@ -75,6 +75,7 @@ const CreateCategoryModal = (props) => {
           title: res.message,
           msg: "Cập nhật thành công",
         });
+        props.closeModalAfterSave();
       }
     } catch (e) {
       console.log(e);
@@ -110,7 +111,7 @@ const CreateCategoryModal = (props) => {
         <div className={classes.paper}>
           <div className="category-modal">
             <h5 style={{ color: ICON_COLOR }}>
-              {props.cateEditFilter ? "Cập nhật danh mục" : "Tạo danh mục"}
+              {props.tagEditFilter ? "Cập nhật tag" : "Tạo tag"}
             </h5>
             <form onSubmit={onSubmit}>
               <FormGroup>
@@ -120,7 +121,7 @@ const CreateCategoryModal = (props) => {
                       input: classes.labelRoot,
                     },
                   }}
-                  label="Tên danh mục"
+                  label="Tên tag"
                   value={editName}
                   InputLabelProps={{
                     classes: {
@@ -131,10 +132,19 @@ const CreateCategoryModal = (props) => {
                   required
                 />
               </FormGroup>
-              <FormGroup className="mt-3">
-                <FormControlLabel
-                  control={<Switch checked={checked} onChange={handleSwitch} />}
-                  label={<span style={{ fontSize: "1rem" }}>Trạng thái</span>}
+              <FormGroup className="mt-2">
+                <Autocomplete
+                  id="combo-box-demo"
+                  options={cateList}
+                  getOptionLabel={(option) => option.name}
+                  onChange={(event, newValue) => {
+                    setCate(newValue._id);
+                  }}
+                  size="small"
+                  renderInput={(params) => (
+                    <TextField {...params} label="Thuộc danh mục" />
+                  )}
+                  required
                 />
               </FormGroup>
               <FormGroup className="mt-3">
@@ -181,4 +191,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default CreateCategoryModal;
+export default CreateTagModal;

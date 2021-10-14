@@ -25,6 +25,7 @@ import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { FaRegEdit } from "react-icons/fa";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { IoTrashBin } from "react-icons/io5";
 
 const headCells = [
   {
@@ -121,7 +122,6 @@ export default function Category(props) {
 
   const editModalHandleOpen = (data) => {
     setEditCateData(data);
-    console.log(data);
     setOpenCreateModal(true);
   };
 
@@ -182,6 +182,7 @@ export default function Category(props) {
           icon: "success",
           title: "Cập nhật thứ tự danh mục thành công",
         });
+        setUpdateBtnState(true);
       } else {
         alert({ icon: "error", title: "Cập nhật thứ tự danh mục thất bại" });
       }
@@ -189,7 +190,6 @@ export default function Category(props) {
       console.log(e);
     }
     setUpdateBtnLoad(false);
-    setUpdateBtnState(false);
   };
 
   const formatUpdateCategoryData = (array) => {
@@ -200,13 +200,28 @@ export default function Category(props) {
     return temp;
   };
 
+  const deleteCategory = async (cateId) => {
+    try {
+      const res = await adminApis.deleteCategoty(cateId);
+      if (res.status === 200) {
+        alert({ icon: "success", title: "Xóa danh mục thành công" });
+        if (id) {
+          getCategoryByParentId(id);
+        } else {
+          getCategoryList([...cateList.categoryData]);
+        }
+      } else {
+        alert({ icon: "error", title: "Xóa danh mục thất bại" });
+      }
+    } catch (e) {}
+  };
+
   return (
     <div className={classes.root}>
       <CreateCategoryModal
         open={openCreateModal}
         closeModal={createModalHandleClose}
         closeModalAfterSave={createModalHandleCloseAfterSave}
-        title="Tạo danh mục"
         parentId={id}
         cateEditFilter={editCateData}
       ></CreateCategoryModal>
@@ -375,6 +390,15 @@ export default function Category(props) {
                                     onClick={() => editModalHandleOpen(row)}
                                   >
                                     <FaRegEdit color={LOGO_COLOR} size={18} />
+                                  </IconButton>
+                                  <IconButton
+                                    color="secondary"
+                                    onClick={() => deleteCategory(row._id)}
+                                  >
+                                    <IoTrashBin
+                                      className="text-danger"
+                                      size={18}
+                                    ></IoTrashBin>
                                   </IconButton>
                                 </TableCell>
                               </TableRow>
