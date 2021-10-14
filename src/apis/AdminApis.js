@@ -24,6 +24,14 @@ const adminApis = {
     const url = `/api/category/update/${id}`;
     return axiosClient.put(url, data);
   },
+  getAllCategory() {
+    const url = "/api/category/list-non-level";
+    return axiosClient.get(url);
+  },
+  deleteCategoty(id) {
+    const url = `/api/category/delete/${id}`;
+    return axiosClient.delete(url);
+  },
   createProduct(data) {
     const url = "/api/product/create";
     return axiosClient.post(url, data);
@@ -55,6 +63,18 @@ const adminApis = {
   updateListReceipt(id, data) {
     const url = `/api/receipt/update/${id}`;
     return axiosClient.put(url, data);
+  },
+  createTag(data) {
+    const url = `/api/tag/create`;
+    return axiosClient.post(url, data);
+  },
+  updateTag(data) {
+    const url = `/api/tag/update`;
+    return axiosClient.put(url, data);
+  },
+  getTagList() {
+    const url = "/api/tag/get-list";
+    return axiosClient.get(url);
   },
 };
 

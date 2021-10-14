@@ -748,7 +748,6 @@ export default function UpdateProduct() {
                                     input: classes.resize,
                                   },
                                 }}
-                                required
                                 label="Tên phân loại"
                               />
                             </FormGroup>
