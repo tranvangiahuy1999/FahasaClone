@@ -17,15 +17,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { HiViewList } from "react-icons/hi";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { IoFileTrayStackedSharp } from "react-icons/io5";
 import { FiBook, FiBookmark } from "react-icons/fi";
 import { BiReceipt } from "react-icons/bi";
-import { RiZzzLine, RiUserReceivedFill } from "react-icons/ri";
-import {
-  AiOutlineFileDone,
-  AiOutlineSetting,
-  AiOutlineTag,
-} from "react-icons/ai";
+import { RiUserReceivedFill } from "react-icons/ri";
+import { AiOutlineSetting } from "react-icons/ai";
 
 import Category from "./Category";
 import Product from "./Product";
@@ -33,6 +28,7 @@ import ReceiptUndone from "./ReceiptUndone";
 import ReceiptCancel from "./ReceiptCancel";
 import CreateProduct from "./CreateProduct";
 import UpdateProduct from "./UpdateProduct";
+import TagManagement from "./Tag";
 
 import {
   BrowserRouter as Router,
@@ -63,8 +59,6 @@ const AdminIndex = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openCateNest, setOpenCateNest] = useState(true);
-  const [openReceiptNest, setOpenReceiptNest] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
@@ -112,6 +106,10 @@ const AdminIndex = (props) => {
       path: "/admin/product/update-product/:id",
       main: () => <UpdateProduct></UpdateProduct>,
     },
+    {
+      path: "/admin/tag",
+      main: () => <TagManagement></TagManagement>,
+    },
   ];
 
   const drawer = (
@@ -119,21 +117,17 @@ const AdminIndex = (props) => {
       <div className={styles.toolbar}></div>
       <List>
         <Divider />
-        <ListItem onClick={() => handleOpenNested("r")}>
+        <ListItem>
           <ListItemIcon>
             <BiReceipt style={style.drawnerItemIcon}></BiReceipt>
           </ListItemIcon>
           <ListItemText style={style.drawnerItem} primary="Đơn hàng" />
           <IconButton>
-            {openReceiptNest ? (
-              <IoIosArrowDown style={style.arrowIcon} />
-            ) : (
-              <IoIosArrowUp style={style.arrowIcon} />
-            )}
+            <IoIosArrowDown style={style.arrowIcon} />
           </IconButton>
         </ListItem>
 
-        <Collapse in={openReceiptNest} timeout="auto">
+        <Collapse in={true} timeout="auto">
           <List component="div" disablePadding>
             <ListItem
               button
@@ -141,9 +135,6 @@ const AdminIndex = (props) => {
               component={NavLink}
               to="/admin/receipt/undone"
             >
-              {/* <ListItemIcon>
-                <RiZzzLine style={style.nestedIcon}></RiZzzLine>
-              </ListItemIcon> */}
               <ListItemText
                 primary="Chờ xử lý"
                 classes={{ primary: styles.listItemText }}
@@ -155,9 +146,6 @@ const AdminIndex = (props) => {
               component={NavLink}
               to="/admin/receipt/cancel"
             >
-              {/* <ListItemIcon>
-                <AiOutlineFileDone style={style.nestedIcon}></AiOutlineFileDone>
-              </ListItemIcon> */}
               <ListItemText
                 primary="Đã xử lý"
                 classes={{ primary: styles.listItemText }}
@@ -166,21 +154,17 @@ const AdminIndex = (props) => {
           </List>
         </Collapse>
 
-        <ListItem onClick={() => handleOpenNested("d")}>
+        <ListItem>
           <ListItemIcon>
             <FiBookmark style={style.drawnerItemIcon}></FiBookmark>
           </ListItemIcon>
           <ListItemText style={style.drawnerItem} primary="Danh mục" />
           <IconButton>
-            {openCateNest ? (
-              <IoIosArrowDown style={style.arrowIcon} />
-            ) : (
-              <IoIosArrowUp style={style.arrowIcon} />
-            )}
+            <IoIosArrowDown style={style.arrowIcon} />
           </IconButton>
         </ListItem>
 
-        <Collapse in={openCateNest} timeout="auto">
+        <Collapse in={true} timeout="auto">
           <List component="div" disablePadding>
             <ListItem
               button
@@ -188,20 +172,18 @@ const AdminIndex = (props) => {
               component={NavLink}
               to="/admin/category"
             >
-              {/* <ListItemIcon>
-                <IoFileTrayStackedSharp
-                  style={style.nestedIcon}
-                ></IoFileTrayStackedSharp>
-              </ListItemIcon> */}
               <ListItemText
                 primary="Danh mục"
                 classes={{ primary: styles.listItemText }}
               />
             </ListItem>
-            <ListItem button style={style.nested}>
-              {/* <ListItemIcon>
-                <AiOutlineTag style={style.nestedIcon}></AiOutlineTag>
-              </ListItemIcon> */}
+            <ListItem
+              component={NavLink}
+              to="/admin/tag"
+              activeClassName="Mui-selected"
+              button
+              style={style.nested}
+            >
               <ListItemText
                 primary="Tag"
                 classes={{ primary: styles.listItemText }}
@@ -238,15 +220,6 @@ const AdminIndex = (props) => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-
-  const handleOpenNested = (tag) => {
-    return;
-    // if (tag === "d") {
-    //   setOpenCateNest(!openCateNest);
-    // } else {
-    //   setOpenReceiptNest(!openReceiptNest);
-    // }
   };
 
   const handleClickSettingMenu = (event) => {
