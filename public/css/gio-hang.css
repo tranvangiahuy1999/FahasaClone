@@ -784,8 +784,16 @@ button.receiptbtn {
 
 @media (max-width:768px){
     .navbar form .input-group{
-        width: 100%!important;
-
+        width: 80%!important;
+    }
+    button.element.btn.btn-outline-success {
+        margin-top: 12%;
+        font-size: 15px;
+        width: 75px;
+        height: 32px;
+        margin-left: -29%;
+        margin-bottom: 6%;
+        margin-top: 18%;
     }
     .new{
         margin-right: 0px !important;
@@ -898,7 +906,6 @@ button.receiptbtn {
         color: red;
         font-size: 22px !important;
         position: absolute;
-        top: 73px !important;
         left: 6% !important;
     }
 

@@ -3,6 +3,7 @@ import Nav from './Nav';
 import shopApis from "../../../apis/ShopApis";
 import { Link } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import Footer from './Footer';
 const Receipt = () => {
   const history = useHistory();
   const [Value, setValue] = useState([])
@@ -55,7 +56,7 @@ const Receipt = () => {
     if  (!Value.length) {
       return (
         <div className="row" style={{ background: '#F0F0F0' }}>
-          <div className="col-12 cart-empty" style={{ background: 'white' }}>
+          <div className="col-12 cart-empty cart" style={{ background: 'white' }}>
             <div className="py-3 pl-3">
               <h6 className="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(0 sản phẩm)</span></h6>
               <div className="cart-empty-content w-100 text-center justify-content-center">
@@ -235,11 +236,11 @@ const Receipt = () => {
   console.log(Value);
 
   return (
-    <div style={{ width: '100%', overflow: 'hidden' }}>
+    <div style={{ width: '100%', overflow: 'hidden', background: "#F0F0F0" }} className="all">
       <Nav />
 
       {/* giao diện giỏ hàng  */}
-      <section className="content my-3" style={{ background: '#F0F0F0' }}>
+      <section className="content" style={{ background: '#F0F0F0' ,marginTop:'1rem !important'}}>
         <div className="container recept_Ip " style={{ background: '#F0F0F0', width: '81%' }}>
           <div className="cart-page bg-white" style={{ background: '#F0F0F0' }}>
 
@@ -311,83 +312,7 @@ const Receipt = () => {
           </div>
         </div>
       </section>
-      <div className="new" style={{ padding: "1%", background: "#F0F0F0" }}>
-        <footer>
-          <div
-            className="container py-4"
-            style={{ background: "white", width: "82%", marginTop: "-1%" }}
-          >
-            <div className="row">
-              <div className="col-md-6 col-xs-6">
-                <div className="gioithieu">
-                  <h3 className="header text-uppercase font-weight-bold">
-                    Về DealBook
-                  </h3>
-                  <a href="#">
-                    Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần
-                    Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM
-                  </a>
-                  <a href="#">
-                    Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi.
-                    KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng
-                    cũng như tất cả Hệ Thống Fahasa trên toàn quốc.
-                  </a>
-                  <a href="#">
-                    <img
-                      src="/images/dang-ky-bo-cong-thuong.png"
-                      alt="jcb-payment"
-                    />
-                  </a>
-                  <div
-                    className="fb-like"
-                    data-href="https://www.facebook.com/DealBook-110745443947730/"
-                    data-width="300px"
-                    data-layout="button"
-                    data-action="like"
-                    data-size="small"
-                    data-share="true"
-                  />
-                </div>
-              </div>
-              <div className="col-md-3 col-xs-6">
-                <div className="hotrokh">
-                  <h3 className="header text-uppercase font-weight-bold">
-                    HỖ TRỢ KHÁCH HÀNG
-                  </h3>
-                  <a href="#">Hướng dẫn đặt hàng</a>
-                  <a href="#">Phương thức thanh toán</a>
-                  <a href="#">Phương thức vận chuyển</a>
-                  <a href="#">Chính sách đổi trả</a>
-                </div>
-              </div>
-
-              <div className="col-md-3 col-xs-6">
-                <div className="ptthanhtoan">
-                  <a href="#">
-                    <img
-                      className="anhfanpage"
-                      src="/images/footer_icon1.png"
-                      style={{ marginLeft: "-10px" }}
-                      alt="jcb-payment"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-        {/* nut cuon len dau trang */}
-        <div className="fixed-bottom">
-          <div
-            className="btn btn-warning float-right rounded-circle nutcuonlen"
-            id="backtotop"
-            href="#"
-            style={{ background: "#64ae55" }}
-          >
-            <i className="fa fa-chevron-up text-white" />
-          </div>
-        </div>
-      </div>
+    <Footer/>
     </div>
   );
 }
