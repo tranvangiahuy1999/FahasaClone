@@ -1,59 +1,31 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
-import Footer from "./Footer";
-import {TextField} from '@material-ui/core';
-import Header from "./Header";
-import NumberFormat from 'react-number-format';
 import { FcNext, FcPrevious } from "react-icons/fc";
 import shopApis from "../../../apis/ShopApis";
-import { useParams, useLocation } from "react-router";
+import { useParams } from "react-router";
 import Carousel from "react-material-ui-carousel";
 import CardMedia from "@material-ui/core/CardMedia";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-function NumberFormatCustom(props) {
-  const { inputRef, onChange, ...other } = props;
-  
-   return (
-          <NumberFormat
-              {...other}
-              getInputRef={inputRef}
-              allowNegative={false}
-              onValueChange={(values) => {
-                  onChange({
-                      target: {
-                          name: props.name,
-                          value: values.value,
-                      },
-                  });
-              }}
-              isNumericString
-          />
-      );
-}
+import { Link, useHistory } from "react-router-dom";
+import alert from "../../../utils/Alert";
+
 const ProductDetail = () => {
+  const history = useHistory();
+  const params = useParams();
   const [categoryList, setCategoryList] = useState([]);
   const [productDetail, setProductDeatil] = useState([]);
-  const params = useParams();
   const [defaultPrice, setDefaultPrice] = useState([]);
-  const [defaultValue,setDeFaultValue]=useState([]);
-  const [default1,setDeFault1]=useState([])
-  const [count,setCount]=useState(1)
-  const [parentId,setParentId]=useState([]);
+  const [defaultValue, setDeFaultValue] = useState([]);
+  const [count, setCount] = useState(1);
+  const [parentId, setParentId] = useState([]);
+
   useEffect(() => {
     getCategoryData();
     getProductDetail();
- 
   }, []);
 
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
-      // console.log(res);
       if (res.status === 200) {
         setCategoryList(res.data);
       }
@@ -61,77 +33,84 @@ const ProductDetail = () => {
       console.log(e);
     }
   };
-  const handleChange=(e)=>{
-    if(e==="in"){
-       setCount(count+1);
-    }
-    else{
-      if(count-1<=0){
-        return 
+
+  const handleChange = (e) => {
+    if (e === "in") {
+      setCount(count + 1);
+    } else {
+      if (count - 1 < 1) {
+        return;
       }
-      setCount(count-1);
+      setCount(count - 1);
     }
-  }
-  const Data_Middle=()=>{
-     if(localStorage.getItem('Cart')===null){
-       
+  };
 
-     
-      let value=({
-        parameter:defaultValue._id,
-        price:defaultValue.price,
-        nameParam:defaultPrice.name,
-        name:defaultValue.name,
-        image:defaultValue.image,
-        id:params.id,
-        count:count+1,
-      });
-    
-      console.log(value);
-     let aray= default1;
-     console.log(aray);
-     aray.push(value)
-      
-      //  setDeFault1(aray)
-    //  console.log(default1);
-    
-  localStorage.setItem('Cart',JSON.stringify(aray));
-    
-     }
-  else{
-     var temp=JSON.parse(localStorage.getItem('Cart'));
+  const handlePayCart = (event) => {
+    if (count < 1) {
+      alert({ icon: "error", title: "Số lượng không thể nhỏ hơn 0" });
+      return;
+    }
+    let cartList = localStorage.getItem("Cart");
+    if (!cartList) {
+      let value = {
+        parameter: defaultValue._id,
+        price: defaultValue.price,
+        nameParam: defaultPrice.name,
+        name: defaultValue.name,
+        image: defaultValue.image,
+        id: params.id,
+        count: Number(count),
+      };
 
-      temp.map((value,index)=>{
-        if(value.id===parentId){
-          temp[index].count+=count;
-          console.log(temp);  
-          localStorage.setItem('Cart',JSON.stringify(temp));
-          return
+      let array = [];
+      array.push(value);
+      localStorage.setItem("Cart", JSON.stringify(array));
+      if (event === "sw") {
+        history.push("/gio-hang");
+      } else {
+        alert({ icon: "success", title: "Đã thêm vào giỏ hàng" });
+      }
+    } else {
+      let temp = JSON.parse(cartList);
+
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].id === parentId) {
+          temp[i].count += count;
+          console.log(temp);
+          localStorage.setItem("Cart", JSON.stringify(temp));
+          if (event === "sw") {
+            history.push("/gio-hang");
+          } else {
+            alert({ icon: "success", title: "Đã thêm vào giỏ hàng" });
+          }
+          return;
         }
-       })
-     console.log(default1);
-     let value=({
-      parameter:defaultPrice._id,
-      price:defaultPrice.price,
-      nameParam:defaultPrice.name,
-      name:defaultValue.name,
-      image:defaultValue.image,
-      id:params.id,
-      count:Number(count),
-    });
-     console.log(value);
-    let aray= temp; 
-    console.log(aray);
-    aray.push(value)
-     
-      // setDeFault1(aray)
-    // console.log(default1);
-   
- localStorage.setItem('Cart',JSON.stringify(aray));
- 
-  }
+      }
 
-  }
+      let value = {
+        parameter: defaultPrice._id,
+        price: defaultPrice.price,
+        nameParam: defaultPrice.name,
+        name: defaultValue.name,
+        image: defaultValue.image,
+        id: params.id,
+        count: Number(count),
+      };
+
+      temp.push(value);
+      localStorage.setItem("Cart", JSON.stringify(temp));
+      if (event === "sw") {
+        history.push("/gio-hang");
+      } else {
+        alert({ icon: "success", title: "Đã thêm vào giỏ hàng" });
+      }
+    }
+  };
+
+  const formatCurrency = (price) => {
+    return price.toLocaleString("it-IT");
+  };
+
   const chuyenDoiURL = (str) => {
     str = str.toLowerCase();
 
@@ -165,23 +144,21 @@ const ProductDetail = () => {
       const res = await shopApis.getProductDetail(params.id);
       console.log(res);
       if (res.status === 200) {
-        // setProductList(res.data.product)
-        console.log(res.data);
         res.data.map((value, index) => {
           setParentId(value._id);
           setDefaultPrice({
             price: value.parameters[0].price,
             _id: value.parameters[0]._id,
-            name:value.parameters[0].name,
+            name: value.parameters[0].name,
           });
-         setDeFaultValue({
-          price: value.parameters[0].price,
-          _id: value.parameters[0]._id,
-          name:value.name,
-          image:value.image[0].url,
-         })
+          setDeFaultValue({
+            price: value.parameters[0].price,
+            _id: value.parameters[0]._id,
+            name: value.name,
+            image: value.image[0].url,
+          });
         });
-      
+
         setProductDeatil(res.data);
       }
     } catch (e) {
@@ -189,8 +166,6 @@ const ProductDetail = () => {
     }
   };
 
-  console.log(count);
-  
   return (
     <div style={{ with: "100%", overflow: "hidden" }}>
       <Nav />
@@ -301,10 +276,10 @@ const ProductDetail = () => {
               <a href="index.html">Trang chủ</a>
             </li>
             <li className="breadcrumb-item">
-              <a href="#">Sách kinh tếdsdsdsdsds</a>
+              <a href="#">Sách kinh tế</a>
             </li>
             <li className="breadcrumb-item">
-              <a href="#">Sách kinh tếdsdsdsdsds</a>
+              <a href="#">Sách kinh tế</a>
             </li>
             <li className="breadcrumb-item active">
               <a href="#">Sách kỹ năng làm việc</a>
@@ -324,14 +299,17 @@ const ProductDetail = () => {
               {/* ảnh  */}
               {productDetail.map((value, index) => (
                 <div className="col-md-6 khoianh">
-                  <div className="anhto mb-4" style={{marginLeft:'11%',width:'70%'}}>
+                  <div
+                    className="anhto mb-4"
+                    style={{ marginLeft: "11%", width: "70%" }}
+                  >
                     <Carousel
                       NextIcon={<FcNext size={20} />}
                       PrevIcon={<FcPrevious size={20} />}
                     >
                       {value.image.map((value, index) => (
                         <CardMedia
-                        style={{width:'400px',height:'400px'}}
+                          style={{ width: "400px", height: "400px" }}
                           key={index}
                           component="img"
                           image={value.url}
@@ -341,15 +319,13 @@ const ProductDetail = () => {
                   </div>
                   {/* <div className="list-anhchitiet d-flex mb-4" style={{marginLeft: '90px'}}>
                   <img className="thumb-img thumb1 mr-3" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua-mt.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-mt" />
-                    <img className="thumb-img thumb2" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua-ms.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-ms" />             
-                   
-                   
+                    <img className="thumb-img thumb2" src="/images/lap-ke-hoach-kinh-doanh-hieu-qua-ms.jpg" alt="lap-ke-hoach-kinh-doanh-hieu-qua-ms" />                                                   
                   </div> */}
                 </div>
               ))}
               {/* thông tin sản phẩm: tên, giá bìa giá bán tiết kiệm, các khuyến mãi, nút chọn mua.... */}
               {productDetail.map((value, index) => (
-                <div className="col-md-6 khoithongtin">
+                <div className="col-md-6 khoithongtin" key={index}>
                   <div className="row">
                     <div className="col-md-12 header">
                       <h4 className="ten">{value.name}</h4>
@@ -362,7 +338,7 @@ const ProductDetail = () => {
                           Giá bán tại DealBooks:
                           {value.parameters.map((value, index) => (
                             <span className="giamoi font-weight-bold">
-                              {defaultPrice.price}₫
+                              {formatCurrency(defaultPrice.price)}₫
                             </span>
                           ))}
                         </div>
@@ -371,45 +347,46 @@ const ProductDetail = () => {
                           className="danhsach"
                           style={{ marginRight: "2px" }}
                         >
-                          {value.parameters.length >=2 && value.parameters.map((value, index) => {
-                            if (value._id === defaultPrice._id) {
-                              return (
-                                <button
-                                  style={{
-                                    background: "#198754",
-                                    color: "white",
-                                  }}
-                                  type="button"
-                                  onClick={() =>
-                                    setDefaultPrice({
-                                      price: value.price,
-                                      _id: value._id,
-                                      name:value.name,
-                                    })
-                                  }
-                                  className="btn btn-outline-success"
-                                >
-                                  {value.name}
-                                </button>
-                              );
-                            } else {
-                              return (
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setDefaultPrice({
-                                      price: value.price,
-                                      _id: value._id,
-                                      name:value.name,
-                                    })
-                                  }
-                                  className="btn btn-outline-success"
-                                >
-                                  {value.name}
-                                </button>
-                              );
-                            }
-                          })}
+                          {value.parameters.length >= 2 &&
+                            value.parameters.map((value, index) => {
+                              if (value._id === defaultPrice._id) {
+                                return (
+                                  <button
+                                    style={{
+                                      background: "#198754",
+                                      color: "white",
+                                    }}
+                                    type="button"
+                                    onClick={() =>
+                                      setDefaultPrice({
+                                        price: value.price,
+                                        _id: value._id,
+                                        name: value.name,
+                                      })
+                                    }
+                                    className="btn btn-outline-success"
+                                  >
+                                    {value.name}
+                                  </button>
+                                );
+                              } else {
+                                return (
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setDefaultPrice({
+                                        price: value.price,
+                                        _id: value._id,
+                                        name: value.name,
+                                      })
+                                    }
+                                    className="btn btn-outline-success"
+                                  >
+                                    {value.name}
+                                  </button>
+                                );
+                              }
+                            })}
                         </div>
                       </div>
                       <div className="uudai my-3">
@@ -427,7 +404,7 @@ const ProductDetail = () => {
                           </li>
                         </ul>
                       </div>
-                  {/* <TextField
+                      {/* <TextField
                       label="Số Lượng"
                       value={count}
                       type='number'
@@ -438,27 +415,49 @@ const ProductDetail = () => {
                             inputComponent: NumberFormatCustom,
                       }}
                   /> */}
-                          <div className="item-info ml-3">
-                      
+                      <div className="item-info ml-3">
                         <div className="soluong d-flex">
                           <div className="input-number input-group mb-3">
-                            <div className="input-group-prepend" onClick={()=>handleChange("de")}>
-                              <span className="input-group-text btn-spin btn-dec">-</span>
+                            <div
+                              className="input-group-prepend"
+                              onClick={() => handleChange("de")}
+                            >
+                              <span className="input-group-text btn-spin btn-dec">
+                                -
+                              </span>
                             </div>
-                            <input value={count} type="text" style={{ height: '86%' }} defaultValue={1}  className="soluongsp  text-center" />
-                            <div className="input-group-append" onClick={()=>handleChange("in")} >
-                              <span  className="input-group-text btn-spin btn-inc">+</span>
+                            <input
+                              value={count}
+                              type="text"
+                              style={{ height: "86%" }}
+                              defaultValue={1}
+                              className="soluongsp  text-center"
+                            />
+                            <div
+                              className="input-group-append"
+                              onClick={() => handleChange("in")}
+                            >
+                              <span className="input-group-text btn-spin btn-inc">
+                                +
+                              </span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <Link to="/gio-hang"><button style={{marginTop:'5%'}} className="btn btn-outline-success w-100 text-uppercase" >
-                        Mua Ngay
-                      </button></Link>
-                      <button className="nutmua btn w-100 text-uppercase" onClick={()=>Data_Middle()}>
-                        Chọn mua
+                      <button
+                        style={{ marginTop: "5%" }}
+                        className="btn btn-outline-success w-100 text-uppercase"
+                        onClick={() => handlePayCart()}
+                      >
+                        Thêm vào giỏ hàng
                       </button>
-                    
+                      <button
+                        className="nutmua btn w-100 text-uppercase"
+                        onClick={() => handlePayCart("sw")}
+                      >
+                        Mua ngay
+                      </button>
+
                       <a
                         className="huongdanmuahang text-decoration-none"
                         href="#"
