@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
+import Footer from './Footer'
 import shopApis from "../../../apis/ShopApis";
 import { useHistory, Link } from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
