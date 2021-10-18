@@ -52,12 +52,12 @@ const Header = () => {
       {/* thanh tieu de "danh muc sach" + hotline + ho tro truc tuyen */}
       <section className="duoinavbar">
         <div
-          className="container text-white"
+          className="container  text-white"
           style={{ background: "white", width: "81%" }}
         >
           <div className="row justify">
             <div className="col-lg-3 md-12" style={{ padding: "0%" }}>
-              <div className="categoryheader">
+              <div className="categoryheader" style={{marginLeft:'0%'}}>
                 <div className="noidungheader text-white">
                   <i
                     className="fa fa-bars"
@@ -77,7 +77,7 @@ const Header = () => {
       {/* noi dung danh muc sach(categories) + banner slider */}
       <section className="header " style={{ background: "#F0F0F0" }}>
         <div
-          className="container"
+          className="container slidebar"
           style={{ background: "white", width: "81%" }}
         >
           <div className="row">

@@ -169,7 +169,7 @@ const ProductSearchList = (props) => {
       {/* ảnh banner  */}
 
       {/* thể loại sách: kinh tế chính trị nhân vật bài học kinh doanh ( từng ô vuông) */}
-      <section className="page-content my-3" style={{ background: '#F0F0F0', height: '280px' }}>
+      {/* <section className="page-content my-3" style={{ background: '#F0F0F0', height: '280px' }}>
         <div className="container" style={{ background: 'white', marginTop: '-17px', width: '81%', paddingBottom: '10px' }}>
           <div>
             <h1 className="header text-uppercase">Danh Mục</h1>
@@ -198,7 +198,7 @@ const ProductSearchList = (props) => {
             </ul>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* khối sản phẩm  */}
       <section className="content my-4" style={{ background: '#F0F0F0' }}>
         <div className="container contentList" style={{ marginTop: '-24px', width: '81%',marginBottom:'3%' }}>

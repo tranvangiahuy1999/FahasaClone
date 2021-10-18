@@ -417,7 +417,8 @@ ul i.fa.fa-chevron-right{
 ul li a.header{
     font-size: 15px;
     padding-left: 17px !important;
-    color: #64ae55;
+    color: #212529;
+    font-weight: 700;
 }
 
 .categorycontent ul li ul .content{
@@ -609,6 +610,7 @@ footer .header {
 
 .khoithongtin .soluong label {
     width: 101px;
+    margin-left: -5%;
     font-size: 22px;
     margin-top: 9px;
 }
@@ -665,10 +667,13 @@ footer .header {
 }
 
 .khoithongtin .giaban {
-    margin-top: -10%;
+    margin-top: -2%;
     font-size: 18px;
 }
-
+.my-3 {
+    margin-top: 1rem!important;
+    margin-bottom: 0rem!important;
+}
 .khoithongtin .giaban .giamoi {
     color: red;
     width: 100%;
@@ -728,6 +733,7 @@ footer .header {
     color: white;
     font-weight: bold;
     font-size: 15px;
+    margin-bottom: 5%;
 }
 
 .khoithongtin .nutmua:hover {
@@ -983,7 +989,9 @@ h6.card-title.ten {
     border: none;
 }
 /* het css cho _1khoi  */
-
+.btnRelated{
+    margin-top: -5% !important ;
+}
 
 
 @media (max-width:767px){
@@ -998,6 +1006,7 @@ h6.card-title.ten {
         position: relative;
         height: 100%;
         top: 15px;
+        /* margin-left: 10%; */
         transition: 0.3s;
         width: 100%;
     }
@@ -1037,6 +1046,7 @@ h6.card-title.ten {
                 position: absolute;
                 top: 30px !important;
                 left: 14px;
+                margin-left :20% !important;
     }
     .the-loai-sach ul{
         flex-wrap:wrap;
@@ -1044,7 +1054,7 @@ h6.card-title.ten {
     }
     .carousel-item {
         width: 80%;
-        margin-left: 53px;
+        margin-left: 0px;
     }
     .navbar ul li a.nav-link{
         margin-left:0.25rem!important;
@@ -1197,7 +1207,7 @@ a.btn.btn-warning.btn-sm.text-white:hover {
 
 ol.breadcrumb.mb-0.p-0.bg-transparent {
     margin-top: 13px;
-    margin-left: 25px;
+    margin-left: 3%;
 }
 
 .hotrokh {
@@ -1229,11 +1239,11 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
     }
   
     .contentList{
-        margin-left: 68px !important;
-        width: 82% !important;
+        margin-left: 68px;
+        width: 82% ;
     }
     .breadcrumbbar{
-        margin-left: -72px ;
+        margin-left: -37px;
     }
     .ptthanhtoan a img {
         width: 291px !important;
@@ -1255,8 +1265,8 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
         top: 0px;
     }
     .img_ipad{
-        height: 165px !important;
-        width: 165px !important;
+        height: 165px ;
+        width: 165px ;
     }
     a.btn.btn-warning.btn-sm.text-white {
         height: 38px;
@@ -1284,3 +1294,6 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
 
 }
 
+figure.table {
+    width: 60%;
+}
