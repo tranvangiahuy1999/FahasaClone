@@ -274,7 +274,7 @@ function HomePage() {
         </section>
         {/* khoi sach combo hot  */}
         <section className="_1khoi combohot " style={{marginTop:'2.5rem'}}>
-          <div className="container" style={{ width: "81%", padding: "0px" }}>
+          <div className="container listProduct" style={{ width: "81%", padding: "0px" }}>
             <div
               className="noidung"
               style={{
@@ -982,7 +982,7 @@ function HomePage() {
         </section>
         {/* khoi sach sap phathanh  */}
         <section className="_1khoi sapphathanh  " style={{ marginTop: "90px" }}>
-          <div className="container" style={{ width: "81%", padding: "0px" }}>
+          <div className="container releaseProduct" style={{ width: "81%", padding: "0px" }}>
             <div className="noidung bg-white" style={{ width: "100%" }}>
               <div
                 className="row"
@@ -1108,7 +1108,7 @@ function HomePage() {
           style={{ background: "#F0F0F0" }}
         >
           <div
-            className="container"
+            className="container readbook"
             style={{
               width: "81%",
               background: "white",

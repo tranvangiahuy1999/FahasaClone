@@ -139,7 +139,7 @@ const Receipt = () => {
   const CartDisplay = () => {
     if (!Value.length) {
       return (
-        <div className="row" style={{ background: "#F0F0F0" }}>
+        <div className="row" style={{ background: "#F0F0F0",height:'250px' }}>
           <div className="col-12 cart-empty" style={{ background: "white" }}>
             <div className="py-3 pl-3">
               <h6 className="header-gio-hang">
@@ -193,7 +193,7 @@ const Receipt = () => {
                             </div>
                             <input
                               type="text"
-                              style={{ height: "86%" }}
+                              style={{ height: "100%" }}
                               value={value.count}
                               className="soluongsp  text-center"
                             />
@@ -208,12 +208,7 @@ const Receipt = () => {
                           </div>
                         </div>
                       </div>
-                      <button
-                        type="button"
-                        className="element btn btn-outline-success"
-                      >
-                        {value.nameParam}
-                      </button>
+                  
                       <div className="item-price ml-auto d-flex flex-column align-items-end">
                         <div className="giamoi">
                           {formatCurrency(
@@ -229,8 +224,22 @@ const Receipt = () => {
                           />
                         </span>
                       </div>
+                      
                     </div>
+                    
                   </div>
+                  { 
+                      typeof value.nameParam !== 'undefined' ? (
+                      
+                      <button
+                        type="button"
+                        className="element btn btn-outline-success"
+                      >
+                        {value.nameParam}
+                      </button>
+                        )  : (
+                      <></>
+                        )}
                   <hr />
                 </div>
               ))}
@@ -454,7 +463,7 @@ const Receipt = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
       {/* giao diện giỏ hàng  */}
-      <section className="content my-3" style={{ background: "#F0F0F0" }}>
+      <section className="content " style={{ background: "#F0F0F0" }}>
         <div
           className="container recept_Ip "
           style={{ background: "#F0F0F0", width: "81%" }}
@@ -527,7 +536,83 @@ const Receipt = () => {
           </div>
         </div>
       </section>
-    <Footer/>
+      <div className="new" style={{ padding: "1%", background: "#F0F0F0" }}>
+        <footer>
+          <div
+            className="container py-4"
+            style={{ background: "white", width: "82%", marginTop: "-1%" }}
+          >
+            <div className="row">
+              <div className="col-md-6 col-xs-6">
+                <div className="gioithieu">
+                  <h3 className="header text-uppercase font-weight-bold">
+                    Về DealBook
+                  </h3>
+                  <a href="#">
+                    Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần
+                    Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM
+                  </a>
+                  <a href="#">
+                    Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi.
+                    KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng
+                    cũng như tất cả Hệ Thống Fahasa trên toàn quốc.
+                  </a>
+                  <a href="#">
+                    <img
+                      src="/images/dang-ky-bo-cong-thuong.png"
+                      alt="jcb-payment"
+                    />
+                  </a>
+                  <div
+                    className="fb-like"
+                    data-href="https://www.facebook.com/DealBook-110745443947730/"
+                    data-width="300px"
+                    data-layout="button"
+                    data-action="like"
+                    data-size="small"
+                    data-share="true"
+                  />
+                </div>
+              </div>
+              <div className="col-md-3 col-xs-6">
+                <div className="hotrokh">
+                  <h3 className="header text-uppercase font-weight-bold">
+                    HỖ TRỢ KHÁCH HÀNG
+                  </h3>
+                  <a href="#">Hướng dẫn đặt hàng</a>
+                  <a href="#">Phương thức thanh toán</a>
+                  <a href="#">Phương thức vận chuyển</a>
+                  <a href="#">Chính sách đổi trả</a>
+                </div>
+              </div>
+
+              <div className="col-md-3 col-xs-6">
+                <div className="ptthanhtoan">
+                  <a href="#">
+                    <img
+                      className="anhfanpage"
+                      src="/images/footer_icon1.png"
+                      style={{ marginLeft: "-10px" }}
+                      alt="jcb-payment"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+        {/* nut cuon len dau trang */}
+        <div className="fixed-bottom">
+          <div
+            className="btn btn-warning float-right rounded-circle nutcuonlen"
+            id="backtotop"
+            href="#"
+            style={{ background: "#64ae55" }}
+          >
+            <i className="fa fa-chevron-up text-white" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

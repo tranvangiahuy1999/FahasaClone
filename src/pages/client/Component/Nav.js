@@ -1,8 +1,50 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Input from "@material-ui/core/Input";
+import shopApis from "../../../apis/ShopApis";
 const Nav = () => {
   const [valueProduct, setValueProduct] = useState();
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(() => {
+    getCategoryData();
+  }, []);
+  const getCategoryData = async () => {
+    try {
+      const res = await shopApis.getCategoryList();
+      console.log(res);
+      if (res.status === 200) {
+        setCategoryList(res.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const chuyenDoiURL = (str) => {
+    str = str.toLowerCase();
 
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, "a");
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, "e");
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, "i");
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, "o");
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, "u");
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, "y");
+    str = str.replace(/(đ)/g, "d");
+
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, "");
+
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, "-");
+
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, "");
+
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, "");
+
+    // return
+    return str;
+  };
   const inputChange = (e) => {
     // prepare value
     let {
@@ -52,7 +94,31 @@ const Nav = () => {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="collapsibleNavId">
-   
+        <ul className="navbar-nav mb-1 ml-auto">
+          <li className="nav-item giohang">
+          <div className="smallmenu">
+                <input type="checkbox" id="overlay-input" />
+          <label for="overlay-input" id="overlay-button"><span></span></label>
+          <label className="Mobile_name" >Danh Mục Sách</label>
+            <div id="overlay">
+            <ul id="accordion" class="accordion">
+             
+                  <li>
+                    <div class="link"><i class="fa fa-database"></i>Web Design<i class="fa fa-chevron-down"></i></div>
+                    <ul class="submenu" style={{display:'none'}}>
+                      <li><a href="#">Photoshop</a></li>
+                      <li><a href="#">HTML</a></li>
+                      <li><a href="#">CSS</a></li>
+                    </ul>
+                  </li>
+ 
+              
+
+</ul>
+            </div>
+            </div>
+            </li>
+          </ul>
           {/* form tìm kiếm  */}
           <form className="form-inline ml-auto my-2 my-lg-0 mr-3">
               <div className="input-group" style={{width: '630px'}}>
@@ -71,6 +137,7 @@ const Nav = () => {
                 </div>
               </div>
             </form>
+          
           <ul className="navbar-nav mb-1 ml-auto">
             
             <li className="nav-item giohang">
@@ -82,51 +149,7 @@ const Nav = () => {
                 Hàng</a>
             </li>
           </ul>
-          <ul className="navbar-nav mb-1 ml-auto">
-          <li className="nav-item giohang">
-          <div className="smallmenu">
-                <input type="checkbox" id="overlay-input" />
-          <label for="overlay-input" id="overlay-button"><span></span></label>
-          <label className="Mobile_name" >Danh Mục Sách</label>
-            <div id="overlay">
-            <ul id="accordion" class="accordion">
-  <li>
-    <div class="link"><i class="fa fa-database"></i>Web Design<i class="fa fa-chevron-down"></i></div>
-    <ul class="submenu">
-      <li><a href="#">Photoshop</a></li>
-      <li><a href="#">HTML</a></li>
-      <li><a href="#">CSS</a></li>
-    </ul>
-  </li>
-  <li>
-    <div class="link"><i class="fa fa-code"></i>Coding<i class="fa fa-chevron-down"></i></div>
-    <ul class="submenu">
-      <li><a href="#">Javascript</a></li>
-      <li><a href="#">jQuery</a></li>
-      <li><a href="#">Ruby</a></li>
-    </ul>
-  </li>
-  <li>
-    <div class="link"><i class="fa fa-mobile"></i>Devices<i class="fa fa-chevron-down"></i></div>
-    <ul class="submenu">
-      <li><a href="#">Tablet</a></li>
-      <li><a href="#">Mobile</a></li>
-      <li><a href="#">Desktop</a></li>
-    </ul>
-  </li>
-  <li>
-    <div class="link"><i class="fa fa-globe"></i>Global<i class="fa fa-chevron-down"></i></div>
-    <ul class="submenu">
-      <li><a href="#">Google</a></li>
-      <li><a href="#">Bing</a></li>
-      <li><a href="#">Yahoo</a></li>
-    </ul>
-  </li>
-</ul>
-            </div>
-            </div>
-            </li>
-          </ul>
+         
         </div>
       </div>
     </nav>

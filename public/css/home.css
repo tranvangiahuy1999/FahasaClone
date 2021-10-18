@@ -252,6 +252,7 @@ label.error {
   height: 40px;
   width: 100%;
   background-color: #218338;
+  margin-left: 12%;
 }
 
 .duoinavbar .container .row {
@@ -685,6 +686,45 @@ footer .header {
   .navbar form .input-group {
     width: 100% !important;
   }
+  .img_ipad {
+    height: 100% !important;
+    width: auto !important;
+}
+  .listProduct{
+    width: 100% !important;
+  }
+  .releaseProduct{
+    width: 100% !important;
+  }
+  .readbook{
+    width: 100% !important;
+  }
+  .sort.d-flex.ml-auto{
+      margin-left: 10% !important;
+  }
+.slidebar {
+    width: 100% !important;
+}
+.mobileNewbook {
+  margin-left: 0% !important;
+  width: 100% !important;
+}
+  .contentList {
+    margin-left: 11% !important;
+    width: 100% !important;
+  }
+  img.MuiCardMedia-root.MuiCardMedia-media.MuiCardMedia-img {
+    width: 100% !important;
+    height: 100% !important;
+}
+  .anhto.mb-4 {
+    margin-left: 0% !important;
+    width: 100% !important;
+}
+
+.container.nd {
+    width: 100% !important;
+}
   .navbar-logo {
     margin-left: 0px !important;
 }
@@ -712,9 +752,7 @@ a.navbar-brand {
     padding-bottom: 15%;
   }
 
-  .mobileNewbook {
-    margin-left: 35px !important;
-  }
+  
   .navbar ul li a.nav-link {
     margin-left: 0.25rem !important;
   }
@@ -799,7 +837,7 @@ i.fa.fa-chevron-right.icon.float-right {
 }
 
 span.input-group-text.btn-spin.btn-inc {
-  height: 32px;
+  height: 30px;
   width: 32px;
   font-size: 20px;
   padding-left: 8px;
@@ -808,7 +846,7 @@ span.input-group-text.btn-spin.btn-inc {
 }
 
 span.input-group-text.btn-spin.btn-dec {
-  height: 32px;
+  height: 30px;
   width: 32px;
   font-size: 30px;
   padding-left: 10px;
@@ -892,11 +930,11 @@ a.btn.nutmuathem.mb-3:hover {
     margin-bottom: 50px;
   }
   .col-md-9.col-xs-12 {
-    margin-left: -30px;
+    margin-left: -12%;
     width: 100%;
   }
   .breadcrumbbar {
-    margin-left: -115px !important;
+    margin-left: -5% !important;
   }
   .ptthanhtoan a img {
     width: 291px !important;
@@ -938,10 +976,10 @@ a.btn.nutmuathem.mb-3:hover {
   ul.categorydetail {
     display: none !important;
   }
-  .carousel-inner {
+  /* .carousel-inner {
     margin-left: -65px;
     width: 115% !important;
-  }
+  } */
   .carousel {
     padding: 0;
   }
@@ -952,11 +990,11 @@ a.btn.nutmuathem.mb-3:hover {
   margin-left: 16%;
 }
 button.element.btn.btn-outline-success {
-    margin-top: 12%;
+    margin-top: -4%;
     font-size: 15px;
-    width: 75px;
+    width: 115px;
+    margin-left: 13%;
     height: 32px;
-    margin-left: -21%;
     margin-bottom: 2%;
 }
 body {
@@ -965,8 +1003,8 @@ body {
   font-family: arial;
   /* width: 100vw;
   height: 100vh; */
-  animation: bugfix infinite 1s;
-  -webkit-animation: bugfix infinite 1s;
+  /* animation: bugfix infinite 1s;
+  -webkit-animation: bugfix infinite 1s; */
 }
 
 @keyframes bugfix {
@@ -986,10 +1024,11 @@ body {
   }
 }
 #overlay-button {
-  position: absolute;
-  right: 82%;
-  top: 72%;
-  padding: 21px 11px;
+  right: 84%;
+  position: d;
+  position: fixed;
+  top: 33%;
+  margin-top: -36%;
   z-index: 5;
   cursor: pointer;
   user-select: none;
@@ -1001,7 +1040,7 @@ body {
   background-color:black;
   position: relative;
   display: block;
-  transition: all 0.2s ease-in-out;
+  /* transition: all 0.2s ease-in-out; */
 }
 #overlay-button span:before {
   top: -10px;
@@ -1029,6 +1068,7 @@ input[type=checkbox] {
 
 input[type=checkbox]:checked ~ #overlay {
   visibility: visible;
+  margin-top: -3%;
 }
 
 input[type=checkbox]:checked ~ #overlay-button:hover span, input[type=checkbox]:checked ~ #overlay-button span {
@@ -1043,10 +1083,10 @@ input[type=checkbox]:checked ~ #overlay-button span:after {
 }
 
 #overlay {
-  height: 27vh;
-  width: 95vw;
-  background: #ec6451;
-  z-index: 2;
+  width: 70vw;
+  height: 75%;
+  overflow: hidden;
+  z-index: 7;
   visibility: hidden;
   position: fixed;
 }
@@ -1054,19 +1094,23 @@ input[type=checkbox]:checked ~ #overlay-button span:after {
   visibility: visible;
 }
 #overlay ul {
-  display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 85%;
   padding-left: 0;
+  margin-top: 1px;
   list-style-type: none;
+  padding-top: 0%;
+  z-index: 99;
 }
 #overlay ul li {
-  padding: 1em;
+  padding: 1px;
+  font-size: 11px;
 }
 #overlay ul li a {
   color: white;
   text-decoration: none;
   font-size: 1.5em;
+  line-height: 0px;
 }
 #overlay ul li a:hover {
   color: #333332;
@@ -1122,24 +1166,22 @@ h1 a {
 .accordion .link {
   cursor: pointer;
   display: block;
-  padding: 15px 15px 15px 42px;
+  padding: 0px 15px 15px 42px;
   color: #4D4D4D;
   font-size: 14px;
   font-weight: 700;
   border-bottom: 1px solid #CCC;
   position: relative;
- 
 }
 
 .accordion li:last-child .link { border-bottom: 0; }
 
 .accordion li i {
   position: absolute;
-  top: 16px;
+  top: 0px;
   left: 12px;
   font-size: 18px;
   color: #595959;
-
 }
 
 .accordion li i.fa-chevron-down {
@@ -1180,9 +1222,15 @@ h1 a {
   padding-left: 42px;
 
 }
-
 .submenu a:hover {
   background: #b63b4d;
   color: #FFF;
 }
-
+button.btn.btn-outline-success {
+  background: white;
+  border-radius: 10px;
+  color: rgb(25, 135, 84);
+}
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.form-control {
+    border: 2px solid;
+}
