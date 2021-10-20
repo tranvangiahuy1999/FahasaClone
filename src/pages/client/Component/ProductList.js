@@ -45,7 +45,9 @@ const ProductList = () => {
     getProductData(page);
     setPage(page);
   };
-
+  const formatCurrency = (price) => {
+    return price.toLocaleString("it-IT");
+  };
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
@@ -434,7 +436,11 @@ const ProductList = () => {
                              {value.parameters
                                 .filter((item, idx) => idx < 1)
                                 .map((value, index) => (
-                              <div className="giamoi">{value.price}đ</div>
+                              <div className="giamoi">
+                              
+                              {formatCurrency(value.price)}₫
+                           
+                                </div>
                              
                              ))}
                            

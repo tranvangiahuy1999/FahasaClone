@@ -94,41 +94,17 @@ const Nav = () => {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="collapsibleNavId">
-        <ul className="navbar-nav mb-1 ml-auto">
-          <li className="nav-item giohang">
-          <div className="smallmenu">
-                <input type="checkbox" id="overlay-input" />
-          <label for="overlay-input" id="overlay-button"><span></span></label>
-          <label className="Mobile_name" >Danh Mục Sách</label>
-            <div id="overlay">
-            <ul id="accordion" class="accordion">
-             
-                  <li>
-                    <div class="link"><i class="fa fa-database"></i>Web Design<i class="fa fa-chevron-down"></i></div>
-                    <ul class="submenu" style={{display:'none'}}>
-                      <li><a href="#">Photoshop</a></li>
-                      <li><a href="#">HTML</a></li>
-                      <li><a href="#">CSS</a></li>
-                    </ul>
-                  </li>
- 
-              
-
-</ul>
-            </div>
-            </div>
-            </li>
-          </ul>
+       
           {/* form tìm kiếm  */}
           <form className="form-inline ml-auto my-2 my-lg-0 mr-3">
               <div className="input-group" style={{width: '630px'}}>
-                {/* <input type="text" className="form-control" aria-label="Small" value={valueProduct} placeholder="Nhập sách cần tìm kiếm..." /> */}
-                <Input    type="text"
+                <input type="text" className="form-control" aria-label="Small" onChange={inputChange} value={valueProduct} placeholder="Nhập sách cần tìm kiếm..." />
+                {/* <Input    type="text"
                           name="name"
                           className="form-control" aria-label="Small"
                           placeholder="Nhập sách cần tìm kiếm..."
                           onChange={inputChange}
-                          value={valueProduct}/>
+                          value={valueProduct}/> */}
                 <div className="input-group-append">
                   <a type="button" className="btn" href={"/ket-qua/"+valueProduct} style={{backgroundColor: '#64ae55', color: 'white'}}>
                     <i className="fa fa-search" />
@@ -137,7 +113,34 @@ const Nav = () => {
                 </div>
               </div>
             </form>
-          
+            <ul className="navbar-nav mb-1 ml-auto">
+          <li className="nav-item giohang">
+          <div className="smallmenu">
+                <input type="checkbox" id="overlay-input" />
+          <label for="overlay-input" id="overlay-button"><span></span></label>
+          <label className="Mobile_name" >Danh Mục Sách</label>
+            <div id="overlay">
+            <ul id="accordion" class="accordion">
+                {categoryList
+                 .filter((item, idx) => idx < 11)
+                 .map((value, index) =>
+                
+                  <li>
+                    <div class="link"><i class="fa fa-database"></i>{value.name}</div>
+                    {/* <ul class="submenu" style={{display:'none'}}>
+                      <li><a href="#">Photoshop</a></li>
+                      <li><a href="#">HTML</a></li>
+                      <li><a href="#">CSS</a></li>
+                    </ul> */}
+                  </li>
+                 )}
+</ul>
+            </div>
+            </div>
+            </li>
+          </ul>
+
+
           <ul className="navbar-nav mb-1 ml-auto">
             
             <li className="nav-item giohang">

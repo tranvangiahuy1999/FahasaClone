@@ -169,7 +169,7 @@ const ProductDetail = () => {
       console.log(e);
     }
   };
-
+  
   return (
     <div style={{ with: "100%", overflow: "hidden" }}>
       <Nav />
@@ -294,7 +294,7 @@ const ProductDetail = () => {
       {/* nội dung của trang  */}
       <section
         className="product-page mb-4"
-        style={{ background: "#F0F0F0", paddingBottom: "50px" }}
+        style={{ background: "#F0F0F0", paddingBottom: "50px",marginTop:'-1%' }}
       >
         <div className="container nd" style={{ width: "82%" }}>
           {/* chi tiết 1 sản phẩm */}
@@ -344,6 +344,7 @@ const ProductDetail = () => {
                             <span className="giamoi font-weight-bold" style={{ color: "#f94144", marginLeft: "10%" }}>
                               {formatCurrency(defaultPrice.price)}₫
                             </span>
+                            
                           ))}
                         </div>
 
@@ -357,8 +358,7 @@ const ProductDetail = () => {
                                 return (
                                   <button
                                     style={{
-                                      background: "#198754",
-                                      color: "white",
+                                      fontWeight:'bold'
                                     }}
                                     type="button"
                                     onClick={() =>
@@ -376,6 +376,7 @@ const ProductDetail = () => {
                               } else {
                                 return (
                                   <button
+                                  
                                     type="button"
                                     onClick={() =>
                                       setDefaultPrice({
@@ -619,7 +620,7 @@ const ProductDetail = () => {
             </div>
             <div className="khoisanpham" style={{ paddingBottom: "5rem" }}>
               {/* 1 sản phẩm */}
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="Lap-trinh-ke-hoach-kinh-doanh-hieu-qua.html"
                   className="motsanpham"
@@ -641,12 +642,12 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">111.200 ₫</div>
                       <div className="giacu text-muted">139.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
               </div>
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="Ma-bun-luu-manh-va-nhung-cau-chuyen-khac-cua-nguyen-tri.html"
                   className="motsanpham"
@@ -669,12 +670,12 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">68.000 ₫</div>
                       <div className="giacu text-muted">85.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
               </div>
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="#"
                   className="motsanpham"
@@ -696,12 +697,12 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">111.200 ₫</div>
                       <div className="giacu text-muted">139.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
               </div>
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="#"
                   className="motsanpham"
@@ -727,12 +728,12 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">111.200 ₫</div>
                       <div className="giacu text-muted">139.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
               </div>
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="#"
                   className="motsanpham"
@@ -756,12 +757,12 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">111.200 ₫</div>
                       <div className="giacu text-muted">139.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
               </div>
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="#"
                   className="motsanpham"
@@ -783,12 +784,12 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">111.200 ₫</div>
                       <div className="giacu text-muted">139.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
               </div>
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="#"
                   className="motsanpham"
@@ -811,12 +812,12 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">111.200 ₫</div>
                       <div className="giacu text-muted">139.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
               </div>
-              <div className="card">
+              <div className="card slick-slide">
                 <a
                   href="#"
                   className="motsanpham"
@@ -838,7 +839,7 @@ const ProductDetail = () => {
                     <div className="gia d-flex align-items-baseline">
                       <div className="giamoi">111.200 ₫</div>
                       <div className="giacu text-muted">139.000 ₫</div>
-                      <div className="sale">-20%</div>
+                      {/* <div className="sale">-20%</div> */}
                     </div>
                   </div>
                 </a>
