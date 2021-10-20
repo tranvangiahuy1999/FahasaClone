@@ -964,7 +964,8 @@ h6.card-title.ten {
 }
 
 .card-body.noidungsp {
-    padding: 10px 10px 15px 10px;
+    padding: 11px 10px 15px 25px;
+    height: 115px;
 }
 
 .card {
@@ -998,6 +999,7 @@ h6.card-title.ten {
     .navbar form .input-group{
         width: 100%!important;
     }
+
     .footer_detail {
         width: 100% !important;
         margin-left: 0% !important;
@@ -1086,7 +1088,7 @@ h6.card-title.ten {
         height: 38px;
         width: 180px;
         color: orange !important;
-        margin-left: 18% !important ;
+        margin-left: 23% !important;
         background: #f5a6230a;
         font-size: 19px;
     } 
@@ -1237,13 +1239,17 @@ ol.breadcrumb.mb-0.p-0.bg-transparent {
         align-items: center;
         margin-top: 20px;
     }
-  
+    .detail-discount{
+        height: 156px !important;
+        width: 280px !important; 
+        margin-top: 10%;
+    }
     .contentList{
         margin-left: 68px;
         width: 82% ;
     }
     .breadcrumbbar{
-        margin-left: -37px;
+        margin-left: 6%;
     }
     .ptthanhtoan a img {
         width: 291px !important;

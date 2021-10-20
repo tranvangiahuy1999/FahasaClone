@@ -803,9 +803,9 @@ button.receiptbtn {
         font-size: 15px;
         width: 112px;
         height: 32px;
-        margin-left: -2%;
+        margin-left: 73%;
         margin-bottom: 6%;
-        margin-top: 3%;
+        margin-top: -11%;
     }
     .new{
         margin-right: 0px !important;
@@ -817,7 +817,7 @@ button.receiptbtn {
         width: 85% !important ;
     }
     .price{
-        width: 270px !important;
+        width: 100% !important;
     }
     .footer_detail {
         width: 83% !important;

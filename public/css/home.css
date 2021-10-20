@@ -252,7 +252,7 @@ label.error {
   height: 40px;
   width: 100%;
   background-color: #218338;
-  margin-left: 12%;
+  margin-left: 11%;
 }
 
 .duoinavbar .container .row {
@@ -782,6 +782,15 @@ a.navbar-brand {
     margin-top: 0%;
     margin-left: 10px;
   }
+  button.element.btn.btn-outline-success {
+    margin-top: 12%;
+    font-size: 15px;
+    width: 112px;
+    height: 32px;
+    margin-left: 56% !important;
+    margin-bottom: 6% ;
+    margin-top: -20% !important;
+}
 }
 
 .privacy.py-sm-5.py-4 {
@@ -934,12 +943,12 @@ a.btn.nutmuathem.mb-3:hover {
     width: 100%;
   }
   .breadcrumbbar {
-    margin-left: -5% !important;
+    margin-left: -2% !important;
   }
   .ptthanhtoan a img {
     width: 291px !important;
     margin-top: 0px !important;
-    margin-left: -7% !important;
+    margin-left: -14% !important;
   }
   .navbar ul li a.nav-link {
     margin-left: 0.25rem !important;
@@ -990,12 +999,12 @@ a.btn.nutmuathem.mb-3:hover {
   margin-left: 16%;
 }
 button.element.btn.btn-outline-success {
-    margin-top: -4%;
     font-size: 15px;
-    width: 115px;
-    margin-left: 13%;
-    height: 32px;
-    margin-bottom: 2%;
+    height: 33px;
+    width: 112px;
+    margin-top: -4%;
+    margin-left: 12%;
+    position: absolute;
 }
 body {
   background: #87cc77;
@@ -1024,11 +1033,9 @@ body {
   }
 }
 #overlay-button {
-  right: 84%;
   position: d;
   position: fixed;
-  top: 33%;
-  margin-top: -36%;
+  margin-top: 6%;
   z-index: 5;
   cursor: pointer;
   user-select: none;
@@ -1097,7 +1104,7 @@ input[type=checkbox]:checked ~ #overlay-button span:after {
   flex-direction: column;
   height: 85%;
   padding-left: 0;
-  margin-top: 1px;
+  margin-top: 5%;
   list-style-type: none;
   padding-top: 0%;
   z-index: 99;
@@ -1227,10 +1234,14 @@ h1 a {
   color: #FFF;
 }
 button.btn.btn-outline-success {
-  background: white;
-  border-radius: 10px;
-  color: rgb(25, 135, 84);
+  background: white !important;
+  border-radius: 5px;
+  color: rgb(25, 135, 84) !important;
 }
 .MuiInputBase-root.MuiInput-root.MuiInput-underline.form-control {
     border: 2px solid;
+}
+
+.soluong.d-flex {
+    margin-top: -3%;
 }

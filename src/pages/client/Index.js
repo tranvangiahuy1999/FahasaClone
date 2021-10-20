@@ -58,7 +58,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
@@ -86,7 +86,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">68.000 ₫</div>
                         <div className="giacu text-muted">85.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
@@ -113,7 +113,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
@@ -144,7 +144,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
@@ -173,7 +173,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
@@ -202,7 +202,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
@@ -230,7 +230,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
@@ -257,7 +257,7 @@ function HomePage() {
                       <div className="gia d-flex align-items-baseline">
                         <div className="giamoi">111.200 ₫</div>
                         <div className="giacu text-muted">139.000 ₫</div>
-                        <div className="sale">-20%</div>
+                        {/* <div className="sale">-20%</div> */}
                       </div>
                     </div>
                   </a>
