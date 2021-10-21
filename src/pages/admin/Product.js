@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
@@ -113,32 +115,6 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    overflowX: "true",
-    padding: 20,
-  },
-  paper: {
-    width: "100%",
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    width: "100%",
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: "rect(0 0 0 0)",
-    height: 1,
-    margin: -1,
-    overflow: "hidden",
-    padding: 0,
-    position: "absolute",
-    top: 20,
-    width: 1,
-  },
-}));
-
 export default function Product() {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -151,6 +127,7 @@ export default function Product() {
   const [photoData, setPhotoData] = useState([]);
   const [actionItemId, setActionItemId] = useState();
   const [confirmModalState, setConfirmModalState] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     getAllProducts(page);
@@ -168,6 +145,7 @@ export default function Product() {
 
   const getAllProducts = async (page) => {
     try {
+      setLoader(true);
       const res = await adminApis.getAllProducts(page);
       if (res.status === 200) {
         setProductList([...res.data.product]);
@@ -180,6 +158,7 @@ export default function Product() {
     } catch (e) {
       console.log(e);
     }
+    setLoader(false);
   };
 
   const handleDeleteRerender = (id) => {
@@ -196,6 +175,7 @@ export default function Product() {
         getAllProducts(1);
         return;
       }
+      setLoader(true);
       const res = await adminApis.getProductByPageAndBarcode(page, value);
       if (res.status === 200) {
         setProductList([...res.data.products]);
@@ -208,10 +188,12 @@ export default function Product() {
     } catch (e) {
       console.log(e);
     }
+    setLoader(false);
   };
 
   const deleteProduct = async (id) => {
     try {
+      setLoader(true);
       const res = await adminApis.deleteProduct(id);
       if (res.status === 200) {
         alert({ icon: "success", title: "Đã xóa thành công" });
@@ -223,6 +205,7 @@ export default function Product() {
     } catch (e) {
       console.log(e);
     }
+    setLoader(false);
   };
 
   const openWidePhoto = (photo) => {
@@ -269,6 +252,9 @@ export default function Product() {
 
   return (
     <div className={classes.root}>
+      <Backdrop className={classes.backdrop} open={loader}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="row mb-2">
         <ReactBnbGallery
           opacity={0.8}
@@ -408,3 +394,33 @@ export default function Product() {
     </div>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    overflowX: "true",
+    padding: 20,
+  },
+  paper: {
+    width: "100%",
+    marginBottom: theme.spacing(2),
+  },
+  table: {
+    width: "100%",
+  },
+  visuallyHidden: {
+    border: 0,
+    clip: "rect(0 0 0 0)",
+    height: 1,
+    margin: -1,
+    overflow: "hidden",
+    padding: 0,
+    position: "absolute",
+    top: 20,
+    width: 1,
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));

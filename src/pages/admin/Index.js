@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Hidden from "@material-ui/core/Hidden";
-import { Menu, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Collapse from "@material-ui/core/Collapse";
@@ -16,11 +15,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { HiViewList } from "react-icons/hi";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import { FiBook, FiBookmark } from "react-icons/fi";
 import { BiReceipt } from "react-icons/bi";
 import { RiUserReceivedFill } from "react-icons/ri";
-import { AiOutlineSetting } from "react-icons/ai";
 
 import Category from "./Category";
 import Product from "./Product";
@@ -29,6 +27,8 @@ import ReceiptCancel from "./ReceiptCancel";
 import CreateProduct from "./CreateProduct";
 import UpdateProduct from "./UpdateProduct";
 import TagManagement from "./Tag";
+import BoxTagManager from "./BoxTag";
+import BoxTagDetail from "./BoxTagDetail";
 
 import {
   BrowserRouter as Router,
@@ -59,7 +59,6 @@ const AdminIndex = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     getCategoryList();
@@ -109,6 +108,15 @@ const AdminIndex = (props) => {
     {
       path: "/admin/tag",
       main: () => <TagManagement></TagManagement>,
+    },
+    {
+      path: "/admin/box-tag",
+      exact: true,
+      main: () => <BoxTagManager></BoxTagManager>,
+    },
+    {
+      path: "/admin/box-tag/:id",
+      main: () => <BoxTagDetail></BoxTagDetail>,
     },
   ];
 
@@ -179,6 +187,18 @@ const AdminIndex = (props) => {
             </ListItem>
             <ListItem
               component={NavLink}
+              to="/admin/box-tag"
+              activeClassName="Mui-selected"
+              button
+              style={style.nested}
+            >
+              <ListItemText
+                primary="Box tag"
+                classes={{ primary: styles.listItemText }}
+              />
+            </ListItem>
+            <ListItem
+              component={NavLink}
               to="/admin/tag"
               activeClassName="Mui-selected"
               button
@@ -222,19 +242,10 @@ const AdminIndex = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleClickSettingMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(userlogoutsuccess());
-    setAnchorEl(null);
     // return history.push("/login");
-  };
-
-  const handleCloseSettingMenu = () => {
-    setAnchorEl(null);
   };
 
   const container =
@@ -250,7 +261,6 @@ const AdminIndex = (props) => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              // sx={{ mr: 2, display: { sm: "none" } }}
               className={styles.menuButton}
             >
               <HiViewList color={ICON_COLOR}></HiViewList>
@@ -268,28 +278,21 @@ const AdminIndex = (props) => {
               Trang quản lý
             </Typography>
             <div className="admin-toolbar-setting">
-              <IconButton onClick={handleClickSettingMenu}>
-                <AiOutlineSetting
-                  size="26px"
+              <div className="link-text" onClick={handleLogout}>
+                <RiUserReceivedFill
                   color={ICON_COLOR}
-                ></AiOutlineSetting>
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleCloseSettingMenu}
-              >
-                <MenuItem onClick={handleLogout}>
-                  <div>
-                    <RiUserReceivedFill
-                      color={ICON_COLOR}
-                      size="18px"
-                    ></RiUserReceivedFill>{" "}
-                    <span>Đăng xuất</span>
-                  </div>
-                </MenuItem>
-              </Menu>
+                  size="20px"
+                ></RiUserReceivedFill>{" "}
+                <span
+                  style={{
+                    color: ICON_COLOR,
+                    size: "2rem",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Đăng xuất
+                </span>
+              </div>
             </div>
           </Toolbar>
         </AppBar>
@@ -302,7 +305,7 @@ const AdminIndex = (props) => {
               open={mobileOpen}
               onClose={handleDrawerToggle}
               ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
+                keepMounted: true,
               }}
             >
               {drawer}
@@ -351,7 +354,7 @@ const style = {
     color: ICON_COLOR,
   },
   nested: {
-    paddingLeft: "70px",
+    paddingLeft: "72px",
     color: TEXT_ON_PRIMARY,
   },
   nestedIcon: {

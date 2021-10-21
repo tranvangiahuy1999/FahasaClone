@@ -457,7 +457,7 @@ export default function UpdateProduct() {
       if (res.status === 200) {
         alert({
           icon: "success",
-          title: "Tạo sản phẩm thành công",
+          title: "Cập nhật sản phẩm thành công",
         });
         history.push("/admin/product");
       }

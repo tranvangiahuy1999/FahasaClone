@@ -65,7 +65,6 @@ const CreateTagModal = (props) => {
           name: convertFirstCharUppercase(editName),
           category: cate,
         };
-        console.log(formData);
         res = await AdminApi.createTag(formData);
       }
 
@@ -75,23 +74,29 @@ const CreateTagModal = (props) => {
           title: res.message,
           msg: "Cập nhật thành công",
         });
-        props.closeModalAfterSave();
+        closeModalAfterSave();
+      } else {
+        alert({
+          icon: "error",
+          title: "Đã có lỗi xảy ra",
+          msg: "Xin vui lòng thử lại",
+        });
+        closeModal();
       }
     } catch (e) {
       console.log(e);
     }
     setSubmitStateBtn(false);
-    closeModalAfterSave();
   };
 
   const closeModalAfterSave = () => {
-    resetModal();
     props.closeModalAfterSave();
+    resetModal();
   };
 
   const closeModal = () => {
-    resetModal();
     props.closeModal();
+    resetModal();
   };
 
   return (
@@ -132,21 +137,23 @@ const CreateTagModal = (props) => {
                   required
                 />
               </FormGroup>
-              <FormGroup className="mt-2">
-                <Autocomplete
-                  id="combo-box-demo"
-                  options={cateList}
-                  getOptionLabel={(option) => option.name}
-                  onChange={(event, newValue) => {
-                    setCate(newValue._id);
-                  }}
-                  size="small"
-                  renderInput={(params) => (
-                    <TextField {...params} label="Thuộc danh mục" />
-                  )}
-                  required
-                />
-              </FormGroup>
+              {!props.tagEditFilter && (
+                <FormGroup className="mt-2">
+                  <Autocomplete
+                    id="combo-box-demo"
+                    options={cateList}
+                    getOptionLabel={(option) => option.name}
+                    onChange={(event, newValue) => {
+                      setCate(newValue._id);
+                    }}
+                    size="small"
+                    renderInput={(params) => (
+                      <TextField {...params} label="Thuộc danh mục" />
+                    )}
+                    required
+                  />
+                </FormGroup>
+              )}
               <FormGroup className="mt-3">
                 <Button
                   variant="contained"

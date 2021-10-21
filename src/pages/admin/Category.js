@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
@@ -24,8 +26,8 @@ import { useSelector } from "react-redux";
 import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { FaRegEdit } from "react-icons/fa";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { IoTrashBin } from "react-icons/io5";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const headCells = [
   {
@@ -87,34 +89,37 @@ export default function Category(props) {
   const cateList = useSelector((state) => state.admin);
   const classes = useStyles();
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [prototypeCateList, setPrototypeCateList] = useState([]);
   const [categoryList, getCategoryList] = useState([]);
   const [parentId, setParentId] = useState();
   const [editCateData, setEditCateData] = useState();
-  const [updateBtnState, setUpdateBtnState] = useState(true);
-  const [updateBtnLoad, setUpdateBtnLoad] = useState(false);
+  const [confirmModalState, setConfirmModalState] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const [updateBtnState, setUpdateBtnState] = useState(true);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const temp = new URLSearchParams(query);
     setParentId(temp.get("parentId"));
-
     if (id) {
       getCategoryByParentId(id);
     } else {
       getCategoryList([...cateList.categoryData]);
+      setPrototypeCateList([...cateList.categoryData]);
+      setLoader(false);
     }
   }, [id, cateList]);
 
   const getCategoryByParentId = async (id) => {
     try {
+      setLoader(true);
       const query = `?parentId=${id}`;
       const res = await adminApis.getCategoryByParent(query);
       if (res.status === 200) {
         getCategoryList([...res.data]);
+        setPrototypeCateList([...res.data]);
       }
+      setLoader(false);
     } catch (e) {
       console.log(e);
     }
@@ -134,9 +139,11 @@ export default function Category(props) {
     setOpenCreateModal(false);
   };
 
-  const createModalHandleCloseAfterSave = () => {
+  const createModalHandleCloseAfterSave = async () => {
     createModalHandleClose();
-    props.getCategoryList();
+    setLoader(true);
+    await props.getCategoryList();
+    setLoader(false);
   };
 
   const formatSingleDayMonth = (string) => {
@@ -166,30 +173,31 @@ export default function Category(props) {
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     getCategoryList([...items]);
+    setPrototypeCateList([...items]);
   };
 
   const updateCategoryPosition = async () => {
     try {
       if (!categoryList.length) return;
-
       const reqArray = formatUpdateCategoryData(categoryList);
       const reqData = { cateList: reqArray };
       setUpdateBtnState(true);
-      setUpdateBtnLoad(true);
+      setLoader(true);
       const res = await adminApis.updateCategoryPosition(reqData);
       if (res.status === 200) {
         alert({
           icon: "success",
           title: "Cập nhật thứ tự danh mục thành công",
         });
+        await props.getCategoryList();
         setUpdateBtnState(true);
       } else {
         alert({ icon: "error", title: "Cập nhật thứ tự danh mục thất bại" });
       }
+      setLoader(false);
     } catch (e) {
       console.log(e);
     }
-    setUpdateBtnLoad(false);
   };
 
   const formatUpdateCategoryData = (array) => {
@@ -200,24 +208,62 @@ export default function Category(props) {
     return temp;
   };
 
-  const deleteCategory = async (cateId) => {
+  const openConfirmDeleteModal = (data) => {
+    setEditCateData(data);
+    setConfirmModalState(true);
+  };
+
+  const closeAfterSaveConfirmModal = () => {
+    closeConfirmModal();
+  };
+
+  const closeConfirmModal = () => {
+    setEditCateData();
+    setConfirmModalState(false);
+  };
+
+  const deleteCategotyUIHandler = (cateId) => {
+    let temp = categoryList;
+    let res = temp.filter((ele) => {
+      return ele._id !== cateId;
+    });
+    return res;
+  };
+
+  const deleteCategory = async () => {
     try {
+      setLoader(true);
+      const cateId = editCateData;
       const res = await adminApis.deleteCategoty(cateId);
       if (res.status === 200) {
         alert({ icon: "success", title: "Xóa danh mục thành công" });
-        if (id) {
-          getCategoryByParentId(id);
-        } else {
-          getCategoryList([...cateList.categoryData]);
-        }
+        const deletedArr = deleteCategotyUIHandler(cateId);
+        getCategoryList([...deletedArr]);
+        setPrototypeCateList([...deletedArr]);
+        closeAfterSaveConfirmModal();
       } else {
         alert({ icon: "error", title: "Xóa danh mục thất bại" });
+        closeConfirmModal();
       }
+      setLoader(false);
     } catch (e) {}
+  };
+
+  const searchCategory = (value) => {
+    let result = prototypeCateList.filter((item) => item.name.includes(value));
+    getCategoryList([...result]);
   };
 
   return (
     <div className={classes.root}>
+      <Backdrop className={classes.backdrop} open={loader}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <ConfirmModal
+        open={confirmModalState}
+        handleClose={() => setConfirmModalState(false)}
+        accept={deleteCategory}
+      ></ConfirmModal>
       <CreateCategoryModal
         open={openCreateModal}
         closeModal={createModalHandleClose}
@@ -267,6 +313,7 @@ export default function Category(props) {
                 </InputAdornment>
               ),
             }}
+            onChange={(e) => searchCategory(e.target.value)}
             variant="standard"
           />
         </div>
@@ -282,11 +329,7 @@ export default function Category(props) {
               onClick={updateCategoryPosition}
               variant="contained"
             >
-              {updateBtnLoad ? (
-                <CircularProgress size="1.6rem" style={{ color: "white" }} />
-              ) : (
-                "Cập nhật thứ tự"
-              )}
+              Cập nhật thứ tự
             </Button>
           </div>
           <div className="col-6 right-wrapper">
@@ -393,7 +436,9 @@ export default function Category(props) {
                                   </IconButton>
                                   <IconButton
                                     color="secondary"
-                                    onClick={() => deleteCategory(row._id)}
+                                    onClick={() =>
+                                      openConfirmDeleteModal(row._id)
+                                    }
                                   >
                                     <IoTrashBin
                                       className="text-danger"
@@ -447,5 +492,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
   },
 }));
