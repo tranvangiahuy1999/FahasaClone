@@ -76,6 +76,62 @@ const adminApis = {
     const url = "/api/tag/get-list";
     return axiosClient.get(url);
   },
+  deleteTag(id) {
+    const url = `/api/tag/delete/${id}`;
+    return axiosClient.delete(url);
+  },
+  getProductByTagId(id) {
+    const url = `/api/tag/get-product/${id}`;
+    return axiosClient.get(url);
+  },
+  addProductToTag(tagId, productId) {
+    const url = `/api/tag/add-product/${tagId}`;
+    return axiosClient.post(url, productId);
+  },
+  removeProductfromTag(tagId, productId) {
+    const url = `/api/tag/remove-product/${tagId}`;
+    return axiosClient.patch(url, productId);
+  },
+  getFreeTag() {
+    const url = "/api/tag/free-tag";
+    return axiosClient.get(url);
+  },
+  getBoxTagList() {
+    const url = "/api/box-tag/get-list";
+    return axiosClient.get(url);
+  },
+  createBoxTag(data) {
+    const url = "/api/box-tag/create";
+    return axiosClient.post(url, data);
+  },
+  updateBoxTag(id, data) {
+    const url = `/api/box-tag/update/${id}`;
+    return axiosClient.put(url, data);
+  },
+  updatBoxTagPosition(data) {
+    const url = "/api/box-tag/update-position";
+    return axiosClient.put(url, data);
+  },
+  getTagWithBoxTagId(id) {
+    const url = `/api/box-tag/detail/${id}`;
+    return axiosClient.get(url);
+  },
+  deleteBoxTag(id) {
+    const url = `/api/box-tag/delete/${id}`;
+    return axiosClient.delete(url);
+  },
+  addTagToBoxTag(boxTagId, tagId) {
+    const url = `/api/box-tag/add-tag/${boxTagId}`;
+    return axiosClient.put(url, tagId);
+  },
+  removeTagFromBoxTag(tagId) {
+    const url = `/api/box-tag/remove-tag/${tagId}`;
+    return axiosClient.patch(url);
+  },
+  updateBoxTagPosition(data) {
+    const url = "/api/box-tag/update-position";
+    return axiosClient.put(url, data);
+  },
 };
 
 export default adminApis;

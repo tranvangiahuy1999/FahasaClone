@@ -27,7 +27,7 @@
 }
 
 .category-modal {
-  width: 300px;
+  width: 340px;
 }
 
 .swal2-popup {
@@ -108,6 +108,14 @@
   -webkit-box-orient: vertical;
 }
 
+.two-line-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .three-line-text {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -167,9 +175,40 @@
 }
 
 .col-border-left {
-  border-left: 1px solid gray;
+  border-left: 1px solid rgb(199, 199, 199);
 }
 
 .receipt-detail-container {
   background-color: #dceeee;
+}
+
+.link-text:hover {
+  cursor: pointer;
+}
+
+.link-text:hover > span {
+  text-decoration: underline;
+}
+
+.box-tag-image-template-wrapper {
+  border-radius: 10px;
+  border: 2px dashed lightgray;
+  width: 100%;
+}
+
+.box-tag-image-wrapper {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.box-tag-image {
+  width: auto;
+  height: 100%;
+}
+
+.row-border-bottom {
+  border-bottom: 1px solid rgb(199, 199, 199);
 }

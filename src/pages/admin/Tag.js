@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -15,14 +16,13 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { GoPlus } from "react-icons/go";
-import { IoSearch } from "react-icons/io5";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoSearch, IoTrashBin } from "react-icons/io5";
 import { LOGO_COLOR } from "../../constants/index";
 import CreateTagModal from "../../components/CreateTagModal";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import adminApis from "../../apis/AdminApis";
 import { FaRegEdit } from "react-icons/fa";
+import ConfirmModal from "../../components/ConfirmModal";
+import alert from "../../utils/Alert";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -110,32 +110,52 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 export default function TagManagement(props) {
-  let query = useQuery();
-  const cateList = useSelector((state) => state.admin);
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
-  const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [prototypeTagList, setPrototypeTagList] = useState([]);
   const [tagList, setTagList] = useState([]);
   const [editTagData, setEditTagData] = useState();
+  const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [confirmModalState, setConfirmModalState] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     getTagList();
   }, []);
 
   const getTagList = async () => {
     try {
+      setLoader(true);
       const res = await adminApis.getTagList();
       if (res.status === 200) {
-        setTagList(res.data);
+        setTagList([...res.data]);
+        setPrototypeTagList([...res.data]);
       }
     } catch (e) {}
+    setLoader(false);
+  };
+
+  const deleteTag = async () => {
+    try {
+      if (!editTagData) return;
+      setLoader(true);
+      const tagId = editTagData._id;
+      const res = await adminApis.deleteTag(tagId);
+      if (res.status === 200) {
+        alert({ icon: "success", title: "Đã xóa tag" });
+        closeAfterSaveConfirmModal();
+      } else {
+        alert({
+          icon: "error",
+          title: "Đã có lỗi xảy ra",
+          msg: "Xin vui lòng thử lại sau",
+        });
+        closeConfirmModal();
+      }
+    } catch (e) {}
+    setLoader(false);
   };
 
   const editModalHandleOpen = (data) => {
@@ -183,23 +203,52 @@ export default function TagManagement(props) {
     setOrderBy(property);
   };
 
+  const openConfirmDeleteModal = (data) => {
+    setEditTagData(data);
+    setConfirmModalState(true);
+  };
+
+  const closeAfterSaveConfirmModal = () => {
+    getTagList();
+    closeConfirmModal();
+  };
+
+  const closeConfirmModal = () => {
+    setEditTagData();
+    setConfirmModalState(false);
+  };
+
+  const searchTag = (value) => {
+    let result = prototypeTagList.filter((item) => item.name.includes(value));
+    setTagList([...result]);
+  };
+
   return (
     <div className={classes.root}>
+      <Backdrop className={classes.backdrop} open={loader}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <CreateTagModal
         open={openCreateModal}
         closeModal={createModalHandleClose}
         closeModalAfterSave={createModalHandleCloseAfterSave}
         tagEditFilter={editTagData}
       ></CreateTagModal>
+      <ConfirmModal
+        open={confirmModalState}
+        handleClose={() => setConfirmModalState(false)}
+        accept={deleteTag}
+      ></ConfirmModal>
       <div className="row m-0 p-0">
-        <h5>Danh sách tag</h5>
+        <h5>Danh sách Tag</h5>
       </div>
 
       <div className="row mb-2">
         <div className="col-lg-6 col-md-6 pt-2 pb-2">
           <TextField
             id="input-with-icon-textfield"
-            placeholder="Tìm kiếm tag"
+            placeholder="Tìm kiếm Tag"
+            onChange={(e) => searchTag(e.target.value)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -265,7 +314,9 @@ export default function TagManagement(props) {
                         >
                           {row.name}
                         </TableCell>
-                        <TableCell align="center">{row.category}</TableCell>
+                        <TableCell align="center">
+                          {row.category.name}
+                        </TableCell>
                         <TableCell align="center">
                           {convertTime(row.createdAt)}
                         </TableCell>
@@ -276,6 +327,15 @@ export default function TagManagement(props) {
                             onClick={() => editModalHandleOpen(row)}
                           >
                             <FaRegEdit color={LOGO_COLOR} size={18} />
+                          </IconButton>
+                          <IconButton
+                            color="secondary"
+                            onClick={() => openConfirmDeleteModal(row)}
+                          >
+                            <IoTrashBin
+                              className="text-danger"
+                              size={18}
+                            ></IoTrashBin>
                           </IconButton>
                         </TableCell>
                       </TableRow>
@@ -319,5 +379,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
   },
 }));
