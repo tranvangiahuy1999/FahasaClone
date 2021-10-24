@@ -102,6 +102,7 @@ const AddTagToBoxtagModal = (props) => {
                   onChange={(event, newValue) => {
                     setCate(newValue._id);
                   }}
+                  disableClearable={true}
                   size="small"
                   renderInput={(params) => (
                     <TextField {...params} label="Thuộc danh mục" />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -28,6 +29,7 @@ export default function BoxTagManager() {
   const [editBoxTag, setEditBoxTag] = useState();
   const [onDeleteBoxTagId, setOnDeleteBoxTagId] = useState();
   const [confirmModalState, setConfirmModalState] = useState(false);
+  const [updateBtnState, setUpdateBtnState] = useState(true);
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -66,6 +68,38 @@ export default function BoxTagManager() {
     setLoader(false);
   };
 
+  const updateBoxtagOrdered = async () => {
+    try {
+      if (!tagBoxList.length) return;
+      setUpdateBtnState(true);
+      setLoader(true);
+      console.log(tagBoxList);
+      const req = formatUpdateCategoryData(tagBoxList);
+      const formData = {
+        boxTagList: req,
+      };
+      const res = await adminApis.updatBoxTagPosition(formData);
+      if (res.status === 200) {
+        alert({ icon: "success", title: "Cập nhật thứ tự thành công" });
+      } else {
+        alert({
+          icon: "error",
+          title: "Đã có lỗi xảy ra",
+          msg: "Xin vui lòng thử lại sau",
+        });
+      }
+    } catch (e) {}
+    setLoader(false);
+  };
+
+  const formatUpdateCategoryData = (array) => {
+    let temp = [];
+    array.map((value) => {
+      temp.push(value._id);
+    });
+    return temp;
+  };
+
   const editModalHandleOpen = (data) => {
     setEditBoxTag(data);
     setOpenCreateModal(true);
@@ -90,10 +124,6 @@ export default function BoxTagManager() {
     setConfirmModalState(true);
   };
 
-  // const closeAfterSaveConfirmModal = () => {
-  //   closeConfirmModal();
-  // };
-
   const closeConfirmModal = () => {
     setOnDeleteBoxTagId();
     setConfirmModalState(false);
@@ -104,6 +134,16 @@ export default function BoxTagManager() {
       item.name.includes(value)
     );
     setBoxTagList([...result]);
+  };
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    setUpdateBtnState(false);
+    const items = Array.from(tagBoxList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setBoxTagList([...items]);
+    setPrototypeBoxTagList([...items]);
   };
 
   return (
@@ -140,85 +180,128 @@ export default function BoxTagManager() {
             variant="standard"
           />
         </div>
-        <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-          <Button
-            style={{
-              backgroundColor: LOGO_COLOR,
-              color: "white",
-            }}
-            size="small"
-            onClick={createModalHandleOpen}
-            variant="contained"
-            startIcon={<GoPlus></GoPlus>}
-          >
-            Thêm Box Tag
-          </Button>
+        <div className="row col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
+          <div className="col-6 right-wrapper">
+            <Button
+              style={{
+                color: "white",
+                backgroundColor: updateBtnState ? "lightgray" : LOGO_COLOR,
+              }}
+              disabled={updateBtnState}
+              size="small"
+              onClick={updateBoxtagOrdered}
+              variant="contained"
+            >
+              Cập nhật thứ tự
+            </Button>
+          </div>
+          <div className="col-6 right-wrapper">
+            <Button
+              style={{
+                backgroundColor: LOGO_COLOR,
+                color: "white",
+              }}
+              size="small"
+              onClick={createModalHandleOpen}
+              variant="contained"
+              startIcon={<GoPlus></GoPlus>}
+            >
+              Thêm Box Tag
+            </Button>
+          </div>
         </div>
       </div>
       <div className={classes.paper}>
-        <div className="row m-0 p-0">
-          {tagBoxList.length ? (
-            tagBoxList.map((ele, index) => (
-              <div className="col-3 mb-4" key={index}>
-                <Card className={classes.card}>
-                  <Link to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}>
-                    <CardActionArea>
-                      <CardMedia
-                        className={classes.media}
-                        image={
-                          ele.image.url ||
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
-                        }
-                        title="Contemplative Reptile"
-                      />
-                      <CardContent>
-                        <div style={{ height: 30 }}>
-                          {ele.name ? (
-                            <Typography
-                              gutterBottom
-                              variant="h6"
-                              component="h4"
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="characters" direction="horizontal">
+            {(provided) => (
+              <div
+                className="row m-0 p-0"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {tagBoxList.length ? (
+                  tagBoxList.map((ele, index) => (
+                    <Draggable
+                      key={ele._id}
+                      draggableId={ele._id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          className="col-3 mb-4"
+                          key={index}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <Card className={classes.card}>
+                            <Link
+                              to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}
                             >
-                              {ele.name}
-                            </Typography>
-                          ) : (
-                            <Typography
-                              gutterBottom
-                              variant="h6"
-                              component="h4"
-                            >
-                              <span style={{ color: "gray" }}>
-                                Không có tiêu đề
-                              </span>
-                            </Typography>
-                          )}
+                              <CardActionArea>
+                                <CardMedia
+                                  className={classes.media}
+                                  image={
+                                    ele.image.url ||
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
+                                  }
+                                  title="Contemplative Reptile"
+                                />
+                                <CardContent>
+                                  <div style={{ height: 30 }}>
+                                    {ele.name ? (
+                                      <Typography
+                                        gutterBottom
+                                        variant="h6"
+                                        component="h4"
+                                      >
+                                        {ele.name}
+                                      </Typography>
+                                    ) : (
+                                      <Typography
+                                        gutterBottom
+                                        variant="h6"
+                                        component="h4"
+                                      >
+                                        <span style={{ color: "gray" }}>
+                                          Không có tiêu đề
+                                        </span>
+                                      </Typography>
+                                    )}
+                                  </div>
+                                </CardContent>
+                              </CardActionArea>
+                            </Link>
+                            <CardActions>
+                              <Button
+                                size="small"
+                                color="primary"
+                                onClick={() => editModalHandleOpen(ele)}
+                              >
+                                Chỉnh sửa
+                              </Button>
+                              <Button
+                                size="small"
+                                color="secondary"
+                                onClick={() => openConfirmDeleteModal(ele._id)}
+                              >
+                                Xóa
+                              </Button>
+                            </CardActions>
+                          </Card>
                         </div>
-                      </CardContent>
-                    </CardActionArea>
-                  </Link>
-                  <CardActions>
-                    <Button
-                      size="small"
-                      color="primary"
-                      onClick={() => editModalHandleOpen(ele)}
-                    >
-                      Chỉnh sửa
-                    </Button>
-                    <Button
-                      size="small"
-                      color="secondary"
-                      onClick={() => openConfirmDeleteModal(ele._id)}
-                    >
-                      Xóa
-                    </Button>
-                  </CardActions>
-                </Card>
+                      )}
+                    </Draggable>
+                  ))
+                ) : (
+                  <div className="empty-data-text">Chưa có dữ liệu</div>
+                )}
+                {provided.placeholder}
               </div>
-            ))
-          ) : (
-            <div className="empty-data-text">Chưa có dữ liệu</div>
-          )}
-        </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     </div>
   );

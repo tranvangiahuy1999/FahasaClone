@@ -59,7 +59,7 @@ const CreateTagModal = (props) => {
         formData = {
           name: convertFirstCharUppercase(editName),
         };
-        res = await AdminApi.updateTag(formData);
+        res = await AdminApi.updateTag(props.tagEditFilter._id, formData);
       } else {
         formData = {
           name: convertFirstCharUppercase(editName),
@@ -137,23 +137,23 @@ const CreateTagModal = (props) => {
                   required
                 />
               </FormGroup>
-              {!props.tagEditFilter && (
-                <FormGroup className="mt-2">
-                  <Autocomplete
-                    id="combo-box-demo"
-                    options={cateList}
-                    getOptionLabel={(option) => option.name}
-                    onChange={(event, newValue) => {
-                      setCate(newValue._id);
-                    }}
-                    size="small"
-                    renderInput={(params) => (
-                      <TextField {...params} label="Thuộc danh mục" />
-                    )}
-                    required
-                  />
-                </FormGroup>
-              )}
+              <FormGroup className="mt-2">
+                <Autocomplete
+                  id="combo-box-demo"
+                  options={cateList}
+                  getOptionLabel={(option) => option.name}
+                  onChange={(event, newValue) => {
+                    setCate(newValue._id);
+                  }}
+                  size="small"
+                  disableClearable={true}
+                  disabled={props.tagEditFilter ? true : false}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Thuộc danh mục" />
+                  )}
+                  required
+                />
+              </FormGroup>
               <FormGroup className="mt-3">
                 <Button
                   variant="contained"

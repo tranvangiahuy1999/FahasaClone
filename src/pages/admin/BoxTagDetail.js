@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
@@ -68,11 +71,15 @@ export default function BoxTagDetail() {
   let query = useQuery();
   const [value, setValue] = useState(0);
   const [tagList, setTagList] = useState([]);
+  const [prototypeProductListOfTag, setPrototypeProductListOfTag] = useState(
+    []
+  );
+  const [productListOfTag, setProductListOfTag] = useState([]);
+  const [prototypeProductList, setPrototypeProductList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [boxTagName, setBoxTagName] = useState("");
   const [boxtagId, setBoxTagId] = useState();
   const [onActionTagId, setOnActionTagId] = useState();
-  // const [onActionCategoryId, setOnActionCategoryId] = useState();
   const [editProductData, setEditProductData] = useState();
   const [confirmModalState, setConfirmModalState] = useState(false);
   const [confirmModalRemoveTagState, setConfirmModalRemoveTagState] =
@@ -80,6 +87,7 @@ export default function BoxTagDetail() {
   const [addTagModalState, setAddTagModalState] = useState(false);
   const [reloadModalData, setReloadModalData] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [showAllProductState, setShowAllProductState] = useState(false);
 
   useEffect(() => {
     const temp = new URLSearchParams(query);
@@ -89,17 +97,21 @@ export default function BoxTagDetail() {
   }, [id]);
 
   useEffect(() => {
-    if (tagList.length) {
-      setValue(0);
-      getProductWithTagId(tagList[0]._id);
+    async function initProductData(index) {
+      setLoader(true);
+      await getProductWithTagId(tagList[index]._id);
+      await getProductByCate(tagList[index]._id);
+      setLoader(false);
     }
-  }, [tagList]);
-
-  useEffect(() => {
     if (tagList.length) {
-      getProductWithTagId(tagList[value]._id);
+      if (value === tagList.length) {
+        setValue(0);
+        initProductData(0);
+      } else if (value <= tagList.length) {
+        initProductData(value);
+      }
     }
-  }, [value]);
+  }, [tagList, value]);
 
   const getTagListWithBoxTagId = async (boxtagId) => {
     try {
@@ -107,7 +119,6 @@ export default function BoxTagDetail() {
       const res = await adminApis.getTagWithBoxTagId(boxtagId);
       if (res.status === 200) {
         setTagList([...res.data]);
-        // setOnActionCategoryId(res.data.category._id);
       }
     } catch (e) {}
     setLoader(false);
@@ -115,14 +126,25 @@ export default function BoxTagDetail() {
 
   const getProductWithTagId = async (tagId) => {
     try {
-      setLoader(true);
       const res = await adminApis.getProductByTagId(tagId);
       if (res.status === 200) {
         setOnActionTagId(tagId);
-        setProductList([...res.data]);
+        setProductListOfTag([...res.data]);
+        setPrototypeProductListOfTag([...res.data]);
       }
     } catch (e) {}
-    setLoader(false);
+  };
+
+  const getProductByCate = async (tagId) => {
+    try {
+      const res = await adminApis.getProductInCateByTag(tagId);
+      if (res.status === 200) {
+        setProductList(res.data);
+        setPrototypeProductList(res.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const removeProductFromTag = async (productId) => {
@@ -163,6 +185,28 @@ export default function BoxTagDetail() {
           msg: "Xin vui lòng thử lại sau",
         });
         closeConfirmRemoveTagModal();
+      }
+    } catch (e) {}
+    setLoader(false);
+  };
+
+  const addProductIntoTag = async (productId) => {
+    try {
+      if (!productId || !onActionTagId) return;
+      setLoader(true);
+      const formData = {
+        idProduct: productId,
+      };
+      const res = await adminApis.addProductToTag(onActionTagId, formData);
+      if (res.status === 200) {
+        alert({ icon: "success", title: "Đã thêm sản phẩm vào tag" });
+        getTagListWithBoxTagId(boxtagId);
+      } else {
+        alert({
+          icon: "error",
+          title: "Đã có lỗi xảy ra",
+          msg: "Xin vui lòng thử lại sau",
+        });
       }
     } catch (e) {}
     setLoader(false);
@@ -216,6 +260,17 @@ export default function BoxTagDetail() {
 
   const formatCurrency = (price) => {
     return price.toLocaleString("it-IT");
+  };
+
+  const searchTag = (value) => {
+    const resultAll = prototypeProductList.filter((item) =>
+      item.name.includes(value)
+    );
+    const resultOfTag = prototypeProductListOfTag.filter((item) =>
+      item.name.includes(value)
+    );
+    setProductList([...resultAll]);
+    setProductListOfTag([...resultOfTag]);
   };
 
   return (
@@ -275,6 +330,7 @@ export default function BoxTagDetail() {
                       <TextField
                         id="input-with-icon-textfield"
                         placeholder="Tìm kiếm sản phẩm"
+                        onChange={(e) => searchTag(e.target.value)}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
@@ -286,7 +342,21 @@ export default function BoxTagDetail() {
                       />
                     </div>
                     <div className="row col-lg-6 col-md-6 pt-2 pb-2">
-                      <div className="col-4 right-wrapper">
+                      <div className="col-6 right-wrapper">
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={showAllProductState}
+                              onChange={() =>
+                                setShowAllProductState(!showAllProductState)
+                              }
+                              color="primary"
+                            />
+                          }
+                          label="Tất cả sản phẩm"
+                        />
+                      </div>
+                      <div className="col-6 right-wrapper">
                         <Button
                           style={{
                             color: "white",
@@ -300,62 +370,104 @@ export default function BoxTagDetail() {
                           Gỡ Tag
                         </Button>
                       </div>
-                      <div className="col-8 right-wrapper">
-                        <Link to="/admin/product/add-product">
-                          <Button
-                            style={{
-                              backgroundColor: LOGO_COLOR,
-                              color: "white",
-                            }}
-                            size="small"
-                            variant="contained"
-                            startIcon={<GoPlus></GoPlus>}
-                          >
-                            Thêm sản phẩm vào tag
-                          </Button>
-                        </Link>
-                      </div>
                     </div>
                   </div>
-                  {productList.length ? (
-                    productList.map((ele, index) => (
-                      <div className="col-3 mb-4 mt-3" key={index}>
-                        <Card className={classes.card}>
-                          <CardActionArea>
-                            <CardMedia
-                              className={classes.media}
-                              image={
-                                ele.image.length
-                                  ? ele.image[0].url
-                                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
-                              }
-                              title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                              <div style={{ height: "60px" }}>
-                                <div className="two-line-text">{ele.name}</div>
-                                <div className="text-danger one-line-text font-weight-bold">
-                                  {formatCurrency(ele.parameters[0].price)}đ
+                  <div className="row m-0 p-0">
+                    {showAllProductState ? (
+                      productList.length ? (
+                        productList.map((ele, index) => (
+                          <div className="col-3 mb-4 mt-3" key={index}>
+                            <Card className={classes.card}>
+                              <CardActionArea>
+                                <CardMedia
+                                  className={classes.media}
+                                  image={
+                                    ele.image.length
+                                      ? ele.image[0].url
+                                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
+                                  }
+                                  title="Contemplative Reptile"
+                                />
+                                <CardContent>
+                                  <div style={{ height: "60px" }}>
+                                    <div className="two-line-text">
+                                      {ele.name}
+                                    </div>
+                                    <div className="text-danger one-line-text font-weight-bold">
+                                      {formatCurrency(ele.parameters[0].price)}đ
+                                    </div>
+                                  </div>
+                                </CardContent>
+                              </CardActionArea>
+                              <CardActions disableSpacing>
+                                {ele.isInTag ? (
+                                  <Button
+                                    size="small"
+                                    color="secondary"
+                                    style={{ marginLeft: "auto" }}
+                                    onClick={() => openConfirmDeleteModal(ele)}
+                                  >
+                                    Gỡ khỏi tag
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    size="small"
+                                    color="primary"
+                                    style={{ marginLeft: "auto" }}
+                                    onClick={() => addProductIntoTag(ele._id)}
+                                  >
+                                    Thêm vào tag
+                                  </Button>
+                                )}
+                              </CardActions>
+                            </Card>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="empty-data-text">Chưa có sản phẩm</div>
+                      )
+                    ) : productListOfTag.length ? (
+                      productListOfTag.map((ele, index) => (
+                        <div className="col-3 mb-4 mt-3" key={index}>
+                          <Card className={classes.card}>
+                            <CardActionArea>
+                              <CardMedia
+                                className={classes.media}
+                                image={
+                                  ele.image.length
+                                    ? ele.image[0].url
+                                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
+                                }
+                                title="Contemplative Reptile"
+                              />
+                              <CardContent>
+                                <div style={{ height: "60px" }}>
+                                  <div className="two-line-text">
+                                    {ele.name}
+                                  </div>
+                                  <div className="text-danger one-line-text font-weight-bold">
+                                    {formatCurrency(ele.parameters[0].price)}đ
+                                  </div>
                                 </div>
-                              </div>
-                            </CardContent>
-                          </CardActionArea>
-                          <CardActions disableSpacing>
-                            <Button
-                              size="small"
-                              color="secondary"
-                              style={{ marginLeft: "auto" }}
-                              onClick={() => openConfirmDeleteModal(ele)}
-                            >
-                              Gỡ khỏi tag
-                            </Button>
-                          </CardActions>
-                        </Card>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="empty-data-text">Chưa có sản phẩm</div>
-                  )}
+                              </CardContent>
+                            </CardActionArea>
+                            <CardActions disableSpacing>
+                              <Button
+                                size="small"
+                                color="secondary"
+                                style={{ marginLeft: "auto" }}
+                                onClick={() => openConfirmDeleteModal(ele)}
+                              >
+                                Gỡ khỏi tag
+                              </Button>
+                            </CardActions>
+                          </Card>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="empty-data-text">Chưa có sản phẩm</div>
+                    )}
+                  </div>
                 </TabPanel>
               ))
             ) : (
