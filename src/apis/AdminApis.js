@@ -68,8 +68,8 @@ const adminApis = {
     const url = `/api/tag/create`;
     return axiosClient.post(url, data);
   },
-  updateTag(data) {
-    const url = `/api/tag/update`;
+  updateTag(tagId, data) {
+    const url = `/api/tag/update/${tagId}`;
     return axiosClient.put(url, data);
   },
   getTagList() {
@@ -79,6 +79,10 @@ const adminApis = {
   deleteTag(id) {
     const url = `/api/tag/delete/${id}`;
     return axiosClient.delete(url);
+  },
+  getProductInCateByTag(id) {
+    const url = `/api/product/search/in-category/${id}`;
+    return axiosClient.get(url);
   },
   getProductByTagId(id) {
     const url = `/api/tag/get-product/${id}`;

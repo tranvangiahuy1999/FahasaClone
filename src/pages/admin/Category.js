@@ -119,10 +119,10 @@ export default function Category(props) {
         getCategoryList([...res.data]);
         setPrototypeCateList([...res.data]);
       }
-      setLoader(false);
     } catch (e) {
       console.log(e);
     }
+    setLoader(false);
   };
 
   const editModalHandleOpen = (data) => {
@@ -194,10 +194,8 @@ export default function Category(props) {
       } else {
         alert({ icon: "error", title: "Cập nhật thứ tự danh mục thất bại" });
       }
-      setLoader(false);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
+    setLoader(false);
   };
 
   const formatUpdateCategoryData = (array) => {
