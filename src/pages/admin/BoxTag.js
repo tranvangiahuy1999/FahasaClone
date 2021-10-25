@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {
+  GridContextProvider,
+  GridDropZone,
+  GridItem,
+  swap,
+} from "react-grid-dnd";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -136,15 +141,11 @@ export default function BoxTagManager() {
     setBoxTagList([...result]);
   };
 
-  const handleOnDragEnd = (result) => {
-    if (!result.destination) return;
+  function onChangePosition(sourceId, sourceIndex, targetIndex, targetId) {
+    const nextState = swap(tagBoxList, sourceIndex, targetIndex);
+    setBoxTagList(nextState);
     setUpdateBtnState(false);
-    const items = Array.from(tagBoxList);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setBoxTagList([...items]);
-    setPrototypeBoxTagList([...items]);
-  };
+  }
 
   return (
     <div className={classes.root}>
@@ -212,96 +213,79 @@ export default function BoxTagManager() {
         </div>
       </div>
       <div className={classes.paper}>
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="characters" direction="horizontal">
-            {(provided) => (
-              <div
-                className="row m-0 p-0"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {tagBoxList.length ? (
-                  tagBoxList.map((ele, index) => (
-                    <Draggable
-                      key={ele._id}
-                      draggableId={ele._id}
-                      index={index}
+        <GridContextProvider onChange={onChangePosition}>
+          <GridDropZone
+            id="items"
+            boxesPerRow={4}
+            rowHeight={270}
+            style={{ height: "400px" }}
+          >
+            {tagBoxList.length ? (
+              tagBoxList.map((ele, index) => (
+                <GridItem key={index}>
+                  <Card className={classes.card}>
+                    <Link
+                      to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}
                     >
-                      {(provided) => (
-                        <div
-                          className="col-3 mb-4"
-                          key={index}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          ref={provided.innerRef}
-                        >
-                          <Card className={classes.card}>
-                            <Link
-                              to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}
-                            >
-                              <CardActionArea>
-                                <CardMedia
-                                  className={classes.media}
-                                  image={
-                                    ele.image.url ||
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
-                                  }
-                                  title="Contemplative Reptile"
-                                />
-                                <CardContent>
-                                  <div style={{ height: 30 }}>
-                                    {ele.name ? (
-                                      <Typography
-                                        gutterBottom
-                                        variant="h6"
-                                        component="h4"
-                                      >
-                                        {ele.name}
-                                      </Typography>
-                                    ) : (
-                                      <Typography
-                                        gutterBottom
-                                        variant="h6"
-                                        component="h4"
-                                      >
-                                        <span style={{ color: "gray" }}>
-                                          Không có tiêu đề
-                                        </span>
-                                      </Typography>
-                                    )}
-                                  </div>
-                                </CardContent>
-                              </CardActionArea>
-                            </Link>
-                            <CardActions>
-                              <Button
-                                size="small"
-                                color="primary"
-                                onClick={() => editModalHandleOpen(ele)}
+                      <CardActionArea>
+                        <CardMedia
+                          className={classes.media}
+                          image={
+                            ele.image.url ||
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
+                          }
+                          title="Contemplative Reptile"
+                        />
+                        <CardContent>
+                          <div style={{ height: 40 }}>
+                            {ele.name ? (
+                              <h5 className="two-line-text">{ele.name}</h5>
+                            ) : (
+                              // <Typography
+                              //   gutterBottom
+                              //   variant="h6"
+                              //   component="h4"
+                              // >
+
+                              // </Typography>
+                              <Typography
+                                gutterBottom
+                                variant="h6"
+                                component="h4"
                               >
-                                Chỉnh sửa
-                              </Button>
-                              <Button
-                                size="small"
-                                color="secondary"
-                                onClick={() => openConfirmDeleteModal(ele._id)}
-                              >
-                                Xóa
-                              </Button>
-                            </CardActions>
-                          </Card>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))
-                ) : (
-                  <div className="empty-data-text">Chưa có dữ liệu</div>
-                )}
-                {provided.placeholder}
-              </div>
+                                <span style={{ color: "gray" }}>
+                                  Không có tiêu đề
+                                </span>
+                              </Typography>
+                            )}
+                          </div>
+                        </CardContent>
+                      </CardActionArea>
+                    </Link>
+                    <CardActions>
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={() => editModalHandleOpen(ele)}
+                      >
+                        Chỉnh sửa
+                      </Button>
+                      <Button
+                        size="small"
+                        color="secondary"
+                        onClick={() => openConfirmDeleteModal(ele._id)}
+                      >
+                        Xóa
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </GridItem>
+              ))
+            ) : (
+              <div className="empty-data-text">Chưa có dữ liệu</div>
             )}
-          </Droppable>
-        </DragDropContext>
+          </GridDropZone>
+        </GridContextProvider>
       </div>
     </div>
   );
@@ -334,6 +318,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     maxWidth: "100%",
+    margin: "6px",
   },
   media: {
     height: 140,
