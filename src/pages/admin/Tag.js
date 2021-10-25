@@ -117,6 +117,7 @@ export default function TagManagement(props) {
   const [prototypeTagList, setPrototypeTagList] = useState([]);
   const [tagList, setTagList] = useState([]);
   const [editTagData, setEditTagData] = useState();
+  const [deleteTagId, setDeleteTagId] = useState();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [confirmModalState, setConfirmModalState] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -139,9 +140,9 @@ export default function TagManagement(props) {
 
   const deleteTag = async () => {
     try {
-      if (!editTagData) return;
+      if (!deleteTagId) return;
       setLoader(true);
-      const tagId = editTagData._id;
+      const tagId = deleteTagId;
       const res = await adminApis.deleteTag(tagId);
       if (res.status === 200) {
         alert({ icon: "success", title: "Đã xóa tag" });
@@ -204,7 +205,7 @@ export default function TagManagement(props) {
   };
 
   const openConfirmDeleteModal = (data) => {
-    setEditTagData(data);
+    setDeleteTagId(data._id);
     setConfirmModalState(true);
   };
 
@@ -214,7 +215,7 @@ export default function TagManagement(props) {
   };
 
   const closeConfirmModal = () => {
-    setEditTagData();
+    setDeleteTagId();
     setConfirmModalState(false);
   };
 
@@ -236,7 +237,7 @@ export default function TagManagement(props) {
       ></CreateTagModal>
       <ConfirmModal
         open={confirmModalState}
-        handleClose={() => setConfirmModalState(false)}
+        handleClose={closeConfirmModal}
         accept={deleteTag}
       ></ConfirmModal>
       <div className="row m-0 p-0">

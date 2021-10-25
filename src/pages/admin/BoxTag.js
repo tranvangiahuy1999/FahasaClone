@@ -218,7 +218,11 @@ export default function BoxTagManager() {
             id="items"
             boxesPerRow={4}
             rowHeight={270}
-            style={{ height: "400px" }}
+            style={{
+              height: tagBoxList.length
+                ? (tagBoxList.length / 4) * 270
+                : "100px",
+            }}
           >
             {tagBoxList.length ? (
               tagBoxList.map((ele, index) => (
@@ -241,13 +245,6 @@ export default function BoxTagManager() {
                             {ele.name ? (
                               <h5 className="two-line-text">{ele.name}</h5>
                             ) : (
-                              // <Typography
-                              //   gutterBottom
-                              //   variant="h6"
-                              //   component="h4"
-                              // >
-
-                              // </Typography>
                               <Typography
                                 gutterBottom
                                 variant="h6"

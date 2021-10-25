@@ -24,7 +24,7 @@ import { IoSearch, IoTrashBin } from "react-icons/io5";
 import alert from "../../utils/Alert";
 import ConfirmModal from "../../components/ConfirmModal";
 import AddTagToBoxtagModal from "../../components/AddTagToBoxtagModal";
-import { LOGO_COLOR } from "../../constants/index";
+// import { LOGO_COLOR } from "../../constants/index";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -84,7 +84,7 @@ export default function BoxTagDetail() {
     useState(false);
   const [addTagModalState, setAddTagModalState] = useState(false);
   const [reloadModalData, setReloadModalData] = useState(false);
-  const [updateBtnState, setUpdateBtnState] = useState(true);
+  // const [updateBtnState, setUpdateBtnState] = useState(true);
   const [loader, setLoader] = useState(false);
   const [showAllProductState, setShowAllProductState] = useState(false);
 
@@ -272,14 +272,14 @@ export default function BoxTagDetail() {
     setProductListOfTag([...resultOfTag]);
   };
 
-  const handleOnDragEnd = (result) => {
-    if (!result.destination) return;
-    setUpdateBtnState(false);
-    const items = Array.from(tagList);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setTagList([...items]);
-  };
+  // const handleOnDragEnd = (result) => {
+  //   if (!result.destination) return;
+  //   setUpdateBtnState(false);
+  //   const items = Array.from(tagList);
+  //   const [reorderedItem] = items.splice(result.source.index, 1);
+  //   items.splice(result.destination.index, 0, reorderedItem);
+  //   setTagList([...items]);
+  // };
 
   return (
     <div className={classes.root}>
@@ -304,19 +304,6 @@ export default function BoxTagDetail() {
         closeModal={closeAddTagModal}
       ></AddTagToBoxtagModal>
       <h5>Thông tin {boxTagName || "Box Tag"}</h5>
-      {/* <Button
-        style={{
-          color: "white",
-          backgroundColor: updateBtnState ? "lightgray" : LOGO_COLOR,
-        }}
-        disabled={updateBtnState}
-        size="small"
-        // onClick={updateBoxtagOrdered}
-        variant="contained"
-      >
-        Cập nhật thứ tự danh sách Tag
-      </Button> */}
-
       <div className={classes.container}>
         <Tabs
           orientation="vertical"
@@ -325,36 +312,13 @@ export default function BoxTagDetail() {
           onChange={handleChange}
           className={classes.tabs}
         >
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="characters">
-              {(provided) => (
-                <Fragment {...provided.droppableProps} ref={provided.innerRef}>
-                  {tagList.length ? (
-                    tagList.map((ele, index) => (
-                      <Draggable
-                        key={ele._id}
-                        draggableId={ele._id}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <Tab
-                            key={index}
-                            label={ele.name}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                            {...a11yProps(index)}
-                          />
-                        )}
-                      </Draggable>
-                    ))
-                  ) : (
-                    <></>
-                  )}
-                </Fragment>
-              )}
-            </Droppable>
-          </DragDropContext>
+          {tagList.length ? (
+            tagList.map((ele, index) => (
+              <Tab key={index} label={ele.name} {...a11yProps(index)} />
+            ))
+          ) : (
+            <></>
+          )}
           <Button
             color="primary"
             style={{ minWidth: 160, justifyContent: "flex-start" }}
@@ -437,9 +401,9 @@ export default function BoxTagDetail() {
                                     <div className="two-line-text">
                                       {ele.name}
                                     </div>
-                                    <div className="text-danger one-line-text font-weight-bold">
-                                      {formatCurrency(ele.parameters[0].price)}đ
-                                    </div>
+                                  </div>
+                                  <div className="text-danger one-line-text font-weight-bold">
+                                    {formatCurrency(ele.parameters[0].price)}đ
                                   </div>
                                 </CardContent>
                               </CardActionArea>

@@ -8,10 +8,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
 import AdminIndex from "./pages/admin/Index";
-import Header from "./pages/client/Component/Header";
-import Footer from "./pages/client/Component/Footer";
-import Nav from "./pages/client/Component/Nav";
-import ShopRoute from "./pages/router/ShopRoute";
 
 let persistor = persistStore(store);
 
@@ -24,10 +20,6 @@ function App() {
             <Switch>
               <Route path="/admin">
                 <AdminIndex></AdminIndex>
-              </Route>
-
-              <Route route="/">
-                <ShopRoute />
               </Route>
             </Switch>
           </Router>
