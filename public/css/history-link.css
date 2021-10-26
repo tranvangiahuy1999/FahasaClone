@@ -1,0 +1,16 @@
+/* History Link  */
+
+.history-link-container {
+   height: 40px;
+   padding: 10px var(--padding-width-percent) 5px var(--padding-width-percent);
+}
+
+.history-link-item {
+   font-size: 14px;
+   color: var(--text-color);
+   cursor: pointer;
+}
+
+.link-item {
+   color: orange;
+}

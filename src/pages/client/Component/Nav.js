@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import { Badge } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [valueProduct, setValueProduct] = useState();
+  const [productInCartQuantity, setProductInCartQuantity] = useState(0);
+
+  useEffect(() => {
+    getLocalCartData();
+  }, []);
+
+  const getLocalCartData = () => {
+    const cartList = JSON.parse(localStorage.getItem("Cart"));
+    setProductInCartQuantity(cartList ? cartList.length : 0);
+  };
 
   return (
     <nav className="nav">
@@ -51,10 +61,12 @@ const Nav = () => {
 
           <div className="nav-cart col-2 text-center">
             <div className="right-wrapper mr-4 mt-3">
-              <AiOutlineShoppingCart
-                size={30}
-                color="orange"
-              ></AiOutlineShoppingCart>
+              <Badge badgeContent={productInCartQuantity} color="primary">
+                <AiOutlineShoppingCart
+                  size={30}
+                  color="orange"
+                ></AiOutlineShoppingCart>
+              </Badge>
             </div>
             <div className="nav-cart-text right-wrapper">GIỎ HÀNG</div>
           </div>

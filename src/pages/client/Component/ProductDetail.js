@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import { Button } from "@material-ui/core";
 import ReactHtmlParser from "react-html-parser";
@@ -16,14 +16,17 @@ import shopApis from "../../../apis/ShopApis";
 import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 import { formatCurrency } from "../../../utils/format-string.util";
 import { AiOutlineDoubleRight } from "react-icons/ai";
+import HistoryLink from "./HistoryLink";
 
 const ProductDetail = () => {
   const params = useParams();
+  const history = useHistory();
   const [productDetail, setProductDetail] = useState([]);
   const [defaultPrice, setDefaultPrice] = useState(null);
   const [defaultProduct, setDefaultProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [productQuantity, setProductQuantity] = useState(1);
+  const [parentId, setParentId] = useState([]);
 
   useEffect(() => {
     getProductDetailData();
@@ -79,17 +82,65 @@ const ProductDetail = () => {
     setProductQuantity(productQuantity + 1);
   };
 
+  const handleAddToCartBtn = (event) => {
+    if (productQuantity < 1) {
+      alert({ icon: "error", title: "Số lượng không thể nhỏ hơn 0" });
+      return;
+    }
+
+    const cartList = localStorage.getItem("Cart");
+
+    if (!cartList) {
+      const cartItem = [
+        {
+          parameter: defaultProduct._id,
+          price: defaultProduct.price,
+          nameParam: defaultPrice.name,
+          name: defaultProduct.name,
+          image: defaultProduct.image,
+          id: params.id,
+          count: Number(productQuantity),
+        },
+      ];
+      localStorage.setItem("Cart", JSON.stringify(cartItem));
+    } else {
+      const localCartList = JSON.parse(cartList);
+
+      for (let i = 0; i < localCartList.length; i++) {
+        if (localCartList[i].id === parentId) {
+          localCartList[i].count += productQuantity;
+
+          localStorage.setItem("Cart", JSON.stringify(localCartList));
+          return handleAddToCartEvent(event);
+        }
+      }
+
+      localCartList.push({
+        parameter: defaultPrice._id,
+        price: defaultPrice.price,
+        nameParam: defaultPrice.name,
+        name: defaultProduct.name,
+        image: defaultProduct.image,
+        id: params.id,
+        count: Number(productQuantity),
+      });
+      localStorage.setItem("Cart", JSON.stringify(localCartList));
+    }
+    handleAddToCartEvent(event);
+  };
+
+  const handleAddToCartEvent = (event) => {
+    if (event === "buyNow") return history.push("/gio-hang");
+    alert({ icon: "success", title: "Đã thêm vào giỏ hàng" });
+  };
+
   return (
     <div className="product-detail-container">
       <div className="product-detail-wrapper">
         <Nav />
-        <section className="history-link-container">
-          <h3 className="history-link-item">
-            Sách Tiếng Việt > Thiếu Nhi > Truyện Thiếu Nhi
-          </h3>
-        </section>
         {productDetail.map((product, index) => (
           <div key={index}>
+            <HistoryLink product={product} />
             <section className="product-detail-item-container">
               <div className="product-detail-item-wrapper">
                 <div className="product-detail-image-container">
@@ -192,11 +243,11 @@ const ProductDetail = () => {
                         >
                           <p className="quantity-adjust-item">-</p>
                         </button>
-                        <input className="product-quantity-value-container">
+                        <div className="product-quantity-value-container">
                           <p className="product-quantity-value">
                             {productQuantity}
                           </p>
-                        </input>
+                        </div>
                         <button
                           className="quantity-inc-btn-container"
                           onClick={() => handleIncreaseAmount()}
@@ -208,6 +259,7 @@ const ProductDetail = () => {
 
                     <div className="buy-method-container">
                       <Button
+                        onClick={() => handleAddToCartBtn()}
                         style={{
                           marginRight: "10px",
                           backgroundColor: "white",
@@ -219,6 +271,7 @@ const ProductDetail = () => {
                         Thêm Vào Giỏ Hàng
                       </Button>
                       <Button
+                        onClick={() => handleAddToCartBtn("buyNow")}
                         style={{
                           marginRight: "10px",
                           backgroundColor: "#74AC74",
