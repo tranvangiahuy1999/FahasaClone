@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { Button } from "@material-ui/core";
 import ReactHtmlParser from "react-html-parser";
@@ -14,12 +15,15 @@ import Footer from "./Footer";
 import shopApis from "../../../apis/ShopApis";
 import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 import { formatCurrency } from "../../../utils/format-string.util";
+import { AiOutlineDoubleRight } from "react-icons/ai";
 
 const ProductDetail = () => {
   const params = useParams();
   const [productDetail, setProductDetail] = useState([]);
   const [defaultPrice, setDefaultPrice] = useState(null);
   const [defaultProduct, setDefaultProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [productQuantity, setProductQuantity] = useState(1);
 
   useEffect(() => {
     getProductDetailData();
@@ -33,18 +37,22 @@ const ProductDetail = () => {
         result.data.map((productDetail) => {
           const firstParameter = productDetail.parameters[0];
 
-          setDefaultPrice({
-            price: firstParameter.price,
-            _id: firstParameter._id,
-            name: firstParameter.name,
-          });
+          setDefaultPrice(firstParameter.price);
 
           setDefaultProduct({
             _id: firstParameter.price,
             price: firstParameter.price,
             name: productDetail.name,
-            iamge: productDetail.image[0].url,
+            image: productDetail.image.length
+              ? productDetail.image[0].url
+              : null,
           });
+          if (selectedImage === null)
+            setSelectedImage(
+              productDetail.image.length
+                ? productDetail.image[0].url
+                : firstParameter.image
+            );
         });
 
         setProductDetail(result.data);
@@ -52,6 +60,23 @@ const ProductDetail = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleSelectImage = async (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const handleSelectParameter = async (parameter) => {
+    setSelectedImage(parameter.image);
+    setDefaultPrice(parameter.price);
+  };
+
+  const handleDecreaseAmount = () => {
+    setProductQuantity(productQuantity > 1 ? productQuantity - 1 : 1);
+  };
+
+  const handleIncreaseAmount = () => {
+    setProductQuantity(productQuantity + 1);
   };
 
   return (
@@ -71,21 +96,33 @@ const ProductDetail = () => {
                   <div className="product-detail-image-wrapper">
                     <div className="main-image-container">
                       <img
+                        key={index}
                         alt=""
                         className="main-image"
-                        src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_188285.jpg"
+                        src={selectedImage}
                       />
                     </div>
 
                     <div className="option-images-container">
                       <div className="option-images-wrapper">
-                        <div className="option-image-item">
-                          <img
-                            className="option-image"
-                            alt=""
-                            src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_188285.jpg"
-                          />
-                        </div>
+                        {product.image.map((productDetailImage, index) => {
+                          return (
+                            <div
+                              className="option-image-item"
+                              key={index}
+                              onClick={() =>
+                                handleSelectImage(productDetailImage.url)
+                              }
+                            >
+                              <img
+                                key={index}
+                                className="option-image"
+                                alt=""
+                                src={productDetailImage.url}
+                              />
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -96,35 +133,74 @@ const ProductDetail = () => {
                     <div className="product-title-container">
                       <h3 className="product-title-value">{product.name}</h3>
                     </div>
+
                     <div className="product-price-container">
                       <p className="product-price-describe">
                         Giá bán tại nhà sách Kiên Giang:
                       </p>
                       <p className="product-price-value">
-                        {formatCurrency(defaultPrice.price)}₫
+                        {formatCurrency(defaultPrice)}₫
                       </p>
                     </div>
+
+                    {product.parameters.length > 1 ? (
+                      <div className="product-parameters-container">
+                        {product.parameters.map((parameter, index) => {
+                          return (
+                            <Button
+                              key={index}
+                              onClick={() => handleSelectParameter(parameter)}
+                              style={{
+                                marginRight: "10px",
+                                backgroundColor: "white",
+                                color: "#74AC74",
+                                border: "1px solid #74AC74",
+                              }}
+                              variant="outlined"
+                            >
+                              {parameter.name}
+                            </Button>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
 
                     <div className="marketing-describe-container">
                       <h6 className="describe-text">
                         Tại Nhà sách Kiên Giang:{" "}
                       </h6>
-                      <p>
-                        Giao hàng cho đơn hàng ở Rạch Giá và ở Tỉnh/Thành khác
+                      <p className="icon">
+                        <AiOutlineDoubleRight /> Giao hàng cho đơn hàng ở Rạch
+                        Giá và ở Tỉnh/Thành khác
                       </p>
-                      <p> Combo sách HOT - GIẢM 25% >> Xem ngay</p>
+                      <p className="icon">
+                        <AiOutlineDoubleRight /> Combo sách HOT - GIẢM 25%{" "}
+                        <Link style={{ color: "orange" }} to="/">
+                          <AiOutlineDoubleRight /> Xem ngay
+                        </Link>
+                      </p>
                     </div>
 
                     <div className="product-quantity-container">
                       <p className="product-quantity-describe">Số Lượng: </p>
                       <div className="product-quantity-box">
-                        <button className="quantity-dec-btn-container">
+                        <button
+                          className="quantity-dec-btn-container"
+                          onClick={() => handleDecreaseAmount()}
+                        >
                           <p className="quantity-adjust-item">-</p>
                         </button>
-                        <div className="product-quantity-value-container">
-                          <p className="product-quantity-value">1</p>
-                        </div>
-                        <button className="quantity-inc-btn-container">
+                        <input className="product-quantity-value-container">
+                          <p className="product-quantity-value">
+                            {productQuantity}
+                          </p>
+                        </input>
+                        <button
+                          className="quantity-inc-btn-container"
+                          onClick={() => handleIncreaseAmount()}
+                        >
                           <p className="quantity-adjust-item">+</p>
                         </button>
                       </div>
@@ -191,15 +267,18 @@ const ProductDetail = () => {
                 </div>
                 <hr />
                 <div className="product-description-container">
-                  <p className="product-descripiton-text">
-                    <div>{ReactHtmlParser(product.description)}</div>
-                  </p>
+                  <div className="product-descripiton-text">
+                    <div>
+                      <span>{ReactHtmlParser(product.description)}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };
