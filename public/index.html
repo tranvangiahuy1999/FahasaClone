@@ -1,75 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
- 
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<head>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/easy-responsive-tabs.css " />
-    <script src="%PUBLIC_URL%/js/easyResponsiveTabs.js"></script>
-    <link rel="stylesheet" href="%PUBLIC_URL%/css/thanh-toan.css">
-    <script>
-      $(document).ready(function () {
-        //Horizontal Tab
-        $('#parentHorizontalTab').easyResponsiveTabs({
-          type: 'default', //Types: default, vertical, accordion
-          width: 'auto', //auto or any width like 600px
-          fit: true, // 100% fit in a container
-          tabidentify: 'hor_1', // The tab groups identifier
-          activate: function (event) { // Callback function if tab is switched
-            var $tab = $(this);
-            var $info = $('#nested-tabInfo');
-            var $name = $('span', $info);
-            $name.text($tab.text());
-            $info.show();
-          }
-        });
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/easy-responsive-tabs.css " />
+  <script src="%PUBLIC_URL%/js/easyResponsiveTabs.js"></script>
+  <link rel="stylesheet" href="%PUBLIC_URL%/css/thanh-toan.css">
+  <script>
+    $(document).ready(function () {
+      //Horizontal Tab
+      $('#parentHorizontalTab').easyResponsiveTabs({
+        type: 'default', //Types: default, vertical, accordion
+        width: 'auto', //auto or any width like 600px
+        fit: true, // 100% fit in a container
+        tabidentify: 'hor_1', // The tab groups identifier
+        activate: function (event) { // Callback function if tab is switched
+          var $tab = $(this);
+          var $info = $('#nested-tabInfo');
+          var $name = $('span', $info);
+          $name.text($tab.text());
+          $info.show();
+        }
       });
-    </script>
-    
-    <link rel="stylesheet" href="%PUBLIC_URL%/css/home.css">
-    <link rel="stylesheet" href="%PUBLIC_URL%/css/gio-hang.css">
-    <link rel="stylesheet" href="%PUBLIC_URL%/css/product-item.css">
-    <script type="text/javascript" src="%PUBLIC_URL%/js/main.js"></script>
-    <link rel="stylesheet" href="%PUBLIC_URL%/fontawesome_free_5.13.0/css/all.css">
+    });
+  </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+  <link rel="stylesheet" href="%PUBLIC_URL%/css/home.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/css/gio-hang.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/css/product-item.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/css/product-detail.css">
+  <script type="text/javascript" src="%PUBLIC_URL%/js/main.js"></script>
+  <link rel="stylesheet" href="%PUBLIC_URL%/fontawesome_free_5.13.0/css/all.css">
 
-    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/slick/slick-theme.css" />
-    <script type="text/javascript" src="%PUBLIC_URL%/slick/slick.min.js"></script>
-    <script type="text/javascript"
-        src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-    <link rel="canonical" href="http://dealbook.xyz/">
-    <meta name="google-site-verification" content="urDZLDaX8wQZ_-x8ztGIyHqwUQh2KRHvH9FhfoGtiEw" />
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="%PUBLIC_URL%/favicon_io/site.webmanifest">
-    <style>img[alt="www.000webhost.com"]{display: none;}</style>
-    <script async defer crossorigin="anonymous"
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/slick/slick-theme.css" />
+  <script type="text/javascript" src="%PUBLIC_URL%/slick/slick.min.js"></script>
+  <script type="text/javascript"
+    src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+  <link rel="canonical" href="http://dealbook.xyz/">
+  <meta name="google-site-verification" content="urDZLDaX8wQZ_-x8ztGIyHqwUQh2KRHvH9FhfoGtiEw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="%PUBLIC_URL%/favicon_io/site.webmanifest">
+  <style>
+    img[alt="www.000webhost.com"] {
+      display: none;
+    }
+  </style>
+  <script async defer crossorigin="anonymous"
     src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0"></script>
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -78,18 +81,19 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Dealbook-Mua sách trực tuyến giá rẻ nhất</title>
-    <meta name="description"
-        content="Mua sách online hay, giá tốt nhất, combo sách hot bán chạy, giảm giá cực khủng cùng với những ưu đãi như miễn phí giao hàng, quà tặng miễn phí, đổi trả nhanh chóng. Đa dạng sản phẩm, đáp ứng mọi nhu cầu.">
-    <meta name="keywords" content="nhà sách online, mua sách hay, sách hot, sách bán chạy, sách giảm giá nhiều">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>Dealbook-Mua sách trực tuyến giá rẻ nhất</title>
+  <meta name="description"
+    content="Mua sách online hay, giá tốt nhất, combo sách hot bán chạy, giảm giá cực khủng cùng với những ưu đãi như miễn phí giao hàng, quà tặng miễn phí, đổi trả nhanh chóng. Đa dạng sản phẩm, đáp ứng mọi nhu cầu.">
+  <meta name="keywords" content="nhà sách online, mua sách hay, sách hot, sách bán chạy, sách giảm giá nhiều">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -99,5 +103,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>
