@@ -17,7 +17,7 @@ html {
 }
 
 .navbar input.form-control {
-  border: 2px solid #b3dee2 !important;
+  border: 2px solid #64ae55;
 }
 
 li.nav-item a {
@@ -689,26 +689,26 @@ footer .header {
   .img_ipad {
     height: 100% !important;
     width: auto !important;
-}
-  .listProduct{
+  }
+  .listProduct {
     width: 100% !important;
   }
-  .releaseProduct{
+  .releaseProduct {
     width: 100% !important;
   }
-  .readbook{
+  .readbook {
     width: 100% !important;
   }
-  .sort.d-flex.ml-auto{
-      margin-left: 10% !important;
+  .sort.d-flex.ml-auto {
+    margin-left: 10% !important;
   }
-.slidebar {
+  .slidebar {
     width: 100% !important;
-}
-.mobileNewbook {
-  margin-left: 0% !important;
-  width: 100% !important;
-}
+  }
+  .mobileNewbook {
+    margin-left: 0% !important;
+    width: 100% !important;
+  }
   .contentList {
     margin-left: 11% !important;
     width: 100% !important;
@@ -716,31 +716,31 @@ footer .header {
   img.MuiCardMedia-root.MuiCardMedia-media.MuiCardMedia-img {
     width: 100% !important;
     height: 100% !important;
-}
+  }
   .anhto.mb-4 {
     margin-left: 0% !important;
     width: 100% !important;
-}
+  }
 
-.container.nd {
+  .container.nd {
     width: 100% !important;
-}
+  }
   .navbar-logo {
     margin-left: 0px !important;
-}
+  }
 
-a.navbar-brand {
+  a.navbar-brand {
     margin-left: 0px !important;
-}
-  .duoinavbar{
+  }
+  .duoinavbar {
     display: none !important;
   }
-  .smallmenu{
+  .smallmenu {
     display: block !important;
   }
   .w-100 {
-    width: 70%!important;
-}
+    width: 70% !important;
+  }
   .danhsach {
     margin-top: 20%;
   }
@@ -752,7 +752,6 @@ a.navbar-brand {
     padding-bottom: 15%;
   }
 
-  
   .navbar ul li a.nav-link {
     margin-left: 0.25rem !important;
   }
@@ -788,9 +787,9 @@ a.navbar-brand {
     width: 112px;
     height: 32px;
     margin-left: 56% !important;
-    margin-bottom: 6% ;
+    margin-bottom: 6%;
     margin-top: -20% !important;
-}
+  }
 }
 
 .privacy.py-sm-5.py-4 {
@@ -921,14 +920,13 @@ a.btn.nutmuathem.mb-3:hover {
     align-items: center;
   }
 }
-.smallmenu{
+.smallmenu {
   display: none;
 }
 /* mobile */
 @media only screen and (max-width: 740px) {
-
   .navbar form .input-group {
-    width: 100% !important;
+    width: 100%;
   }
   .index_footer {
     width: 100% !important;
@@ -993,18 +991,18 @@ a.btn.nutmuathem.mb-3:hover {
     padding: 0;
   }
 }
-.Mobile_name{
+.Mobile_name {
   height: 40px;
   margin-top: 4%;
   margin-left: 16%;
 }
 button.element.btn.btn-outline-success {
-    font-size: 15px;
-    height: 33px;
-    width: 112px;
-    margin-top: -4%;
-    margin-left: 12%;
-    position: absolute;
+  font-size: 15px;
+  height: 33px;
+  width: 112px;
+  margin-top: -4%;
+  margin-left: 12%;
+  position: absolute;
 }
 body {
   background: #87cc77;
@@ -1044,7 +1042,7 @@ body {
   height: 4px;
   width: 35px;
   border-radius: 2px;
-  background-color:black;
+  background-color: black;
   position: relative;
   display: block;
   /* transition: all 0.2s ease-in-out; */
@@ -1056,7 +1054,8 @@ body {
 #overlay-button span:after {
   top: 10px;
 }
-#overlay-button span:before, #overlay-button span:after {
+#overlay-button span:before,
+#overlay-button span:after {
   height: 4px;
   width: 35px;
   border-radius: 2px;
@@ -1065,27 +1064,30 @@ body {
   content: "";
   transition: all 0.2s ease-in-out;
 }
-#overlay-button:hover span, #overlay-button:hover span:before, #overlay-button:hover span:after {
+#overlay-button:hover span,
+#overlay-button:hover span:before,
+#overlay-button:hover span:after {
   background: #333332;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   display: none;
 }
 
-input[type=checkbox]:checked ~ #overlay {
+input[type="checkbox"]:checked ~ #overlay {
   visibility: visible;
   margin-top: -3%;
 }
 
-input[type=checkbox]:checked ~ #overlay-button:hover span, input[type=checkbox]:checked ~ #overlay-button span {
+input[type="checkbox"]:checked ~ #overlay-button:hover span,
+input[type="checkbox"]:checked ~ #overlay-button span {
   background: transparent;
 }
-input[type=checkbox]:checked ~ #overlay-button span:before {
+input[type="checkbox"]:checked ~ #overlay-button span:before {
   transform: rotate(45deg) translate(7px, 7px);
   opacity: 1;
 }
-input[type=checkbox]:checked ~ #overlay-button span:after {
+input[type="checkbox"]:checked ~ #overlay-button span:after {
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
@@ -1132,10 +1134,12 @@ input[type=checkbox]:checked ~ #overlay-button span:after {
 
 body {
   background: #2d2c41;
-  font-family: 'Open Sans', Arial, Helvetica, Sans-serif, Verdana, Tahoma;
+  font-family: "Open Sans", Arial, Helvetica, Sans-serif, Verdana, Tahoma;
 }
 
-ul { list-style-type: none; }
+ul {
+  list-style-type: none;
+}
 
 a {
   color: #b63b4d;
@@ -1146,9 +1150,8 @@ a {
  * Contenedor Principal
  ===========================*/
 
-
 h1 {
-  color: #FFF;
+  color: #fff;
   font-size: 24px;
   font-weight: 400;
   text-align: center;
@@ -1164,7 +1167,7 @@ h1 a {
   width: 100%;
   max-width: 360px;
   margin: 30px auto 20px;
-  background: #FFF;
+  background: #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -1174,14 +1177,16 @@ h1 a {
   cursor: pointer;
   display: block;
   padding: 0px 15px 15px 42px;
-  color: #4D4D4D;
+  color: #4d4d4d;
   font-size: 14px;
   font-weight: 700;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
   position: relative;
 }
 
-.accordion li:last-child .link { border-bottom: 0; }
+.accordion li:last-child .link {
+  border-bottom: 0;
+}
 
 .accordion li i {
   position: absolute;
@@ -1197,9 +1202,13 @@ h1 a {
   font-size: 16px;
 }
 
-.accordion li.open .link { color: #b63b4d; }
+.accordion li.open .link {
+  color: #b63b4d;
+}
 
-.accordion li.open i { color: #b63b4d; }
+.accordion li.open i {
+  color: #b63b4d;
+}
 
 .accordion li.open i.fa-chevron-down {
   -webkit-transform: rotate(180deg);
@@ -1212,14 +1221,15 @@ h1 a {
  * Submenu
  -----------------------------*/
 
-
 .submenu {
   display: none;
   background: #444359;
   font-size: 14px;
 }
 
-.submenu li { border-bottom: 1px solid #4b4a5e; }
+.submenu li {
+  border-bottom: 1px solid #4b4a5e;
+}
 
 .submenu a {
   display: block;
@@ -1227,11 +1237,10 @@ h1 a {
   color: #d9d9d9;
   padding: 12px;
   padding-left: 42px;
-
 }
 .submenu a:hover {
   background: #b63b4d;
-  color: #FFF;
+  color: #fff;
 }
 button.btn.btn-outline-success {
   background: white !important;
@@ -1239,9 +1248,9 @@ button.btn.btn-outline-success {
   color: rgb(25, 135, 84) !important;
 }
 .MuiInputBase-root.MuiInput-root.MuiInput-underline.form-control {
-    border: 2px solid;
+  border: 2px solid;
 }
 
 .soluong.d-flex {
-    margin-top: -3%;
+  margin-top: -3%;
 }

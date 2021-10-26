@@ -217,3 +217,237 @@
   align-items: self-start !important;
   justify-content: flex-start !important;
 }
+
+.nav {
+  width: 100%;
+  background-color: white;
+}
+
+.nav .nav-container,
+.footer .footer-container,
+.custom-header .custom-header-container {
+  width: 95%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.nav .nav-container .nav-logo-wrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav .nav-container .nav-logo-wrapper .nav-logo {
+  width: auto;
+  height: 70px;
+  flex-shrink: 0;
+  margin: auto;
+}
+
+.nav .nav-container .nav-brand-wrapper .nav-brand-top-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #64ae55;
+  text-align: center;
+  height: 30px;
+  letter-spacing: 1px;
+}
+
+.nav .nav-container .nav-brand-wrapper .nav-brand-bot-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #64ae55;
+  text-align: center;
+  height: 30px;
+  letter-spacing: 1px;
+}
+
+.nav .nav-container .nav-search-wrapper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.nav .nav-container .nav-search-input {
+  margin: auto;
+  border: 2px solid #64ae55;
+  outline: none !important;
+  box-shadow: 0 0 0;
+}
+
+.nav .nav-container .nav-cart .nav-cart-text {
+  font-size: 0.9rem;
+  color: orange;
+  font-weight: bold;
+}
+
+.search-btn {
+  width: 42px;
+  height: 38px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #dfdfdf;
+  text-align: center;
+  border: none;
+  padding-top: 8px;
+}
+
+.footer,
+.custom-header {
+  width: 100%;
+}
+
+.footer .footer-container .footer-text {
+  font-size: 0.9rem;
+}
+
+.footer .footer-container .footer-fanpage-wrapper .footer-fanpage {
+  width: 100%;
+  height: auto;
+}
+
+.header-category-list {
+  display: block;
+  box-sizing: border-box;
+
+  background: white;
+  text-align: left;
+}
+
+.header-category-list ul {
+  list-style: none;
+  background: white;
+  height: 385px;
+  padding-left: 0 !important;
+}
+
+.header-category-list > ul > li:hover {
+  background-color: #82e66e;
+  cursor: pointer;
+}
+
+.header-category-list ul li:hover > .subcate-item-0,
+.header-category-list ul li:hover i.fa.fa-chevron-right {
+  color: white;
+}
+
+.header-category-list > ul > li {
+  border-bottom: 1px solid #f8e1e1;
+  height: 35px;
+}
+
+.header-category-list ul li span {
+  line-height: 35px;
+  padding-left: 14px;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.header-category-list ul li ul {
+  display: none;
+  height: 424px;
+  width: 300%;
+  position: absolute;
+  z-index: 99;
+  top: 0px;
+  left: 0px;
+  margin-left: 100%;
+  background-color: white;
+}
+
+.header-category-list .subcate-1-title {
+  font-weight: bold;
+}
+
+.header-category-list ul li ul:hover {
+  cursor: auto;
+}
+
+.header-category-list ul li .category-item-title {
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  margin-bottom: -37px;
+  font-size: 15px;
+  height: 35px;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  transition: 0.3s;
+}
+
+.header-category-list ul li .subcate-item-2 {
+  text-decoration: none;
+  color: black;
+  font-size: 0.9rem;
+  height: 30px;
+}
+
+.header-category-list ul li .subcate-item-1 {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 1rem;
+  height: 30px;
+}
+
+.header-category-list ul li .subcate-item-1:hover,
+.header-category-list ul li .subcate-item-2:hover {
+  color: #64ae55;
+}
+
+.header-category-list ul li:hover ul {
+  display: block;
+}
+
+.header-category-list ul li ul .content {
+  float: left;
+  margin-left: 20px;
+  width: 342px;
+  height: 265px;
+  text-align: left;
+}
+
+.header-category-list ul li ul .content.phai {
+  margin-left: 20px;
+}
+
+.header-title {
+  background-color: #64ae55;
+  padding: 8px;
+}
+
+.nutcarousel.carousel-indicators li {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+}
+
+.header-carousel-inner {
+  margin-left: 0%;
+  width: 100% !important;
+}
+
+.header-img-fluid {
+  width: 100%;
+}
+
+.banner-img-wrapper {
+  height: 100%;
+  width: 100%;
+  margin-top: 0;
+  user-select: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.banner-img {
+  height: 424px;
+  width: 900px;
+}
