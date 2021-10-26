@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Nav = () => {
+  const history = useHistory();
   const [valueProduct, setValueProduct] = useState();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!valueProduct) return;
+    history.push("/ket-qua/" + valueProduct);
+  };
 
   return (
     <nav className="nav">
@@ -24,7 +31,7 @@ const Nav = () => {
           </div>
 
           <div className="col-6 nav-search-container">
-            <form className="form-inline mr-3">
+            <form className="form-inline mr-3" onSubmit={onSubmit}>
               <div
                 className="input-group nav-search-wrapper"
                 style={{ width: "630px" }}
@@ -37,9 +44,10 @@ const Nav = () => {
                   value={valueProduct}
                   placeholder="Nhập sách cần tìm kiếm..."
                 />
-                <div className="input-group-append">
+                <div className="input-group-append" onClick={onSubmit}>
                   <div
                     className="search-btn"
+                    onClick={onSubmit}
                     style={{ backgroundColor: "#64ae55", color: "white" }}
                   >
                     <i className="fa fa-search " />
