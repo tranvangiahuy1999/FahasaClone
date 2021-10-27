@@ -9,13 +9,12 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 
-import Nav from "./Nav";
-import Footer from "./Footer";
 import HistoryLink from "./ProductDetail/HistoryLink";
 import ProductInfo from "./ProductDetail/ProductInfo";
 import MarketingBox from "./ProductDetail/MarketingBox";
 
 import shopApis from "../../../apis/ShopApis";
+import alert from "../../../utils/Alert";
 import { formatCurrency } from "../../../utils/format-string.util";
 import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 
@@ -27,8 +26,8 @@ const ProductDetail = () => {
   const [defaultProduct, setDefaultProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [productQuantity, setProductQuantity] = useState(1);
+  // @ts-ignore
   const [parentId, setParentId] = useState([]);
-  const [isFullDescription, setIsFullDescription] = useState(false);
 
   useEffect(() => {
     getProductDetailData();
@@ -36,6 +35,7 @@ const ProductDetail = () => {
 
   const getProductDetailData = async () => {
     try {
+      // @ts-ignore
       const result = await shopApis.getProductDetail(params.id);
 
       if (result.status === HTTP_RESPONSE_STATUS.SUCCESS) {
@@ -86,6 +86,7 @@ const ProductDetail = () => {
 
   const handleAddToCartBtn = (event) => {
     if (productQuantity < 1) {
+      // @ts-ignore
       alert({ icon: "error", title: "Số lượng không thể nhỏ hơn 0" });
       return;
     }
@@ -100,6 +101,7 @@ const ProductDetail = () => {
           nameParam: defaultPrice.name,
           name: defaultProduct.name,
           image: defaultProduct.image,
+          // @ts-ignore
           id: params.id,
           count: Number(productQuantity),
         },
@@ -123,6 +125,7 @@ const ProductDetail = () => {
         nameParam: defaultPrice.name,
         name: defaultProduct.name,
         image: defaultProduct.image,
+        // @ts-ignore
         id: params.id,
         count: Number(productQuantity),
       });
@@ -133,17 +136,19 @@ const ProductDetail = () => {
 
   const handleAddToCartEvent = (event) => {
     if (event === "buyNow") return history.push("/gio-hang");
-    alert({ icon: "success", title: "Đã thêm vào giỏ hàng" });
+    // @ts-ignore
+    alert({
+      icon: "success",
+      title: "Đã thêm vào giỏ hàng",
+    });
   };
 
   return (
     <div className="product-detail-container">
       <div className="product-detail-wrapper">
-        <Nav />
         {productDetail.map((product, index) => (
           <div key={index}>
             <HistoryLink product={product} />
-
             <section className="product-detail-item-container">
               <div className="product-detail-item-wrapper">
                 <div className="product-detail-image-container">
@@ -283,7 +288,6 @@ const ProductDetail = () => {
           </div>
         ))}
       </div>
-      <Footer />
     </div>
   );
 };

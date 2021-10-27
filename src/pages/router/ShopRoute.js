@@ -14,7 +14,7 @@ const ShopRoute = () => {
   return (
     <div style={{ background: "#F0F0F0" }}>
       <Nav />
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/gio-hang" component={Receipt} />
