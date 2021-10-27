@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router";
-import { Button } from "@material-ui/core";
-import ReactHtmlParser from "react-html-parser";
+import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import { Button } from "@material-ui/core";
+import {
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 
 import Nav from "./Nav";
 import Footer from "./Footer";
+import HistoryLink from "./ProductDetail/HistoryLink";
+import ProductInfo from "./ProductDetail/ProductInfo";
+import MarketingBox from "./ProductDetail/MarketingBox";
+
 import shopApis from "../../../apis/ShopApis";
-import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 import { formatCurrency } from "../../../utils/format-string.util";
-import { AiOutlineDoubleRight } from "react-icons/ai";
-import HistoryLink from "./HistoryLink";
+import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 
 const ProductDetail = () => {
   const params = useParams();
@@ -27,6 +28,7 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [productQuantity, setProductQuantity] = useState(1);
   const [parentId, setParentId] = useState([]);
+  const [isFullDescription, setIsFullDescription] = useState(false);
 
   useEffect(() => {
     getProductDetailData();
@@ -141,6 +143,7 @@ const ProductDetail = () => {
         {productDetail.map((product, index) => (
           <div key={index}>
             <HistoryLink product={product} />
+
             <section className="product-detail-item-container">
               <div className="product-detail-item-wrapper">
                 <div className="product-detail-image-container">
@@ -184,7 +187,6 @@ const ProductDetail = () => {
                     <div className="product-title-container">
                       <h3 className="product-title-value">{product.name}</h3>
                     </div>
-
                     <div className="product-price-container">
                       <p className="product-price-describe">
                         Giá bán tại nhà sách Kiên Giang:
@@ -193,7 +195,6 @@ const ProductDetail = () => {
                         {formatCurrency(defaultPrice)}₫
                       </p>
                     </div>
-
                     {product.parameters.length > 1 ? (
                       <div className="product-parameters-container">
                         {product.parameters.map((parameter, index) => {
@@ -218,42 +219,32 @@ const ProductDetail = () => {
                       <div />
                     )}
 
-                    <div className="marketing-describe-container">
-                      <h6 className="describe-text">
-                        Tại Nhà sách Kiên Giang:{" "}
-                      </h6>
-                      <p className="icon">
-                        <AiOutlineDoubleRight /> Giao hàng cho đơn hàng ở Rạch
-                        Giá và ở Tỉnh/Thành khác
-                      </p>
-                      <p className="icon">
-                        <AiOutlineDoubleRight /> Combo sách HOT - GIẢM 25%{" "}
-                        <Link style={{ color: "orange" }} to="/">
-                          <AiOutlineDoubleRight /> Xem ngay
-                        </Link>
-                      </p>
-                    </div>
+                    <MarketingBox />
 
                     <div className="product-quantity-container">
                       <p className="product-quantity-describe">Số Lượng: </p>
-                      <div className="product-quantity-box">
-                        <button
-                          className="quantity-dec-btn-container"
-                          onClick={() => handleDecreaseAmount()}
-                        >
-                          <p className="quantity-adjust-item">-</p>
-                        </button>
-                        <div className="product-quantity-value-container">
-                          <p className="product-quantity-value">
-                            {productQuantity}
-                          </p>
+                      <div className="product-quantity-box-container">
+                        <div className="product-quantity-box">
+                          <button
+                            className="quantity-dec-btn-container"
+                            onClick={() => handleDecreaseAmount()}
+                          >
+                            <AiOutlineMinus className="icon-quantity" />
+                          </button>
+                          <div className="product-quantity-value-container">
+                            <input
+                              type="text"
+                              className="product-quantity-value"
+                              value={productQuantity}
+                            />
+                          </div>
+                          <button
+                            className="quantity-inc-btn-container"
+                            onClick={() => handleIncreaseAmount()}
+                          >
+                            <AiOutlinePlus className="icon-quantity" />
+                          </button>
                         </div>
-                        <button
-                          className="quantity-inc-btn-container"
-                          onClick={() => handleIncreaseAmount()}
-                        >
-                          <p className="quantity-adjust-item">+</p>
-                        </button>
                       </div>
                     </div>
 
@@ -268,6 +259,7 @@ const ProductDetail = () => {
                         }}
                         variant="outlined"
                       >
+                        <AiOutlineShoppingCart style={{ marginRight: "5px" }} />
                         Thêm Vào Giỏ Hàng
                       </Button>
                       <Button
@@ -287,47 +279,7 @@ const ProductDetail = () => {
                 </div>
               </div>
             </section>
-
-            <section className="product-info-container">
-              <div className="product-info-wrapper">
-                <div className="product-info-header">
-                  <h4 className="describe-text">Thông Tin Chi Tiết</h4>
-                </div>
-                <hr />
-                <Paper className="product-info-table" elevation={0}>
-                  <Table>
-                    <TableBody>
-                      {Object.keys(product.details).map((key, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="product-info-table-left-cell">
-                            {key}
-                          </TableCell>
-                          <TableCell className="product-info-table-right-cell ">
-                            {product.details[key]}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </Paper>
-              </div>
-            </section>
-
-            <section className="product-info-container">
-              <div className="product-info-wrapper">
-                <div className="product-info-header">
-                  <h4 className="describe-text">Mô Tả Sản Phẩm</h4>
-                </div>
-                <hr />
-                <div className="product-description-container">
-                  <div className="product-descripiton-text">
-                    <div>
-                      <span>{ReactHtmlParser(product.description)}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <ProductInfo product={product} />
           </div>
         ))}
       </div>

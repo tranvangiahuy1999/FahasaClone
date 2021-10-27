@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { convertURL } from "../../../utils/format-string.util";
+import { convertURL } from "../../../../utils/format-string.util";
 
 const HistoryLink = ({ product }) => {
   return (
