@@ -1,8 +1,10 @@
 import { Badge } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
 
 const Nav = () => {
+  const history = useHistory();
   const [valueProduct, setValueProduct] = useState();
   const [productInCartQuantity, setProductInCartQuantity] = useState(0);
 
@@ -13,6 +15,12 @@ const Nav = () => {
   const getLocalCartData = () => {
     const cartList = JSON.parse(localStorage.getItem("Cart"));
     setProductInCartQuantity(cartList ? cartList.length : 0);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!valueProduct) return;
+    history.push("/ket-qua/" + valueProduct);
   };
 
   return (
@@ -34,7 +42,7 @@ const Nav = () => {
           </div>
 
           <div className="col-6 nav-search-container">
-            <form className="form-inline mr-3">
+            <form className="form-inline mr-3" onSubmit={onSubmit}>
               <div
                 className="input-group nav-search-wrapper"
                 style={{ width: "630px" }}
@@ -47,9 +55,10 @@ const Nav = () => {
                   value={valueProduct}
                   placeholder="Nhập sách cần tìm kiếm..."
                 />
-                <div className="input-group-append">
+                <div className="input-group-append" onClick={onSubmit}>
                   <div
                     className="search-btn"
+                    onClick={onSubmit}
                     style={{ backgroundColor: "#64ae55", color: "white" }}
                   >
                     <i className="fa fa-search " />
