@@ -10,10 +10,10 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { TextField, FormGroup } from "@material-ui/core";
-import { ICON_COLOR, LOGO_COLOR } from "../../constants/index";
+import { ICON_COLOR, LOGO_COLOR } from "../constants/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const ChangePasswordModal = (props) => {
+const ChangeStatusModal = (props) => {
   const classes = useStyles();
   const [status, setStatus] = useState("");
   const [description, setDescription] = useState();
@@ -181,4 +181,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default ChangePasswordModal;
+export default ChangeStatusModal;
