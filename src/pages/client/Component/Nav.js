@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import IconButton from "@material-ui/core/IconButton";
+import { BsListNested } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 
 const Nav = () => {
@@ -13,8 +15,8 @@ const Nav = () => {
   };
 
   return (
-    <nav className="nav">
-      <div className="nav-container">
+    <nav className="nav bg-white">
+      <div className="nav-container d-none d-md-block">
         <div className="row m-0 p-0">
           <div className="col-1">
             <div className="nav-logo-wrapper">
@@ -25,7 +27,7 @@ const Nav = () => {
               />
             </div>
           </div>
-          <div className="nav-brand-wrapper col-3 pr-4">
+          <div className="nav-brand-wrapper col-3 pr-2">
             <div className="nav-brand-top-text mt-1">Nhà Sách</div>
             <div className="nav-brand-bot-text">Kiên Giang</div>
           </div>
@@ -39,7 +41,6 @@ const Nav = () => {
                 <input
                   type="text"
                   className="form-control nav-search-input"
-                  aria-label="Small"
                   onChange={(e) => setValueProduct(e.target.value)}
                   value={valueProduct}
                   placeholder="Nhập sách cần tìm kiếm..."
@@ -59,12 +60,41 @@ const Nav = () => {
 
           <div className="nav-cart col-2 text-center">
             <div className="right-wrapper mr-4 mt-3">
-              <AiOutlineShoppingCart
-                size={30}
-                color="orange"
-              ></AiOutlineShoppingCart>
+              <IconButton color="secondary">
+                <AiOutlineShoppingCart
+                  size={30}
+                  color="orange"
+                ></AiOutlineShoppingCart>
+                <div className="nav-cart-text right-wrapper ml-2">GIỎ HÀNG</div>
+              </IconButton>
             </div>
-            <div className="nav-cart-text right-wrapper">GIỎ HÀNG</div>
+          </div>
+        </div>
+      </div>
+      <div className="mobile-nav-container d-md-none">
+        <div className="mobile-nav-title">Nhà Sách Kiên Giang</div>
+        <div className="row m-0 p-0">
+          <div className="col-2">
+            <IconButton color="primary">
+              <BsListNested size={28} color="white"></BsListNested>
+            </IconButton>
+          </div>
+          <div className="col-8">
+            <input
+              type="text"
+              className="form-control mobile-nav-search-input"
+              onChange={(e) => setValueProduct(e.target.value)}
+              value={valueProduct}
+              placeholder="Nhập sách cần tìm kiếm..."
+            ></input>
+          </div>
+          <div className="col-2 right-wrapper">
+            <IconButton color="secondary">
+              <AiOutlineShoppingCart
+                size={28}
+                color="white"
+              ></AiOutlineShoppingCart>
+            </IconButton>
           </div>
         </div>
       </div>

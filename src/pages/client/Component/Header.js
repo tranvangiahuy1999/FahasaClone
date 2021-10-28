@@ -28,6 +28,7 @@ const Header = () => {
       console.log(e);
     }
   };
+
   const chuyenDoiURL = (str) => {
     str = str.toLowerCase();
 
@@ -61,7 +62,7 @@ const Header = () => {
       <div className="custom-header-container">
         <section>
           <div className="row m-0 p-0 justify">
-            <div className="col-3 p-0 m-0">
+            <div className="col-3 d-none d-md-block p-0 m-0">
               <div className="header-title">
                 <div className="text-white">
                   <i className="fa fa-bars mr-2" id=" menuId" />
@@ -149,7 +150,7 @@ const Header = () => {
                 </ul>
               </div>
             </div>
-            <div className="col-9 p-0 m-0">
+            <div className="col-lg-9 col-md-9 col-12 p-0 m-0">
               <Carousel
                 NextIcon={<FcNext className="arrow-icon" />}
                 PrevIcon={<FcPrevious className="arrow-icon" />}
@@ -162,73 +163,6 @@ const Header = () => {
                   </div>
                 ))}
               </Carousel>
-            </div>
-          </div>
-        </section>
-
-        <section className="header-category-list-container">
-          <div>
-            <div className="row m-0 p-0">
-              <div className="col-3 p-0"></div>
-              {/* banner slider  */}
-              <div className="col-9 px-0">
-                {/* <div id="carouselId" className="carousel" data-ride="carousel">
-                  <ol className="nutcarousel carousel-indicators rounded-circle">
-                    <li
-                      data-target="#carouselId"
-                      data-slide-to={0}
-                      className="active"
-                    />
-                    <li data-target="#carouselId" data-slide-to={1} />
-                    <li data-target="#carouselId" data-slide-to={2} />
-                  </ol>
-                  <div className="header-carousel-inner">
-                    <div className="carousel-item active">
-                      <img
-                        src="images/banner-sach-moi.jpg"
-                        className="header-img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div className="carousel-item">
-                      <img
-                        src="images/banner-beethoven.jpg"
-                        className="header-img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div className="carousel-item">
-                      <img
-                        src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg"
-                        className="header-img-fluid"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <a
-                    className="carousel-control-prev"
-                    href="#carouselId"
-                    data-slide="prev"
-                  >
-                    <span
-                      className="carousel-control-prev-icon"
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">Previous</span>
-                  </a>
-                  <a
-                    className="carousel-control-next"
-                    href="#carouselId"
-                    data-slide="next"
-                  >
-                    <span
-                      className="carousel-control-next-icon"
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">Next</span>
-                  </a>
-                </div> */}
-              </div>
             </div>
           </div>
         </section>

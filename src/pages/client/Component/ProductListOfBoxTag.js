@@ -100,7 +100,7 @@ const ProductListOfBoxTag = (props) => {
       </AntTabs>
       <TabPanel value={value} index={0}>
         <div className="row m-0 p-0">
-          <div className="col-5">
+          <div className="col-5 d-none d-md-block">
             <div className="product-list-of-boxtag-img-wrapper">
               <img
                 alt=""
@@ -108,7 +108,7 @@ const ProductListOfBoxTag = (props) => {
               ></img>
             </div>
           </div>
-          <div className="row m-0 p-0 col-7">
+          <div className="row m-0 p-0 col-lg-7 col-md-7 col-12">
             <div className="col-6">
               <HorizontalProductCard
                 img={
