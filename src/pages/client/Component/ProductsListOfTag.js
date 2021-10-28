@@ -6,9 +6,9 @@ import { PRIMARY_HOME_COLOR } from "../../../constants/index";
 const ProductsListOfTag = () => {
   return (
     <div className="product-list-of-tag-container bg-white">
-      <div className="product-list-of-tag-title">Sách Kinh Doanh</div>
+      <div className="product-list-of-tag-title">Sản phẩm nổi bật</div>
       <div className="row m-0 p-0">
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-2">
+        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
           <ProductCard
             img={
               "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
@@ -17,7 +17,7 @@ const ProductsListOfTag = () => {
             productPrice={100000}
           ></ProductCard>
         </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-2">
+        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
           <ProductCard
             img={
               "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
@@ -28,7 +28,7 @@ const ProductsListOfTag = () => {
             productPrice={100000}
           ></ProductCard>
         </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-2">
+        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
           <ProductCard
             img={
               "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
@@ -39,7 +39,7 @@ const ProductsListOfTag = () => {
             productPrice={100000}
           ></ProductCard>
         </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-2">
+        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
           <ProductCard
             img={
               "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
@@ -50,7 +50,7 @@ const ProductsListOfTag = () => {
             productPrice={100000}
           ></ProductCard>
         </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-2">
+        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
           <ProductCard
             img={
               "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"

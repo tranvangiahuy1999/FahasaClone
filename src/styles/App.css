@@ -584,3 +584,11 @@
   height: auto;
   width: 100%;
 }
+
+.product-list-visited-title {
+  color: gray;
+  font-weight: bold;
+  padding: 14px;
+  font-size: 1.3rem;
+  background-color: rgb(221, 221, 221);
+}
