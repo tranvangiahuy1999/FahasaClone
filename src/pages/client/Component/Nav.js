@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import clsx from "clsx";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
 import { BsListNested } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Controller from "../../../utils/Controller";
 
 const Nav = () => {
+  const classes = useStyles();
   const history = useHistory();
+  const categoryData = useSelector((state) => state.shop.categoryData);
+  const [cateList, setCateList] = useState([]);
   const [valueProduct, setValueProduct] = useState();
+  const [drawnerState, setDrawnerState] = useState(false);
+
+  useEffect(() => {
+    setCateList([...categoryData]);
+  }, [categoryData]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,17 +31,59 @@ const Nav = () => {
     history.push("/ket-qua/" + valueProduct);
   };
 
+  const toggleDrawer = (open) => {
+    setDrawnerState(open);
+  };
+
+  const list = () => (
+    <div
+      className={clsx(classes.list)}
+      role="presentation"
+      onClick={() => toggleDrawer(false)}
+      onKeyDown={() => toggleDrawer(false)}
+    >
+      <h5 className="pl-3">Danh mục</h5>
+      <List>
+        {cateList.length ? (
+          cateList.map((ele, index) => (
+            <Link
+              className="drawner-link-color"
+              to={
+                "/danh-sach/" + Controller.formatURL(ele.name) + "." + ele._id
+              }
+            >
+              <ListItem button key={index}>
+                <ListItemText primary={ele.name} />
+              </ListItem>
+            </Link>
+          ))
+        ) : (
+          <div className="empty-data-text">Hiện tại chưa có danh mục</div>
+        )}
+      </List>
+    </div>
+  );
+
   return (
     <nav className="nav bg-white">
+      <Drawer
+        anchor="left"
+        open={drawnerState}
+        onClose={() => toggleDrawer(false)}
+      >
+        {list()}
+      </Drawer>
       <div className="nav-container d-none d-md-block">
         <div className="row m-0 p-0">
           <div className="col-1">
             <div className="nav-logo-wrapper">
-              <img
-                className="nav-logo"
-                src="https://res.cloudinary.com/hanh/image/upload/v1634066828/products/cge2hp4d7bctkrtw1rdj.png"
-                alt=""
-              />
+              <Link to="/">
+                <img
+                  className="nav-logo"
+                  src="https://res.cloudinary.com/hanh/image/upload/v1634066828/products/cge2hp4d7bctkrtw1rdj.png"
+                  alt=""
+                />
+              </Link>
             </div>
           </div>
           <div className="nav-brand-wrapper col-3 pr-2">
@@ -60,13 +119,17 @@ const Nav = () => {
 
           <div className="nav-cart col-2 text-center">
             <div className="right-wrapper mr-4 mt-3">
-              <IconButton color="secondary">
-                <AiOutlineShoppingCart
-                  size={30}
-                  color="orange"
-                ></AiOutlineShoppingCart>
-                <div className="nav-cart-text right-wrapper ml-2">GIỎ HÀNG</div>
-              </IconButton>
+              <Link to="/gio-hang">
+                <IconButton color="secondary">
+                  <AiOutlineShoppingCart
+                    size={30}
+                    color="orange"
+                  ></AiOutlineShoppingCart>
+                  <div className="nav-cart-text right-wrapper ml-2">
+                    GIỎ HÀNG
+                  </div>
+                </IconButton>
+              </Link>
             </div>
           </div>
         </div>
@@ -75,7 +138,7 @@ const Nav = () => {
         <div className="mobile-nav-title">Nhà Sách Kiên Giang</div>
         <div className="row m-0 p-0">
           <div className="col-2">
-            <IconButton color="primary">
+            <IconButton color="primary" onClick={() => toggleDrawer(true)}>
               <BsListNested size={28} color="white"></BsListNested>
             </IconButton>
           </div>
@@ -89,17 +152,26 @@ const Nav = () => {
             ></input>
           </div>
           <div className="col-2 right-wrapper">
-            <IconButton color="secondary">
-              <AiOutlineShoppingCart
-                size={28}
-                color="white"
-              ></AiOutlineShoppingCart>
-            </IconButton>
+            <Link to="/gio-hang">
+              <IconButton color="secondary">
+                <AiOutlineShoppingCart
+                  size={28}
+                  color="white"
+                ></AiOutlineShoppingCart>
+              </IconButton>
+            </Link>
           </div>
         </div>
       </div>
     </nav>
   );
 };
+
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+    paddingTop: 20,
+  },
+});
 
 export default Nav;

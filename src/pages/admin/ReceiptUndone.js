@@ -19,7 +19,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import alert from "../../utils/Alert";
-import ChangeStatusModal from "../../components/ChangeStatusModal/index";
+import ChangeStatusModal from "../../components/ChangeStatusModal";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
