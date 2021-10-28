@@ -6,7 +6,6 @@ import ProductDetail from "../client/Component/ProductDetail";
 import ProductList from "../client/Component/ProductList";
 import ProductSeachList from "../client/Component/ProductSearchList";
 import Nav from "../client/Component/Nav";
-import Header from "../client/Component/Header";
 import Footer from "../client/Component/Footer";
 import Service from "../client/Component/Service";
 
@@ -14,7 +13,6 @@ const ShopRoute = () => {
   return (
     <div style={{ background: "#F0F0F0" }}>
       <Nav />
-      {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/gio-hang" component={Receipt} />
