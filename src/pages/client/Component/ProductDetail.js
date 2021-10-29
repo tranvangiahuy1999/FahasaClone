@@ -256,12 +256,7 @@ const ProductDetail = () => {
                     <div className="buy-method-container">
                       <Button
                         onClick={() => handleAddToCartBtn()}
-                        style={{
-                          marginRight: "10px",
-                          backgroundColor: "white",
-                          color: "#74AC74",
-                          border: "2px solid #74AC74",
-                        }}
+                        className="add-to-cart-btn"
                         variant="outlined"
                       >
                         <AiOutlineShoppingCart style={{ marginRight: "5px" }} />
@@ -269,12 +264,7 @@ const ProductDetail = () => {
                       </Button>
                       <Button
                         onClick={() => handleAddToCartBtn("buyNow")}
-                        style={{
-                          marginRight: "10px",
-                          backgroundColor: "#74AC74",
-                          color: "white",
-                          border: "2px solid #74AC74",
-                        }}
+                        className="buy-now-btn"
                         variant="outlined"
                       >
                         Mua Ngay

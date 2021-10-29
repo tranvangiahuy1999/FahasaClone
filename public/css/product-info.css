@@ -94,3 +94,32 @@ hr {
    color: var(--text-color);
    font-size: 16px;
 }
+
+/* IPAD PRO*/
+@media (max-width: 1024px) {
+   .product-info-container {
+      width: 100%;
+      padding: 30px var(--tablet-padding-width-percent) 10px var(--tablet-padding-width-percent);
+   }
+}
+
+/* IPHONE X */
+@media (max-width: 375px) {
+   .product-info-container {
+      padding: 20px var(--tablet-padding-width-percent) 10px var(--tablet-padding-width-percent);
+   }
+   .product-info-header {
+      padding: 10px 20px 0px 10px;
+      height: 30px;
+   }
+
+   .product-info-table {
+      padding: 0px 10px 10px 10px;
+   }
+
+   .product-info-table-left-cell {
+      max-width: 100px;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+   }
+}
