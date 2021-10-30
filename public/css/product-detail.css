@@ -276,7 +276,7 @@
 }
 
 /* IPHONE X */
-@media (max-width: 375px) {
+@media (max-width: 414px) {
    .product-detail-item-container > .product-detail-item-wrapper {
       flex-direction: column;
       height: auto;

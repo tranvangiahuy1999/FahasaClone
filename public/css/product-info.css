@@ -95,6 +95,12 @@ hr {
    font-size: 16px;
 }
 
+.describe-text-info {
+   font-size: 20px;
+   font-weight: bold;
+   color: var(--text-color);
+}
+
 /* IPAD PRO*/
 @media (max-width: 1024px) {
    .product-info-container {
@@ -103,23 +109,67 @@ hr {
    }
 }
 
-/* IPHONE X */
-@media (max-width: 375px) {
+/* IPHONE 6/7/8 PLUS */
+@media (max-width: 414px) {
    .product-info-container {
-      padding: 20px var(--tablet-padding-width-percent) 10px var(--tablet-padding-width-percent);
+      padding: 10px var(--tablet-padding-width-percent) 0px var(--tablet-padding-width-percent);
    }
+
    .product-info-header {
       padding: 10px 20px 0px 10px;
       height: 30px;
    }
 
    .product-info-table {
+      margin-top: -20px !important;
       padding: 0px 10px 10px 10px;
    }
 
+   .describe-text-info {
+      font-size: 14px;
+   }
+
    .product-info-table-left-cell {
-      max-width: 100px;
-      font-size: 14px !important;
-      font-weight: 400 !important;
+      max-width: 60px;
+      padding: 5px !important;
+      font-size: 10px !important;
+   }
+
+   .product-info-table-right-cell {
+      font-size: 10px !important;
+      padding: 5px !important;
+   }
+
+   .product-descripiton-full-text {
+      font-size: 12px;
+   }
+
+   .description-html-full-text {
+      font-size: 12px;
+   }
+
+   .product-description-container {
+      margin-top: -20px;
+      padding: 0px 10px 10px 10px;
+      font-size: 12px !important;
+   }
+
+   .product-description-full-text-container {
+      margin-top: -20px;
+      padding: 0px 10px 10px 10px;
+      font-size: 12px !important;
+   }
+
+   .load-more-text {
+      font-size: 12px;
+   }
+
+   .description-html-text {
+      -webkit-line-clamp: 5; /* number of lines to show */
+   }
+
+   .product-descripiton-text {
+      font-size: 12px;
+      line-height: 25px; /* fallback */
    }
 }

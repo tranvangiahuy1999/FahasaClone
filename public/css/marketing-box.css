@@ -43,7 +43,7 @@
 }
 
 /* IPHONE X */
-@media (max-width: 375px) {
+@media (max-width: 414px) {
    .marketing-describe-container {
       display: none;
    }

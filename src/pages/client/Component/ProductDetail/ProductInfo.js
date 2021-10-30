@@ -19,7 +19,7 @@ const ProductInfo = ({ product }) => {
       <section className="product-info-container">
         <div className="product-info-wrapper">
           <div className="product-info-header">
-            <h4 className="describe-text">Thông Tin Chi Tiết</h4>
+            <h4 className="describe-text-info">Thông Tin Chi Tiết</h4>
           </div>
           <hr />
           <Paper className="product-info-table" elevation={0}>
@@ -44,7 +44,7 @@ const ProductInfo = ({ product }) => {
       <section className="product-info-container">
         <div className="product-info-wrapper">
           <div className="product-info-header">
-            <h4 className="describe-text">Mô Tả Sản Phẩm</h4>
+            <h4 className="describe-text-info">Mô Tả Sản Phẩm</h4>
           </div>
           <hr />
 
