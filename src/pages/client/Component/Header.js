@@ -31,10 +31,6 @@ const Header = () => {
     } catch (e) {}
   };
 
-  // const Controller.formatURL = (str) => {
-
-  // };
-
   return (
     <div className="custom-header mt-3">
       <div className="custom-header-container">
