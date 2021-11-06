@@ -26,9 +26,10 @@ const Header = () => {
       const res = await shopApis.getCategoryList();
       if (res.status === 200) {
         setCategoryList(res.data);
+        console.log(res.data)
         await dispatch(setcategorydata(res.data));
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   return (

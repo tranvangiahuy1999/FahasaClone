@@ -219,13 +219,15 @@
   justify-content: flex-start !important;
 }
 
-.nav {
+.nav,
+.product-list {
   width: 100%;
 }
 
 .nav .nav-container,
 .footer .footer-container,
-.main-container {
+.main-container,
+.product-list .product-list-container {
   width: 95%;
   max-width: 1100px;
   margin: auto;
@@ -613,4 +615,9 @@
 
 .drawner-link-color {
   color: #64ae55;
+}
+
+.product-list .product-list-container .product-list-breadcrum-wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

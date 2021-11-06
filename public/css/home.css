@@ -1150,19 +1150,6 @@ a {
  * Contenedor Principal
  ===========================*/
 
-h1 {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 400;
-  text-align: center;
-  margin-top: 80px;
-}
-
-h1 a {
-  color: #c12c42;
-  font-size: 16px;
-}
-
 .accordion {
   width: 100%;
   max-width: 360px;

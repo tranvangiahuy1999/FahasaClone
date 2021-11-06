@@ -120,7 +120,7 @@ const Nav = () => {
           </div>
 
           <div className="nav-cart col-2 text-center">
-            <div className="right-wrapper mr-4 mt-3">
+            <div className="right-wrapper mr-4 mt-2">
               <Link to="/gio-hang">
                 <IconButton color="secondary">
                   <AiOutlineShoppingCart
