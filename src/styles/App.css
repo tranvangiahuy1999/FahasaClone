@@ -217,3 +217,32 @@
   align-items: self-start !important;
   justify-content: flex-start !important;
 }
+
+.login-page .login-header {
+  padding: 10px;
+}
+
+.login-page .login-body {
+  background-color: #3396b5;
+  height: 550px;
+}
+
+.login-page .login-body .login-form {
+  background-color: white;
+  margin-top: 16%;
+  border-radius: 5px;
+  padding: 3rem;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.login-page .login-body .register-form {
+  background-color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px;
+  padding: 3rem;
+  margin-top: 5%;
+  margin-left: 8%;
+  margin-right: 8%;
+}

@@ -48,7 +48,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCategoryData } from "../../reducers/AdminReducer";
 
-import { userlogoutsuccess } from "../../reducers/UserReducer";
+import { userLogoutSuccess } from "../../reducers/AdminReducer";
 import adminApis from "../../apis/AdminApis";
 
 const drawerWidth = 230;
@@ -244,8 +244,8 @@ const AdminIndex = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    dispatch(userlogoutsuccess());
-    // return history.push("/login");
+    dispatch(userLogoutSuccess());
+    return history.push("/login");
   };
 
   const container =

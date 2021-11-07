@@ -7,7 +7,9 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
+import PrivateRoute from './components/PrivateRoute';
 import AdminIndex from "./pages/admin/Index";
+import Login from './pages/admin/Login'
 
 let persistor = persistStore(store);
 
@@ -18,9 +20,12 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
           <Router>
             <Switch>
-              <Route path="/admin">
-                <AdminIndex></AdminIndex>
+              <Route exact path='/login'>
+                <Login></Login>
               </Route>
+              <PrivateRoute exact path="/admin">
+                <AdminIndex></AdminIndex>
+              </PrivateRoute>
             </Switch>
           </Router>
         </PersistGate>
