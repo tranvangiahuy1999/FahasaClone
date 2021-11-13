@@ -23,18 +23,11 @@ axiosClient.interceptors.request.use(
 
 //handle error
 const handleError = (error) => {
-  if (error)
-    alert({
-      icon: "error",
-      title: "Đã xảy ra lỗi",
-      msg: error.response.data.message,
-    });
-  else
-    alert({
-      icon: "error",
-      title: "Đã xảy ra lỗi",
-      msg: "Không thể kết nối tới server!",
-    });
+  alert({
+    icon: "error",
+    title: "Đã có lỗi xảy ra",
+    msg: "Xin vui lòng kiểm tra lại thông tin",
+  });
 };
 
 //handle response
