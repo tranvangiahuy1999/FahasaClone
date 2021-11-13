@@ -231,6 +231,7 @@ export default function BoxTagManager() {
                   <Card className={classes.card}>
                     <Link
                       to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}
+                      className="rrd-custom-link"
                     >
                       <CardActionArea>
                         <CardMedia
