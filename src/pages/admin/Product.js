@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 import adminApis from "../../apis/AdminApis";
 import ConfirmModal from "../../components/ConfirmModal";
 import alert from "../../utils/Alert";
+import { useHistory } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -117,6 +118,7 @@ EnhancedTableHead.propTypes = {
 
 export default function Product() {
   const classes = useStyles();
+  const history = useHistory();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("calories");
   const [productList, setProductList] = useState([]);
@@ -250,6 +252,10 @@ export default function Product() {
     setActionItemId(id);
   };
 
+  const goToCreateProductPage = () => {
+    history.push('/admin/product/add-product')
+  }
+
   return (
     <div className={classes.root}>
       <Backdrop className={classes.backdrop} open={loader}>
@@ -286,19 +292,18 @@ export default function Product() {
             />
           </div>
           <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-            <Link to="/admin/product/add-product">
-              <Button
-                style={{
-                  backgroundColor: LOGO_COLOR,
-                  color: "white",
-                }}
-                size="small"
-                variant="contained"
-                startIcon={<GoPlus></GoPlus>}
-              >
-                Thêm sản phẩm
-              </Button>
-            </Link>
+            <Button
+              style={{
+                backgroundColor: LOGO_COLOR,
+                color: "white",
+              }}
+              size="small"
+              variant="contained"
+              startIcon={<GoPlus></GoPlus>}
+              onClick={goToCreateProductPage}
+            >
+              Thêm sản phẩm
+            </Button>
           </div>
         </div>
       </div>

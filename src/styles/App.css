@@ -246,3 +246,7 @@
   margin-left: 8%;
   margin-right: 8%;
 }
+
+.rrd-custom-link {
+  text-decoration: none;
+}

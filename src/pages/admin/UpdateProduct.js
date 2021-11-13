@@ -32,6 +32,7 @@ export default function UpdateProduct() {
   const fileRef = useRef();
   const history = useHistory();
   const [name, setName] = useState();
+  const [unit, setUnit] = useState();
   const [desc, setDesc] = useState();
   const [category, setCategory] = useState(["null", "null", "null"]);
   const [categoryList1, setCategoryList1] = useState([
@@ -399,6 +400,7 @@ export default function UpdateProduct() {
     const parameter = await formatProducts(productsData);
     const formdata = new FormData();
     formdata.append("name", name);
+    formdata.append("unit", unit);
     formdata.append("description", desc);
 
     specify.forEach((ele, index) => {
@@ -478,7 +480,7 @@ export default function UpdateProduct() {
                   <FormLabel>
                     <span className="addprod-title">Thông tin sản phẩm</span>
                   </FormLabel>
-                  <FormGroup className="mb-4 mt-2">
+                  <FormGroup className="mb-2 mt-2">
                     <TextField
                       InputLabelProps={{
                         classes: {
@@ -494,6 +496,24 @@ export default function UpdateProduct() {
                       }}
                       required
                       placeholder="Tên sản phẩm"
+                    />
+                  </FormGroup>
+                  <FormGroup className="mb-4">
+                    <TextField
+                      InputLabelProps={{
+                        classes: {
+                          root: classes.resize,
+                        },
+                      }}
+                      value={unit}
+                      onChange={(e) => setUnit(e.target.value)}
+                      InputProps={{
+                        classes: {
+                          input: classes.resize,
+                        },
+                      }}
+                      required
+                      label="Đơn vị sản phẩm"
                     />
                   </FormGroup>
                   <FormLabel>

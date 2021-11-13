@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,8 +19,10 @@ import { ICON_COLOR } from "../../constants/index";
 import { FaRegEdit } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { LOGO_COLOR } from "../../constants/index";
 import alert from "../../utils/Alert";
 import ChangeStatusModal from "../../components/ChangeStatusModal/index";
+import downloadReceiptReport from '../../utils/downloadReceiptReport'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -179,6 +182,12 @@ export default function ReceiptUndone() {
     handleCloseModal();
   };
 
+  const exportReceiptHandle = async () => {
+    setLoader(true)
+    await downloadReceiptReport()
+    setLoader(false)
+  }
+
   const pageChange = (event, page) => {
     getReceiptData(page, true);
   };
@@ -216,19 +225,34 @@ export default function ReceiptUndone() {
         onSubmit={adminChangeStatus}
       ></ChangeStatusModal>
       <h5>Đơn hàng chưa xử lý</h5>
-      <div className="mb-4 mt-3">
-        <TextField
-          id="input-with-icon-textfield"
-          placeholder="Tìm kiếm đơn hàng"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <IoSearch></IoSearch>
-              </InputAdornment>
-            ),
-          }}
-          variant="standard"
-        />
+      <div className="row mb-2">
+        <div className="col-lg-6 col-md-6 pt-2 pb-2">
+          <TextField
+            id="input-with-icon-textfield"
+            placeholder="Tìm kiếm đơn hàng"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IoSearch></IoSearch>
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
+        </div>
+        <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
+          <Button
+            style={{
+              backgroundColor: LOGO_COLOR,
+              color: "white",
+            }}
+            size="small"
+            variant="contained"
+            onClick={exportReceiptHandle}
+          >
+            Xuất hóa đơn
+          </Button>
+        </div>
       </div>
       <Paper className={classes.paper}>
         <TableContainer>
@@ -265,7 +289,7 @@ export default function ReceiptUndone() {
                           align="center"
                           onClick={() => changeCollapseState(index)}
                         >
-                          <Link to="#" color="inherit">
+                          <Link to="#" color="inherit" className='rrd-custom-link'>
                             {row.name}
                           </Link>
                         </TableCell>

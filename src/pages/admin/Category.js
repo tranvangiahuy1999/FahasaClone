@@ -22,7 +22,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import { LOGO_COLOR } from "../../constants/index";
 import CreateCategoryModal from "../../components/CreateCategoryModal";
 import { Link, useParams, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { FaRegEdit } from "react-icons/fa";
@@ -86,11 +85,10 @@ function useQuery() {
 export default function Category(props) {
   let { id } = useParams();
   let query = useQuery();
-  const cateList = useSelector((state) => state.admin);
   const classes = useStyles();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [prototypeCateList, setPrototypeCateList] = useState([]);
-  const [categoryList, getCategoryList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const [parentId, setParentId] = useState();
   const [editCateData, setEditCateData] = useState();
   const [confirmModalState, setConfirmModalState] = useState(false);
@@ -99,16 +97,31 @@ export default function Category(props) {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
+    if (!id) {
+      getCategoryList()
+    }
+  }, [])
+
+  useEffect(() => {
     const temp = new URLSearchParams(query);
     setParentId(temp.get("parentId"));
     if (id) {
       getCategoryByParentId(id);
-    } else {
-      getCategoryList([...cateList.categoryData]);
-      setPrototypeCateList([...cateList.categoryData]);
-      setLoader(false);
     }
-  }, [id, cateList]);
+  }, [id]);
+
+  const getCategoryList = async () => {
+    try {
+      setLoader(true);
+      const res = await adminApis.getCategory();
+      if (res.status === 200) {
+        setCategoryList([...res.data])
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    setLoader(false);
+  };
 
   const getCategoryByParentId = async (id) => {
     try {
@@ -116,7 +129,7 @@ export default function Category(props) {
       const query = `?parentId=${id}`;
       const res = await adminApis.getCategoryByParent(query);
       if (res.status === 200) {
-        getCategoryList([...res.data]);
+        setCategoryList([...res.data]);
         setPrototypeCateList([...res.data]);
       }
     } catch (e) {
@@ -142,7 +155,7 @@ export default function Category(props) {
   const createModalHandleCloseAfterSave = async () => {
     createModalHandleClose();
     setLoader(true);
-    await props.getCategoryList();
+    await getCategoryList();
     setLoader(false);
   };
 
@@ -172,7 +185,7 @@ export default function Category(props) {
     const items = Array.from(categoryList);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    getCategoryList([...items]);
+    setCategoryList([...items]);
     setPrototypeCateList([...items]);
   };
 
@@ -189,12 +202,12 @@ export default function Category(props) {
           icon: "success",
           title: "Cập nhật thứ tự danh mục thành công",
         });
-        await props.getCategoryList();
+        await getCategoryList();
         setUpdateBtnState(true);
       } else {
         alert({ icon: "error", title: "Cập nhật thứ tự danh mục thất bại" });
       }
-    } catch (e) {}
+    } catch (e) { }
     setLoader(false);
   };
 
@@ -236,7 +249,7 @@ export default function Category(props) {
       if (res.status === 200) {
         alert({ icon: "success", title: "Xóa danh mục thành công" });
         const deletedArr = deleteCategotyUIHandler(cateId);
-        getCategoryList([...deletedArr]);
+        setCategoryList([...deletedArr]);
         setPrototypeCateList([...deletedArr]);
         closeAfterSaveConfirmModal();
       } else {
@@ -244,12 +257,12 @@ export default function Category(props) {
         closeConfirmModal();
       }
       setLoader(false);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const searchCategory = (value) => {
     let result = prototypeCateList.filter((item) => item.name.includes(value));
-    getCategoryList([...result]);
+    setCategoryList([...result]);
   };
 
   return (
@@ -276,13 +289,14 @@ export default function Category(props) {
             separator={<IoIosArrowForward size="16px" />}
             aria-label="breadcrumb"
           >
-            <Link color="inherit" to="/admin/category">
+            <Link color="inherit" to="/admin/category" className='rrd-custom-link'>
               Danh mục 1
             </Link>
             {parentId && (
               <Link
                 color="inherit"
                 to={`/admin/category/${parentId}?parentId=${parentId}`}
+                className='rrd-custom-link'
               >
                 Danh mục 2
               </Link>
@@ -291,6 +305,7 @@ export default function Category(props) {
               <Link
                 color="inherit"
                 to={`/admin/category/${id}?parentId=${parentId}`}
+                className='rrd-custom-link'
               >
                 Danh mục 3
               </Link>
@@ -403,6 +418,7 @@ export default function Category(props) {
                                           ? `/admin/category/${row._id}?parentId=${parentId}`
                                           : `/admin/category/${row._id}?parentId=${row._id}`
                                       }
+                                      className='rrd-custom-link'
                                     >
                                       {row.name}
                                     </Link>

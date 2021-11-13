@@ -31,6 +31,7 @@ export default function Product() {
   const fileRef = useRef();
   const history = useHistory();
   const [name, setName] = useState();
+  const [unit, setUnit] = useState();
   const [desc, setDesc] = useState();
   const [category, setCategory] = useState(["null", "null", "null"]);
   const [categoryList1, setCategoryList1] = useState([
@@ -295,6 +296,7 @@ export default function Product() {
     const parameter = await formatProducts(productsData);
     const formdata = new FormData();
     formdata.append("name", name);
+    formdata.append("unit", unit);
     formdata.append("description", desc);
     specify.forEach((ele, index) => {
       formdata.append(`details[${ele.key}]`, ele.value);
@@ -335,10 +337,6 @@ export default function Product() {
     try {
       const formData = await formatForm();
 
-      for (var value of formData.values()) {
-        console.log(value);
-      }
-
       const res = await adminApis.createProduct(formData);
       if (res.status === 200) {
         alert({
@@ -364,7 +362,7 @@ export default function Product() {
                   <FormLabel>
                     <span className="addprod-title">Thông tin sản phẩm</span>
                   </FormLabel>
-                  <FormGroup className="mb-4">
+                  <FormGroup className="mb-2">
                     <TextField
                       InputLabelProps={{
                         classes: {
@@ -380,6 +378,24 @@ export default function Product() {
                       }}
                       required
                       label="Tên sản phẩm"
+                    />
+                  </FormGroup>
+                  <FormGroup className="mb-4">
+                    <TextField
+                      InputLabelProps={{
+                        classes: {
+                          root: classes.resize,
+                        },
+                      }}
+                      value={unit}
+                      onChange={(e) => setUnit(e.target.value)}
+                      InputProps={{
+                        classes: {
+                          input: classes.resize,
+                        },
+                      }}
+                      required
+                      label="Đơn vị sản phẩm"
                     />
                   </FormGroup>
                   <FormLabel>

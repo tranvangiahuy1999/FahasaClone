@@ -29,6 +29,7 @@ import UpdateProduct from "./UpdateProduct";
 import TagManagement from "./Tag";
 import BoxTagManager from "./BoxTag";
 import BoxTagDetail from "./BoxTagDetail";
+import PageNotFound from './PageNotFound'
 
 import {
   BrowserRouter as Router,
@@ -46,10 +47,8 @@ import {
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCategoryData } from "../../reducers/AdminReducer";
 
 import { userLogoutSuccess } from "../../reducers/AdminReducer";
-import adminApis from "../../apis/AdminApis";
 
 const drawerWidth = 230;
 
@@ -60,19 +59,15 @@ const AdminIndex = (props) => {
   const history = useHistory();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  useEffect(() => {
-    getCategoryList();
-  }, []);
-
   const routes = [
     {
       path: "/admin/category",
       exact: true,
-      main: () => <Category getCategoryList={getCategoryList}></Category>,
+      main: () => <Category></Category>,
     },
     {
       path: "/admin/category/:id",
-      main: () => <Category getCategoryList={getCategoryList}></Category>,
+      main: () => <Category></Category>,
     },
     {
       path: "/admin/product",
@@ -81,7 +76,6 @@ const AdminIndex = (props) => {
     },
     {
       path: "/admin/product/edit-product/:id",
-      exact: true,
       main: () => <CreateProduct></CreateProduct>,
     },
     {
@@ -117,6 +111,10 @@ const AdminIndex = (props) => {
     {
       path: "/admin/box-tag/:id",
       main: () => <BoxTagDetail></BoxTagDetail>,
+    },
+    {
+      path: "*",
+      main: () => <PageNotFound></PageNotFound>,
     },
   ];
 
@@ -226,17 +224,6 @@ const AdminIndex = (props) => {
       </List>
     </div>
   );
-
-  const getCategoryList = async () => {
-    try {
-      const res = await adminApis.getCategory();
-      if (res.status === 200) {
-        await dispatch(setCategoryData(res.data));
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

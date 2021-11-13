@@ -25,6 +25,7 @@ import adminApis from "../../apis/AdminApis";
 import CreateBoxTagModal from "../../components/CreateBoxTagModal";
 import ConfirmModal from "../../components/ConfirmModal";
 import alert from "../../utils/Alert";
+import img from '../../assets/broke-image.png';
 
 export default function BoxTagManager() {
   const classes = useStyles();
@@ -49,7 +50,7 @@ export default function BoxTagManager() {
         setBoxTagList(res.data);
         setPrototypeBoxTagList(res.data);
       }
-    } catch (e) {}
+    } catch (e) { }
     setLoader(false);
   };
 
@@ -68,7 +69,7 @@ export default function BoxTagManager() {
           msg: "Xin vui lòng thử lại",
         });
       }
-    } catch (e) {}
+    } catch (e) { }
     closeConfirmModal();
     setLoader(false);
   };
@@ -93,7 +94,7 @@ export default function BoxTagManager() {
           msg: "Xin vui lòng thử lại sau",
         });
       }
-    } catch (e) {}
+    } catch (e) { }
     setLoader(false);
   };
 
@@ -236,7 +237,7 @@ export default function BoxTagManager() {
                           className={classes.media}
                           image={
                             ele.image.url ||
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPR5xrvNUYG0rKRBmoNziQh8DNWNquSiXrQ&usqp=CAU"
+                            img
                           }
                           title="Contemplative Reptile"
                         />

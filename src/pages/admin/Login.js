@@ -54,7 +54,7 @@ const Login = () => {
         localStorage.setItem("token", res.data);
         AuthApis.setHeaderAxios(res.data);
         dispatch(userLoginSuccess())
-        return history.push("/admin");
+        return history.push("/admin/receipt/undone");
       }
     } catch (e) {
       console.log(e);

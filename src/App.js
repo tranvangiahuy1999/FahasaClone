@@ -1,7 +1,7 @@
 import "./styles/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bnb-gallery/dist/style.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import store from "./Store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -23,9 +23,10 @@ function App() {
               <Route exact path='/login'>
                 <Login></Login>
               </Route>
-              <PrivateRoute exact path="/admin">
+              <PrivateRoute path="/admin">
                 <AdminIndex></AdminIndex>
               </PrivateRoute>
+              <Redirect from="*" to="/login" />
             </Switch>
           </Router>
         </PersistGate>
