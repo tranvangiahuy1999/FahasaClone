@@ -91,7 +91,7 @@ export default function UpdateProduct() {
         if (res.data.length) {
           setName(res.data[0].name);
           setDesc(res.data[0].description);
-
+          setUnit(res.data[0].unit)
           parseInitCate(
             res.data[0].cate1,
             res.data[0].cate2,
@@ -480,7 +480,7 @@ export default function UpdateProduct() {
                   <FormLabel>
                     <span className="addprod-title">Thông tin sản phẩm</span>
                   </FormLabel>
-                  <FormGroup className="mb-2 mt-2">
+                  <FormGroup className="mb-4 mt-2">
                     <TextField
                       InputLabelProps={{
                         classes: {
@@ -513,7 +513,7 @@ export default function UpdateProduct() {
                         },
                       }}
                       required
-                      label="Đơn vị sản phẩm"
+                      placeholder="Đơn vị sản phẩm"
                     />
                   </FormGroup>
                   <FormLabel>
