@@ -115,7 +115,8 @@ export default function Category(props) {
       setLoader(true);
       const res = await adminApis.getCategory();
       if (res.status === 200) {
-        setCategoryList([...res.data])
+        setCategoryList([...res.data]);
+        setPrototypeCateList([...res.data]);
       }
     } catch (e) {
       console.log(e);
