@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import HorizontalProductCard from "./HorizontalProductCard";
+import ProductsHorizontalCardList from "./ProductsHorizontalCardList";
+import ProductsCardList from "./ProductsCardList"
 import Box from "@material-ui/core/Box";
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
+import Controller from "../../../utils/Controller";
+import { Link } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,75 +87,91 @@ const AntTab = withStyles((theme) => ({
 }))((props) => <Tab disableRipple {...props} />);
 
 const ProductListOfBoxTag = (props) => {
-  const [data, setData] = useState([]);
-  const [value, setValue] = useState(0);
+  const [boxtagData, setBoxtagData] = useState();
+  const [tabValue, setTabValue] = useState(0);
+
+  useEffect(() => {
+    if (props.boxtagData) {
+      setBoxtagData(props.boxtagData)
+    }
+  }, [props.boxtagData])
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTabValue(newValue);
   };
+
+  const fieldValidator = (value) => {
+    if (value) {
+      return value;
+    } else {
+      return ""
+    }
+  }
 
   return (
     <div className="product-list-of-boxtag bg-white mt-4 mb-4">
-      <div className="product-list-of-boxtag-title">Kinh tế</div>
-      <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-        <AntTab label="Giảm sốc" {...a11yProps(0)} />
-        <AntTab label="Sắp phát hành" {...a11yProps(0)} />
-        <AntTab label="Bán chạy" {...a11yProps(0)} />
+      <div className="product-list-of-boxtag-title">{boxtagData ? boxtagData.name : ""}</div>
+      <AntTabs value={tabValue} onChange={handleChange} aria-label="ant example">
+        {
+          boxtagData ? boxtagData.tags.length && boxtagData.tags.map((value, index) => (
+            <AntTab key={value._id} label={fieldValidator(value.name)} {...a11yProps(index)} />
+          )) : <></>
+        }
       </AntTabs>
-      <TabPanel value={value} index={0}>
-        <div className="row m-0 p-0">
-          <div className="col-5 d-none d-md-block">
-            <div className="product-list-of-boxtag-img-wrapper">
-              <img
-                alt=""
-                src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_180164_2_411.jpg"
-              ></img>
+      {
+        boxtagData ? boxtagData.tags.length && boxtagData.tags.map((value, index) => (
+          <TabPanel key={value._id} value={tabValue} index={index}>
+            <div>
+              {
+                boxtagData.image.url ? (
+                  <div className="row m-0 p-0">
+                    <div className="col-5 d-none d-md-block">
+                      <div className="product-list-of-boxtag-img-wrapper">
+                        <img
+                          alt=""
+                          src={boxtagData.image.url}
+                        ></img>
+                      </div>
+                    </div>
+                    <div className="row m-0 p-0 col-lg-7 col-md-7 col-12">
+                      <ProductsHorizontalCardList cateId={value.category}></ProductsHorizontalCardList>
+
+                      <div className="see-more col-12 p-3 text-center">
+                        <Link
+                          className="category-item-title one-line-text"
+                          to={
+                            "/danh-sach/" +
+                            Controller.formatURL(value.name) +
+                            "." +
+                            value.category
+                          }
+                        >
+                          <Button
+                            variant="outlined"
+                            style={{
+                              color: PRIMARY_HOME_COLOR,
+                              border: `2px solid ${PRIMARY_HOME_COLOR}`,
+                              paddingLeft: "50px",
+                              paddingRight: "50px",
+                              fontSize: "0.9rem",
+                            }}
+                          >
+                            Xem thêm
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <ProductsCardList cateData={value}></ProductsCardList>
+                )
+              }
+
             </div>
-          </div>
-          <div className="row m-0 p-0 col-lg-7 col-md-7 col-12">
-            <div className="col-6">
-              <HorizontalProductCard
-                img={
-                  "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-                }
-                productName={
-                  "Where To Play: 3 Bước Để Xác Định Thị Trường Đắt Giá Của Doanh Nghiệp"
-                }
-                productPrice={100000}
-              ></HorizontalProductCard>
-            </div>
-            <div className="col-6">
-              <HorizontalProductCard
-                img={
-                  "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-                }
-                productName={"Where To Play"}
-                productPrice={100000}
-              ></HorizontalProductCard>
-            </div>
-            <div className="col-6">
-              <HorizontalProductCard
-                img={
-                  "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-                }
-                productName={"Where To Play"}
-                productPrice={100000}
-              ></HorizontalProductCard>
-            </div>
-            <div className="col-6">
-              <HorizontalProductCard
-                img={
-                  "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-                }
-                productName={
-                  "Where To Play: 3 Bước Để Xác Định Thị Trường Đắt Giá Của Doanh Nghiệp"
-                }
-                productPrice={100000}
-              ></HorizontalProductCard>
-            </div>
-          </div>
-        </div>
-      </TabPanel>
+          </TabPanel>
+        )) : <></>
+      }
+
     </div>
   );
 };
