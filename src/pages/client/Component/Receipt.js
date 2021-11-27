@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Nav from "./Nav";
-import Footer from './Footer'
 import shopApis from "../../../apis/ShopApis";
 import { useHistory, Link } from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -139,7 +137,7 @@ const Receipt = () => {
   const CartDisplay = () => {
     if (!Value.length) {
       return (
-        <div className="row" style={{ background: "#F0F0F0",height:'250px' }}>
+        <div className="row" style={{ background: "#F0F0F0", height: "250px" }}>
           <div className="col-12 cart-empty" style={{ background: "white" }}>
             <div className="py-3 pl-3">
               <h6 className="header-gio-hang">
@@ -208,7 +206,7 @@ const Receipt = () => {
                           </div>
                         </div>
                       </div>
-                  
+
                       <div className="item-price ml-auto d-flex flex-column align-items-end">
                         <div className="giamoi">
                           {formatCurrency(
@@ -224,22 +222,18 @@ const Receipt = () => {
                           />
                         </span>
                       </div>
-                      
                     </div>
-                    
                   </div>
-                  { 
-                      typeof value.nameParam !== 'undefined' ? (
-                      
-                      <button
-                        type="button"
-                        className="element btn btn-outline-success"
-                      >
-                        {value.nameParam}
-                      </button>
-                        )  : (
-                      <></>
-                        )}
+                  {typeof value.nameParam !== "undefined" ? (
+                    <button
+                      type="button"
+                      className="element btn btn-outline-success"
+                    >
+                      {value.nameParam}
+                    </button>
+                  ) : (
+                    <></>
+                  )}
                   <hr />
                 </div>
               ))}
@@ -458,7 +452,6 @@ const Receipt = () => {
 
   return (
     <div style={{ width: "100%", overflow: "hidden" }}>
-      <Nav />
       <Backdrop className={classes.backdrop} open={openBackdrop}>
         <CircularProgress color="inherit" />
       </Backdrop>

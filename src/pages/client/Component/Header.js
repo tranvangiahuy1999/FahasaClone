@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from "react";
 import shopApis from "../../../apis/ShopApis";
-import ProductList from "./ProductList";
+import Carousel from "react-material-ui-carousel";
+import { FcNext, FcPrevious } from "react-icons/fc";
+import { useDispatch } from "react-redux";
+import { setcategorydata } from "../../../reducers/UserReducer";
+import { Link } from "react-router-dom";
+import Controller from "../../../utils/Controller";
+
+const imageArray = [
+  "images/banner-sach-moi.jpg",
+  "images/banner-beethoven.jpg",
+  "images/neu-toi-biet-duoc-khi-20-full-banner.jpg",
+];
+
 const Header = () => {
+  const dispatch = useDispatch();
   const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
@@ -11,146 +24,87 @@ const Header = () => {
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
-      console.log(res);
       if (res.status === 200) {
         setCategoryList(res.data);
+        await dispatch(setcategorydata(res.data));
       }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const chuyenDoiURL = (str) => {
-    str = str.toLowerCase();
-
-    // xóa dấu
-    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, "a");
-    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, "e");
-    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, "i");
-    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, "o");
-    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, "u");
-    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, "y");
-    str = str.replace(/(đ)/g, "d");
-
-    // Xóa ký tự đặc biệt
-    str = str.replace(/([^0-9a-z-\s])/g, "");
-
-    // Xóa khoảng trắng thay bằng ký tự -
-    str = str.replace(/(\s+)/g, "-");
-
-    // xóa phần dự - ở đầu
-    str = str.replace(/^-+/g, "");
-
-    // xóa phần dư - ở cuối
-    str = str.replace(/-+$/g, "");
-
-    // return
-    return str;
+    } catch (e) { }
   };
 
   return (
-    <div>
-      {/* thanh tieu de "danh muc sach" + hotline + ho tro truc tuyen */}
-      <section className="duoinavbar">
-        <div
-          className="container  text-white"
-          style={{ background: "white", width: "81%" }}
-        >
-          <div className="row justify">
-            <div className="col-lg-3 md-12" style={{ padding: "0%" }}>
-              <div className="categoryheader" style={{marginLeft:'0%'}}>
-                <div className="noidungheader text-white">
-                  <i
-                    className="fa fa-bars"
-                    id=" menuId"
-                    style={{ marginRight: "10px" }}
-                  />
+    <div className="custom-header mt-3">
+      <div className="custom-header-container">
+        <section>
+          <div className="row m-0 p-0 justify">
+            <div className="col-3 d-none d-md-block p-0 m-0">
+              <div className="header-title">
+                <div className="text-white">
+                  <i className="fa fa-bars mr-2" id=" menuId" />
                   <span className="text-uppercase font-weight-bold ml-1">
                     Danh mục sách
                   </span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-   
-      {/* noi dung danh muc sach(categories) + banner slider */}
-      <section className="header " style={{ background: "#F0F0F0" }}>
-        <div
-          className="container slidebar"
-          style={{ background: "white", width: "81%" }}
-        >
-          <div className="row">
-            <div className="col-lg-3" style={{ padding: "0%" }}>
-              {/* CATEGORIES */}
-              <div className="categorycontent display">
+              <div className="header-category-list">
                 <ul>
                   {categoryList.length ? (
                     categoryList
                       .filter((item, idx) => idx < 11)
                       .map((value, index) => (
                         <li key={index}>
-                          {" "}
-                          <a
-                            href={
+                          <Link
+                            className="category-item-title one-line-text"
+                            to={
                               "/danh-sach/" +
-                              chuyenDoiURL(value.name) +
+                              Controller.formatURL(value.name) +
                               "." +
                               value._id
                             }
-                            className="tieude"
                           >
-                            {" "}
-                            {value.name}
-                          </a>
+                            <span className="subcate-item-0">{value.name}</span>
+                          </Link>
                           <i className="fa fa-chevron-right icon float-right" />
-                          <ul className="categorydetail container">
-                            <div className="row " style={{ height: "185px" }}>
+                          <ul>
+                            <div className="row m-0 p-0">
                               {value.subCate.length ? (
                                 value.subCate
                                   .filter((item, idx) => idx < 6)
                                   .map((value, index) => (
                                     <div className="col-4" key={index}>
-                                      <li className="liheader1">
-                                        <a
-                                          href={
+                                      <li>
+                                        <Link
+                                          to={
                                             "/danh-sach/" +
-                                            chuyenDoiURL(value.name) +
+                                            Controller.formatURL(value.name) +
                                             "." +
                                             value._id
                                           }
-                                          className="header text-uppercase"
-                                          style={{
-                                            color: "black",
-                                            fontWeight: "600",
-                                          }}
+                                          className="text-uppercase subcate-item-1"
                                         >
-                                          {" "}
-                                          {value.name}
-                                        </a>
+                                          <span className=" one-line-text subcate-1-title">
+                                            {value.name}
+                                          </span>
+                                        </Link>
                                       </li>
-                                      <div
-                                        className="content trai"
-                                        style={{
-                                          marginTop: "-10px",
-                                          marginLeft: "17px",
-                                        }}
-                                      >
+                                      <div className="ml-1 mb-2">
                                         {value.subCate.length ? (
                                           value.subCate
                                             .filter((item, idx) => idx < 5)
                                             .map((value, index) => (
                                               <li key={index}>
-                                                <a
-                                                  href={
+                                                <Link
+                                                  className="subcate-item-2 one-line-text"
+                                                  to={
                                                     "/danh-sach/" +
-                                                    chuyenDoiURL(value.name) +
+                                                    Controller.formatURL(
+                                                      value.name
+                                                    ) +
                                                     "." +
                                                     value._id
                                                   }
                                                 >
-                                                  {value.name}
-                                                </a>
+                                                  <span>{value.name}</span>
+                                                </Link>
                                               </li>
                                             ))
                                         ) : (
@@ -172,81 +126,23 @@ const Header = () => {
                 </ul>
               </div>
             </div>
-            {/* banner slider  */}
-            <div className="col-lg-9 md-12 px-0">
-              <div
-                id="carouselId"
-                className="carousel slide"
-                data-ride="carousel"
+            <div className="col-lg-9 col-md-9 col-12 p-0 m-0">
+              <Carousel
+                NextIcon={<FcNext className="arrow-icon" />}
+                PrevIcon={<FcPrevious className="arrow-icon" />}
+                indicators={false}
+                fullHeightHover={false}
               >
-                <ol className="nutcarousel carousel-indicators rounded-circle">
-                  <li
-                    data-target="#carouselId"
-                    data-slide-to={0}
-                    className="active"
-                  />
-                  <li data-target="#carouselId" data-slide-to={1} />
-                  <li data-target="#carouselId" data-slide-to={2} />
-                </ol>
-                <div className="carousel-inner" style={{ marginTop: "-40px" }}>
-                  <div className="carousel-item active">
-                    <a href="#">
-                      <img
-                        src="images/banner-sach-moi.jpg"
-                        className="img-fluid"
-                        style={{ height: "427px", width: "100%" }}
-                        alt="First slide"
-                      />
-                    </a>
+                {imageArray.map((ele, i) => (
+                  <div key={i} className="banner-img-wrapper">
+                    <img className="banner-img" alt="" src={ele} />
                   </div>
-                  <div className="carousel-item">
-                    <a href="#">
-                      <img
-                        src="images/banner-beethoven.jpg"
-                        className="img-fluid"
-                        style={{ height: "427px", width: "100%" }}
-                        alt="Second slide"
-                      />
-                    </a>
-                  </div>
-                  <div className="carousel-item">
-                    <a href="#">
-                      <img
-                        src="images/neu-toi-biet-duoc-khi-20-full-banner.jpg"
-                        className="img-fluid"
-                        style={{ height: "427px", width: "100%" }}
-                        alt="Third slide"
-                      />
-                    </a>
-                  </div>
-                </div>
-                <a
-                  className="carousel-control-prev"
-                  href="#carouselId"
-                  data-slide="prev"
-                >
-                  <span
-                    className="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  />
-                  <span className="sr-only">Previous</span>
-                </a>
-                <a
-                  className="carousel-control-next"
-                  href="#carouselId"
-                  data-slide="next"
-                >
-                  <span
-                    className="carousel-control-next-icon"
-                    aria-hidden="true"
-                  />
-                  <span className="sr-only">Next</span>
-                </a>
-              </div>
+                ))}
+              </Carousel>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };

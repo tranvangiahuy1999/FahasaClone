@@ -1,162 +1,179 @@
-import React, { useState,useEffect } from "react";
-import Input from "@material-ui/core/Input";
-import shopApis from "../../../apis/ShopApis";
+import { useSelector } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+
+import { BsListNested } from "react-icons/bs";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+
+import List from "@material-ui/core/List";
+import Drawer from "@material-ui/core/Drawer";
+import ListItem from "@material-ui/core/ListItem";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
+import ListItemText from "@material-ui/core/ListItemText";
+
+import Controller from "../../../utils/Controller";
+
 const Nav = () => {
+  const classes = useStyles();
+  const history = useHistory();
+  const categoryData = useSelector((state) => state.shop.categoryData);
+  const [cateList, setCateList] = useState([]);
   const [valueProduct, setValueProduct] = useState();
-  const [categoryList, setCategoryList] = useState([]);
+  const [drawnerState, setDrawnerState] = useState(false);
+
   useEffect(() => {
-    getCategoryData();
-  }, []);
-  const getCategoryData = async () => {
-    try {
-      const res = await shopApis.getCategoryList();
-      console.log(res);
-      if (res.status === 200) {
-        setCategoryList(res.data);
-      }
-    } catch (e) {
-      console.log(e);
-    }
+    setCateList([...categoryData]);
+  }, [categoryData]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!valueProduct) return;
+    history.push("/ket-qua/" + valueProduct);
   };
-  const chuyenDoiURL = (str) => {
-    str = str.toLowerCase();
 
-    // xóa dấu
-    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, "a");
-    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, "e");
-    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, "i");
-    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, "o");
-    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, "u");
-    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, "y");
-    str = str.replace(/(đ)/g, "d");
-
-    // Xóa ký tự đặc biệt
-    str = str.replace(/([^0-9a-z-\s])/g, "");
-
-    // Xóa khoảng trắng thay bằng ký tự -
-    str = str.replace(/(\s+)/g, "-");
-
-    // xóa phần dự - ở đầu
-    str = str.replace(/^-+/g, "");
-
-    // xóa phần dư - ở cuối
-    str = str.replace(/-+$/g, "");
-
-    // return
-    return str;
+  const toggleDrawer = (open) => {
+    setDrawnerState(open);
   };
-  const inputChange = (e) => {
-    // prepare value
-    let {
-      target: { name: fieldName, value },
-    } = e;
-    setValueProduct(value);
-    console.log("value", value);
-  };
+
+  const list = () => (
+    <div
+      className={clsx(classes.list)}
+      role="presentation"
+      onClick={() => toggleDrawer(false)}
+      onKeyDown={() => toggleDrawer(false)}
+    >
+      <h5 className="pl-3">Danh mục</h5>
+      <List>
+        {cateList.length ? (
+          cateList.map((ele, index) => (
+            <Link
+              className="drawner-link-color"
+              to={
+                "/danh-sach/" + Controller.formatURL(ele.name) + "." + ele._id
+              }
+            >
+              <ListItem button key={index}>
+                <ListItemText primary={ele.name} />
+              </ListItem>
+            </Link>
+          ))
+        ) : (
+          <div className="empty-data-text">Hiện tại chưa có danh mục</div>
+        )}
+      </List>
+    </div>
+  );
 
   return (
-    <nav className="navbar navbar-expand-md bg-white navbar-light">
-      <div className="container" style={{ paddingBottom: "0px" }}>
-        <div
-          class="navbar-logo"
-          style={{
-            width: "60px",
-            height: "60",
-            marginLeft: "30px",
-            paddingTop: "0px",
-            marginBottom: "0px",
-          }}
-        >
-          <img
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-            src="https://res.cloudinary.com/hanh/image/upload/v1634066828/products/cge2hp4d7bctkrtw1rdj.png"
-            alt=""
-          />
-        </div>
-        <a
-          className="navbar-brand"
-          href="/"
-          style={{ color: "#64ae55", marginLeft: "20px" }}
-        >
-          <b>Nhà Sách KG</b>
-        </a>
-        {/* navbar-toggler  */}
-        <button
-          className="navbar-toggler d-lg-none"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapsibleNavId"
-          aria-controls="collapsibleNavId"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          style={{marginTop:'3%'}}
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="collapsibleNavId">
-       
-          {/* form tìm kiếm  */}
-          <form className="form-inline ml-auto my-2 my-lg-0 mr-3">
-              <div className="input-group" style={{width: '630px'}}>
-                <input type="text" className="form-control" aria-label="Small" onChange={inputChange} value={valueProduct} placeholder="Nhập sách cần tìm kiếm..." />
-                {/* <Input    type="text"
-                          name="name"
-                          className="form-control" aria-label="Small"
-                          placeholder="Nhập sách cần tìm kiếm..."
-                          onChange={inputChange}
-                          value={valueProduct}/> */}
-                <div className="input-group-append">
-                  <a type="button" className="btn" href={"/ket-qua/"+valueProduct} style={{backgroundColor: '#64ae55', color: 'white'}}>
-                    <i className="fa fa-search" />
-                  </a>
-                  {/* <ProductSearchList value={valueProduct}></ProductSearchList> */}
+    <nav className="nav bg-white">
+      <Drawer
+        anchor="left"
+        open={drawnerState}
+        onClose={() => toggleDrawer(false)}
+      >
+        {list()}
+      </Drawer>
+      <div className="nav-container d-none d-md-block">
+        <div className="row m-0 p-0">
+          <div className="col-1">
+            <div className="nav-logo-wrapper">
+              <Link to="/">
+                <img
+                  className="nav-logo"
+                  src="https://res.cloudinary.com/hanh/image/upload/v1634066828/products/cge2hp4d7bctkrtw1rdj.png"
+                  alt=""
+                />
+              </Link>
+            </div>
+          </div>
+          <div className="nav-brand-wrapper col-3 pr-2">
+            <div className="nav-brand-top-text mt-1">Nhà Sách</div>
+            <div className="nav-brand-bot-text">Kiên Giang</div>
+          </div>
+
+          <div className="col-6 nav-search-container">
+            <form className="form-inline mr-3" onSubmit={onSubmit}>
+              <div
+                className="input-group nav-search-wrapper"
+                style={{ width: "630px" }}
+              >
+                <input
+                  type="text"
+                  className="form-control nav-search-input"
+                  onChange={(e) => setValueProduct(e.target.value)}
+                  value={valueProduct}
+                  placeholder="Nhập sách cần tìm kiếm..."
+                />
+                <div className="input-group-append" onClick={onSubmit}>
+                  <div
+                    className="search-btn"
+                    onClick={onSubmit}
+                    style={{ backgroundColor: "#64ae55", color: "white" }}
+                  >
+                    <i className="fa fa-search " />
+                  </div>
                 </div>
               </div>
             </form>
-            <ul className="navbar-nav mb-1 ml-auto">
-          <li className="nav-item giohang">
-          <div className="smallmenu">
-                <input type="checkbox" id="overlay-input" />
-          <label for="overlay-input" id="overlay-button"><span></span></label>
-          <label className="Mobile_name" >Danh Mục Sách</label>
-            <div id="overlay">
-            <ul id="accordion" class="accordion">
-                {categoryList
-                 .filter((item, idx) => idx < 11)
-                 .map((value, index) =>
-                
-                  <li>
-                    <div class="link"><i class="fa fa-database"></i>{value.name}</div>
-                    {/* <ul class="submenu" style={{display:'none'}}>
-                      <li><a href="#">Photoshop</a></li>
-                      <li><a href="#">HTML</a></li>
-                      <li><a href="#">CSS</a></li>
-                    </ul> */}
-                  </li>
-                 )}
-</ul>
-            </div>
-            </div>
-            </li>
-          </ul>
+          </div>
 
-
-          <ul className="navbar-nav mb-1 ml-auto">
-            
-            <li className="nav-item giohang">
-              <a href="/gio-hang" className="btn btn-secondary rounded-circle">
-                <i className="fa fa-shopping-cart" />
-                
-              </a>
-              <a className="nav-link text-dark giohang text-uppercase" href="/gio-hang" style={{display: 'inline-block'}}>Giỏ
-                Hàng</a>
-            </li>
-          </ul>
-         
+          <div className="nav-cart col-2 text-center">
+            <div className="right-wrapper mr-4 mt-2">
+              <Link to="/gio-hang">
+                <IconButton color="secondary">
+                  <AiOutlineShoppingCart
+                    size={30}
+                    color="orange"
+                  ></AiOutlineShoppingCart>
+                  <div className="nav-cart-text right-wrapper ml-2">
+                    GIỎ HÀNG
+                  </div>
+                </IconButton>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mobile-nav-container d-md-none">
+        <div className="mobile-nav-title">Nhà Sách Kiên Giang</div>
+        <div className="row m-0 p-0">
+          <div className="col-2">
+            <IconButton color="primary" onClick={() => toggleDrawer(true)}>
+              <BsListNested size={28} color="white"></BsListNested>
+            </IconButton>
+          </div>
+          <div className="col-8">
+            <input
+              type="text"
+              className="form-control mobile-nav-search-input"
+              onChange={(e) => setValueProduct(e.target.value)}
+              value={valueProduct}
+              placeholder="Nhập sách cần tìm kiếm..."
+            ></input>
+          </div>
+          <div className="col-2 right-wrapper">
+            <Link to="/gio-hang">
+              <IconButton color="secondary">
+                <AiOutlineShoppingCart
+                  size={28}
+                  color="white"
+                ></AiOutlineShoppingCart>
+              </IconButton>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
   );
 };
+
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+    paddingTop: 20,
+  },
+});
 
 export default Nav;

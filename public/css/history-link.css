@@ -1,0 +1,30 @@
+/* History Link  */
+
+.history-link-container {
+   height: 40px;
+   padding: 10px var(--padding-width-percent) 5px var(--padding-width-percent);
+}
+
+.history-link-item {
+   font-size: 14px;
+   color: var(--text-color);
+   cursor: pointer;
+}
+
+.link-item {
+   color: orange;
+}
+
+/* IPAD PRO */
+@media (max-width: 1024px) {
+   .history-link-container {
+      padding: 12px var(--tablet-padding-width-percent) 0px var(--tablet-padding-width-percent);
+   }
+}
+
+/* IPHONE X */
+@media (max-width: 414px) {
+   .history-link-item {
+      font-size: 12px;
+   }
+}
