@@ -21,7 +21,7 @@ const ProductsHorizontalCardList = (props) => {
 
     const getProductsList = async (cateId) => {
         try {
-            const res = await shopApis.getProductByCate(1, cateId);
+            const res = await shopApis.getProductByCate(1, cateId, 4, null);
             if (res.status === 200) {
                 setProducts([...res.data.product])
             }
