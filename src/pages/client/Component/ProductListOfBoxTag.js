@@ -138,7 +138,6 @@ const ProductListOfBoxTag = (props) => {
 
                       <div className="see-more col-12 p-3 text-center">
                         <Link
-                          className="category-item-title one-line-text"
                           to={
                             "/danh-sach/" +
                             Controller.formatURL(value.name) +
