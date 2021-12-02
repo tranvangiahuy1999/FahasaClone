@@ -204,11 +204,11 @@ export default function Category(props) {
           title: "Cập nhật thứ tự danh mục thành công",
         });
         await getCategoryList();
-        setUpdateBtnState(true);
       } else {
         alert({ icon: "error", title: "Cập nhật thứ tự danh mục thất bại" });
       }
     } catch (e) { }
+    setUpdateBtnState(true);
     setLoader(false);
   };
 

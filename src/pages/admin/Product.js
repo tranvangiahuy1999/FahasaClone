@@ -145,6 +145,13 @@ export default function Product() {
     setOrderBy(property);
   };
 
+  const setDefaultPageAndAlert = () => {
+    alert({ icon: "error", title: "Trang không tồn tại" });
+    setProductList([]);
+    setTotalPage(1);
+    setPage(1)
+  }
+
   const getAllProducts = async (page) => {
     try {
       setLoader(true);
@@ -152,23 +159,14 @@ export default function Product() {
       if (res.status === 200) {
         setProductList([...res.data.product]);
         setTotalPage(res.data.total_page);
+        setPage(res.data.page);
       } else {
-        setProductList([]);
-        setTotalPage(1);
+        setDefaultPageAndAlert()
       }
-      setPage(page);
     } catch (e) {
       console.log(e);
     }
     setLoader(false);
-  };
-
-  const handleDeleteRerender = (id) => {
-    let temp = productList;
-    let res = temp.filter((ele) => {
-      return ele._id !== id;
-    });
-    return res;
   };
 
   const searchProductByPageAndBarcode = async (page, value) => {
@@ -182,11 +180,10 @@ export default function Product() {
       if (res.status === 200) {
         setProductList([...res.data.products]);
         setTotalPage(res.data.total_page);
+        setPage(res.data.page);
       } else {
-        setProductList([]);
-        setTotalPage(1);
+        setDefaultPageAndAlert()
       }
-      setPage(page);
     } catch (e) {
       console.log(e);
     }
@@ -199,7 +196,7 @@ export default function Product() {
       const res = await adminApis.deleteProduct(id);
       if (res.status === 200) {
         alert({ icon: "success", title: "Đã xóa thành công" });
-        setProductList([...handleDeleteRerender(id)]);
+        pageChange(0, page);
       } else {
         alert({ icon: "error", title: "Đã có lỗi xảy ra" });
       }

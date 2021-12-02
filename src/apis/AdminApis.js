@@ -136,6 +136,22 @@ const adminApis = {
     const url = "/api/box-tag/update-position";
     return axiosClient.put(url, data);
   },
+  getSpecialTagList(isHide, page, limit) {
+    const url = `/api/special-tag/admin/get-list?is_hide=${isHide}&page=${page}&limit=${limit}`;
+    return axiosClient.get(url);
+  },
+  updateOrderOfSpecialTag(data) {
+    const url = '/api/special-tag/update-sort';
+    return axiosClient.put(url, data)
+  },
+  deleteSpecialTag(tagId) {
+    const url = `/api/special-tag/delete/${tagId}`
+    return axiosClient.delete(url)
+  },
+  createSpecialTag(data) {
+    const url = '/api/special-tag/create'
+    return axiosClient.post(url, data)
+  }
 };
 
 export default adminApis;

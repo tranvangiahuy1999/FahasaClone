@@ -21,7 +21,7 @@ import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { LOGO_COLOR } from "../../constants/index";
 import alert from "../../utils/Alert";
-import ChangeStatusModal from "../../components/ChangeStatusModal/index";
+import ChangeStatusModal from "../../components/ChangeStatusModal";
 import downloadReceiptReport from '../../utils/downloadReceiptReport'
 
 function descendingComparator(a, b, orderBy) {
