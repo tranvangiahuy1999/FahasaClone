@@ -12,6 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItemText from "@material-ui/core/ListItemText";
+import Badge from '@material-ui/core/Badge';
 
 import Controller from "../../../utils/Controller";
 
@@ -22,11 +23,20 @@ const Nav = () => {
   const [cateList, setCateList] = useState([]);
   const [valueProduct, setValueProduct] = useState();
   const [drawnerState, setDrawnerState] = useState(false);
-
+  const [numItem, setNumItem] = useState(0);
   useEffect(() => {
     setCateList([...categoryData]);
   }, [categoryData]);
-
+  useEffect(() => {
+    setNumItem(getNumItem());
+  });
+  const getNumItem = () => {
+    const temp = JSON.parse(localStorage.getItem("Cart"));
+    if (temp)
+      return temp.length;
+    else
+      return 0;
+  }
   const onSubmit = (e) => {
     e.preventDefault();
     if (!valueProduct) return;
@@ -53,8 +63,9 @@ const Nav = () => {
               to={
                 "/danh-sach/" + Controller.formatURL(ele.name) + "." + ele._id
               }
+              key={index}
             >
-              <ListItem button key={index}>
+              <ListItem button >
                 <ListItemText primary={ele.name} />
               </ListItem>
             </Link>
@@ -123,13 +134,18 @@ const Nav = () => {
             <div className="right-wrapper mr-4 mt-2">
               <Link to="/gio-hang">
                 <IconButton color="secondary">
-                  <AiOutlineShoppingCart
-                    size={30}
-                    color="orange"
-                  ></AiOutlineShoppingCart>
-                  <div className="nav-cart-text right-wrapper ml-2">
+                  <IconButton aria-label="cart">
+                    <Badge badgeContent={numItem} color="secondary">
+                      <AiOutlineShoppingCart
+                        size={30}
+                        color="orange"
+                      ></AiOutlineShoppingCart>
+                    </Badge>
+                  </IconButton>
+
+                  {/* <div className="nav-cart-text right-wrapper ml-2">
                     GIỎ HÀNG
-                  </div>
+                  </div> */}
                 </IconButton>
               </Link>
             </div>

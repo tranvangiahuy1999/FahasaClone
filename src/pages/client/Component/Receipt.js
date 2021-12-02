@@ -5,16 +5,37 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import alert from "../../../utils/Alert";
-
+import CartItem from "./Cart/CartItem";
+import RadioOptionGroup from "./Radio/RadioOptionGroup";
+const listDeliveryType = [
+  {
+    _id: "delivery_1",
+    label: "Nhận hàng tại nhà sách",
+    value: 0
+  },
+  {
+    _id: "delivery_2",
+    label: "Giao hàng nội thành",
+    value: 20000
+  },
+  {
+    _id: "delivery_3",
+    label: "Giao hàng ngoại thành",
+    value: 50000,
+  }
+]
 const Receipt = () => {
   const history = useHistory();
   const classes = useStyles();
   const [Value, setValue] = useState([]);
   const [name, setName] = useState();
   const [phone, setPhone] = useState();
-  const [address, setAddress] = useState();
-  const [delivery, setDelivery] = useState("Nhận hàng tại nhà sách");
+  const [address, setAddress] = useState("");
+  const [detail, setDetail] = useState("");
+  const [showAddress, setShowAddress] = useState(false);
+  const [delivery, setDelivery] = useState(listDeliveryType[0]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [tempPrice, setTempPrice] = useState(0);
   const [openBackdrop, setOpenBackdrop] = useState(false);
 
   const handleCloseBackdrop = () => {
@@ -23,7 +44,23 @@ const Receipt = () => {
   const handleOpenBackdrop = () => {
     setOpenBackdrop(true);
   };
+  const handleDeliveryChange = (value) => {
+    setDelivery(listDeliveryType.find(element => element.value == value));
+    if (value > 0) {
+      setShowAddress(true);
+    } else {
+      setShowAddress(false);
+      setAddress("");
+    }
 
+  };
+  const handleChangeCheckbox = (index, value) => {
+
+    let temp = Value;
+    temp[index].checked = value;
+    setValue([...temp]);
+    localStorage.setItem("Cart", JSON.stringify(temp));
+  }
   useEffect(() => {
     const temp = JSON.parse(localStorage.getItem("Cart"));
     if (temp) {
@@ -33,7 +70,7 @@ const Receipt = () => {
 
   useEffect(() => {
     caculateTotalPrice();
-  }, [Value]);
+  }, [Value, delivery]);
 
   const checkDataProductExist = async (data) => {
     let temp = [];
@@ -43,7 +80,7 @@ const Receipt = () => {
         if (res.status === 200) {
           temp.push(value);
         }
-      } catch (e) {}
+      } catch (e) { }
     }
     setValue([...temp]);
   };
@@ -56,29 +93,32 @@ const Receipt = () => {
       } else {
         return false;
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
-  const deleteRowHandle = (index) => {
-    let temp = Value;
-    temp.splice(index, 1);
-    setValue([...temp]);
-    localStorage.setItem("Cart", JSON.stringify(temp));
-  };
+
 
   const payment = async () => {
+    let formValue = [];
+    let temp = [];
     Value.map((value, index) => {
-      delete value.name;
-      delete value.price;
-      delete value.image;
+      if (value.checked) {
+        formValue.push({
+          id: value.id,
+          parameter: value.parameter,
+          count: value.count
+        })
+      } else {
+        temp.push(value);
+      }
     });
-
     let formData = {
       name: name,
       phone: phone,
       address: address,
-      delivery: delivery,
-      product: Value,
+      delivery: delivery.label,
+      detail: detail,
+      product: formValue,
     };
 
     const res = await shopApis.createReceipt(formData);
@@ -88,7 +128,9 @@ const Receipt = () => {
         title: "Đặt hàng thành công",
         msg: "Cảm ơn quý khách đã ủng hộ",
       });
-      localStorage.removeItem("Cart");
+      setValue([...temp]);
+      localStorage.setItem("Cart", JSON.stringify(temp));
+      // localStorage.removeItem("Cart");
       history.push("/");
     } else {
       alert({ icon: "error", title: "Đã có lỗi xảy ra" });
@@ -99,45 +141,26 @@ const Receipt = () => {
     return price.toLocaleString("it-IT");
   };
 
-  const handleChangeQuantity = async (event, index) => {
-    let temp = Value;
-    handleOpenBackdrop();
-    if (await checkProductExist(temp[index].id)) {
-      if (event === "in") {
-        temp[index].count += 1;
-      } else {
-        if (temp[index].count - 1 < 1) {
-          handleCloseBackdrop();
-          return;
-        }
-        temp[index].count -= 1;
-      }
-      setValue([...temp]);
-      localStorage.setItem("Cart", JSON.stringify(temp));
-    } else {
-      alert({
-        icon: "error",
-        title: "Sản phẩm không tồn tại",
-        msg: "Vui lòng xóa sản phẩm khỏi giỏ hàng",
-      });
-    }
-    handleCloseBackdrop();
-  };
-
   const caculateTotalPrice = () => {
     let total = 0;
     if (Value.length) {
       Value.map((value) => {
-        total += Number(value.price) * Number(value.count);
+        if (value.checked == true) {
+          total += Number(value.price) * Number(value.count);
+        }
       });
+      setTempPrice(total);
+      total += delivery.value;
     }
     setTotalPrice(total);
   };
 
+
+
   const CartDisplay = () => {
     if (!Value.length) {
       return (
-        <div className="row" style={{ background: "#F0F0F0", height: "250px" }}>
+        <div className="row mx-0" style={{ background: "#F0F0F0", height: "250px" }}>
           <div className="col-12 cart-empty" style={{ background: "white" }}>
             <div className="py-3 pl-3">
               <h6 className="header-gio-hang">
@@ -158,84 +181,37 @@ const Receipt = () => {
       );
     } else {
       return (
-        <div className="row" style={{ background: "#F0F0F0" }}>
-          <div className="col-md-8 cart" style={{ background: "white" }}>
+        <div className="row mx-0" style={{ background: "#F0F0F0" }}>
+          <div className="col-lg-8 cart" style={{ background: "white" }}>
             <div className="cart-content py-3 pl-3">
-              <h6 className="header-gio-hang">
+              <h5 className="header-gio-hang font-weight-bold">
                 GIỎ HÀNG CỦA BẠN <span>({Value.length} sản phẩm)</span>
-              </h6>
-              {Value.map((value, index) => (
-                <div className="cart-list-items" key={index}>
-                  <div className="cart-item d-flex">
-                    <a href="product-item.html" className="img">
-                      <img
-                        src={value.image}
-                        className="img-fluid"
-                        alt="anhsp1"
-                      />
-                    </a>
-                    <div className="item-caption d-flex w-100">
-                      <div className="item-info ml-3">
-                        <a href="product-item.html" className="ten">
-                          {value.name}
-                        </a>
-                        <div className="soluong d-flex">
-                          <div className="input-number input-group mb-3">
-                            <div
-                              className="input-group-prepend"
-                              onClick={() => handleChangeQuantity("de", index)}
-                            >
-                              <span className="input-group-text btn-spin btn-dec">
-                                -
-                              </span>
-                            </div>
-                            <input
-                              type="text"
-                              style={{ height: "100%" }}
-                              value={value.count}
-                              className="soluongsp  text-center"
-                            />
-                            <div
-                              className="input-group-append"
-                              onClick={() => handleChangeQuantity("in", index)}
-                            >
-                              <span className="input-group-text btn-spin btn-inc">
-                                +
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="item-price ml-auto d-flex flex-column align-items-end">
-                        <div className="giamoi">
-                          {formatCurrency(
-                            Number(value.price) * Number(value.count)
-                          )}
-                          ₫
-                        </div>
-
-                        <span className="remove mt-auto">
-                          <i
-                            onClick={() => deleteRowHandle(index)}
-                            className="far fa-trash-alt"
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  {typeof value.nameParam !== "undefined" ? (
-                    <button
-                      type="button"
-                      className="element btn btn-outline-success"
-                    >
-                      {value.nameParam}
-                    </button>
-                  ) : (
-                    <></>
-                  )}
-                  <hr />
+              </h5>
+              <div className="d-flex subtitle-container">
+                <div className="subtitle block-product">
+                  <p>Sản Phẩm</p>
                 </div>
+                <div className="subtitle block-price ml-auto d-none d-md-block">
+                  <p className="text-center">Đơn Giá</p>
+                </div>
+                <div className="subtitle block-number d-none d-md-block">
+                  <p className="text-center">Số Lượng</p>
+                </div>
+                <div className="subtitle block-total-price d-none d-md-block">
+                  <p className="text-right">Thành Tiền</p>
+                </div>
+                <div className="block-delete"></div>
+              </div>
+              {Value.map((value, index) => (
+                <CartItem itemvalue={value}
+                  listvalue={Value}
+                  setvalue={setValue}
+                  key={index} index={index}
+                  open={handleOpenBackdrop}
+                  close={handleCloseBackdrop}
+                  checkproductexist={checkProductExist}
+                  changeCheckbox={handleChangeCheckbox}
+                />
               ))}
               <div className="row">
                 <div className="col-md-3">
@@ -247,7 +223,7 @@ const Receipt = () => {
                   <div className="tonggiatien">
                     <div className="group d-flex justify-content-between">
                       <p className="label">Tạm tính:</p>
-                      <p className="tamtinh">{formatCurrency(totalPrice)}₫</p>
+                      <p className="tamtinh">{formatCurrency(tempPrice)}₫</p>
                     </div>
                     <div className="group d-flex justify-content-between">
                       <p className="label">Giảm giá:</p>
@@ -255,7 +231,7 @@ const Receipt = () => {
                     </div>
                     <div className="group d-flex justify-content-between">
                       <p className="label">Phí vận chuyển:</p>
-                      <p className="phivanchuyen">0₫</p>
+                      <p className="phivanchuyen">{formatCurrency(delivery.value)}₫</p>
                     </div>
                     <div className="group d-flex justify-content-between">
                       <p className="label">Phí dịch vụ:</p>
@@ -273,28 +249,32 @@ const Receipt = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4 cart-steps pl-0" style={{ padding: "0px" }}>
+          <div className="col-lg-4 cart-steps pl-0" style={{ padding: "0px" }}>
             <div
               id="cart-steps-accordion"
               role="tablist"
               aria-multiselectable="true"
             >
+
               {/* bước số 2: nhập địa chỉ giao hàng  */}
-              <div className="card">
-                <span
-                  style={{
-                    textAlign: "center",
-                    paddingTop: "15px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                  className="label"
-                >
-                  Địa chỉ giao hàng
-                </span>
+              <div className="card ml-0 mr-0 ml-lg-2 mt-2 mt-lg-0">
+
 
                 <div role="tabpanel" aria-labelledby="step2header">
                   <div className="card-body">
+                    <div className="pttt">
+                      <h5 className="header font-weight-bold text-center">
+                        Chọn phương thức giao hàng
+                      </h5>
+                      <RadioOptionGroup listoption={listDeliveryType} name="deliveryType" value={delivery.value} onChange={handleDeliveryChange}></RadioOptionGroup>
+                    </div>
+                    <hr />
+                    <p
+                      className="label font-weight-bold text h5 my-3 text-center"
+                    >
+                      Địa chỉ giao hàng
+                    </p>
+
                     <form className="form-diachigiaohang">
                       <div className="form-label-group">
                         <input
@@ -306,7 +286,7 @@ const Receipt = () => {
                           placeholder="Nhập họ và tên"
                           name="name"
                           required
-                          autofocus
+                          autoFocus={true}
                         />
                       </div>
                       <div className="form-label-group">
@@ -324,8 +304,8 @@ const Receipt = () => {
                       {/* <div className="form-label-group">
                     <input type="email" id="inputEmail" className="form-control" placeholder="Nhập địa chỉ email" name="email" required />
                   </div> */}
-                      <div className="form-label-group">
-                        <input
+                      {showAddress ? <div className="form-label-group">
+                        {/* <input
                           type="text"
                           id="inputAddress"
                           value={address}
@@ -334,28 +314,18 @@ const Receipt = () => {
                           placeholder="Nhập Địa chỉ giao hàng"
                           name="address"
                           required
-                        />
-                      </div>
-                      <div className="form-label-group">
-                        <input
+                        /> */}
+                        <textarea
                           type="text"
-                          id="inputCity"
+                          id="inputAddress"
                           className="form-control"
-                          placeholder="Nhập Tỉnh/Thành phố"
-                          name="city"
+                          placeholder="Nhập Địa chỉ giao hàng"
+                          name="address"
+                          defaultValue={address}
+                          onChange={(e) => setAddress(e.target.value)}
                           required
                         />
-                      </div>
-                      <div className="form-label-group">
-                        <input
-                          type="text"
-                          id="inputDistrict"
-                          className="form-control"
-                          placeholder="Nhập Quận/Huyện"
-                          name="district"
-                          required
-                        />
-                      </div>
+                      </div> : <></>}
                       <div className="form-label-group">
                         <textarea
                           type="text"
@@ -363,7 +333,8 @@ const Receipt = () => {
                           className="form-control"
                           placeholder="Nhập ghi chú (Nếu có)"
                           name="note"
-                          defaultValue={""}
+                          onChange={(e) => setDetail(e.target.value)}
+                          defaultValue={detail}
                         />
                       </div>
                     </form>
@@ -384,49 +355,10 @@ const Receipt = () => {
                         khác</p>
                     </div>
                   </div> */}
-                      <hr />
-                      <div className="pttt">
-                        <h6 className="header text-uppercase">
-                          Chọn phương thức thanh toán
-                        </h6>
-                        <div className="option mb-2">
-                          <input
-                            type="radio"
-                            value={delivery}
-                            name="pttt"
-                            id="cod"
-                            defaultChecked
-                          />
-                          <label htmlFor="cod">
-                            Thanh toán bằng tiền mặt khi nhận hàng
-                          </label>
-                        </div>
-                        <div className="option option2">
-                          <input type="radio" name="pttt" id="atm" />
-                          <label htmlFor="atm" className="chuyenkhoan">
-                            Thanh toán chuyển khoản trước qua Thẻ ATM/Internet
-                            Banking
-                          </label>
-                          <p className="mt-4">
-                            - Quý khách chỉ chuyển khoản khi được xác nhận có đủ
-                            sách qua điện thoại từ DealBook.
-                          </p>
-                          <p>
-                            - Thời gian chuyển khoản là trong tối đa 2 ngày từ
-                            khi có xác nhận đủ sách.
-                          </p>
-                          <p>
-                            - Nội dung chuyển khoản cần ghi:{" "}
-                            <a href="#">[Mã đơn hàng]</a> ; hoặc{" "}
-                            <a href="#">[số điện thoại dùng đặt hàng]</a>{" "}
-                          </p>
-                          <p>
-                            - Xem thông tin chuyển khoản của NetaBooks{" "}
-                            <a href="phuong-thuc-thanh-toan.html">tại đây</a>{" "}
-                          </p>
-                        </div>
-                      </div>
-                      <hr />
+
+
+
+
                       <button
                         className="btn btn-lg btn-block btn-checkout text-uppercase text-white"
                         onClick={() => payment()}
@@ -434,10 +366,11 @@ const Receipt = () => {
                       >
                         Đặt mua
                       </button>
-                      <p className="text-center note-before-checkout">
+                     
+                    </div>
+                    <p className="text-center note-before-checkout">
                         (Vui lòng kiểm tra lại đơn hàng trước khi Đặt Mua)
                       </p>
-                    </div>
                   </div>
                 </div>
 
@@ -451,15 +384,15 @@ const Receipt = () => {
   };
 
   return (
-    <div style={{ width: "100%", overflow: "hidden" }}>
+    <div className="main-container my-3 font-roboto" >
       <Backdrop className={classes.backdrop} open={openBackdrop}>
         <CircularProgress color="inherit" />
       </Backdrop>
       {/* giao diện giỏ hàng  */}
       <section className="content " style={{ background: "#F0F0F0" }}>
         <div
-          className="container recept_Ip "
-          style={{ background: "#F0F0F0", width: "81%" }}
+          className="recept_Ip "
+          style={{ background: "#F0F0F0" }}
         >
           <div className="cart-page bg-white" style={{ background: "#F0F0F0" }}>
             {/* het row  */}
@@ -472,140 +405,17 @@ const Receipt = () => {
       </section>
       {/* het khoi content  */}
       {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-
-      <section
-        className="abovefooter text-white"
-        style={{ marginBottom: "-1%", background: "#F0F0F0", padding: "1%" }}
-      >
+      <div className="fixed-bottom">
         <div
-          className="container footer_detail"
-          style={{ backgroundColor: "#64ae55", width: "82%" }}
+          className="btn btn-warning float-right rounded-circle nutcuonlen"
+          id="backtotop"
+          href="#"
+          style={{ background: "#64ae55" }}
         >
-          <div className="row">
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-books.png" alt="icon-books" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">
-                    HƠN 14.000 TỰA SÁCH HAY
-                  </h6>
-                  <p className="detail">Tuyển chọn bởi DealBooks</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-ship.png" alt="icon-ship" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">
-                    MIỄN PHÍ GIAO HÀNG
-                  </h6>
-                  <p className="detail">Từ 150.000đ ở TP.HCM</p>
-                  <p className="detail">Từ 300.000đ ở tỉnh thành khác</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-gift.png" alt="icon-gift" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">QUÀ TẶNG MIỄN PHÍ</h6>
-                  <p className="detail">Tặng Bookmark</p>
-                  <p className="detail">Bao sách miễn phí</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="dichvu d-flex align-items-center">
-                <img src="/images/icon-return.png" alt="icon-return" />
-                <div className="noidung">
-                  <h6 className="tieude font-weight-bold">
-                    ĐỔI TRẢ NHANH CHÓNG
-                  </h6>
-                  <p className="detail">Hàng bị lỗi được đổi trả nhanh chóng</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div className="new" style={{ padding: "1%", background: "#F0F0F0" }}>
-        <footer>
-          <div
-            className="container py-4"
-            style={{ background: "white", width: "82%", marginTop: "-1%" }}
-          >
-            <div className="row">
-              <div className="col-md-6 col-xs-6">
-                <div className="gioithieu">
-                  <h3 className="header text-uppercase font-weight-bold">
-                    Về DealBook
-                  </h3>
-                  <a href="#">
-                    Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM Công Ty Cổ Phần
-                    Phát Hành Sách - FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM
-                  </a>
-                  <a href="#">
-                    Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi.
-                    KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng
-                    cũng như tất cả Hệ Thống Fahasa trên toàn quốc.
-                  </a>
-                  <a href="#">
-                    <img
-                      src="/images/dang-ky-bo-cong-thuong.png"
-                      alt="jcb-payment"
-                    />
-                  </a>
-                  <div
-                    className="fb-like"
-                    data-href="https://www.facebook.com/DealBook-110745443947730/"
-                    data-width="300px"
-                    data-layout="button"
-                    data-action="like"
-                    data-size="small"
-                    data-share="true"
-                  />
-                </div>
-              </div>
-              <div className="col-md-3 col-xs-6">
-                <div className="hotrokh">
-                  <h3 className="header text-uppercase font-weight-bold">
-                    HỖ TRỢ KHÁCH HÀNG
-                  </h3>
-                  <a href="#">Hướng dẫn đặt hàng</a>
-                  <a href="#">Phương thức thanh toán</a>
-                  <a href="#">Phương thức vận chuyển</a>
-                  <a href="#">Chính sách đổi trả</a>
-                </div>
-              </div>
-
-              <div className="col-md-3 col-xs-6">
-                <div className="ptthanhtoan">
-                  <a href="#">
-                    <img
-                      className="anhfanpage"
-                      src="/images/footer_icon1.png"
-                      style={{ marginLeft: "-10px" }}
-                      alt="jcb-payment"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-        {/* nut cuon len dau trang */}
-        <div className="fixed-bottom">
-          <div
-            className="btn btn-warning float-right rounded-circle nutcuonlen"
-            id="backtotop"
-            href="#"
-            style={{ background: "#64ae55" }}
-          >
-            <i className="fa fa-chevron-up text-white" />
-          </div>
+          <i className="fa fa-chevron-up text-white" />
         </div>
       </div>
+
     </div>
   );
 };
