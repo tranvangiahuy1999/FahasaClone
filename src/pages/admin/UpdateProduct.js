@@ -8,6 +8,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import ImageList from "@material-ui/core/ImageList";
@@ -24,7 +26,6 @@ import alert from "../../utils/Alert";
 import adminApis from "../../apis/AdminApis";
 import { LOGO_COLOR, ICON_COLOR } from "../../constants/index";
 import { useHistory, useParams } from "react-router-dom";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function UpdateProduct() {
   let { id } = useParams();
@@ -53,6 +54,7 @@ export default function UpdateProduct() {
   const [deletedImage, setDeletedImageList] = useState([""]);
   const [checkFirstCate2Init, setCheckFirstCate2Init] = useState(true);
   const [checkFirstCate3Init, setCheckFirstCate3Init] = useState(true);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     getCategoryLevel1();
@@ -86,6 +88,7 @@ export default function UpdateProduct() {
 
   const getProductDetail = async () => {
     try {
+      setLoader(true)
       const res = await adminApis.getProductDetail(id);
       if (res.status === 200) {
         if (res.data.length) {
@@ -110,6 +113,7 @@ export default function UpdateProduct() {
     } catch (e) {
       console.log(e);
     }
+    setLoader(false)
   };
 
   const parseInitCate = (cate1, cate2, cate3) => {
@@ -471,6 +475,9 @@ export default function UpdateProduct() {
 
   return (
     <div className={classes.root}>
+      <Backdrop className={classes.backdrop} open={loader}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="product-modal">
         <div className={classes.paper}>
           <div className={classes.paperContainer}>
@@ -1000,5 +1007,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
   },
 }));

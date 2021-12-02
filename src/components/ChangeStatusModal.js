@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { TextField, FormGroup } from "@material-ui/core";
-import { ICON_COLOR, LOGO_COLOR } from "../../constants/index";
+import { ICON_COLOR, LOGO_COLOR } from "../constants/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ChangeStatusModal = (props) => {

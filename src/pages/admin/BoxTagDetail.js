@@ -119,7 +119,7 @@ export default function BoxTagDetail() {
       if (res.status === 200) {
         setTagList([...res.data]);
       }
-    } catch (e) {}
+    } catch (e) { }
     setLoader(false);
   };
 
@@ -131,7 +131,7 @@ export default function BoxTagDetail() {
         setProductListOfTag([...res.data]);
         setPrototypeProductListOfTag([...res.data]);
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const getProductByCate = async (tagId) => {
@@ -165,7 +165,7 @@ export default function BoxTagDetail() {
         });
         closeConfirmModal();
       }
-    } catch (e) {}
+    } catch (e) { }
     setLoader(false);
   };
 
@@ -185,7 +185,7 @@ export default function BoxTagDetail() {
         });
         closeConfirmRemoveTagModal();
       }
-    } catch (e) {}
+    } catch (e) { }
     setLoader(false);
   };
 
@@ -207,7 +207,7 @@ export default function BoxTagDetail() {
           msg: "Xin vui lòng thử lại sau",
         });
       }
-    } catch (e) {}
+    } catch (e) { }
     setLoader(false);
   };
 

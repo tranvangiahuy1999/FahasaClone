@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Hidden from "@material-ui/core/Hidden";
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,7 +29,8 @@ import UpdateProduct from "./UpdateProduct";
 import TagManagement from "./Tag";
 import BoxTagManager from "./BoxTag";
 import BoxTagDetail from "./BoxTagDetail";
-import PageNotFound from './PageNotFound'
+import PageNotFound from './PageNotFound';
+import SpecialTag from './SpecialTag'
 
 import {
   BrowserRouter as Router,
@@ -113,9 +114,13 @@ const AdminIndex = (props) => {
       main: () => <BoxTagDetail></BoxTagDetail>,
     },
     {
+      path: "/admin/special-tag",
+      main: () => <SpecialTag></SpecialTag>,
+    },
+    {
       path: "*",
       main: () => <PageNotFound></PageNotFound>,
-    },
+    }
   ];
 
   const drawer = (
@@ -180,6 +185,19 @@ const AdminIndex = (props) => {
             >
               <ListItemText
                 primary="Danh mục"
+                classes={{ primary: styles.listItemText }}
+              />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to="/admin/special-tag"
+              activeClassName="Mui-selected"
+              button
+              style={style.nested}
+            >
+              <ListItemText
+                primary="Special tag"
                 classes={{ primary: styles.listItemText }}
               />
             </ListItem>
