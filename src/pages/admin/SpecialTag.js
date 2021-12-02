@@ -235,7 +235,7 @@ export default function SpecialTag(props) {
                 accept={deleteCategory}
             ></ConfirmModal>
             <CreateSpecialTagModal open={openCreateModal} handleClose={createModalHandleClose} reloadData={createModalHandleCloseAfterSave}></CreateSpecialTagModal>
-            <AddProductsToSpecialTagModal open={openEditModal} handleClose={editModalHandleClose} reloadData={createModalHandleCloseAfterSave}></AddProductsToSpecialTagModal>
+            <AddProductsToSpecialTagModal open={openEditModal} handleClose={editModalHandleClose} reloadData={createModalHandleCloseAfterSave} tagData={editSpecialTagData}></AddProductsToSpecialTagModal>
             <h5>Danh sách special tag</h5>
 
             <div className="row mb-2">

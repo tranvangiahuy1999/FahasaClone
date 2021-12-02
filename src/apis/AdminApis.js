@@ -151,6 +151,10 @@ const adminApis = {
   createSpecialTag(data) {
     const url = '/api/special-tag/create'
     return axiosClient.post(url, data)
+  },
+  updateSpecialTag(tagId, data) {
+    const url = `/api/special-tag/update/${tagId}`
+    return axiosClient.put(url, data)
   }
 };
 

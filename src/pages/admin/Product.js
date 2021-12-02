@@ -135,9 +135,9 @@ export default function Product() {
     getAllProducts(page);
   }, []);
 
-  useEffect(() => {
-    searchProductByPageAndBarcode(1, search);
-  }, [search]);
+  // useEffect(() => {
+
+  // }, [search]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -253,6 +253,12 @@ export default function Product() {
     history.push('/admin/product/add-product')
   }
 
+  const onSearchProduct = (e) => {
+    if (e.key === 'Enter') {
+      searchProductByPageAndBarcode(1, e.target.value)
+    }
+  }
+
   return (
     <div className={classes.root}>
       <Backdrop className={classes.backdrop} open={loader}>
@@ -284,6 +290,7 @@ export default function Product() {
                 ),
               }}
               value={search}
+              onKeyDown={onSearchProduct}
               onChange={(e) => setSearch(e.target.value)}
               variant="standard"
             />
