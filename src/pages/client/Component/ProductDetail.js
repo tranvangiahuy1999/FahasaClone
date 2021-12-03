@@ -26,6 +26,7 @@ const ProductDetail = () => {
   const [defaultProduct, setDefaultProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [productQuantity, setProductQuantity] = useState(1);
+  const [defaultParameterName, setDefaultParameterName] = useState(null);
   // @ts-ignore
   const [parentId, setParentId] = useState([]);
 
@@ -45,7 +46,7 @@ const ProductDetail = () => {
           setDefaultPrice(firstParameter.price);
 
           setDefaultProduct({
-            _id: firstParameter.price,
+            _id: firstParameter._id,
             price: firstParameter.price,
             name: productDetail.name,
             image: productDetail.image.length
@@ -58,8 +59,7 @@ const ProductDetail = () => {
                 ? productDetail.image[0].url
                 : firstParameter.image
             );
-        });
-
+        });       
         setProductDetail(result.data);
       }
     } catch (err) {
@@ -74,6 +74,13 @@ const ProductDetail = () => {
   const handleSelectParameter = async (parameter) => {
     setSelectedImage(parameter.image);
     setDefaultPrice(parameter.price);
+    setDefaultParameterName(parameter.name);
+    setDefaultProduct({
+      _id: parameter._id,
+      price: parameter.price,
+      name: defaultProduct.name,
+      image: defaultProduct.image
+    })
   };
 
   const handleDecreaseAmount = () => {
@@ -97,8 +104,9 @@ const ProductDetail = () => {
       const cartItem = [
         {
           parameter: defaultProduct._id,
-          price: defaultProduct.price,
-          nameParam: defaultPrice.name,
+          price: defaultPrice,
+          checked: true,
+          nameParam: defaultParameterName,
           name: defaultProduct.name,
           image: defaultProduct.image,
           // @ts-ignore
@@ -120,9 +128,10 @@ const ProductDetail = () => {
       }
 
       localCartList.push({
-        parameter: defaultPrice._id,
-        price: defaultPrice.price,
-        nameParam: defaultPrice.name,
+        parameter: defaultProduct._id,
+        price: defaultPrice,
+        checked: true,
+        nameParam: defaultParameterName,
         name: defaultProduct.name,
         image: defaultProduct.image,
         // @ts-ignore
@@ -202,7 +211,7 @@ const ProductDetail = () => {
                     </div>
                     {product.parameters.length > 1 ? (
                       <div className="product-parameters-container">
-                        {product.parameters.map((parameter, index) => {
+                        {product.parameters.map((parameter, index) => {                          
                           return (
                             <Button
                               key={index}

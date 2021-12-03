@@ -53,13 +53,13 @@ function ListItemLevel3(props) {
 }
 function ListItemLevel2(props) {
   const classes = useStyles();
-  const { listdata,currentId,parentIdLevel1,parentIdLevel2, ...other } = props;
+  const { listdata,currentId,parentidlevel1,parentidlevel2, ...other } = props;
 
   return (
     <List {...other}>
       {listdata.map((level2) =>
         (level2.subCate.length > 0) ?
-          <ItemLevel2 parentIdLevel1={parentIdLevel1}  parentIdLevel2={parentIdLevel2} currentId={currentId} key={level2._id} level2={level2} className={classes.nested} />
+          <ItemLevel2 parentidlevel1={parentidlevel1}  parentidlevel2={parentidlevel2} currentId={currentId} key={level2._id} level2={level2} className={classes.nested} />
           : <ListItemLink className={level2._id === currentId ? "active" : ""} primary={level2.name} key={level2._id} to={"/danh-sach/" + convertURL(level2.name) + "." + level2._id} className={classes.nested} />
       )}
     </List>
@@ -67,15 +67,15 @@ function ListItemLevel2(props) {
 }
 function ItemLevel2(props) {
   const [open, setOpen] = React.useState(false);
-  const { level2,className,currentId,parentIdLevel2, ...other } = props;
+  const { level2,className,currentId,parentidlevel2, ...other } = props;
 
   const handleClick = () => {
     setOpen((prevOpen) => !prevOpen);
   };
   return (
     <React.Fragment >
-      <ListItemLink className={className + (level2._id === currentId ? " active" : "")} primary={level2.name} to={"/danh-sach/" + convertURL(level2.name) + "." + level2._id} open={level2._id === parentIdLevel2 ? !open : open} parentOnClick={handleClick} {...other} />
-      <Collapse component="li" in={level2._id === parentIdLevel2 ? !open : open} timeout="auto" unmountOnExit>
+      <ListItemLink className={className + (level2._id === currentId ? " active" : "")} primary={level2.name} to={"/danh-sach/" + convertURL(level2.name) + "." + level2._id} open={level2._id === parentidlevel2 ? !open : open} parentOnClick={handleClick} {...other} />
+      <Collapse component="li" in={level2._id === parentidlevel2 ? !open : open} timeout="auto" unmountOnExit>
         <List disablePadding>
           <ListItemLevel3 currentId={currentId} listdata={level2.subCate} />
         </List>
@@ -85,7 +85,7 @@ function ItemLevel2(props) {
 }
 function ItemLevel1(props) {
   const [open, setOpen] = React.useState(false);
-  const { level1,currentId,parentIdLevel1,parentIdLevel2, ...other } = props;
+  const { level1,currentId,parentidlevel1,parentidlevel2, ...other } = props;
 
   const handleClick = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -93,10 +93,10 @@ function ItemLevel1(props) {
 
   return (
     <React.Fragment >
-      <ListItemLink className={level1._id === currentId ? "active" : ""} primary={level1.name} to={"/danh-sach/" + convertURL(level1.name) + "." + level1._id} open={level1._id === parentIdLevel1 ? !open : open} parentOnClick={handleClick}  {...other} />
-      <Collapse component="li" in={level1._id === parentIdLevel1 ? !open : open} timeout="auto" unmountOnExit>
+      <ListItemLink className={level1._id === currentId ? "active" : ""} primary={level1.name} to={"/danh-sach/" + convertURL(level1.name) + "." + level1._id} open={level1._id === parentidlevel1 ? !open : open} parentOnClick={handleClick}  {...other} />
+      <Collapse component="li" in={level1._id === parentidlevel1 ? !open : open} timeout="auto" unmountOnExit>
         <List disablePadding>
-          <ListItemLevel2 parentIdLevel2={parentIdLevel2} currentId={currentId} listdata={level1.subCate} />
+          <ListItemLevel2 parentidlevel2={parentidlevel2} currentId={currentId} listdata={level1.subCate} />
         </List>
       </Collapse>
     </React.Fragment>
@@ -109,7 +109,7 @@ ListItemLink.propTypes = {
 
 export default function CategorySideBar(props) {
   const classes = useStyles();
-  const { listdata,currentId,parentIdLevel1,parentIdLevel2, ...other } = props;
+  const { listdata,currentId,parentidlevel1,parentidlevel2, ...other } = props;
 
   return (    
       <div className={classes.root}>
@@ -118,7 +118,7 @@ export default function CategorySideBar(props) {
             <List>
               {(props.listdata).map((level1, index) => (
                   (level1.subCate && level1.subCate.length > 0) ?
-                    <ItemLevel1 key={level1._id} parentIdLevel1={parentIdLevel1}  parentIdLevel2={parentIdLevel2} currentId={currentId} level1={level1} /> :
+                    <ItemLevel1 key={level1._id} parentidlevel1={parentidlevel1}  parentidlevel2={parentidlevel2} currentId={currentId} level1={level1} /> :
                     <ListItemLink key={level1._id} primary={level1.name} className={level1._id === currentId ? "active" : ""}  to={"/danh-sach/" + convertURL(level1.name) + "." + level1._id} />
             ))}
             </List> : <></>}

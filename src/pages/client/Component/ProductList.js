@@ -40,7 +40,7 @@ const ProductListContent = () => {
   const [productId1, setProductId1] = useState();
   const [productId2, setProductId2] = useState();
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(30);
+  const [perPage, setPerPage] = useState(16);
   const [sortType, setSortType] = useState("price_up");
   const [totalPage, setTotalPage] = useState(1);
   const params = useParams();
@@ -110,7 +110,7 @@ const ProductListContent = () => {
                 <p>Tất Cả Sản Phẩm</p>
               </div>
               <div className="category-list">
-                <CategorySideBar listdata={categoryList} parentIdLevel1={productId1} parentIdLevel2={productId2} currentId={params.id} />
+                <CategorySideBar listdata={categoryList} parentidlevel1={productId1} parentidlevel2={productId2} currentId={params.id} />
               </div>
             </div>
           </div>
@@ -121,9 +121,11 @@ const ProductListContent = () => {
                   Hiển thị :
                 </label>
                 <select onChange={perPageChange} value={perPage}>
-                <option value={1}>1</option>
-                  <option value={30}>30</option>
-                  <option value={60}>60</option>
+                <option value={4}>4</option>
+                  <option value={8}>8</option>
+                  <option value={16}>16</option>
+                  <option value={32}>32</option>
+                  <option value={64}>64</option>
                 </select>
               </div>
               <div className="sort-item">
