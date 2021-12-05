@@ -92,6 +92,7 @@ export default function SpecialTag(props) {
     const [openEditModal, setEditModal] = useState(false)
     const [specialTagList, setSpecialTagList] = useState([]);
     const [editSpecialTagData, setEditSpecialTagData] = useState();
+    const [editSpecialTagId, setEditSpecialTagId] = useState();
     const [confirmModalState, setConfirmModalState] = useState(false);
     const [updateBtnState, setUpdateBtnState] = useState(true);
     const [loader, setLoader] = useState(true);
@@ -190,7 +191,7 @@ export default function SpecialTag(props) {
     };
 
     const openConfirmDeleteModal = (data) => {
-        setEditSpecialTagData(data);
+        setEditSpecialTagId(data);
         setConfirmModalState(true);
     };
 
@@ -199,14 +200,15 @@ export default function SpecialTag(props) {
     };
 
     const closeConfirmModal = () => {
-        setEditSpecialTagData();
+        setEditSpecialTagId();
         setConfirmModalState(false);
     };
 
     const deleteCategory = async () => {
         try {
+            if (!editSpecialTagId) return
             setLoader(true);
-            const tagId = editSpecialTagData;
+            const tagId = editSpecialTagId;
             const res = await adminApis.deleteSpecialTag(tagId);
             if (res.status === 200) {
                 alert({ icon: "success", title: "Xóa tag thành công" });

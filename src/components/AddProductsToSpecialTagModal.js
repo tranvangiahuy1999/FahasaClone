@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AdminApi from "../apis/AdminApis";
 import { makeStyles } from "@material-ui/core/styles";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Modal from "@material-ui/core/Modal";
 import { TextField, Button, FormGroup, FormControlLabel, Switch, FormControl } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -165,6 +166,14 @@ const AddProductsToSpecialTagModal = (props) => {
         return true
     }
 
+    const handleOnDragEnd = (result) => {
+        if (!result.destination) return;
+        const items = Array.from(productIdListOfTag);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+        setProductListIdOfTag([...items]);
+    };
+
     return (
         <Modal
             open={props.open}
@@ -242,43 +251,66 @@ const AddProductsToSpecialTagModal = (props) => {
                                     <div className='col-6 font-weight-bold'>Tên SP</div>
                                     <div className='col-3 font-weight-bold text-center'>Tùy chọn</div>
                                 </div>
-                                <div className='special-tag-table-contain'>
-                                    {
-                                        productIdListOfTag.length ? productIdListOfTag.map((row) => (
-                                            <div key={row._id} className='special-tag-table-row row m-0 p-2'>
-                                                <div className='col-3'>
-                                                    {row.image[0] ? (
-                                                        <div
-                                                            className="small-img-wrapper"
+                                <DragDropContext onDragEnd={handleOnDragEnd}>
+                                    <Droppable droppableId="characters">
+                                        {(provided) => (
+                                            <div
+                                                {...provided.droppableProps}
+                                                ref={provided.innerRef}
+                                                className='special-tag-table-contain'>
+                                                {
+                                                    productIdListOfTag.length ? productIdListOfTag.map((row, index) => (
+                                                        <Draggable
+                                                            key={row._id}
+                                                            draggableId={row._id}
+                                                            index={index}
                                                         >
-                                                            <img alt="" src={row.image[0].url}></img>
-                                                        </div>
-                                                    ) : (
-                                                        <span className="img-broke-wrapper">
-                                                            Không có hình ảnh
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <div className='col-6 one-line-text'>{row.name}</div>
-                                                <div className='col-3 text-center'>
-                                                    <Button
-                                                        type="button"
-                                                        variant="contained"
-                                                        style={{
-                                                            fontSize: "0.7rem",
-                                                            backgroundColor: '#d9534f',
-                                                            color: "white",
-                                                        }}
-                                                        onClick={() => removeProductOutOfList(row)}
-                                                    >
-                                                        Xóa
-                                                    </Button></div>
+                                                            {(provided) => (
+                                                                <div key={row._id}
+                                                                    {...provided.draggableProps}
+                                                                    {...provided.dragHandleProps}
+                                                                    ref={provided.innerRef}
+                                                                    hover
+                                                                    className='special-tag-table-row row m-0 p-2'>
+                                                                    <div className='col-3'>
+                                                                        {row.image[0] ? (
+                                                                            <div
+                                                                                className="small-img-wrapper"
+                                                                            >
+                                                                                <img alt="" src={row.image[0].url}></img>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <span className="img-broke-wrapper">
+                                                                                Không có hình ảnh
+                                                                            </span>
+                                                                        )}
+                                                                    </div>
+                                                                    <div className='col-6 one-line-text'>{row.name}</div>
+                                                                    <div className='col-3 text-center'>
+                                                                        <Button
+                                                                            type="button"
+                                                                            variant="contained"
+                                                                            style={{
+                                                                                fontSize: "0.7rem",
+                                                                                backgroundColor: '#d9534f',
+                                                                                color: "white",
+                                                                            }}
+                                                                            onClick={() => removeProductOutOfList(row)}
+                                                                        >
+                                                                            Xóa
+                                                                        </Button></div>
+                                                                </div>
+                                                            )}
+                                                        </Draggable>
+                                                    )) : (
+                                                        <div className="empty-data-text">Chưa có dữ liệu</div>
+                                                    )
+                                                }
+                                                {provided.placeholder}
                                             </div>
-                                        )) : (
-                                            <div className="empty-data-text">Chưa có dữ liệu</div>
-                                        )
-                                    }
-                                </div>
+                                        )}
+                                    </Droppable>
+                                </DragDropContext>
                             </div>
                             <div className='col-6 pl-2'>
                                 <div className='row m-0 p-0'>
