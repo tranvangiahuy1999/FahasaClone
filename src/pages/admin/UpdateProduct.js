@@ -420,6 +420,7 @@ export default function UpdateProduct() {
       formdata.append(`parameter[${index}].id_image`, value.id_image);
     });
 
+
     category.forEach((value, index) => {
       let temp = value;
       if (value === "null") {
@@ -455,9 +456,9 @@ export default function UpdateProduct() {
     try {
       const formData = await formatForm();
 
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-      }
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0] + ": " + pair[1]);
+      // }
 
       const res = await adminApis.updateProduct(id, formData);
       if (res.status === 200) {
