@@ -86,8 +86,6 @@ EnhancedTableHead.propTypes = {
 
 export default function SpecialTag(props) {
     const classes = useStyles();
-    const [page, setPage] = useState(1);
-    const [totalPage, setTotalPage] = useState(1);
     const [openCreateModal, setOpenCreateModal] = useState(false);
     const [openEditModal, setEditModal] = useState(false)
     const [specialTagList, setSpecialTagList] = useState([]);
@@ -98,14 +96,12 @@ export default function SpecialTag(props) {
     const [loader, setLoader] = useState(true);
 
     useEffect(() => {
-        getSpecialTagList(false, page, 10);
+        getSpecialTagList(false, 1, "");
     }, []);
 
     const setDefaultPageAndAlert = () => {
         alert({ icon: "error", title: "Trang không tồn tại" });
         setSpecialTagList([]);
-        setTotalPage(1);
-        setPage(1)
     }
 
     const getSpecialTagList = async (isHide, page, limit) => {
@@ -113,8 +109,6 @@ export default function SpecialTag(props) {
             setLoader(true);
             const res = await adminApis.getSpecialTagList(isHide, page, limit);
             if (res.status === 200) {
-                setPage(res.data.page);
-                setTotalPage(res.data.total_page);
                 setSpecialTagList([...res.data.tag]);
             } else {
                 setDefaultPageAndAlert();
@@ -147,7 +141,7 @@ export default function SpecialTag(props) {
         createModalHandleClose();
         editModalHandleClose();
         setLoader(true);
-        await getSpecialTagList(false, page, 10);
+        await getSpecialTagList(false, 1, "");
         setLoader(false);
     };
 
@@ -173,7 +167,7 @@ export default function SpecialTag(props) {
                     icon: "success",
                     title: "Cập nhật thứ tự tag thành công",
                 });
-                await getSpecialTagList(false, page, 10);
+                await getSpecialTagList(false, 1, "");
             } else {
                 alert({ icon: "error", title: "Cập nhật thứ tự tag thất bại" });
             }
@@ -212,7 +206,7 @@ export default function SpecialTag(props) {
             const res = await adminApis.deleteSpecialTag(tagId);
             if (res.status === 200) {
                 alert({ icon: "success", title: "Xóa tag thành công" });
-                pageChange(0, page)
+                getSpecialTagList(false, 1, "");
                 closeAfterSaveConfirmModal();
             } else {
                 alert({ icon: "error", title: "Xóa tag thất bại" });
@@ -222,9 +216,6 @@ export default function SpecialTag(props) {
         } catch (e) { }
     };
 
-    const pageChange = (event, page) => {
-        getSpecialTagList(false, page, 10);
-    };
 
     return (
         <div className={classes.root}>
@@ -370,15 +361,6 @@ export default function SpecialTag(props) {
                 {specialTagList.length === 0 && (
                     <div className="empty-data-text">Chưa có dữ liệu</div>
                 )}
-                <div className="p-4 right-wrapper">
-                    <Pagination
-                        count={totalPage}
-                        page={page}
-                        onChange={pageChange}
-                        variant="outlined"
-                        shape="rounded"
-                    />
-                </div>
             </Paper>
         </div>
     );
