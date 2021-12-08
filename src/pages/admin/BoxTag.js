@@ -229,19 +229,19 @@ export default function BoxTagManager() {
               tagBoxList.map((ele, index) => (
                 <GridItem key={index}>
                   <Card className={classes.card}>
-                    <Link
-                      to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}
-                      className="rrd-custom-link"
-                    >
-                      <CardActionArea>
-                        <CardMedia
-                          className={classes.media}
-                          image={
-                            ele.image.url ||
-                            img
-                          }
-                          title="Contemplative Reptile"
-                        />
+                    <CardActionArea>
+                      <CardMedia
+                        className={classes.media}
+                        image={
+                          ele.image.url ||
+                          img
+                        }
+                        title="Contemplative Reptile"
+                      />
+                      <Link
+                        to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}
+                        className="rrd-custom-link"
+                      >
                         <CardContent>
                           <div style={{ height: 40 }}>
                             {ele.name ? (
@@ -259,8 +259,8 @@ export default function BoxTagManager() {
                             )}
                           </div>
                         </CardContent>
-                      </CardActionArea>
-                    </Link>
+                      </Link>
+                    </CardActionArea>
                     <CardActions>
                       <Button
                         size="small"
