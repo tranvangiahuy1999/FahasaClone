@@ -2,7 +2,9 @@ import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-import { Button } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -21,12 +23,14 @@ import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst"
 const ProductDetail = () => {
   const params = useParams();
   const history = useHistory();
+  const classes = useStyles();
   const [productDetail, setProductDetail] = useState([]);
   const [defaultPrice, setDefaultPrice] = useState(null);
   const [defaultProduct, setDefaultProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [productQuantity, setProductQuantity] = useState(1);
   const [defaultParameterName, setDefaultParameterName] = useState(null);
+  const [loader, setLoader] = useState(true);
   // @ts-ignore
   const [parentId, setParentId] = useState([]);
 
@@ -37,7 +41,9 @@ const ProductDetail = () => {
   const getProductDetailData = async () => {
     try {
       // @ts-ignore
+      setLoader(true)
       const result = await shopApis.getProductDetail(params.id);
+      console.log(result)
 
       if (result.status === HTTP_RESPONSE_STATUS.SUCCESS) {
         result.data.map((productDetail) => {
@@ -59,12 +65,14 @@ const ProductDetail = () => {
                 ? productDetail.image[0].url
                 : firstParameter.image
             );
-        });       
+        });
         setProductDetail(result.data);
       }
     } catch (err) {
-      console.log(err);
+      alert({ icon: "error", title: "Đã có lỗi xảy ra hoặc sản phẩm không tồn tại!" });
+      history.push("/")
     }
+    setLoader(false)
   };
 
   const handleSelectImage = async (imageUrl) => {
@@ -154,6 +162,9 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container">
+      <Backdrop className={classes.backdrop} open={loader}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="product-detail-wrapper">
         {productDetail.map((product, index) => (
           <div key={index}>
@@ -211,7 +222,7 @@ const ProductDetail = () => {
                     </div>
                     {product.parameters.length > 1 ? (
                       <div className="product-parameters-container">
-                        {product.parameters.map((parameter, index) => {                          
+                        {product.parameters.map((parameter, index) => {
                           return (
                             <Button
                               key={index}
@@ -290,5 +301,12 @@ const ProductDetail = () => {
     </div>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
 
 export default ProductDetail;

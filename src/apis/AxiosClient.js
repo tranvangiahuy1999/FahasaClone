@@ -26,13 +26,13 @@ const handleError = (error) => {
   if (error)
     alert({
       icon: "error",
-      title: "Đã xảy ra lỗi",
-      msg: error.response.data.message,
+      title: "Đã có lỗi xảy ra",
+      msg: "Xin vui lòng thử lại sau!",
     });
   else
     alert({
       icon: "error",
-      title: "Đã xảy ra lỗi",
+      title: "Đã có lỗi xảy ra",
       msg: "Không thể kết nối tới server!",
     });
 };
