@@ -25,8 +25,7 @@ const HomePage = () => {
 
   return (
     <div className="main-container mt-3 mb-5">
-      <Header></Header>
-      <ProductsListOfTag></ProductsListOfTag>
+      <Header></Header>      
       {
         boxtagData.length ? boxtagData.map((value) => (
           <ProductListOfBoxTag key={value._id} boxtagData={value}></ProductListOfBoxTag>

@@ -1,80 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import shopApis from "../../../apis/ShopApis";
 import { Button } from "@material-ui/core";
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
+import Controller from "../../../utils/Controller";
+import NoProductImg from '../../../assets/image/no-product.png'
+import { Link, Redirect } from "react-router-dom";
 
-const ProductsListOfTag = () => {
+const ProductsListOfTag = (props) => {
+  const [productList, setProductList] = useState([])
+
+  useEffect(() => {
+    if (props.cateInfo) {
+      getRelateProducts(props.cateInfo._id)
+    }
+  }, [props.cateInfo])
+
+  const getRelateProducts = async (cateId) => {
+    try {
+      const res = await shopApis.getProductByCate(1, cateId, 5, "")
+      if (res.status === 200) {
+        setProductList([...res.data.product])
+      }
+    } catch (e) {
+
+    }
+  }
+
   return (
     <div className="product-list-of-tag-container bg-white">
-      <div className="product-list-of-tag-title">Sản phẩm nổi bật</div>
+      <div className="product-list-of-tag-title">{props.title}</div>
       <div className="row m-0 p-0">
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
-          <ProductCard
-            img={
-              "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-            }
-            productName={"Where To Play"}
-            productPrice={100000}
-          ></ProductCard>
-        </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
-          <ProductCard
-            img={
-              "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-            }
-            productName={
-              "Where To Play: 3 Bước Để Xác Định Thị Trường Đắt Giá Của Doanh Nghiệp"
-            }
-            productPrice={100000}
-          ></ProductCard>
-        </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
-          <ProductCard
-            img={
-              "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-            }
-            productName={
-              "Where To Play: 3 Bước Để Xác Định Thị Trường Đắt Giá Của Doanh Nghiệp"
-            }
-            productPrice={100000}
-          ></ProductCard>
-        </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
-          <ProductCard
-            img={
-              "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-            }
-            productName={
-              "Where To Play: 3 Bước Để Xác Định Thị Trường Đắt Giá Của Doanh Nghiệp"
-            }
-            productPrice={100000}
-          ></ProductCard>
-        </div>
-        <div className="col-lg col-md-3 col-sm-4 col-6 p-3">
-          <ProductCard
-            img={
-              "https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_196417.jpg"
-            }
-            productName={
-              "Where To Play: 3 Bước Để Xác Định Thị Trường Đắt Giá Của Doanh Nghiệp"
-            }
-            productPrice={100000}
-          ></ProductCard>
-        </div>
+        {
+          productList.length ? productList.map((ele) => (
+            <div key={ele._id} className="col-lg-3 col-md-4 col-sm-4 col-6 p-3">
+              <Link to={"/chi-tiet/" +
+                Controller.formatURL(ele.name) +
+                "." +
+                ele._id}>
+                <ProductCard
+                  img={
+                    ele.image.length ? ele.image[0].url : ""
+                  }
+                  productName={ele.name}
+                  productPrice={ele.parameters.length ? ele.parameters[0].price : "0"}
+                ></ProductCard>
+              </Link>
+            </div>
+          )) : (
+            <div className='text-center no-product-img-container mt-auto mb-auto'>
+              <img className="no-product-img" alt="" src={NoProductImg}></img>
+            </div>
+          )
+        }
+
       </div>
       <div className="see-more p-3 text-center">
-        <Button
-          variant="outlined"
-          style={{
-            color: PRIMARY_HOME_COLOR,
-            border: `2px solid ${PRIMARY_HOME_COLOR}`,
-            paddingLeft: "50px",
-            paddingRight: "50px",
-            fontSize: "0.9rem",
-          }}
+        <Link
+          to={
+            "/danh-sach/" +
+            Controller.formatURL(props.cateInfo.name) +
+            "." +
+            props.cateInfo._id
+          }
         >
-          Xem thêm
-        </Button>
+          <Button
+            variant="outlined"
+            style={{
+              color: PRIMARY_HOME_COLOR,
+              border: `2px solid ${PRIMARY_HOME_COLOR}`,
+              paddingLeft: "50px",
+              paddingRight: "50px",
+              fontSize: "0.9rem",
+            }}
+          >
+            Xem thêm
+          </Button>
+        </Link>
       </div>
     </div>
   );

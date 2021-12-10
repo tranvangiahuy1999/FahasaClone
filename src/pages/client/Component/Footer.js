@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-container bg-white p-3">
         <div className="row m-0 p-0">
-          <div className="col-5">
+          <div className="col-md-6 col-12">
             <div>
               <h3 className="header text-uppercase font-weight-bold">
                 Về nhà sách kiên giang
@@ -31,7 +31,7 @@ function Footer() {
               />
             </div>
           </div>
-          <div className="col-3">
+          <div className="col-md-6 col-12">
             <div>
               <h3 className="header text-uppercase font-weight-bold">
                 HỖ TRỢ KHÁCH HÀNG
@@ -41,17 +41,7 @@ function Footer() {
               <div className="footer-text">Phương thức vận chuyển</div>
               <div className="footer-text">Chính sách đổi trả</div>
             </div>
-          </div>
-
-          <div className="col-4">
-            <div className="footer-fanpage-wrapper">
-              <img
-                className="footer-fanpage"
-                src="images/footer_icon1.png"
-                alt=""
-              />
-            </div>
-          </div>
+          </div>          
         </div>
       </div>
     </footer>
