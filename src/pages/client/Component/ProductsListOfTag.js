@@ -18,7 +18,7 @@ const ProductsListOfTag = (props) => {
 
   const getRelateProducts = async (cateId) => {
     try {
-      const res = await shopApis.getProductByCate(1, cateId, 5, "")
+      const res = await shopApis.getProductByCate(1, cateId, 4, "")
       if (res.status === 200) {
         setProductList([...res.data.product])
       }
