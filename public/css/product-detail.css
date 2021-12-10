@@ -284,11 +284,7 @@
   .product-detail-item-container > .product-detail-item-wrapper {
     flex-direction: column;
     height: auto;
-  }
-
-  .option-images-container {
-    display: none;
-  }
+  }  
 
   .product-detail-image-container {
     border: none;
