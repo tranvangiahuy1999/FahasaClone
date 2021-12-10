@@ -39,7 +39,7 @@ const ProductsCardList = (props) => {
             <div className="row m-0 p-0 product-cart-list-section">
                 {
                     onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) : products.length ? products.filter((item, idx) => idx < 5).map((value) => (
-                        <div key={value._id} className="col-lg col-md-3 col-sm-4 col-6 p-3">
+                        <div key={value._id} className="col-lg-4 col-md-3 col-sm-4 col-6 p-3">
                             <Link
                                 to={
                                     "/chi-tiet/" +
