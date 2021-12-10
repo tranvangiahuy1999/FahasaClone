@@ -1,8 +1,11 @@
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import ProductsListOfTag from './ProductsListOfTag'
 
-import { Button } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -21,22 +24,29 @@ import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst"
 const ProductDetail = () => {
   const params = useParams();
   const history = useHistory();
+  const classes = useStyles();
   const [productDetail, setProductDetail] = useState([]);
   const [defaultPrice, setDefaultPrice] = useState(null);
   const [defaultProduct, setDefaultProduct] = useState(null);
+  const [cateInfo, setCateInfo] = useState()
   const [selectedImage, setSelectedImage] = useState(null);
   const [productQuantity, setProductQuantity] = useState(1);
   const [defaultParameterName, setDefaultParameterName] = useState(null);
+  const [loader, setLoader] = useState(true);
   // @ts-ignore
   const [parentId, setParentId] = useState([]);
 
   useEffect(() => {
-    getProductDetailData();
-  }, []);
+    if (params) {
+      window.scrollTo(0, 0)
+      getProductDetailData();
+    }
+  }, [params]);
 
   const getProductDetailData = async () => {
     try {
       // @ts-ignore
+      setLoader(true)
       const result = await shopApis.getProductDetail(params.id);
 
       if (result.status === HTTP_RESPONSE_STATUS.SUCCESS) {
@@ -59,12 +69,15 @@ const ProductDetail = () => {
                 ? productDetail.image[0].url
                 : firstParameter.image
             );
-        });       
+        });
         setProductDetail(result.data);
+        getExactCateId(result.data)
       }
     } catch (err) {
-      console.log(err);
+      alert({ icon: "error", title: "Đã có lỗi xảy ra hoặc sản phẩm không tồn tại!" });
+      history.push("/")
     }
+    setLoader(false)
   };
 
   const handleSelectImage = async (imageUrl) => {
@@ -152,8 +165,23 @@ const ProductDetail = () => {
     });
   };
 
+  const getExactCateId = (productDetail) => {
+    if (productDetail[0].cate3) {
+      setCateInfo(productDetail[0].cate3)
+      return
+    }
+    if (productDetail[0].cate2) {
+      setCateInfo(productDetail[0].cate2)
+      return
+    }
+    setCateInfo(productDetail[0].cate1)
+  }
+
   return (
     <div className="product-detail-container">
+      <Backdrop className={classes.backdrop} open={loader}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="product-detail-wrapper">
         {productDetail.map((product, index) => (
           <div key={index}>
@@ -173,24 +201,24 @@ const ProductDetail = () => {
 
                     <div className="option-images-container">
                       <div className="option-images-wrapper">
-                        {product.image.map((productDetailImage, index) => {
-                          return (
-                            <div
-                              className="option-image-item"
+                        {product.image.map((productDetailImage, index) =>
+                        (
+                          <div
+                            className="option-image-item"
+                            key={index}
+                            onClick={() =>
+                              handleSelectImage(productDetailImage.url)
+                            }
+                          >
+                            <img
                               key={index}
-                              onClick={() =>
-                                handleSelectImage(productDetailImage.url)
-                              }
-                            >
-                              <img
-                                key={index}
-                                className="option-image"
-                                alt=""
-                                src={productDetailImage.url}
-                              />
-                            </div>
-                          );
-                        })}
+                              className="option-image"
+                              alt=""
+                              src={productDetailImage.url}
+                            />
+                          </div>
+                        )
+                        )}
                       </div>
                     </div>
                   </div>
@@ -211,7 +239,7 @@ const ProductDetail = () => {
                     </div>
                     {product.parameters.length > 1 ? (
                       <div className="product-parameters-container">
-                        {product.parameters.map((parameter, index) => {                          
+                        {product.parameters.map((parameter, index) => {
                           return (
                             <Button
                               key={index}
@@ -235,7 +263,7 @@ const ProductDetail = () => {
 
                     <MarketingBox />
 
-                    <div className="product-quantity-container">
+                    <div className="product-quantity-container text-center">
                       <p className="product-quantity-describe">Số Lượng: </p>
                       <div className="product-quantity-box-container">
                         <div className="product-quantity-box">
@@ -284,11 +312,28 @@ const ProductDetail = () => {
               </div>
             </section>
             <ProductInfo product={product} />
+            <div className="product-info-container">
+              {
+                cateInfo && (
+                  <ProductsListOfTag title={"Sản phẩm liên quan"} cateInfo={cateInfo}></ProductsListOfTag>
+                )
+              }
+
+            </div>
+
+
           </div>
         ))}
       </div>
     </div>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
 
 export default ProductDetail;
