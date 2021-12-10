@@ -20,7 +20,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { GoPlus } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
 import { LOGO_COLOR } from "../../constants/index";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import adminApis from "../../apis/AdminApis";
 import CreateBoxTagModal from "../../components/CreateBoxTagModal";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -29,6 +29,7 @@ import img from '../../assets/broke-image.png';
 
 export default function BoxTagManager() {
   const classes = useStyles();
+  const history = useHistory();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [prototypeBoxTagList, setPrototypeBoxTagList] = useState([]);
   const [tagBoxList, setBoxTagList] = useState([]);
@@ -237,11 +238,7 @@ export default function BoxTagManager() {
                           img
                         }
                         title="Contemplative Reptile"
-                      />
-                      <Link
-                        to={`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`}
-                        className="rrd-custom-link"
-                      >
+                      />                     
                         <CardContent>
                           <div style={{ height: 40 }}>
                             {ele.name ? (
@@ -258,10 +255,16 @@ export default function BoxTagManager() {
                               </Typography>
                             )}
                           </div>
-                        </CardContent>
-                      </Link>
+                        </CardContent>                      
                     </CardActionArea>
                     <CardActions>
+                    <Button
+                        size="small"
+                        color="default"
+                        onClick={() => history.push(`/admin/box-tag/${ele._id}?boxtagName=${ele.name}`)}
+                      >
+                        Chi tiết
+                      </Button>
                       <Button
                         size="small"
                         color="primary"

@@ -64,7 +64,7 @@ function EnhancedTableHead(props) {
           Điện thoại
         </TableCell>
         <TableCell padding="normal" align="center">
-          Địa chỉ
+          Phương thức giao hàng
         </TableCell>
         <TableCell padding="normal" align="center">
           Ngày đặt
@@ -294,12 +294,12 @@ export default function ReceiptUndone() {
                           </Link>
                         </TableCell>
 
-                        <TableCell padding="normal" align="center">
+                        <TableCell className="break-long-text-line" padding="normal" align="center">
                           {row.phone}
                         </TableCell>
 
                         <TableCell padding="normal" align="center">
-                          {row.address}
+                          {row.delivery}
                         </TableCell>
 
                         <TableCell padding="normal" align="center">
@@ -348,15 +348,15 @@ export default function ReceiptUndone() {
                               </div>
                               <div className="row">
                                 <div className="col-6 font-weight-bold">
-                                  Phương thức giao hàng:
+                                  Địa chỉ:
                                 </div>
-                                <div className="col-6">{row.delivery}</div>
+                                <div className="col-6 break-long-text-line">{row.address}</div>
                               </div>
                               <div className="row">
                                 <div className="col-6 font-weight-bold">
                                   Ghi chú:
                                 </div>
-                                <div className="col-6">
+                                <div className="col-6 break-long-text-line">
                                   {row.detail ? row.detail : "Không có"}
                                 </div>
                               </div>

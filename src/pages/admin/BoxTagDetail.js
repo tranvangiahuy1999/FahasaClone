@@ -96,8 +96,9 @@ export default function BoxTagDetail() {
   }, [id]);
 
   useEffect(() => {
+    setShowAllProductState(false)
     async function initProductData(index) {
-      setLoader(true);
+      setLoader(true);      
       await getProductWithTagId(tagList[index]._id);
       await getProductByCate(tagList[index]._id);
       setLoader(false);
@@ -361,7 +362,7 @@ export default function BoxTagDetail() {
                               color="primary"
                             />
                           }
-                          label="Tất cả sản phẩm"
+                          label="Thêm sản phẩm"
                         />
                       </div>
                       <div className="col-6 right-wrapper">
@@ -383,7 +384,7 @@ export default function BoxTagDetail() {
                   <div className="row m-0 p-0">
                     {showAllProductState ? (
                       productList.length ? (
-                        productList.map((ele, index) => (
+                        productList.filter((ele) => !ele.isInTag).map((ele, index) => (
                           <div className="col-3 mb-4 mt-3" key={index}>
                             <Card className={classes.card}>
                               <CardActionArea>
