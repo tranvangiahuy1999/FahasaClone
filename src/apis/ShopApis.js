@@ -25,6 +25,10 @@ const shopApis = {
     const url = `/api/box-tag/get-list?skip=${skip}&limit=${limit}`;
     return axiosClient.get(url);
   },
+  getListSpecialProduct(page,limit,home_page){
+    const url = `/api/special-tag/get-list?is_hide=true&page=${page}&limit=${limit}&home_page=${home_page}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default shopApis;
