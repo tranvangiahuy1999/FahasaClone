@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import ProductsListOfTag from "./Component/ProductsListOfTag";
+import { makeStyles } from "@material-ui/core";
 import ProductListOfBoxTag from "./Component/ProductListOfBoxTag";
 import ProductsHaveVisitedList from "./Component/ProductsHaveVisitedList";
 import MutipleItemCarousel from "./Component/Carousel/MutipleItemCarousel";
@@ -7,36 +10,41 @@ import Header from "./Component/Header";
 import shopApis from '../../apis/ShopApis';
 
 const HomePage = () => {
+  const classes = useStyles();
   const [boxtagData, setBoxtagData] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     getHomeBoxtagData(0, 10);
   }, [])
 
   const getHomeBoxtagData = async (skip, limit) => {
+    setLoader(true)
     try {
       const res = await shopApis.getBoxTagList(skip, limit);
       if (res.status === 200) {
         setBoxtagData([...res.data])
       }
     } catch (e) {
-
     }
+    setLoader(false)
   }
 
 
   return (
     <div className="main-container mt-3 mb-5">
+      <Backdrop className={classes.backdrop} open={loader}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Header></Header>
       <CarouselSpecialMutipleProduct />
-      
       {
         boxtagData.length ? boxtagData.map((value) => (
           <ProductListOfBoxTag key={value._id} boxtagData={value}></ProductListOfBoxTag>
         )) :
           <></>
       }
-
       <ProductsHaveVisitedList></ProductsHaveVisitedList>
     </div>
   );
@@ -84,6 +92,7 @@ const CarouselSpecialMutipleProduct = (props) => {
     }
     return result;
   }
+
   return ((specialProduct && specialProduct.length > 0) ?
     <div>
       {
@@ -135,4 +144,12 @@ const CarouselSpecialMutipleProduct = (props) => {
     </div> : <></>
   )
 }
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
+
 export default HomePage;
