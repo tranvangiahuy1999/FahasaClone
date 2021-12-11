@@ -8,25 +8,24 @@ import { Link } from "react-router-dom";
 import NoProductImg from '../../../assets/image/no-product.png'
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import MutipleItemCarousel from "./Carousel/MutipleItemCarousel";
 
 const ProductsCardList = (props) => {
     const classes = useStyles();
-    const [products, setProducts] = useState([])
-    const [cateData, setCateData] = useState()
+    const [products, setProducts] = useState([])    
     const [onLoad, setOnLoad] = useState(true);
 
     useEffect(() => {
-        if (props.cateData) {
-            getProductsList(props.cateData.category)
-            setCateData(props.cateData)
+        if (props.tagId) {
+            getProductsList(props.tagId)            
         }
-    }, [props.cateData])
+    }, [props.tagId])
 
-    const getProductsList = async (cateId) => {
+    const getProductsList = async (tagId) => {
         try {
-            const res = await shopApis.getProductByCate(1, cateId, 5, null);
-            if (res.status === 200) {
-                setProducts([...res.data.product])
+            const res = await shopApis.getProductByTagId(tagId);
+            if (res.status === 200) {                
+                setProducts(formatSpecialListData(res.data))                
             }
         } catch (e) {
 
@@ -34,31 +33,66 @@ const ProductsCardList = (props) => {
         setOnLoad(false)
     }
 
+    const formatSpecialListData = (data) => {
+        var result = [];
+        if (data.length) {
+            data.map((item) => {
+                result.push(
+                    {
+                        _id: item._id,
+                        name: item.name,
+                        img: item.image[0].url,
+                        price: item.parameters[0].price,
+                    }
+                );
+            })
+        }        
+        return result;
+    }
+
     return (
         <div className="bg-white">
             <div className="row m-0 p-0 product-cart-list-section">
                 {
-                    onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) : products.length ? products.filter((item, idx) => idx < 5).map((value) => (
-                        <div key={value._id} className="col-lg-3 col-md-3 col-sm-4 col-6 p-3">
-                            <Link
-                                className="rrd-custom-link"
-                                to={
-                                    "/chi-tiet/" +
-                                    Controller.formatURL(value.name) +
-                                    "." +
-                                    value._id
-                                }
-                            >
-                                <ProductCard
-                                    img={
-                                        value.image.length ? value.image[0].url : ""
+                    onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) : products.length ? (
+                        <MutipleItemCarousel
+                            listData={products}
+                            settings={{
+                                dots: true,
+                                infinite: false,
+                                speed: 500,
+                                slidesToShow: 5,
+                                slidesToScroll: 1,
+                                initialSlide: 0,
+                                responsive: [
+                                    {
+                                        breakpoint: 1024,
+                                        settings: {
+                                            slidesToShow: 3,
+                                            slidesToScroll: 1,
+                                            infinite: true,
+                                            dots: true
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 600,
+                                        settings: {
+                                            slidesToShow: 2,
+                                            slidesToScroll: 1,
+                                            initialSlide: 0
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 480,
+                                        settings: {
+                                            slidesToShow: 2,
+                                            slidesToScroll: 1
+                                        }
                                     }
-                                    productName={value.name}
-                                    productPrice={value.parameters.length ? value.parameters[0].price : "0"}
-                                ></ProductCard>
-                            </Link>
-                        </div>
-                    ))
+                                ]
+                            }}
+                        />
+                    )
                         : <div className='text-center no-product-img-container mt-auto mb-auto'>
                             <img className="no-product-img" alt="" src={NoProductImg}></img>
                         </div>
@@ -66,11 +100,11 @@ const ProductsCardList = (props) => {
             </div>
             <div className="see-more col-12 p-3 text-center">
                 <Link
-                    to={cateData ?
+                    to={props.cateData ?
                         "/danh-sach/" +
-                        Controller.formatURL(cateData.name) +
+                        Controller.formatURL(props.cateData.name) +
                         "." +
-                        cateData.category : ""
+                        props.cateData.category : ""
                     }
                 >
                     <Button

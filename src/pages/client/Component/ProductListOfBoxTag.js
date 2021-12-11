@@ -162,7 +162,7 @@ const ProductListOfBoxTag = (props) => {
                     </div>
                   </div>
                 ) : (
-                  <ProductsCardList cateData={value}></ProductsCardList>
+                  <ProductsCardList tagId={value._id} cateData={value}></ProductsCardList>
                 )
               }
 

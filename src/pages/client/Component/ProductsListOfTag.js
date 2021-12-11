@@ -48,7 +48,7 @@ const ProductsListOfTag = (props) => {
   return (
     <div className="product-list-of-tag-container bg-white">
       <div className="product-list-of-tag-title">{props.title}</div>
-      <div className="row mt-3">
+      <div className="row mt-2">
         {
           productList.length ? (
             <MutipleItemCarousel
