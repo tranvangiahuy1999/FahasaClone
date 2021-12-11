@@ -33,12 +33,13 @@ const ProductsHorizontalCardList = (props) => {
 
     return (
         <div className="bg-white">
-            <div className="row m-0 p-0 product-cart-list-section">
+            <div className="row product-cart-list-section">
                 {
                     onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) :
                         products.length ? products.filter((item, idx) => idx < 4).map((value) => (
                             <div key={value._id} className="col-6">
                                 <Link
+                                    className="rrd-custom-link"
                                     to={
                                         "/chi-tiet/" +
                                         Controller.formatURL(value.name) +
