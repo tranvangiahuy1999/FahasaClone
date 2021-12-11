@@ -39,8 +39,9 @@ const ProductsCardList = (props) => {
             <div className="row m-0 p-0 product-cart-list-section">
                 {
                     onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) : products.length ? products.filter((item, idx) => idx < 5).map((value) => (
-                        <div key={value._id} className="col-lg-4 col-md-3 col-sm-4 col-6 p-3">
+                        <div key={value._id} className="col-lg-3 col-md-3 col-sm-4 col-6 p-3">
                             <Link
+                                className="rrd-custom-link"
                                 to={
                                     "/chi-tiet/" +
                                     Controller.formatURL(value.name) +
@@ -77,9 +78,9 @@ const ProductsCardList = (props) => {
                         style={{
                             color: PRIMARY_HOME_COLOR,
                             border: `2px solid ${PRIMARY_HOME_COLOR}`,
-                            paddingLeft: "50px",
-                            paddingRight: "50px",
-                            fontSize: "0.9rem",
+                            paddingLeft: "40px",
+                            paddingRight: "40px",
+                            fontSize: "0.8rem",
                         }}
                     >
                         Xem thêm

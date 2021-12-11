@@ -6,13 +6,13 @@ const HorizontalProductCard = (props) => {
   };
 
   return (
-    <div className="product-card-horizontal row m-1 p-0">
-      <div className="col-5">
+    <div className="product-card-horizontal row ml-1">
+      <div className="col-4">
         <div className="product-card-horizontal-img-wrapper">
           <img alt="" src={props.img}></img>
         </div>
       </div>
-      <div className="col-7">
+      <div className="col-8">
         <div className="product-card-name two-line-text">
           {props.productName}
         </div>

@@ -124,7 +124,7 @@ const ProductListOfBoxTag = (props) => {
             <div>
               {
                 boxtagData.image.url ? (
-                  <div className="row m-0 p-0">
+                  <div className="row">
                     <div className="col-5 d-none d-md-block">
                       <div className="product-list-of-boxtag-img-wrapper">
                         <img
@@ -133,7 +133,7 @@ const ProductListOfBoxTag = (props) => {
                         ></img>
                       </div>
                     </div>
-                    <div className="row m-0 p-0 col-lg-7 col-md-7 col-12">
+                    <div className="row col-lg-7 col-md-7 col-12">
                       <ProductsHorizontalCardList tagId={value._id}></ProductsHorizontalCardList>
 
                       <div className="see-more col-12 p-3 text-center">

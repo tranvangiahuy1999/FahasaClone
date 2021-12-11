@@ -19,7 +19,7 @@
 }
 
 .custom-link {
-  text-decoration: "none";
+  text-decoration: "none";  
 }
 
 .custom-link:hover {
@@ -625,6 +625,11 @@
 
 .product-cart-list-section {
   min-height: 260px;
+}
+
+.rrd-custom-link {
+  text-decoration: none;
+  color:#242a3a;
 }
 
 @media (max-width: 768px) {

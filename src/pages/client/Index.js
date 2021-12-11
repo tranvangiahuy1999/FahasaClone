@@ -29,12 +29,14 @@ const HomePage = () => {
     <div className="main-container mt-3 mb-5">
       <Header></Header>
       <CarouselSpecialMutipleProduct />
+      
       {
         boxtagData.length ? boxtagData.map((value) => (
           <ProductListOfBoxTag key={value._id} boxtagData={value}></ProductListOfBoxTag>
         )) :
           <></>
       }
+
       <ProductsHaveVisitedList></ProductsHaveVisitedList>
     </div>
   );
