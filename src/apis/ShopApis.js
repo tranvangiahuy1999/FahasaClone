@@ -25,8 +25,12 @@ const shopApis = {
     const url = `/api/box-tag/get-list?skip=${skip}&limit=${limit}`;
     return axiosClient.get(url);
   },
-  getListSpecialProduct(page,limit,home_page){
-    const url = `/api/special-tag/get-list?is_hide=true&page=${page}&limit=${limit}&home_page=${home_page}`;
+  getListSpecialProduct(page, limit, home_page, is_hide, is_suggested){
+    const url = `/api/special-tag/get-list?is_hide=${is_hide}&page=${page}&limit=${limit}&is_suggestion=${is_suggested}&home_page=${home_page}`;
+    return axiosClient.get(url);
+  },
+  getProductByTagId(id) {
+    const url = `/api/tag/get-product/${id}`;
     return axiosClient.get(url);
   },
 };
