@@ -6,6 +6,7 @@ import { PRIMARY_HOME_COLOR } from "../../../constants/index";
 import Controller from "../../../utils/Controller";
 import NoProductImg from '../../../assets/image/no-product.png'
 import { Link, Redirect } from "react-router-dom";
+import MutipleItemCarousel from "./Carousel/MutipleItemCarousel";
 
 const ProductsListOfTag = (props) => {
   const [productList, setProductList] = useState([])
@@ -18,13 +19,30 @@ const ProductsListOfTag = (props) => {
 
   const getRelateProducts = async (cateId) => {
     try {
-      const res = await shopApis.getProductByCate(1, cateId, 4, "")
+      const res = await shopApis.getProductByCate(1, cateId, 10, "")
       if (res.status === 200) {
-        setProductList([...res.data.product])
+        setProductList(formatSpecialListData(res.data.product))          
       }
     } catch (e) {
 
     }
+  }
+
+  const formatSpecialListData = (data) => {
+    var result = [];
+    if (data.length) {
+      data.map((item) => {
+        result.push(
+          {
+            _id: item._id,
+            name: item.name,
+            img: item.image[0].url,
+            price: item.parameters[0].price,
+          }
+        );  
+      })
+    }    
+    return result;
   }
 
   return (
@@ -32,22 +50,45 @@ const ProductsListOfTag = (props) => {
       <div className="product-list-of-tag-title">{props.title}</div>
       <div className="row m-0 p-0">
         {
-          productList.length ? productList.map((ele) => (
-            <div key={ele._id} className="col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <Link to={"/chi-tiet/" +
-                Controller.formatURL(ele.name) +
-                "." +
-                ele._id}>
-                <ProductCard
-                  img={
-                    ele.image.length ? ele.image[0].url : ""
+          productList.length ? (
+            <MutipleItemCarousel
+              listData={productList}
+              settings={{
+                dots: true,
+                infinite: false,
+                speed: 500,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                initialSlide: 0,
+                responsive: [
+                  {
+                    breakpoint: 1024,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 1,
+                      infinite: true,
+                      dots: true
+                    }
+                  },
+                  {
+                    breakpoint: 600,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                      initialSlide: 0
+                    }
+                  },
+                  {
+                    breakpoint: 480,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1
+                    }
                   }
-                  productName={ele.name}
-                  productPrice={ele.parameters.length ? ele.parameters[0].price : "0"}
-                ></ProductCard>
-              </Link>
-            </div>
-          )) : (
+                ]
+              }}
+            />
+          ) : (
             <div className='text-center no-product-img-container mt-auto mb-auto'>
               <img className="no-product-img" alt="" src={NoProductImg}></img>
             </div>
@@ -69,9 +110,9 @@ const ProductsListOfTag = (props) => {
             style={{
               color: PRIMARY_HOME_COLOR,
               border: `2px solid ${PRIMARY_HOME_COLOR}`,
-              paddingLeft: "50px",
-              paddingRight: "50px",
-              fontSize: "0.9rem",
+              paddingLeft: "40px",
+              paddingRight: "40px",
+              fontSize: "0.8rem",
             }}
           >
             Xem thêm

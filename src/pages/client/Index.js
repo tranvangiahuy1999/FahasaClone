@@ -48,7 +48,7 @@ const CarouselSpecialMutipleProduct = (props) => {
 
   const getSpecialProductData = async (page, limit, home_page) => {
     try {
-      const res = await shopApis.getListSpecialProduct(page, limit, home_page);
+      const res = await shopApis.getListSpecialProduct(page, limit, home_page, true, false);
       if (res.status === 200) {
         setSpecialProduct(formatSpecialListData(res.data));
       }
@@ -56,6 +56,7 @@ const CarouselSpecialMutipleProduct = (props) => {
 
     }
   }
+  
   const formatSpecialListData = (data) => {
     var result = [];
     if (data.tag && data.tag.length > 0) {

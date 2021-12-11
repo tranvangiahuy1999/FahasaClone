@@ -26,7 +26,9 @@
 
 /*-------------- Product Detail Item */
 .product-detail-item-container {
-  padding: 0 var(--padding-width-percent) 0 var(--padding-width-percent);
+  width: 95%;
+  max-width: 1100px;
+  margin: auto;
 }
 
 .product-detail-item-container > .product-detail-item-wrapper {
@@ -139,6 +141,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 90%;
+  padding: 6px;
 }
 
 .product-quantity-container > .product-quantity-describe {
@@ -217,20 +220,24 @@
 }
 
 /* IPAD PRO */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .product-detail-item-container {
     padding: 0 var(--tablet-padding-width-percent) 0
       var(--tablet-padding-width-percent);
   }
-}
+} */
 
 /* IPAD */
-@media (max-width: 768px) {
+@media (max-width: 910px) {
   .product-detail-image-container {
     flex: 1;
     height: 100%;
     padding: 30px 10px 30px 10px;
     border-right: 2px solid var(--break-line-color);
+  }
+
+  .add-to-cart-btn, .buy-now-btn {
+    font-size: 10px;
   }
 
   .main-image-container {
@@ -280,7 +287,7 @@
 }
 
 /* IPHONE X */
-@media (max-width: 414px) {
+@media (max-width: 650px) {
   .product-detail-item-container > .product-detail-item-wrapper {
     flex-direction: column;
     height: auto;

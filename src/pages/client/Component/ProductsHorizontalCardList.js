@@ -14,16 +14,16 @@ const ProductsHorizontalCardList = (props) => {
     const [onLoad, setOnLoad] = useState(true);
 
     useEffect(() => {
-        if (props.cateId) {
-            getProductsList(props.cateId)
+        if (props.tagId) {
+            getProductsList(props.tagId)
         }
-    }, [props.cateId])
+    }, [props.tagId])
 
-    const getProductsList = async (cateId) => {
+    const getProductsList = async (tagId) => {
         try {
-            const res = await shopApis.getProductByCate(1, cateId, 4, null);
+            const res = await shopApis.getProductByTagId(tagId);
             if (res.status === 200) {
-                setProducts([...res.data.product])
+                setProducts([...res.data])
             }
         } catch (e) {
 
@@ -49,7 +49,7 @@ const ProductsHorizontalCardList = (props) => {
                                     <HorizontalProductCard
                                         img={
                                             value.image.length ? value.image[0].url : ""
-                                        }
+                                        } 
                                         productName={value.name}
                                         productPrice={value.parameters.length ? value.parameters[0].price : "0"}
                                     ></HorizontalProductCard>

@@ -584,10 +584,6 @@
   color: #64ae55;
 }
 
-.product-list-of-boxtag {
-  /* height: 470px; */
-}
-
 .product-list-of-boxtag .product-list-of-boxtag-title {
   font-size: 1.3rem;
   font-weight: bold;
@@ -634,7 +630,7 @@
 @media (max-width: 768px) {
   .product-card .product-card-img-wrapper {
     width: 100%;
-    height: 110px;   
+    height: 120px;   
   }
 
   .product-card .product-card-name {

@@ -134,7 +134,7 @@ const ProductListOfBoxTag = (props) => {
                       </div>
                     </div>
                     <div className="row m-0 p-0 col-lg-7 col-md-7 col-12">
-                      <ProductsHorizontalCardList cateId={value.category}></ProductsHorizontalCardList>
+                      <ProductsHorizontalCardList tagId={value._id}></ProductsHorizontalCardList>
 
                       <div className="see-more col-12 p-3 text-center">
                         <Link
@@ -150,9 +150,9 @@ const ProductListOfBoxTag = (props) => {
                             style={{
                               color: PRIMARY_HOME_COLOR,
                               border: `2px solid ${PRIMARY_HOME_COLOR}`,
-                              paddingLeft: "50px",
-                              paddingRight: "50px",
-                              fontSize: "0.9rem",
+                              paddingLeft: "40px",
+                              paddingRight: "40px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             Xem thêm

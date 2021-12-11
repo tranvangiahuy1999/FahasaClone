@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
 import ProductsListOfTag from './ProductsListOfTag'
-
+import MutipleItemCarousel from "./Carousel/MutipleItemCarousel";
 import { Button, makeStyles } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -26,6 +26,7 @@ const ProductDetail = () => {
   const history = useHistory();
   const classes = useStyles();
   const [productDetail, setProductDetail] = useState([]);
+  const [specialProduct, setSpecialProduct] = useState([]);  
   const [defaultPrice, setDefaultPrice] = useState(null);
   const [defaultProduct, setDefaultProduct] = useState(null);
   const [cateInfo, setCateInfo] = useState()
@@ -35,6 +36,10 @@ const ProductDetail = () => {
   const [loader, setLoader] = useState(true);
   // @ts-ignore
   const [parentId, setParentId] = useState([]);
+
+  useEffect(() => {
+    getSpecialProductData(1, 10, true)
+  }, [])
 
   useEffect(() => {
     if (params) {
@@ -69,8 +74,8 @@ const ProductDetail = () => {
                 ? productDetail.image[0].url
                 : firstParameter.image
             );
-        });
-        setProductDetail(result.data);
+        });        
+        setProductDetail(result.data);        
         getExactCateId(result.data)
       }
     } catch (err) {
@@ -79,6 +84,43 @@ const ProductDetail = () => {
     }
     setLoader(false)
   };
+
+  const getSpecialProductData = async (page, limit, isSuggested) => {
+    try {
+      const res = await shopApis.getListSpecialProduct(page, limit, true, false, isSuggested);
+      if (res.status === 200) {        
+        setSpecialProduct(formatSpecialListData(res.data));
+      }
+    } catch (e) {
+
+    }
+  }
+  
+  const formatSpecialListData = (data) => {
+    var result = [];
+    if (data.tag && data.tag.length > 0) {
+      data.tag.map((tag_item, tag_idx) => {
+        result.push(
+          {
+            name: tag_item.name,
+            _id: tag_item._id,
+            data: []
+          }
+        );
+        if (tag_item.products && tag_item.products.length > 0) {
+          tag_item.products.map((product, product_idx) => {
+            result[tag_idx].data.push({
+              _id: product._id,
+              name: product.name,
+              img: product.image[0].url,
+              price: product.parameters[0].price
+            })
+          })
+        }
+      })
+    }
+    return result;
+  }
 
   const handleSelectImage = async (imageUrl) => {
     setSelectedImage(imageUrl);
@@ -312,6 +354,7 @@ const ProductDetail = () => {
               </div>
             </section>
             <ProductInfo product={product} />
+
             <div className="product-info-container">
               {
                 cateInfo && (
@@ -319,8 +362,59 @@ const ProductDetail = () => {
                 )
               }
 
-            </div>
+              {
+                (specialProduct && specialProduct.length > 0) ?
+                <div className="mt-4">
+                  {
+                    specialProduct.map((item) => 
+                      <div key={item._id} className="product-list-of-boxtag bg-white mb-4">
+                        <div className="product-list-of-boxtag-title">{item.name}</div>
+                        <MutipleItemCarousel
+                          listData={item.data}
+                          settings={{
+                            dots: true,
+                            infinite: false,
+                            speed: 500,
+                            slidesToShow: 5,
+                            slidesToScroll: 1,
+                            initialSlide: 0,
+                            responsive: [
+                              {
+                                breakpoint: 1024,
+                                settings: {
+                                  slidesToShow: 3,
+                                  slidesToScroll: 1,
+                                  infinite: true,
+                                  dots: true
+                                }
+                              },
+                              {
+                                breakpoint: 600,
+                                settings: {
+                                  slidesToShow: 2,
+                                  slidesToScroll: 1,
+                                  initialSlide: 0
+                                }
+                              },
+                              {
+                                breakpoint: 480,
+                                settings: {
+                                  slidesToShow: 2,
+                                  slidesToScroll: 1
+                                }
+                              }
+                            ]
+                          }}
+                        />
+                      </div>
+                    )
+                  }
+            
+            
+                </div> : <></>              
+              }
 
+            </div>
 
           </div>
         ))}
