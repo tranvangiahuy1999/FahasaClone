@@ -1,33 +1,35 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 140,
-    },
-});
 
 export default function CardItemVertical(props) {
-    const classes = useStyles();
+    const { item, showDescription,className, ...other } = props;
 
     return (
-        <>
-            <a href={props.item.href} className={"" + props.className} title={props.item.img.alt} data-toggle="tooltip">
-                <div className={"card"}>
-                    <div className="card-img-wrapper"> 
-                        <div className="card-img-top" style={{ backgroundImage: "url(" + props.item.img.src + ")" }} alt={props.item.img.alt} />
+        item.href ?
+            <Link to={item.href} title={item.img.alt} className = {(className ? className : "") + " list-card-item"} data-toggle="tooltip" {...other}>
+                <div className="card">
+                    <div className="card-img-wrapper">
+                        <div className="card-img-top" style={{ backgroundImage: "url(" + item.img.src + ")" }} alt={item.img.alt} />
                     </div>
                     <div className="card-body">
-                        <h5 className="card-title">{props.item.title}</h5>
-                        {props.showDescription? <p className="card-description" dangerouslySetInnerHTML={{ __html: props.item.description }}></p> : <></>}                        
-                        <p className="card-price" > {props.item.price}</p>
+                        <h5 className="card-title">{item.title}</h5>
+                        {showDescription ? <p className="card-description" dangerouslySetInnerHTML={{ __html: props.item.description }}></p> : <></>}
+                        <p className="card-price" > {item.price}</p>
                     </div>
                 </div>
-            </a>
-        </>
+            </Link>
+            :
+            <div className="card">
+                <div className="card-img-wrapper">
+                    <div className="card-img-top" style={{ backgroundImage: "url(" + item.img.src + ")" }} alt={item.img.alt} />
+                </div>
+                <div className="card-body">
+                    <h5 className="card-title">{item.title}</h5>
+                    {showDescription ? <p className="card-description" dangerouslySetInnerHTML={{ __html: props.item.description }}></p> : <></>}
+                    <p className="card-price" > {item.price}</p>
+                </div>
+            </div>
     );
 }

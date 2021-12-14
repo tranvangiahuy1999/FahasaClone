@@ -38,7 +38,8 @@ const ProductDetail = () => {
   const [parentId, setParentId] = useState([]);
 
   useEffect(() => {
-    getSpecialProductData(1, 10, true)
+    getSpecialProductData(1, 10, true);
+    addToVisitedProductList(params.id);
   }, [])
 
   useEffect(() => {
@@ -218,7 +219,19 @@ const ProductDetail = () => {
     }
     setCateInfo(productDetail[0].cate1)
   }
-
+  const addToVisitedProductList = (id) =>{
+    const visitedProductList = localStorage.getItem("VisitedProductList");
+    var visitedProductListJson = [];
+    if(visitedProductList){
+      visitedProductListJson = JSON.parse(visitedProductList);
+      visitedProductListJson = visitedProductListJson.filter(item => item.id != id);
+      visitedProductListJson.unshift({id: id});
+      visitedProductListJson = visitedProductListJson.slice(0,10)
+    }else{
+      visitedProductListJson.push({id: id});
+    }
+    localStorage.setItem("VisitedProductList", JSON.stringify(visitedProductListJson));
+  }
   return (
     <div className="product-detail-container">
       <Backdrop className={classes.backdrop} open={loader}>

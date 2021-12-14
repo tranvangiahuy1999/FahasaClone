@@ -1241,3 +1241,9 @@ button.btn.btn-outline-success {
 .soluong.d-flex {
   margin-top: -3%;
 }
+.slick-track{
+  margin-left: 0 !important;
+}
+.slick-initialized .slick-slide{
+  padding: 5px;
+}
