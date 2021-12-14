@@ -5,23 +5,9 @@ import { convertURL, formatCurrency } from "../../../utils/format-string.util";
 import CardItemVertical from "./Card/CardItemVertical";
 import "../../../styles/style.css";
 import CategorySideBar from "./SideBar/CategorySideBar";
-import {  Switch, Route, useRouteMatch, useParams, useLocation } from "react-router-dom";
+import { Switch, Route, useRouteMatch, useParams, useLocation } from "react-router-dom";
+import { CircularProgress, Box } from "@material-ui/core";
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-function formatToItemIntro(value, beforeURL) {
-  let result = new Object();
-  result.title = value.name ? value.name : "";
-  result.description = value.description ? value.description : "";
-  result.href = value._id ? (beforeURL + convertURL(value.name) + "." + value._id) : "";
-  result.img = {
-    src: value.image[0] ? value.image[0].url : "",
-    alt: result.title
-  };
-  result.price = value.parameters[0] ? formatCurrency(value.parameters[0].price) + "đ" : "";
-  return result
-}
 const ProductList = () => {
   let match = useRouteMatch();
   return (
@@ -36,44 +22,14 @@ const ProductList = () => {
 }
 const ProductListContent = () => {
   const [categoryList, setCategoryList] = useState([]);
-  const [productList, setProductList] = useState([]);
   const [productId1, setProductId1] = useState();
   const [productId2, setProductId2] = useState();
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(16);
-  const [sortType, setSortType] = useState("price_up");
-  const [totalPage, setTotalPage] = useState(1);
   const params = useParams();
-  let query = useQuery();
-
+  
   useEffect(() => {
     getCategoryData();
-    getProductData(page,perPage,sortType);
   }, []);
 
-  const getProductData = async (page,perPage,sortType) => {
-    try {
-      const res = await shopApis.getProductByCate(page, params.id,perPage,sortType);
-      if (res.status === 200) {
-        setProductList(res.data.product);
-        setTotalPage(res.data.total_page);
-      }
-    } catch (e) {
-    }
-  };
-
-  const pageChange = (event,page) => {
-    getProductData(page,perPage,sortType);
-    setPage(page);
-  };
-  const perPageChange =(event) =>{
-    getProductData(page,event.target.value,sortType);
-    setPerPage(event.target.value);
-  }
-  const sortTypeChange =(event) =>{
-    getProductData(page,perPage,event.target.value);
-    setSortType(event.target.value);
-  }
   const getCategoryData = async () => {
     try {
       const res = await shopApis.getCategoryList();
@@ -97,7 +53,7 @@ const ProductListContent = () => {
     } catch (e) {
     }
   };
-
+  
 
   return (
     <div className='product-list mt-3'>
@@ -114,66 +70,135 @@ const ProductListContent = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-9 col-12 bg-white mb-3">
-            <div className="list-sort d-flex my-3">
-              <div className="sort-item mr-2 mr-md-5">
-                <label className="label-select">
-                  Hiển thị :
-                </label>
-                <select onChange={perPageChange} value={perPage}>
-                <option value={4}>4</option>
-                  <option value={8}>8</option>
-                  <option value={16}>16</option>
-                  <option value={32}>32</option>
-                  <option value={64}>64</option>
-                </select>
-              </div>
-              <div className="sort-item">
-                <label className="label-select">
-                  Sắp xếp :
-                </label>
-                <select onChange={sortTypeChange} value={sortType}>
-                  <option value="price_up">Giá: Thấp - Cao</option>
-                  <option value="price_down">Giá: Cao - Thấp</option>
-                </select>
-              </div>
-            </div>
-            {productList.length > 0 ?
-              <>
-                <div className="items">
-                  <div className="product-grid mx-0">
-                    {productList.map((value, index) => (
-                      <CardItemVertical
-                        className="list-card-item px-0 my-2"
-                        item={formatToItemIntro(value, "/chi-tiet/")}
-                        key={value._id}
-                        showDescription={false}></CardItemVertical>
-                    ))}
-                  </div>
-                </div>
-                <div className="pagination-bar my-3">
-                  <div className="d-flex pr-3">
-                    <nav className="mx-auto">
-                      <Pagination
-                        count={totalPage}
-                        page={page}
-                        onChange={pageChange}
-                        variant="outlined"
-                        shape="rounded"
-                      />
-                    </nav>
-                  </div>
-                </div>
-              </> :
-              <div>
-                <p className="text-secondary">Không tìm thấy sản phẩm phù hợp.</p>
-              </div>
-            }
-          </div>
+          <CustomerProductListContent  className="col-md-9 col-12 bg-white mb-3"/>
         </div>
       </div>
     </div>
   );
 };
+const CustomerProductListContent = (props) =>{
+  const {...other} = props;
+  const [productList, setProductList] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
+  const [loader, setLoader] = useState(true);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(16);
+  const [sortType, setSortType] = useState("price_up");
+  const params = useParams();
+  useEffect(()=>{
+    getProductData(page, perPage, sortType);
+  },[]);
+  const getProductData = async (page, perPage, sortType) => {
+    try {
+      const res = await shopApis.getProductByCate(page, params.id, perPage, sortType);
+      if (res.status === 200) {
+        setProductList(res.data.product);
+        setTotalPage(res.data.total_page);
+      }
+    } catch (e) {
+    }
+    setLoader(false);
+  };
+  const pageChange = (event, page) => {
+    setLoader(true);
+    getProductData(page, perPage, sortType);
+    setPage(page);
+  };
+  const perPageChange = (event) => {
+    setLoader(true);
+    getProductData(page, event.target.value, sortType);
+    setPerPage(event.target.value);
+  }
+  const sortTypeChange = (event) => {
+    setLoader(true);
+    getProductData(page, perPage, event.target.value);
+    setSortType(event.target.value);
+  }
+  const formatToItemIntro =  (value, beforeURL) =>{
+    let result = {
+      _id: value._id,
+      title: value.name ? value.name : "",
+      description: value.description ? value.description : "",
+      href: value._id ? (beforeURL + convertURL(value.name) + "." + value._id) : "",
+      img: {
+        src: value.image[0] ? value.image[0].url : "",
+        alt: value.name ? value.name : ""
+      },
+      price: value.parameters[0] ? formatCurrency(value.parameters[0].price) + "đ" : ""
+    }
+    return result;
+  }
+  return (
+    <div {...other}>
+            {
+              loader ? <Box className="d-flex justify-content-center my-3">
+                <CircularProgress color="inherit" />
+              </Box> :
+                (productList.length > 0 ?
+                  <div>
+                    <div className="list-sort d-md-flex my-3">
+                      <div className="sort-item mr-2 mr-md-5 mb-2 mb-md-0">
+                        <label className="label-select">
+                          Hiển thị :
+                        </label>
+                        <select onChange={perPageChange} value={perPage}>
+                          <option value={4}>4</option>
+                          <option value={8}>8</option>
+                          <option value={16}>16</option>
+                          <option value={32}>32</option>
+                          <option value={64}>64</option>
+                        </select>
+                      </div>
+                      <div className="sort-item">
+                        <label className="label-select">
+                          Sắp xếp :
+                        </label>
+                        <select onChange={sortTypeChange} value={sortType}>
+                          <option value="price_up">Giá: Thấp - Cao</option>
+                          <option value="price_down">Giá: Cao - Thấp</option>
+                        </select>
+                      </div>
+                    </div>
 
+                    <div className="items">
+                      <div className="product-grid mx-0">
+                        {productList.map((value, index) => (
+                          <CardItemVertical
+                            className="list-card-item px-0 my-2"
+                            item={formatToItemIntro(value, "/chi-tiet/")}
+                            key={value._id}
+                            showDescription={false}></CardItemVertical>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="pagination-bar my-3">
+                      <div className="d-flex pr-3">
+                        <nav className="mx-auto">
+                          <Pagination
+                            count={totalPage}
+                            page={page}
+                            onChange={pageChange}
+                            variant="outlined"
+                            shape="rounded"
+                          />
+                        </nav>
+                      </div>
+                    </div>
+                  </div>
+                  :
+                  <div className="my-3">
+                    <div className="no-product-img-container mt-auto mb-auto">
+                      <img className="no-product-img" alt="" src="/static/media/no-product.79c372d7.png" />
+
+                    </div>
+                    <div className="my-3">
+                      <p className="text-secondary text-center">Không tìm thấy sản phẩm nào phù hợp.</p>
+                    </div>
+                  </div>
+
+                )
+            }
+          </div>
+  )
+}
 export default ProductList;

@@ -8,7 +8,8 @@ import ProductsHaveVisitedList from "./Component/ProductsHaveVisitedList";
 import MutipleItemCarousel from "./Component/Carousel/MutipleItemCarousel";
 import Header from "./Component/Header";
 import shopApis from '../../apis/ShopApis';
-
+import VisitedCarousel from "./Component/Carousel/VisistedCarousel";
+import { formatCurrency, convertURL } from "../../utils/format-string.util";
 const HomePage = () => {
   const classes = useStyles();
   const [boxtagData, setBoxtagData] = useState([]);
@@ -45,7 +46,7 @@ const HomePage = () => {
         )) :
           <></>
       }
-      <ProductsHaveVisitedList></ProductsHaveVisitedList>
+      <VisitedCarousel />
     </div>
   );
 };
@@ -61,12 +62,13 @@ const CarouselSpecialMutipleProduct = (props) => {
       const res = await shopApis.getListSpecialProduct(page, limit, home_page, true, false);
       if (res.status === 200) {
         setSpecialProduct(formatSpecialListData(res.data));
+        console.log("special: ", specialProduct);
       }
     } catch (e) {
 
     }
   }
-  
+
   const formatSpecialListData = (data) => {
     var result = [];
     if (data.tag && data.tag.length > 0) {
@@ -82,10 +84,15 @@ const CarouselSpecialMutipleProduct = (props) => {
           tag_item.products.map((product, product_idx) => {
             result[tag_idx].data.push({
               _id: product._id,
-              name: product.name,
-              img: product.image[0].url,
-              price: product.parameters[0].price
-            })
+              title: product.name ? product.name : "",
+              description: product.description ? product.description : "",
+              href: product._id ? ("/chi-tiet/" + convertURL(product.name) + "." + product._id) : "",
+              img: {
+              src: product.image[0] ? product.image[0].url : "",
+              alt: product.name ? product.name : ""
+            },
+              price: product.parameters[0] ? formatCurrency(product.parameters[0].price) + "đ" : ""
+            });
           })
         }
       })
@@ -96,41 +103,47 @@ const CarouselSpecialMutipleProduct = (props) => {
   return ((specialProduct && specialProduct.length > 0) ?
     <div>
       {
-        specialProduct.map((item) => 
-          <div key={item._id} className="product-list-of-boxtag bg-white mb-4">
+        specialProduct.map((item) =>
+          <div key={item._id} className="product-list-of-boxtag bg-white mb-4 row mx-0 pb-3">
             <div className="product-list-of-boxtag-title">{item.name}</div>
+            
             <MutipleItemCarousel
               listData={item.data}
               settings={{
-                dots: true,
+                dots: false,
                 infinite: false,
                 speed: 500,
                 slidesToShow: 5,
-                slidesToScroll: 1,
                 initialSlide: 0,
                 responsive: [
                   {
                     breakpoint: 1024,
                     settings: {
+                      dots: false,
+                      infinite: false,
+                      speed: 500,
                       slidesToShow: 3,
-                      slidesToScroll: 1,
-                      infinite: true,
-                      dots: true
+                      initialSlide: 0
                     }
                   },
                   {
                     breakpoint: 600,
                     settings: {
+                      dots: false,
+                      infinite: false,
+                      speed: 500,
                       slidesToShow: 2,
-                      slidesToScroll: 1,
                       initialSlide: 0
                     }
                   },
                   {
                     breakpoint: 480,
                     settings: {
+                      dots: false,
+                      infinite: false,
+                      speed: 500,
                       slidesToShow: 2,
-                      slidesToScroll: 1
+                      initialSlide: 0
                     }
                   }
                 ]
