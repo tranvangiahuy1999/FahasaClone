@@ -3,12 +3,12 @@ import ProductCard from "./ProductCard";
 import { Button } from "@material-ui/core";
 import shopApis from '../../../apis/ShopApis';
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
-import Controller from "../../../utils/Controller";
 import { Link } from "react-router-dom";
 import NoProductImg from '../../../assets/image/no-product.png'
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MutipleItemCarousel from "./Carousel/MutipleItemCarousel";
+import { formatCurrency, convertURL } from "../../../utils/format-string.util";
 
 const ProductsCardList = (props) => {
     const classes = useStyles();
@@ -31,7 +31,7 @@ const ProductsCardList = (props) => {
 
         }
         setOnLoad(false)
-    }
+    }    
 
     const formatSpecialListData = (data) => {
         var result = [];
@@ -40,10 +40,15 @@ const ProductsCardList = (props) => {
                 result.push(
                     {
                         _id: item._id,
-                        name: item.name,
-                        img: item.image[0].url,
-                        price: item.parameters[0].price,
-                    }
+                        title: item.name ? item.name : "",
+                        description: item.description ? item.description : "",
+                        href: item._id ? ("/chi-tiet/" + convertURL(item.name) + "." + item._id) : "",
+                        img: {
+                        src: item.image[0] ? item.image[0].url : "",
+                        alt: item.name ? item.name : ""
+                      },
+                        price: item.parameters[0] ? formatCurrency(item.parameters[0].price) + "đ" : ""
+                      }
                 );
             })
         }        
@@ -102,7 +107,7 @@ const ProductsCardList = (props) => {
                 <Link
                     to={props.cateData ?
                         "/danh-sach/" +
-                        Controller.formatURL(props.cateData.name) +
+                        convertURL(props.cateData.name) +
                         "." +
                         props.cateData.category : ""
                     }

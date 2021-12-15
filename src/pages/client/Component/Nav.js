@@ -13,8 +13,8 @@ import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItemText from "@material-ui/core/ListItemText";
 import Badge from '@material-ui/core/Badge';
-
-import Controller from "../../../utils/Controller";
+import logoImg from '../../../assets/image/logo-img.png'
+import { convertURL } from "../../../utils/format-string.util";
 
 const Nav = () => {
   const classes = useStyles();
@@ -61,7 +61,7 @@ const Nav = () => {
             <Link
               className="drawner-link-color"
               to={
-                "/danh-sach/" + Controller.formatURL(ele.name) + "." + ele._id
+                "/danh-sach/" + convertURL(ele.name) + "." + ele._id
               }
               key={index}
             >
@@ -93,7 +93,7 @@ const Nav = () => {
               <Link to="/">
                 <img
                   className="nav-logo"
-                  src="https://res.cloudinary.com/hanh/image/upload/v1634066828/products/cge2hp4d7bctkrtw1rdj.png"
+                  src={logoImg}
                   alt=""
                 />
               </Link>
@@ -160,7 +160,7 @@ const Nav = () => {
               <BsListNested size={28} color="white"></BsListNested>
             </IconButton>
           </div>
-          <div className="col-8">
+          <form className="col-8" onSubmit={onSubmit}>
             <input
               type="text"
               className="form-control mobile-nav-search-input"
@@ -168,7 +168,7 @@ const Nav = () => {
               value={valueProduct}
               placeholder="Nhập sách cần tìm kiếm..."
             ></input>
-          </div>
+          </form>
           <div className="col-2 right-wrapper">
             <Link to="/gio-hang">
               <IconButton color="secondary">

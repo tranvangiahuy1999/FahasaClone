@@ -5,7 +5,7 @@ import { FcNext, FcPrevious } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { setcategorydata } from "../../../reducers/UserReducer";
 import { Link } from "react-router-dom";
-import Controller from "../../../utils/Controller";
+import { convertURL } from "../../../utils/format-string.util";
 
 const imageArray = [
   "images/banner-sach-moi.jpg",
@@ -56,7 +56,7 @@ const Header = () => {
                             className="category-item-title one-line-text"
                             to={
                               "/danh-sach/" +
-                              Controller.formatURL(value.name) +
+                              convertURL(value.name) +
                               "." +
                               value._id
                             }
@@ -75,7 +75,7 @@ const Header = () => {
                                         <Link
                                           to={
                                             "/danh-sach/" +
-                                            Controller.formatURL(value.name) +
+                                            convertURL(value.name) +
                                             "." +
                                             value._id
                                           }
@@ -96,7 +96,7 @@ const Header = () => {
                                                   className="subcate-item-2 one-line-text"
                                                   to={
                                                     "/danh-sach/" +
-                                                    Controller.formatURL(
+                                                    convertURL(
                                                       value.name
                                                     ) +
                                                     "." +

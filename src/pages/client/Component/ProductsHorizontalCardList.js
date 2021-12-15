@@ -76,10 +76,8 @@ const ProductsHorizontalCardList = (props) => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
-        '& > * + *': {
-            marginLeft: theme.spacing(2),
-        },
+        display: 'flex',        
+        height: '266px',
     },
 }));
 

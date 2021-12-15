@@ -8,7 +8,7 @@ import ProductsHorizontalCardList from "./ProductsHorizontalCardList";
 import ProductsCardList from "./ProductsCardList"
 import Box from "@material-ui/core/Box";
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
-import Controller from "../../../utils/Controller";
+import { convertURL } from "../../../utils/format-string.util";
 import { Link } from "react-router-dom";
 
 function TabPanel(props) {
@@ -140,7 +140,7 @@ const ProductListOfBoxTag = (props) => {
                         <Link
                           to={
                             "/danh-sach/" +
-                            Controller.formatURL(value.name) +
+                            convertURL(value.name) +
                             "." +
                             value.category
                           }
