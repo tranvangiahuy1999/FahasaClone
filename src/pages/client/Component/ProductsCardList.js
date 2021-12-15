@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
 import { Button } from "@material-ui/core";
 import shopApis from '../../../apis/ShopApis';
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
@@ -12,26 +11,26 @@ import { formatCurrency, convertURL } from "../../../utils/format-string.util";
 
 const ProductsCardList = (props) => {
     const classes = useStyles();
-    const [products, setProducts] = useState([])    
+    const [products, setProducts] = useState([])
     const [onLoad, setOnLoad] = useState(true);
 
     useEffect(() => {
         if (props.tagId) {
-            getProductsList(props.tagId)            
+            getProductsList(props.tagId)
         }
     }, [props.tagId])
 
     const getProductsList = async (tagId) => {
         try {
             const res = await shopApis.getProductByTagId(tagId);
-            if (res.status === 200) {                
-                setProducts(formatSpecialListData(res.data))                
+            if (res.status === 200) {
+                setProducts(formatSpecialListData(res.data))
             }
         } catch (e) {
 
         }
         setOnLoad(false)
-    }    
+    }
 
     const formatSpecialListData = (data) => {
         var result = [];
@@ -44,14 +43,14 @@ const ProductsCardList = (props) => {
                         description: item.description ? item.description : "",
                         href: item._id ? ("/chi-tiet/" + convertURL(item.name) + "." + item._id) : "",
                         img: {
-                        src: item.image[0] ? item.image[0].url : "",
-                        alt: item.name ? item.name : ""
-                      },
+                            src: item.image[0] ? item.image[0].url : "",
+                            alt: item.name ? item.name : ""
+                        },
                         price: item.parameters[0] ? formatCurrency(item.parameters[0].price) + "đ" : ""
-                      }
+                    }
                 );
             })
-        }        
+        }
         return result;
     }
 
@@ -63,35 +62,40 @@ const ProductsCardList = (props) => {
                         <MutipleItemCarousel
                             listData={products}
                             settings={{
-                                dots: true,
+                                dots: false,
                                 infinite: false,
                                 speed: 500,
                                 slidesToShow: 5,
-                                slidesToScroll: 1,
                                 initialSlide: 0,
                                 responsive: [
                                     {
                                         breakpoint: 1024,
                                         settings: {
+                                            dots: false,
+                                            infinite: false,
+                                            speed: 500,
                                             slidesToShow: 3,
-                                            slidesToScroll: 1,
-                                            infinite: true,
-                                            dots: true
+                                            initialSlide: 0
                                         }
                                     },
                                     {
                                         breakpoint: 600,
                                         settings: {
+                                            dots: false,
+                                            infinite: false,
+                                            speed: 500,
                                             slidesToShow: 2,
-                                            slidesToScroll: 1,
                                             initialSlide: 0
                                         }
                                     },
                                     {
                                         breakpoint: 480,
                                         settings: {
+                                            dots: false,
+                                            infinite: false,
+                                            speed: 500,
                                             slidesToShow: 2,
-                                            slidesToScroll: 1
+                                            initialSlide: 0
                                         }
                                     }
                                 ]

@@ -1,35 +1,61 @@
-import { useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import shopApis from "../../../apis/ShopApis";
 import clsx from "clsx";
-
+import "../../../styles/style.css";
 import { BsListNested } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-import List from "@material-ui/core/List";
 import Drawer from "@material-ui/core/Drawer";
-import ListItem from "@material-ui/core/ListItem";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
-import ListItemText from "@material-ui/core/ListItemText";
 import Badge from '@material-ui/core/Badge';
 import logoImg from '../../../assets/image/logo-img.png'
-import { convertURL } from "../../../utils/format-string.util";
+import CategorySideBar from "./SideBar/CategorySideBar";
 
 const Nav = () => {
   const classes = useStyles();
   const history = useHistory();
-  const categoryData = useSelector((state) => state.shop.categoryData);
-  const [cateList, setCateList] = useState([]);
+  const params = useParams();
+  const [categoryList, setCategoryList] = useState([]);
+  const [productId1, setProductId1] = useState();
+  const [productId2, setProductId2] = useState();
   const [valueProduct, setValueProduct] = useState();
   const [drawnerState, setDrawnerState] = useState(false);
   const [numItem, setNumItem] = useState(0);
+
   useEffect(() => {
-    setCateList([...categoryData]);
-  }, [categoryData]);
+    getCategoryData()
+  }, []);
+
   useEffect(() => {
     setNumItem(getNumItem());
   });
+
+  const getCategoryData = async () => {
+    try {
+      const res = await shopApis.getCategoryList();
+      if (res.status === 200) {
+        res.data.map((value, index) => {
+          value.subCate.map((value1, index) => {
+            if (value1._id === params.id) {
+              setProductId1(value1.parent_cate);
+            } else if (value1.subCate && value1.subCate.length > 0) {
+              value1.subCate.map(value2 => {
+                if (value2._id === params.id) {
+                  setProductId1(value1.parent_cate);
+                  setProductId2(value2.parent_cate);
+                }
+              })
+            }
+          });
+        });
+        setCategoryList(res.data);
+      }
+    } catch (e) {
+    }
+  };
+
   const getNumItem = () => {
     const temp = JSON.parse(localStorage.getItem("Cart"));
     if (temp)
@@ -37,6 +63,7 @@ const Nav = () => {
     else
       return 0;
   }
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (!valueProduct) return;
@@ -51,29 +78,9 @@ const Nav = () => {
     <div
       className={clsx(classes.list)}
       role="presentation"
-      onClick={() => toggleDrawer(false)}
-      onKeyDown={() => toggleDrawer(false)}
     >
       <h5 className="pl-3">Danh mục</h5>
-      <List>
-        {cateList.length ? (
-          cateList.map((ele, index) => (
-            <Link
-              className="drawner-link-color"
-              to={
-                "/danh-sach/" + convertURL(ele.name) + "." + ele._id
-              }
-              key={index}
-            >
-              <ListItem button >
-                <ListItemText primary={ele.name} />
-              </ListItem>
-            </Link>
-          ))
-        ) : (
-          <div className="empty-data-text">Hiện tại chưa có danh mục</div>
-        )}
-      </List>
+      <CategorySideBar listdata={categoryList} parentidlevel1={productId1} parentidlevel2={productId2} currentId={params.id} />
     </div>
   );
 
@@ -153,7 +160,7 @@ const Nav = () => {
         </div>
       </div>
       <div className="mobile-nav-container d-md-none">
-      <Link to="/"><div className="mobile-nav-title">Nhà Sách Kiên Giang</div></Link>
+        <Link to="/"><div className="mobile-nav-title">Nhà Sách Kiên Giang</div></Link>
         <div className="row m-0 p-0">
           <div className="col-2">
             <IconButton color="primary" onClick={() => toggleDrawer(true)}>
@@ -188,7 +195,7 @@ const Nav = () => {
 const useStyles = makeStyles({
   list: {
     width: 250,
-    paddingTop: 20,
+    paddingTop: 20,    
   },
 });
 

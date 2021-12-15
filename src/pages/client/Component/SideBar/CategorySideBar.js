@@ -116,7 +116,7 @@ export default function CategorySideBar(props) {
         <nav className={classes.lists} aria-label="mailbox folders">
           {props.listdata.length > 0 ?
             <List>
-              {(props.listdata).map((level1, index) => (
+              {(props.listdata).map((level1) => (
                   (level1.subCate && level1.subCate.length > 0) ?
                     <ItemLevel1 key={level1._id} parentidlevel1={parentidlevel1}  parentidlevel2={parentidlevel2} currentId={currentId} level1={level1} /> :
                     <ListItemLink key={level1._id} primary={level1.name} className={level1._id === currentId ? "active" : ""}  to={"/danh-sach/" + convertURL(level1.name) + "." + level1._id} />

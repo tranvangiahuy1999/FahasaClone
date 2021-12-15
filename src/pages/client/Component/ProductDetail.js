@@ -390,7 +390,7 @@ const ProductDetail = () => {
                         <MutipleItemCarousel
                           listData={item.data}
                           settings={{
-                            dots: true,
+                            dots: false,
                             infinite: false,
                             speed: 500,
                             slidesToShow: 5,
@@ -402,8 +402,8 @@ const ProductDetail = () => {
                                 settings: {
                                   slidesToShow: 3,
                                   slidesToScroll: 1,
-                                  infinite: true,
-                                  dots: true
+                                  infinite: false,
+                                  dots: false
                                 }
                               },
                               {

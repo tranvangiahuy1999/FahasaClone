@@ -38,9 +38,9 @@ const ProductsListOfTag = (props) => {
             description: item.description ? item.description : "",
             href: item._id ? ("/chi-tiet/" + convertURL(item.name) + "." + item._id) : "",
             img: {
-            src: item.image[0] ? item.image[0].url : "",
-            alt: item.name ? item.name : ""
-          },
+              src: item.image[0] ? item.image[0].url : "",
+              alt: item.name ? item.name : ""
+            },
             price: item.parameters[0] ? formatCurrency(item.parameters[0].price) + "đ" : ""
           }
         );
@@ -58,35 +58,40 @@ const ProductsListOfTag = (props) => {
             <MutipleItemCarousel
               listData={productList}
               settings={{
-                dots: true,
+                dots: false,
                 infinite: false,
                 speed: 500,
                 slidesToShow: 5,
-                slidesToScroll: 1,
                 initialSlide: 0,
                 responsive: [
                   {
                     breakpoint: 1024,
                     settings: {
+                      dots: false,
+                      infinite: false,
+                      speed: 500,
                       slidesToShow: 3,
-                      slidesToScroll: 1,
-                      infinite: true,
-                      dots: true
+                      initialSlide: 0
                     }
                   },
                   {
                     breakpoint: 600,
                     settings: {
+                      dots: false,
+                      infinite: false,
+                      speed: 500,
                       slidesToShow: 2,
-                      slidesToScroll: 1,
                       initialSlide: 0
                     }
                   },
                   {
                     breakpoint: 480,
                     settings: {
+                      dots: false,
+                      infinite: false,
+                      speed: 500,
                       slidesToShow: 2,
-                      slidesToScroll: 1
+                      initialSlide: 0
                     }
                   }
                 ]
