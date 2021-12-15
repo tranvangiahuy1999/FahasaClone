@@ -153,7 +153,7 @@ const Nav = () => {
         </div>
       </div>
       <div className="mobile-nav-container d-md-none">
-        <div className="mobile-nav-title">Nhà Sách Kiên Giang</div>
+      <Link to="/"><div className="mobile-nav-title">Nhà Sách Kiên Giang</div></Link>
         <div className="row m-0 p-0">
           <div className="col-2">
             <IconButton color="primary" onClick={() => toggleDrawer(true)}>
