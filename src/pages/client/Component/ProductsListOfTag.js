@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
 import shopApis from "../../../apis/ShopApis";
 import { Button } from "@material-ui/core";
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
-import Controller from "../../../utils/Controller";
 import NoProductImg from '../../../assets/image/no-product.png'
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { formatCurrency, convertURL } from "../../../utils/format-string.util";
 import MutipleItemCarousel from "./Carousel/MutipleItemCarousel";
 
 const ProductsListOfTag = (props) => {
@@ -21,7 +20,7 @@ const ProductsListOfTag = (props) => {
     try {
       const res = await shopApis.getProductByCate(1, cateId, 10, "")
       if (res.status === 200) {
-        setProductList(formatSpecialListData(res.data.product))          
+        setProductList(formatSpecialListData(res.data.product))
       }
     } catch (e) {
 
@@ -35,13 +34,18 @@ const ProductsListOfTag = (props) => {
         result.push(
           {
             _id: item._id,
-            name: item.name,
-            img: item.image[0].url,
-            price: item.parameters[0].price,
+            title: item.name ? item.name : "",
+            description: item.description ? item.description : "",
+            href: item._id ? ("/chi-tiet/" + convertURL(item.name) + "." + item._id) : "",
+            img: {
+            src: item.image[0] ? item.image[0].url : "",
+            alt: item.name ? item.name : ""
+          },
+            price: item.parameters[0] ? formatCurrency(item.parameters[0].price) + "đ" : ""
           }
-        );  
+        );
       })
-    }    
+    }
     return result;
   }
 
@@ -100,7 +104,7 @@ const ProductsListOfTag = (props) => {
         <Link
           to={
             "/danh-sach/" +
-            Controller.formatURL(props.cateInfo.name) +
+            convertURL(props.cateInfo.name) +
             "." +
             props.cateInfo._id
           }

@@ -18,7 +18,7 @@ import MarketingBox from "./ProductDetail/MarketingBox";
 
 import shopApis from "../../../apis/ShopApis";
 import alert from "../../../utils/Alert";
-import { formatCurrency } from "../../../utils/format-string.util";
+import { formatCurrency, convertURL } from "../../../utils/format-string.util";
 import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 
 const ProductDetail = () => {
@@ -112,9 +112,14 @@ const ProductDetail = () => {
           tag_item.products.map((product, product_idx) => {
             result[tag_idx].data.push({
               _id: product._id,
-              name: product.name,
-              img: product.image[0].url,
-              price: product.parameters[0].price
+              title: product.name ? product.name : "",
+              description: product.description ? product.description : "",
+              href: product._id ? ("/chi-tiet/" + convertURL(product.name) + "." + product._id) : "",
+              img: {
+              src: product.image[0] ? product.image[0].url : "",
+              alt: product.name ? product.name : ""
+            },
+              price: product.parameters[0] ? formatCurrency(product.parameters[0].price) + "đ" : ""
             })
           })
         }

@@ -70,7 +70,7 @@ const ProductListContent = () => {
               </div>
             </div>
           </div>
-          <CustomerProductListContent  className="col-md-9 col-12 bg-white mb-3"/>
+          <CustomerProductListContent  className="product-content col-md-9 col-12 bg-white mb-3"/>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import Header from "./Component/Header";
 import shopApis from '../../apis/ShopApis';
 import VisitedCarousel from "./Component/Carousel/VisistedCarousel";
 import { formatCurrency, convertURL } from "../../utils/format-string.util";
+
 const HomePage = () => {
   const classes = useStyles();
   const [boxtagData, setBoxtagData] = useState([]);
@@ -61,8 +62,7 @@ const CarouselSpecialMutipleProduct = (props) => {
     try {
       const res = await shopApis.getListSpecialProduct(page, limit, home_page, true, false);
       if (res.status === 200) {
-        setSpecialProduct(formatSpecialListData(res.data));
-        console.log("special: ", specialProduct);
+        setSpecialProduct(formatSpecialListData(res.data));        
       }
     } catch (e) {
 
