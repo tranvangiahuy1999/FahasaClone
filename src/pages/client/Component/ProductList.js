@@ -76,6 +76,7 @@ const ProductListContent = () => {
     </div>
   );
 };
+
 const CustomerProductListContent = (props) =>{
   const {...other} = props;
   const [productList, setProductList] = useState([]);
@@ -85,12 +86,16 @@ const CustomerProductListContent = (props) =>{
   const [perPage, setPerPage] = useState(16);
   const [sortType, setSortType] = useState("price_up");
   const params = useParams();
+
   useEffect(()=>{
     getProductData(page, perPage, sortType);
-  },[]);
+  },[params]);
+
   const getProductData = async (page, perPage, sortType) => {
     try {
+      setLoader(true);
       const res = await shopApis.getProductByCate(page, params.id, perPage, sortType);
+      console.log(res)
       if (res.status === 200) {
         setProductList(res.data.product);
         setTotalPage(res.data.total_page);
@@ -99,18 +104,15 @@ const CustomerProductListContent = (props) =>{
     }
     setLoader(false);
   };
-  const pageChange = (event, page) => {
-    setLoader(true);
+  const pageChange = (event, page) => {    
     getProductData(page, perPage, sortType);
     setPage(page);
   };
   const perPageChange = (event) => {
-    setLoader(true);
     getProductData(page, event.target.value, sortType);
     setPerPage(event.target.value);
   }
   const sortTypeChange = (event) => {
-    setLoader(true);
     getProductData(page, perPage, event.target.value);
     setSortType(event.target.value);
   }

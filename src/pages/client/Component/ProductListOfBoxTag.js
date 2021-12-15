@@ -111,11 +111,12 @@ const ProductListOfBoxTag = (props) => {
   return (
     <div className="product-list-of-boxtag bg-white mt-4 mb-4">
       <div className="product-list-of-boxtag-title">{boxtagData ? boxtagData.name : ""}</div>
-      <AntTabs value={tabValue} onChange={handleChange} aria-label="ant example">
+      <AntTabs variant="scrollable"
+        scrollButtons="auto" value={tabValue} onChange={handleChange} aria-label="ant example">
         {
-          boxtagData ? boxtagData.tags.length && boxtagData.tags.map((value, index) => (
+          boxtagData && boxtagData.tags.length && boxtagData.tags.map((value, index) => (
             <AntTab key={value._id} label={fieldValidator(value.name)} {...a11yProps(index)} />
-          )) : <></>
+          ))
         }
       </AntTabs>
       {
@@ -125,7 +126,7 @@ const ProductListOfBoxTag = (props) => {
               {
                 boxtagData.image.url ? (
                   <div className="row">
-                    <div className="col-5 d-none d-md-block">
+                    <div className="col-lg-5 col-md-5 col-12">
                       <div className="product-list-of-boxtag-img-wrapper">
                         <img
                           alt=""
@@ -133,7 +134,7 @@ const ProductListOfBoxTag = (props) => {
                         ></img>
                       </div>
                     </div>
-                    <div className="row col-lg-7 col-md-7 col-12">
+                    <div className="row m-0 col-lg-7 col-md-7 col-12">
                       <ProductsHorizontalCardList tagId={value._id}></ProductsHorizontalCardList>
 
                       <div className="see-more col-12 p-3 text-center">
@@ -144,7 +145,7 @@ const ProductListOfBoxTag = (props) => {
                             "." +
                             value.category
                           }
-                        >                          
+                        >
                           <Button
                             variant="outlined"
                             style={{

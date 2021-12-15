@@ -31,6 +31,7 @@ function Item(props) {
     return (
         <div className="item">
             <Link
+                className='rrd-custom-link'
                 to={
                     "/chi-tiet/" +
                     convertURL(props.item.name) +

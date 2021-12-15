@@ -33,15 +33,14 @@ const ProductListContent = () => {
             if (res.status === 200) {
                 res.data.map((value, index) => {
                     value.subCate.map((value1, index) => {
-                        if (value1._id === params.id) {
-                            setProductId1(value1.parent_cate);
-                        } else if (value1.subCate && value1.subCate.length > 0) {
+                        if (value1.subCate && value1.subCate.length > 0) {
                             value1.subCate.map(value2 => {
-                                if (value2._id === params.id) {
-                                    setProductId1(value1.parent_cate);
-                                    setProductId2(value2.parent_cate);
-                                }
+                                setProductId1(value1.parent_cate);
+                                setProductId2(value2.parent_cate);
+
                             })
+                        } else {
+                            setProductId1(value1.parent_cate);
                         }
                     });
                 });
@@ -63,7 +62,7 @@ const ProductListContent = () => {
                                 <p>Tất Cả Sản Phẩm</p>
                             </div>
                             <div className="category-list">
-                                <CategorySideBar listdata={categoryList} parentidlevel1={productId1} parentidlevel2={productId2} currentId={params.id} />
+                                <CategorySideBar listdata={categoryList} parentidlevel1={productId1} parentidlevel2={productId2} currentId={""} />
                             </div>
                         </div>
                     </div>
