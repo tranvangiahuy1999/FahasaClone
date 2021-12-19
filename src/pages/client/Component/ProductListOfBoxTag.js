@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import ProductsHorizontalCardList from "./ProductsHorizontalCardList";
 import ProductsCardList from "./ProductsCardList"
 import Box from "@material-ui/core/Box";
@@ -37,55 +34,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
-  };
-}
-
-const AntTabs = withStyles({
-  root: {
-    borderBottom: `1px solid lightgray`,
-  },
-  indicator: {
-    backgroundColor: PRIMARY_HOME_COLOR,
-  },
-})(Tabs);
-
-const AntTab = withStyles((theme) => ({
-  root: {
-    textTransform: "none",
-    minWidth: 72,
-    fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(4),
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-    "&:hover": {
-      color: PRIMARY_HOME_COLOR,
-      opacity: 1,
-    },
-    "&$selected": {
-      color: PRIMARY_HOME_COLOR,
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    "&:focus": {
-      color: PRIMARY_HOME_COLOR,
-    },
-  },
-  selected: {},
-}))((props) => <Tab disableRipple {...props} />);
-
 const ProductListOfBoxTag = (props) => {
   const [boxtagData, setBoxtagData] = useState();
   const [tabValue, setTabValue] = useState(0);
@@ -96,7 +44,7 @@ const ProductListOfBoxTag = (props) => {
     }
   }, [props.boxtagData])
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setTabValue(newValue);
   };
 
@@ -111,14 +59,17 @@ const ProductListOfBoxTag = (props) => {
   return (
     <div className="product-list-of-boxtag bg-white mt-4 mb-4">
       <div className="product-list-of-boxtag-title">{boxtagData ? boxtagData.name : ""}</div>
-      <AntTabs variant="scrollable"
-        scrollButtons="auto" value={tabValue} onChange={handleChange} aria-label="ant example">
-        {
+      <div className="boxtag-tabs">
+      <ul>
+      {
           boxtagData && boxtagData.tags.length && boxtagData.tags.map((value, index) => (
-            <AntTab key={value._id} label={fieldValidator(value.name)} {...a11yProps(index)} />
+            <li key={value._id} onClick={() => handleChange(index)}>
+              <span className={tabValue === index ? "active" : ""}>{value.name}</span>
+            </li>            
           ))
-        }
-      </AntTabs>
+        }      
+      </ul>
+      </div>      
       {
         boxtagData ? boxtagData.tags.length && boxtagData.tags.map((value, index) => (
           <TabPanel key={value._id} value={tabValue} index={index}>
