@@ -1,27 +1,39 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import shopApis from '../../../apis/ShopApis';
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import NoProductImg from '../../../assets/image/no-product.png'
-import MultipleRowsItemCarousel from './Carousel/MultipleRowsItemCarousel'
+import MultipleRowsItemCarousel from './Carousel/MultipleRowsItemCarousel';
+import { setBoxtagData } from '../../../reducers/BoxtagReducer'
+import { formatCurrency, convertURL } from "../../../utils/format-string.util";
 
 const ProductsHorizontalCardList = (props) => {
     const classes = useStyles();
-    const [products, setProducts] = useState([])
+    const boxtagData = useSelector((state) => state.boxtag.boxtagData)
+    const dispatch = useDispatch()
+    const [products, setProducts] = useState()
     const [onLoad, setOnLoad] = useState(true);
 
     useEffect(() => {
-        if (props.tagId) {
-            getProductsList(props.tagId)
+        for (const item of boxtagData) {
+            if (item.tagId === props.tagId) {                
+                setProducts(item)
+                setOnLoad(false)
+                return
+            }
         }
+        getProductsList(props.tagId)
     }, [props.tagId])
 
     const getProductsList = async (tagId) => {
         try {
             const res = await shopApis.getProductByTagId(tagId);
             if (res.status === 200) {
-                setProducts(formatSpecialListData(res.data))
+                const formatedProductsData = formatSpecialListData(res.data)                                
+                setProducts(formatedProductsData)
+                dispatch(setBoxtagData(formatedProductsData))
             }
         } catch (e) {
 
@@ -30,31 +42,39 @@ const ProductsHorizontalCardList = (props) => {
     }
 
     const formatSpecialListData = (data) => {
-        var result = [];
+        var result = {
+            tagId: props.tagId,
+            products: []
+        };
         if (data.length) {
             data.map((item) => {
-                result.push(
+                result.products.push(
                     {
                         _id: item._id,
-                        name: item.name,
-                        img: item.image[0].url,
-                        price: item.parameters[0].price,
+                        title: item.name ? item.name : "",
+                        description: item.description ? item.description : "",
+                        href: item._id ? ("/chi-tiet/" + convertURL(item.name) + "." + item._id) : "",
+                        img: {
+                            src: item.image[0] ? item.image[0].url : "",
+                            alt: item.name ? item.name : ""
+                        },
+                        price: item.parameters[0] ? formatCurrency(item.parameters[0].price) + "đ" : ""
                     }
                 );
             })
-        }        
+        }
         return result;
-    }    
+    }
 
     return (
         <div className="bg-white">
             <div className="product-cart-list-section">
                 {
                     onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) :
-                        products.length ? (
+                        products.products.length ? (
                             <MultipleRowsItemCarousel
-                                listData={products}
-                                settings={{                                    
+                                listData={products.products}
+                                settings={{
                                     centerMode: false,
                                     infinite: false,
                                     centerPadding: "0px",
@@ -62,7 +82,7 @@ const ProductsHorizontalCardList = (props) => {
                                     speed: 500,
                                     rows: 1,
                                     slidesPerRow: 2
-                                  }}>                                
+                                }}>
                             </MultipleRowsItemCarousel>
                         )
                             : <div className='text-center no-product-img-container mt-auto mb-auto'>
@@ -76,7 +96,7 @@ const ProductsHorizontalCardList = (props) => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',        
+        display: 'flex',
         height: '266px',
     },
 }));

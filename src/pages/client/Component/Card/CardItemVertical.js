@@ -16,7 +16,7 @@ export default function CardItemVertical(props) {
                     <div className="card-body">
                         <h5 className="card-title">{item.title}</h5>
                         {showDescription ? <p className="card-description" dangerouslySetInnerHTML={{ __html: props.item.description }}></p> : <></>}
-                        <p className="card-price" > {item.price}</p>
+                        <p className="card-price" >{item.price}</p>
                     </div>
                 </div>
             </Link>

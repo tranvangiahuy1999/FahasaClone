@@ -2,8 +2,12 @@
    width: 95%;
    max-width: 1100px;
    margin: auto;
-   padding-top: 16px;
-   padding-bottom: 16px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+.product-detail-item-container {
+   padding-bottom: 10px;
 }
 
 .product-info-wrapper {
@@ -108,14 +112,14 @@ hr {
 @media (max-width: 1024px) {
    .product-info-container {
       width: 100%;
-      padding: 30px var(--tablet-padding-width-percent) 10px var(--tablet-padding-width-percent);
+      padding: 10px var(--tablet-padding-width-percent) 10px var(--tablet-padding-width-percent);
    }
 }
 
 /* IPHONE 6/7/8 PLUS */
 @media (max-width: 414px) {
    .product-info-container {
-      padding: 10px var(--tablet-padding-width-percent) 0px var(--tablet-padding-width-percent);
+      padding: 10px var(--tablet-padding-width-percent) 10px var(--tablet-padding-width-percent);
    }
 
    .product-info-header {

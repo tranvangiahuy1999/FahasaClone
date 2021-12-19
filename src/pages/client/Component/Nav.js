@@ -2,9 +2,9 @@ import { useHistory, Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import shopApis from "../../../apis/ShopApis";
 import clsx from "clsx";
-import "../../../styles/style.css";
 import { BsListNested } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import "../../../styles/style.css";
 
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
@@ -80,7 +80,15 @@ const Nav = () => {
       role="presentation"
     >
       <h5 className="pl-3">Danh mục</h5>
-      <CategorySideBar listdata={categoryList} parentidlevel1={productId1} parentidlevel2={productId2} currentId={params.id} />
+      <div className="bg-white py-3 mb-3 px-0 category-list-wrapper" >
+        <div className="px-3">
+          <h6 className="font-weight-bold"> Nhóm Sản Phẩm </h6>
+          <p>Tất Cả Sản Phẩm</p>
+        </div>
+        <div className="category-list">
+          <CategorySideBar listdata={categoryList} parentidlevel1={productId1} parentidlevel2={productId2} currentId={params.id} />
+        </div>
+      </div>
     </div>
   );
 
@@ -94,7 +102,7 @@ const Nav = () => {
         {list()}
       </Drawer>
       <div className="nav-container d-none d-md-block">
-        <div className="row m-0 p-0">
+        <div className="row">
           <div className="col-1">
             <div className="nav-logo-wrapper">
               <Link to="/">
@@ -106,8 +114,8 @@ const Nav = () => {
               </Link>
             </div>
           </div>
-          <div className="nav-brand-wrapper col-3 pr-2">
-            <div className="nav-brand-top-text mt-1">Nhà Sách</div>
+          <div className="nav-brand-wrapper col-3">
+            <div className="nav-brand-top-text">Nhà Sách</div>
             <div className="nav-brand-bot-text">Kiên Giang</div>
           </div>
 
@@ -140,20 +148,18 @@ const Nav = () => {
           <div className="nav-cart col-2 text-center">
             <div className="right-wrapper mr-4 mt-2">
               <Link to="/gio-hang">
-                <IconButton color="secondary">
-                  <IconButton aria-label="cart">
-                    <Badge badgeContent={numItem} color="secondary">
-                      <AiOutlineShoppingCart
-                        size={30}
-                        color="orange"
-                      ></AiOutlineShoppingCart>
-                    </Badge>
-                  </IconButton>
+                <IconButton aria-label="cart">
+                  <Badge badgeContent={numItem} color="secondary">
+                    <AiOutlineShoppingCart
+                      size={30}
+                      color="orange"
+                    ></AiOutlineShoppingCart>
+                  </Badge>
+                </IconButton>
 
-                  {/* <div className="nav-cart-text right-wrapper ml-2">
+                {/* <div className="nav-cart-text right-wrapper ml-2">
                     GIỎ HÀNG
                   </div> */}
-                </IconButton>
               </Link>
             </div>
           </div>
@@ -161,7 +167,7 @@ const Nav = () => {
       </div>
       <div className="mobile-nav-container d-md-none">
         <Link to="/"><div className="mobile-nav-title">Nhà Sách Kiên Giang</div></Link>
-        <div className="row m-0 p-0">
+        <div className="row m-0">
           <div className="col-2">
             <IconButton color="primary" onClick={() => toggleDrawer(true)}>
               <BsListNested size={28} color="white"></BsListNested>
@@ -176,7 +182,7 @@ const Nav = () => {
               placeholder="Nhập sách cần tìm kiếm..."
             ></input>
           </form>
-          <div className="col-2 right-wrapper">
+          <div className="col-2 right-wrapper pr-4">
             <Link to="/gio-hang">
               <IconButton color="secondary">
                 <AiOutlineShoppingCart
@@ -195,7 +201,8 @@ const Nav = () => {
 const useStyles = makeStyles({
   list: {
     width: 250,
-    paddingTop: 20,    
+    paddingTop: 20,
+    overflowY: 'hidden'
   },
 });
 

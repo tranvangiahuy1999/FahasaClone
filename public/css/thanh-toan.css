@@ -13,8 +13,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-body a {
-    color: #000;
+body a {    
     text-decoration: none;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
@@ -34,11 +33,11 @@ a {
 a:hover {
     text-decoration: none;
     opacity: .8;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
+    transition: 0.2s all;
+    -webkit-transition: 0.2s all;
+    -moz-transition: 0.s all;
+    -o-transition: 0.2s all;
+    -ms-transition: 0.2s all;     
 }
 
 input[type="button"],

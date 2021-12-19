@@ -1,6 +1,8 @@
-/* Binh Css */
+:root {
+  --category-hover-bg-color: #D4ECDD;
+  --category-hover-border-style: 1px solid #E8F6EF;
+}
 
-/* Huy Css */
 .admin-background {
   background-color: #e5e9ec;
   min-height: 100vh;
@@ -253,6 +255,11 @@
   margin: auto;
 }
 
+.nav .nav-container .nav-brand-wrapper {
+  padding-right: 80px;
+  margin-top: 8px;
+}
+
 .nav .nav-container .nav-brand-wrapper .nav-brand-top-text {
   font-size: 1.5rem;
   font-weight: bold;
@@ -273,7 +280,7 @@
 
 .nav .nav-container .nav-search-wrapper {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 20px;  
 }
 
 .nav .nav-container .nav-search-input {
@@ -350,7 +357,8 @@
 }
 
 .header-category-list > ul > li:hover {
-  background-color: #82e66e;
+  background-color: var(--category-hover-bg-color);
+  border-bottom: var(--category-hover-border-style);
   cursor: pointer;
 }
 
@@ -649,5 +657,20 @@
   .product-list-of-boxtag .product-list-of-boxtag-img-wrapper {
     height: 180px;
     width: 100%;      
+  }
+}
+
+@media (max-width: 980px) {
+  .nav .nav-container .nav-brand-wrapper .nav-brand-top-text {
+    font-size: 1.3rem;
+  }
+
+  .nav .nav-container .nav-brand-wrapper .nav-brand-bot-text {
+    font-size: 1.4rem;
+  }
+  
+  .nav .nav-container .nav-brand-wrapper {
+    margin-top: 10px;
+    padding-right: 30px;
   }
 }
