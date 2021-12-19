@@ -1,5 +1,6 @@
 :root {
   --category-hover-bg-color: #D4ECDD;
+  --main-green: var(--main-green);
   --category-hover-border-style: 1px solid #E8F6EF;
 }
 
@@ -263,7 +264,7 @@
 .nav .nav-container .nav-brand-wrapper .nav-brand-top-text {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #64ae55;
+  color: var(--main-green);
   text-align: center;
   height: 30px;
   letter-spacing: 1px;
@@ -272,7 +273,7 @@
 .nav .nav-container .nav-brand-wrapper .nav-brand-bot-text {
   font-size: 1.7rem;
   font-weight: bold;
-  color: #64ae55;
+  color: var(--main-green);
   text-align: center;
   height: 30px;
   letter-spacing: 1px;
@@ -285,7 +286,7 @@
 
 .nav .nav-container .nav-search-input {
   margin: auto;
-  border: 2px solid #64ae55;
+  border: 2px solid var(--main-green);
   outline: none !important;
   box-shadow: 0 0 0;
 }
@@ -304,7 +305,7 @@
 }
 
 .nav .mobile-nav-container {
-  background-color: #64ae55;
+  background-color: var(--main-green);
   width: 100%;
 }
 
@@ -432,7 +433,7 @@
 
 .header-category-list ul li .subcate-item-1:hover,
 .header-category-list ul li .subcate-item-2:hover {
-  color: #64ae55;
+  color: var(--main-green);
 }
 
 .header-category-list ul li:hover ul {
@@ -452,7 +453,7 @@
 }
 
 .header-title {
-  background-color: #64ae55;
+  background-color: var(--main-green);
   padding: 8px;
 }
 
@@ -583,8 +584,8 @@
 }
 
 .see-more-btn {
-  border: #64ae55;
-  color: #64ae55;
+  border: var(--main-green);
+  color: var(--main-green);
 }
 
 .product-list-of-boxtag .product-list-of-boxtag-title {
@@ -617,7 +618,7 @@
 }
 
 .drawner-link-color {
-  color: #64ae55;
+  color: var(--main-green);
 }
 
 .product-list .product-list-container .product-list-breadcrum-wrapper {
@@ -632,6 +633,27 @@
 .rrd-custom-link, .rrd-custom-link:hover {
   text-decoration: none;
   color:#242a3a;
+}
+
+.product-list-of-boxtag .boxtag-tabs {
+  border-bottom: 1px solid lightgray;
+}
+
+.product-list-of-boxtag .boxtag-tabs ul li {
+  display: inline-block;
+  margin: 10px 5px 5px;
+}
+
+.product-list-of-boxtag .boxtag-tabs ul li span {  
+  padding: 8px 15px;
+}
+
+.product-list-of-boxtag .boxtag-tabs ul li span:hover, .product-list-of-boxtag .boxtag-tabs .active {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--main-green);
+  border: 1px solid var(--main-green);
+  border-radius: 6px;
 }
 
 @media (max-width: 750px) {
