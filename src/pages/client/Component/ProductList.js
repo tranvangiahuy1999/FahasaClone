@@ -53,7 +53,6 @@ const ProductListContent = () => {
     } catch (e) {
     }
   };
-  
 
   return (
     <div className='product-list mt-3'>

@@ -15,6 +15,7 @@ import {
 import HistoryLink from "./ProductDetail/HistoryLink";
 import ProductInfo from "./ProductDetail/ProductInfo";
 import MarketingBox from "./ProductDetail/MarketingBox";
+import VisitedCarousel from "./Carousel/VisistedCarousel";
 
 import shopApis from "../../../apis/ShopApis";
 import alert from "../../../utils/Alert";
@@ -26,7 +27,8 @@ const ProductDetail = () => {
   const history = useHistory();
   const classes = useStyles();
   const [productDetail, setProductDetail] = useState([]);
-  const [specialProduct, setSpecialProduct] = useState([]);  
+  const [specialProduct, setSpecialProduct] = useState([]);
+  const [defaultIndex, setDefaultIndex] = useState(0)
   const [defaultPrice, setDefaultPrice] = useState(null);
   const [defaultProduct, setDefaultProduct] = useState(null);
   const [cateInfo, setCateInfo] = useState()
@@ -45,6 +47,7 @@ const ProductDetail = () => {
   useEffect(() => {
     if (params) {
       window.scrollTo(0, 0)
+      setDefaultIndex(0)
       getProductDetailData();
     }
   }, [params]);
@@ -69,14 +72,13 @@ const ProductDetail = () => {
               ? productDetail.image[0].url
               : null,
           });
-          if (selectedImage === null)
-            setSelectedImage(
-              productDetail.image.length
-                ? productDetail.image[0].url
-                : firstParameter.image
-            );
-        });        
-        setProductDetail(result.data);        
+          setSelectedImage(
+            productDetail.image.length
+              ? productDetail.image[0].url
+              : firstParameter.image
+          );
+        });
+        setProductDetail(result.data);
         getExactCateId(result.data)
       }
     } catch (err) {
@@ -89,14 +91,14 @@ const ProductDetail = () => {
   const getSpecialProductData = async (page, limit, isSuggested) => {
     try {
       const res = await shopApis.getListSpecialProduct(page, limit, true, false, isSuggested);
-      if (res.status === 200) {        
+      if (res.status === 200) {
         setSpecialProduct(formatSpecialListData(res.data));
       }
     } catch (e) {
 
     }
   }
-  
+
   const formatSpecialListData = (data) => {
     var result = [];
     if (data.tag && data.tag.length > 0) {
@@ -116,9 +118,9 @@ const ProductDetail = () => {
               description: product.description ? product.description : "",
               href: product._id ? ("/chi-tiet/" + convertURL(product.name) + "." + product._id) : "",
               img: {
-              src: product.image[0] ? product.image[0].url : "",
-              alt: product.name ? product.name : ""
-            },
+                src: product.image[0] ? product.image[0].url : "",
+                alt: product.name ? product.name : ""
+              },
               price: product.parameters[0] ? formatCurrency(product.parameters[0].price) + "đ" : ""
             })
           })
@@ -132,7 +134,8 @@ const ProductDetail = () => {
     setSelectedImage(imageUrl);
   };
 
-  const handleSelectParameter = async (parameter) => {
+  const handleSelectParameter = async (parameter, index) => {
+    setDefaultIndex(index)
     setSelectedImage(parameter.image);
     setDefaultPrice(parameter.price);
     setDefaultParameterName(parameter.name);
@@ -224,16 +227,16 @@ const ProductDetail = () => {
     }
     setCateInfo(productDetail[0].cate1)
   }
-  const addToVisitedProductList = (id) =>{
+  const addToVisitedProductList = (id) => {
     const visitedProductList = localStorage.getItem("VisitedProductList");
     var visitedProductListJson = [];
-    if(visitedProductList){
+    if (visitedProductList) {
       visitedProductListJson = JSON.parse(visitedProductList);
       visitedProductListJson = visitedProductListJson.filter(item => item.id != id);
-      visitedProductListJson.unshift({id: id});
-      visitedProductListJson = visitedProductListJson.slice(0,10)
-    }else{
-      visitedProductListJson.push({id: id});
+      visitedProductListJson.unshift({ id: id });
+      visitedProductListJson = visitedProductListJson.slice(0, 10)
+    } else {
+      visitedProductListJson.push({ id: id });
     }
     localStorage.setItem("VisitedProductList", JSON.stringify(visitedProductListJson));
   }
@@ -303,11 +306,11 @@ const ProductDetail = () => {
                           return (
                             <Button
                               key={index}
-                              onClick={() => handleSelectParameter(parameter)}
+                              onClick={() => handleSelectParameter(parameter, index)}
                               style={{
                                 marginRight: "10px",
-                                backgroundColor: "white",
-                                color: "#74AC74",
+                                backgroundColor: defaultIndex === index ? "#74AC74" : "white",
+                                color: defaultIndex === index ? "white" : "#74AC74",
                                 border: "1px solid #74AC74",
                               }}
                               variant="outlined"
@@ -382,56 +385,56 @@ const ProductDetail = () => {
 
               {
                 (specialProduct && specialProduct.length > 0) ?
-                <div className="mt-4">
-                  {
-                    specialProduct.map((item) => 
-                      <div key={item._id} className="product-list-of-boxtag bg-white mb-4">
-                        <div className="product-list-of-boxtag-title">{item.name}</div>
-                        <MutipleItemCarousel
-                          listData={item.data}
-                          settings={{
-                            dots: false,
-                            infinite: false,
-                            speed: 500,
-                            slidesToShow: 5,
-                            slidesToScroll: 1,
-                            initialSlide: 0,
-                            responsive: [
-                              {
-                                breakpoint: 1024,
-                                settings: {
-                                  slidesToShow: 3,
-                                  slidesToScroll: 1,
-                                  infinite: false,
-                                  dots: false
+                  <div className="mt-4">
+                    {
+                      specialProduct.map((item) =>
+                        <div key={item._id} className="product-list-of-boxtag bg-white mb-4">
+                          <div className="product-list-of-boxtag-title">{item.name}</div>
+                          <MutipleItemCarousel
+                            listData={item.data}
+                            settings={{
+                              dots: false,
+                              infinite: false,
+                              speed: 500,
+                              slidesToShow: 5,
+                              slidesToScroll: 1,
+                              initialSlide: 0,
+                              responsive: [
+                                {
+                                  breakpoint: 1024,
+                                  settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                    infinite: false,
+                                    dots: false
+                                  }
+                                },
+                                {
+                                  breakpoint: 600,
+                                  settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 1,
+                                    initialSlide: 0
+                                  }
+                                },
+                                {
+                                  breakpoint: 480,
+                                  settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 1
+                                  }
                                 }
-                              },
-                              {
-                                breakpoint: 600,
-                                settings: {
-                                  slidesToShow: 2,
-                                  slidesToScroll: 1,
-                                  initialSlide: 0
-                                }
-                              },
-                              {
-                                breakpoint: 480,
-                                settings: {
-                                  slidesToShow: 2,
-                                  slidesToScroll: 1
-                                }
-                              }
-                            ]
-                          }}
-                        />
-                      </div>
-                    )
-                  }
-            
-            
-                </div> : <></>              
-              }
+                              ]
+                            }}
+                          />
+                        </div>
+                      )
+                    }
 
+
+                  </div> : <></>
+              }
+              <VisitedCarousel></VisitedCarousel>
             </div>
 
           </div>

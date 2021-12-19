@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from "@material-ui/core";
 import shopApis from '../../../apis/ShopApis';
 import { PRIMARY_HOME_COLOR } from "../../../constants/index";
@@ -8,23 +9,33 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MutipleItemCarousel from "./Carousel/MutipleItemCarousel";
 import { formatCurrency, convertURL } from "../../../utils/format-string.util";
+import { setBoxtagData } from '../../../reducers/BoxtagReducer'
 
 const ProductsCardList = (props) => {
     const classes = useStyles();
+    const boxtagData = useSelector((state) => state.boxtag.boxtagData)
+    const dispatch = useDispatch()
     const [products, setProducts] = useState([])
     const [onLoad, setOnLoad] = useState(true);
 
     useEffect(() => {
-        if (props.tagId) {
-            getProductsList(props.tagId)
+        for (const item of boxtagData) {
+            if (item.tagId === props.tagId) {                
+                setProducts(item)
+                setOnLoad(false)
+                return
+            }
         }
+        getProductsList(props.tagId)
     }, [props.tagId])
 
     const getProductsList = async (tagId) => {
         try {
             const res = await shopApis.getProductByTagId(tagId);
             if (res.status === 200) {
-                setProducts(formatSpecialListData(res.data))
+                const formatedProductsData = formatSpecialListData(res.data) 
+                setProducts(formatedProductsData)
+                dispatch(setBoxtagData(formatedProductsData))
             }
         } catch (e) {
 
@@ -33,10 +44,13 @@ const ProductsCardList = (props) => {
     }
 
     const formatSpecialListData = (data) => {
-        var result = [];
+        var result = {
+            tagId: props.tagId,
+            products: []
+        };
         if (data.length) {
             data.map((item) => {
-                result.push(
+                result.products.push(
                     {
                         _id: item._id,
                         title: item.name ? item.name : "",
@@ -58,9 +72,9 @@ const ProductsCardList = (props) => {
         <div className="bg-white">
             <div className="row m-0 p-0 product-cart-list-section">
                 {
-                    onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) : products.length ? (
+                    onLoad ? (<div className={classes.root}><CircularProgress className='m-auto' style={{ color: PRIMARY_HOME_COLOR }} size="40px" /></div>) : products.products.length ? (
                         <MutipleItemCarousel
-                            listData={products}
+                            listData={products.products}
                             settings={{
                                 dots: false,
                                 infinite: false,

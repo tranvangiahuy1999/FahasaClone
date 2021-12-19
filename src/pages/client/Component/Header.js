@@ -3,7 +3,6 @@ import shopApis from "../../../apis/ShopApis";
 import Carousel from "react-material-ui-carousel";
 import { FcNext, FcPrevious } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import { setcategorydata } from "../../../reducers/UserReducer";
 import { Link } from "react-router-dom";
 import { convertURL } from "../../../utils/format-string.util";
 
@@ -25,8 +24,7 @@ const Header = () => {
     try {
       const res = await shopApis.getCategoryList();
       if (res.status === 200) {
-        setCategoryList(res.data);
-        await dispatch(setcategorydata(res.data));
+        setCategoryList(res.data);        
       }
     } catch (e) { }
   };
