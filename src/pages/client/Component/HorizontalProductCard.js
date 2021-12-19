@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const HorizontalProductCard = (props) => {
   const { item } = props;
   return (
-    <Link to={item.href} title={item.img.alt} data-toggle="tooltip">
+    <Link className="rrd-custom-link" to={item.href} title={item.img.alt} data-toggle="tooltip">
       <div className="product-card-horizontal row m-1">
         <div className="col-lg-5 col-md-5 col-4 p-0">
           <div className="product-card-horizontal-img-wrapper">
