@@ -17,7 +17,10 @@ const HomePage = () => {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
     getHomeBoxtagData(0, 10);
   }, [])
 
@@ -62,7 +65,7 @@ const CarouselSpecialMutipleProduct = (props) => {
     try {
       const res = await shopApis.getListSpecialProduct(page, limit, home_page, true, false);
       if (res.status === 200) {
-        setSpecialProduct(formatSpecialListData(res.data));        
+        setSpecialProduct(formatSpecialListData(res.data));
       }
     } catch (e) {
 
@@ -88,9 +91,9 @@ const CarouselSpecialMutipleProduct = (props) => {
               description: product.description ? product.description : "",
               href: product._id ? ("/chi-tiet/" + convertURL(product.name) + "." + product._id) : "",
               img: {
-              src: product.image[0] ? product.image[0].url : "",
-              alt: product.name ? product.name : ""
-            },
+                src: product.image[0] ? product.image[0].url : "",
+                alt: product.name ? product.name : ""
+              },
               price: product.parameters[0] ? formatCurrency(product.parameters[0].price) + "đ" : ""
             });
           })
@@ -106,7 +109,7 @@ const CarouselSpecialMutipleProduct = (props) => {
         specialProduct.map((item) =>
           <div key={item._id} className="product-list-of-boxtag bg-white mb-4 row mx-0 pb-3">
             <div className="product-list-of-boxtag-title">{item.name}</div>
-            
+
             <MutipleItemCarousel
               listData={item.data}
               settings={{

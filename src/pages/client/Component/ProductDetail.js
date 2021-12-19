@@ -46,7 +46,10 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (params) {
-      window.scrollTo(0, 0)
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
       setDefaultIndex(0)
       getProductDetailData();
     }

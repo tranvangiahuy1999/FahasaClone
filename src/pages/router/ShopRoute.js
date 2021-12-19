@@ -8,6 +8,7 @@ import SearchProductList from "../client/Component/SearchProductList";
 import Nav from "../client/Component/Nav";
 import Footer from "../client/Component/Footer";
 import Service from "../client/Component/Service";
+import ScrollToTopButton from '../client/Component/ScrollToTopButton'
 
 const ShopRoute = () => {
   return (
@@ -21,6 +22,7 @@ const ShopRoute = () => {
         <Route path="/danh-sach" component={ProductList} />
         <Route path="/ket-qua" component={SearchProductList} />
       </Switch>
+      <ScrollToTopButton/>
       <Service />
       <Footer />
     </div>
