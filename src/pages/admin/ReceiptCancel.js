@@ -21,7 +21,6 @@ import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import alert from "../../utils/Alert";
 import ChangeStatusModal from "../../components/ChangeStatusModal";
-import downloadReceiptReport from '../../utils/downloadReceiptReport'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -181,12 +180,6 @@ export default function ReceiptUndone() {
     handleCloseModal();
   };
 
-  const exportReceiptHandle = async () => {
-    setLoader(true)
-    await downloadReceiptReport()
-    setLoader(false)
-  }
-
   const pageChange = (event, page) => {
     getReceiptData(page, false);
   };
@@ -240,17 +233,7 @@ export default function ReceiptUndone() {
           />
         </div>
         <div className="col-lg-6 col-md-6 pt-2 pb-2 right-wrapper">
-          <Button
-            style={{
-              backgroundColor: LOGO_COLOR,
-              color: "white",
-            }}
-            size="small"
-            variant="contained"
-            onClick={exportReceiptHandle}
-          >
-            Xuất hóa đơn
-          </Button>
+          
         </div>
       </div>
       <Paper className={classes.paper}>
@@ -385,13 +368,11 @@ export default function ReceiptUndone() {
                                     className="row m-0 p-0 mt-1 pt-2 detail-product-item"
                                     key={index}
                                   >
-                                    <div className="col-3 text-center">
+                                    <div className="col-3 text-center three-line-text">
                                       {ele.product.parameter.bar_code}
                                     </div>
                                     <div className="col-3 text-center three-line-text">
-                                      {ele.product.name +
-                                        " " +
-                                        ele.product.parameter.name}
+                                      {ele.product.name} <span>{(ele.product.parameter.name) ? ele.product.parameter.name : ""}</span>
                                     </div>
                                     <div className="col-3 text-center">
                                       {ele.total}

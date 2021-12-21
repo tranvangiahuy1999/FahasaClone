@@ -380,13 +380,11 @@ export default function ReceiptUndone() {
                                     className="row m-0 p-0 mt-1 pt-2 detail-product-item"
                                     key={index}
                                   >
-                                    <div className="col-3 text-center">
+                                    <div className="col-3 text-center three-line-text">
                                       {ele.product.parameter.bar_code}
                                     </div>
                                     <div className="col-3 text-center three-line-text">
-                                      {ele.product.name +
-                                        " " +
-                                        ele.product.parameter.name}
+                                    {ele.product.name} <span>{(ele.product.parameter.name) ? ele.product.parameter.name : ""}</span>
                                     </div>
                                     <div className="col-3 text-center">
                                       {ele.total}

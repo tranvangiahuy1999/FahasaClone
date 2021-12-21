@@ -176,6 +176,7 @@
 
 .detail-product-item {
   border-top: 1px solid gray;
+  max-height: 70px;
 }
 
 .col-border-left {
