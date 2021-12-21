@@ -8,11 +8,8 @@ import SearchProductList from "../client/Component/SearchProductList";
 import Nav from "../client/Component/Nav";
 import Footer from "../client/Component/Footer";
 import Service from "../client/Component/Service";
-<<<<<<< HEAD
 import ScrollToTopButton from '../client/Component/ScrollToTopButton'
-=======
 import { useState } from "react";
->>>>>>> 6658f07 (!Update sync number of cart icon)
 
 const ShopRoute = () => {
   const [badgeNumber,setBadgeNumber] = useState(0);
