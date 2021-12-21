@@ -13,7 +13,8 @@ import Badge from '@material-ui/core/Badge';
 import logoImg from '../../../assets/image/logo-img.png'
 import CategorySideBar from "./SideBar/CategorySideBar";
 
-const Nav = () => {
+const Nav = (props) => {
+  const badgeNumber = props.badgeNumber;
   const classes = useStyles();
   const history = useHistory();
   const params = useParams();
@@ -30,7 +31,7 @@ const Nav = () => {
 
   useEffect(() => {
     setNumItem(getNumItem());
-  });
+  },[badgeNumber]);
 
   const getCategoryData = async () => {
     try {

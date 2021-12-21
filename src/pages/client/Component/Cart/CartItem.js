@@ -3,7 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { formatCurrency } from "../../../../utils/format-string.util";
 import { convertURL } from "../../../../utils/format-string.util";
 const CartItem = (props) => {
-    const { itemvalue, index, listvalue, ...other } = props;
+    const { itemvalue, index, listvalue,handleBadge, ...other } = props;
     const handleOpenBackdrop = other.open;
     const handleCloseBackdrop = other.close;
     const handleChangeChecked = other.changeCheckbox;
@@ -19,6 +19,7 @@ const CartItem = (props) => {
         temp.splice(index, 1);
         setValue([...temp]);
         localStorage.setItem("Cart", JSON.stringify(temp));
+        props.handleBadge(1);
     };
     const handleChangeQuantity = async (event, index) => {
         let temp = listvalue;

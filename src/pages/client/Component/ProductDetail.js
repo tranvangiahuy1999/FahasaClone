@@ -21,7 +21,7 @@ import alert from "../../../utils/Alert";
 import { formatCurrency, convertURL } from "../../../utils/format-string.util";
 import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
   const params = useParams();
   const history = useHistory();
   const classes = useStyles();
@@ -211,6 +211,7 @@ const ProductDetail = () => {
       icon: "success",
       title: "Đã thêm vào giỏ hàng",
     });
+    props.handleBadge(1);
   };
 
   const getExactCateId = (productDetail) => {
