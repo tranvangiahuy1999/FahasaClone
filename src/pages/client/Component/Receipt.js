@@ -24,7 +24,7 @@ const listDeliveryType = [
     value: 50000,
   }
 ]
-const Receipt = () => {
+const Receipt = (props) => {
   const history = useHistory();
   const classes = useStyles();
   const [Value, setValue] = useState([]);
@@ -157,7 +157,7 @@ const Receipt = () => {
 
 
 
-  const CartDisplay = () => {
+  const CartDisplay = (props) => {
     if (!Value.length) {
       return (
         <div className="row mx-0" style={{ background: "#F0F0F0", height: "250px" }}>
@@ -211,6 +211,7 @@ const Receipt = () => {
                   close={handleCloseBackdrop}
                   checkproductexist={checkProductExist}
                   changeCheckbox={handleChangeCheckbox}
+                  handleBadge={props.handleBadge}
                 />
               ))}
               <div className="row">
@@ -396,7 +397,7 @@ const Receipt = () => {
         >
           <div className="cart-page bg-white" style={{ background: "#F0F0F0" }}>
             {/* het row  */}
-            {CartDisplay()}
+            <CartDisplay handleBadge={props.handleBadge}></CartDisplay>
           </div>
         </div>
         {/* het cart-page  */}
