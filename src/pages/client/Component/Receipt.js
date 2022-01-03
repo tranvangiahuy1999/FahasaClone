@@ -69,6 +69,7 @@ const Receipt = (props) => {
   const [phoneMessageError, setPhoneMessageError] = useState("");
   const [isFormError, setIsFormError] = useState(false);
   const [loader, setLoader] = useState(true);
+  const [disableButtonSubmit, setDisableButtonSubmit] = useState(false);
 
   const handleCloseBackdrop = () => {
     setOpenBackdrop(false);
@@ -200,7 +201,7 @@ const Receipt = (props) => {
     return false;
   }
   const payment = async () => {
-    console.log(checkPayment());
+    setDisableButtonSubmit(true);
     if (checkPayment()) {
       setIsFormError(false);
       let formValue = [];
@@ -241,6 +242,7 @@ const Receipt = (props) => {
         alert({ icon: "error", title: "Đã có lỗi xảy ra" });
       }
     }
+    setDisableButtonSubmit(false);
   };
 
   const caculateTotalPrice = () => {
@@ -449,33 +451,17 @@ const Receipt = (props) => {
                       </form>
 
                       <div className="card-body" style={{ padding: "15px" }}>
-                        {/* <div className="goigiaohang">
-              <h6 className="header text-uppercase">Chọn gói giao hàng</h6>
-              <div className="option">
-                <input type="radio" name="goigiaohang" id="ghtc" defaultChecked />
-                <label htmlFor="ghtc">Giao hàng tiêu chuẩn</label>
-                <p>Từ 1-3 ngày tại TP. Hồ Chí Minh; từ 3-5 ngày đối với các Tỉnh /
-                  Thành khác</p>
-              </div>
-              <div className="option">
-                <input type="radio" name="goigiaohang" id="ghn" />
-                <label htmlFor="ghn">Giao hàng nhanh</label>
-                <p>1 ngày tại TP. Hồ Chí Minh; từ 2-3 ngày đối với các Tỉnh / Thành
-                  khác</p>
-              </div>
-            </div> */}
-
-
-
-
+                        
                         <button
                           className="btn btn-lg btn-block btn-checkout text-uppercase text-white"
                           onClick={() => payment()}
                           style={{ background: "#F5A623" }}
+                          disabled={disableButtonSubmit}
                         >
-                          Đặt mua
+                        {
+                          disableButtonSubmit ? <CircularProgress color="inherit" /> :  "Đặt mua"
+                        }
                         </button>
-
                       </div>
                       <p className="text-center note-before-checkout">
                         (Vui lòng kiểm tra lại đơn hàng trước khi Đặt Mua)
