@@ -31,7 +31,7 @@ const Nav = (props) => {
 
   useEffect(() => {
     setNumItem(getNumItem());
-  },[badgeNumber]);
+  }, [badgeNumber]);
 
   const getCategoryData = async () => {
     try {
@@ -150,7 +150,7 @@ const Nav = (props) => {
             <div className="right-wrapper mr-4 mt-2">
               <Link to="/gio-hang">
                 <IconButton aria-label="cart">
-                  <Badge badgeContent={numItem} color="secondary">
+                  <Badge badgeContent={numItem} color="secondary" showZero>
                     <AiOutlineShoppingCart
                       size={30}
                       color="orange"
@@ -186,10 +186,12 @@ const Nav = (props) => {
           <div className="col-2 right-wrapper pr-4">
             <Link to="/gio-hang">
               <IconButton color="secondary">
-                <AiOutlineShoppingCart
-                  size={28}
-                  color="white"
-                ></AiOutlineShoppingCart>
+                <Badge badgeContent={numItem} color="secondary" showZero>
+                  <AiOutlineShoppingCart
+                    size={28}
+                    color="white"
+                  ></AiOutlineShoppingCart>
+                </Badge>
               </IconButton>
             </Link>
           </div>

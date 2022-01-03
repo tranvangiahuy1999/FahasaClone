@@ -186,9 +186,8 @@ const ProductDetail = (props) => {
       const localCartList = JSON.parse(cartList);
 
       for (let i = 0; i < localCartList.length; i++) {
-        if (localCartList[i].id === parentId) {
+        if (localCartList[i].id === params.id && localCartList[i].parameter === defaultProduct._id) {
           localCartList[i].count += productQuantity;
-
           localStorage.setItem("Cart", JSON.stringify(localCartList));
           return handleAddToCartEvent(event);
         }
