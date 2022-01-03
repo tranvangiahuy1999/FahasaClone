@@ -1043,3 +1043,6 @@ button.slick-prev.slick-arrow {
     max-width: 1100px;
     margin: auto;
 }
+.block-delete:hover{
+    cursor: pointer;
+}

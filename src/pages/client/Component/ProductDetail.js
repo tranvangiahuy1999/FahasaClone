@@ -22,7 +22,7 @@ import alert from "../../../utils/Alert";
 import { formatCurrency, convertURL } from "../../../utils/format-string.util";
 import { HTTP_RESPONSE_STATUS } from "../../../constants/http-response.contanst";
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
   const params = useParams();
   const history = useHistory();
   const classes = useStyles();
@@ -186,9 +186,8 @@ const ProductDetail = () => {
       const localCartList = JSON.parse(cartList);
 
       for (let i = 0; i < localCartList.length; i++) {
-        if (localCartList[i].id === parentId) {
+        if (localCartList[i].id === params.id && localCartList[i].parameter === defaultProduct._id) {
           localCartList[i].count += productQuantity;
-
           localStorage.setItem("Cart", JSON.stringify(localCartList));
           return handleAddToCartEvent(event);
         }
@@ -217,6 +216,7 @@ const ProductDetail = () => {
       icon: "success",
       title: "Đã thêm vào giỏ hàng",
     });
+    props.handleBadge(1);
   };
 
   const getExactCateId = (productDetail) => {

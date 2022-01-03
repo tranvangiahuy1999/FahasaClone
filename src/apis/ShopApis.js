@@ -33,6 +33,10 @@ const shopApis = {
     const url = `/api/tag/get-product/${id}`;
     return axiosClient.get(url);
   },
+  getListProductByListId(listId){
+    const url = `/api/product/list-query`;
+    return axiosClient.post(url,{headers: {"Content-Type": "application/json"},data:{"listId":listId}});
+  }
 };
 
 export default shopApis;
