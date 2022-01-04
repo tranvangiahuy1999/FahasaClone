@@ -3,7 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { formatCurrency } from "../../../../utils/format-string.util";
 import { convertURL } from "../../../../utils/format-string.util";
 const CartItem = (props) => {
-    const { itemvalue, index, listvalue,handleBadge, ...other } = props;
+    const { itemvalue, index, listvalue, handleBadge, ...other } = props;
     const handleOpenBackdrop = other.open;
     const handleCloseBackdrop = other.close;
     const handleChangeChecked = other.changeCheckbox;
@@ -48,7 +48,7 @@ const CartItem = (props) => {
     return (
         <div className="cart-list-items ">
             <div className="d-flex  align-items-center pb-2">
-                <div className="cart-item  d-block d-md-flex align-items-center">
+                <div className="cart-item  d-block d-md-flex align-items-center w-full">
                     <div className="d-flex  my-3 align-items-center">
                         <div>
                             <Checkbox
@@ -68,22 +68,17 @@ const CartItem = (props) => {
                                     {itemvalue.nameParam ? <span className="text-danger"> || {itemvalue.nameParam} </span> : <></>}
                                 </a>
                             </div>
+
+                        </div>
+                        <div className="block-delete d-md-none ml-auto">
+                            <span className="remove mt-auto">
+                                <i
+                                    onClick={() => deleteRowHandle(index)}
+                                    className="far fa-trash-alt"
+                                />
+                            </span>
                         </div>
 
-                        {/* <div>
-                        {itemvalue.nameParam ? (
-                            <div className="type-product text-secondary">
-                                <p>
-                                    Phân loại hàng
-                                </p>
-                                <p>
-                                    {itemvalue.nameParam}
-                                </p>
-                            </div>
-                        ) : (
-                            <></>
-                        )}
-                    </div> */}
                     </div>
                     <div className="block-price ml-md-auto">
                         <p className="text-center">{formatCurrency(itemvalue.price)}đ</p>
@@ -137,14 +132,7 @@ const CartItem = (props) => {
                         </span>
                     </div>
                 </div>
-                <div className="block-delete d-md-none">
-                    <span className="remove mt-auto">
-                        <i
-                            onClick={() => deleteRowHandle(index)}
-                            className="far fa-trash-alt"
-                        />
-                    </span>
-                </div>
+
             </div>
 
             <hr />
