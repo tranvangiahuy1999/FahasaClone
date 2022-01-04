@@ -38,7 +38,7 @@ a.list-card-item {
 
 .list-card-item .card-title {
     font-size: 16px;
-    min-height: 38px;
+    min-height: 34px;
 }
 
 .list-card-item .card-description {
@@ -47,7 +47,7 @@ a.list-card-item {
 }
 
 .list-card-item .card-price {
-    font-size: 26px;
+    font-size: 20px;
     color: var(--main-red)
 }
 .list-card-item .card-img-wrapper{

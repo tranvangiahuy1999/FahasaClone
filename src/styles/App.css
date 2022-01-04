@@ -2,6 +2,7 @@
   --category-hover-bg-color: #D4ECDD;
   --main-green: var(--main-green);
   --category-hover-border-style: 1px solid #E8F6EF;
+  --main-red: #A31818;
 }
 
 .admin-background {
@@ -572,8 +573,8 @@
 .product-card .product-card-price,
 .product-card-horizontal .product-card-price {
   font-size: 1.1rem;
-  font-weight: bold;
-  color: rgb(199, 0, 0);
+  font-weight: 500;
+  color: var(--main-red);
   padding: 7px;
 }
 

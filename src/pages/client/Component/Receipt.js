@@ -499,18 +499,7 @@ const Receipt = (props) => {
         {/* het container  */}
       </section>
       {/* het khoi content  */}
-      {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}
-      <div className="fixed-bottom">
-        <div
-          className="btn btn-warning float-right rounded-circle nutcuonlen"
-          id="backtotop"
-          href="#"
-          style={{ background: "#64ae55" }}
-        >
-          <i className="fa fa-chevron-up text-white" />
-        </div>
-      </div>
-
+      {/* thanh cac dich vu :mien phi giao hang, qua tang mien phi ........ */}      
     </div>
   );
 };
