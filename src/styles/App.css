@@ -491,7 +491,6 @@
 @media (max-width:600px){
   .banner-img {
     width: 100%;
-    height: auto;
   }
 }
 .service-item p.service-detail {

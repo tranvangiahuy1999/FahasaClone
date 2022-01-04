@@ -574,37 +574,6 @@ footer .header {
     font-weight: 400;
     margin-bottom: 14px;
 }
-
-.cart-item a .img-product {
-    width: 60px;
-    padding-bottom:150%; 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-@media (max-width: 768px) {
-    .cart-item a {
-        font-size: 14px;
-    }
-    .cart-item .block-price,.cart-item .block-number,.cart-item  .block-total-price{
-        margin-left: 102px;
-    }
-    .cart-item .block-price{
-        color: red;
-    }
-    .cart-item .block-total-price{
-        display: none;
-    }
-}
-
-.cart {
-    border-right: 1px solid #ebebeb;
-}
-
-.group strong {
-    font-size: 14px;
-}
-
 .tonggiatien .group .tongcong {
     font-size: 19px;
     color: red;
@@ -619,6 +588,41 @@ footer .header {
     border: 1px solid #F5A623;
     color: #F5A623;
 }
+
+.cart-item a .img-product {
+    width: 60px;
+    padding-bottom:150%; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+@media (max-width: 768px) {
+    .cart-item a, .cart-item * {
+        font-size: 14px;
+    }
+    .cart-item .block-price,.cart-item .block-number,.cart-item  .block-total-price{
+        margin-left: 102px;
+    }
+    .cart-item .block-price{
+        color: red;
+    }
+    .cart-item .block-total-price{
+        display: none;
+    }
+    .tonggiatien .group .tongcong{
+        font-size: 16px;
+    }
+}
+
+.cart {
+    border-right: 1px solid #ebebeb;
+}
+
+.group strong {
+    font-size: 14px;
+}
+
+
 /* het css cho cart-content  */
 
 /* css cho cart-steps  */
