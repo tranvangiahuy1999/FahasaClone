@@ -46,7 +46,7 @@ const listDeliveryType = [
   {
     _id: "delivery_3",
     label: "Giao hàng ngoại thành",
-    value: 50000,
+    value: -1,
     display: "Sẽ được liên hệ lại!"
   }
 ]
@@ -254,7 +254,8 @@ const Receipt = (props) => {
         }
       });
       setTempPrice(total);
-      total += delivery.value;
+      if(delivery.label !== "Giao hàng ngoại thành")
+        total += delivery.value;
     }
     setTotalPrice(total);
   };

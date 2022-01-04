@@ -488,7 +488,12 @@
   height: 424px;
   width: 900px;
 }
-
+@media (max-width:600px){
+  .banner-img {
+    width: 100%;
+    height: auto;
+  }
+}
 .service-item p.service-detail {
   font-size: 12px;
   margin-bottom: 1px;
@@ -712,4 +717,11 @@
     margin-top: 10px;
     padding-right: 30px;
   }
+}
+.mx-0{
+  margin-left:0;
+  margin-right:0;
+}
+.w-full{
+  width: 100%;
 }

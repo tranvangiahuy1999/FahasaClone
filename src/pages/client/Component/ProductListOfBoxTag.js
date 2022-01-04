@@ -76,7 +76,7 @@ const ProductListOfBoxTag = (props) => {
             <div>
               {
                 boxtagData.image.url ? (
-                  <div className="row">
+                  <div className="row mx-0">
                     <div className="col-lg-5 col-md-5 col-12">
                       <div className="product-list-of-boxtag-img-wrapper">
                         <img
