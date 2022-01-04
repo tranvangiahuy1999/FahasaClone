@@ -47,7 +47,7 @@ a.list-card-item {
 }
 
 .list-card-item .card-price {
-    font-size: 20px;
+    font-size: 18px;
     color: var(--main-red)
 }
 .list-card-item .card-img-wrapper{

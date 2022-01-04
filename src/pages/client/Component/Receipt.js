@@ -79,7 +79,7 @@ const Receipt = (props) => {
   };
   const handleDeliveryChange = (value) => {
     setDelivery(listDeliveryType.find(element => element.value == value));
-    if (value > 0) {
+    if (value > 0 || value == -1) {
       setShowAddress(true);
     } else {
       setShowAddress(false);
