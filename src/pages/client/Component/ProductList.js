@@ -8,7 +8,14 @@ import CategorySideBar from "./SideBar/CategorySideBar";
 import { Switch, Route, useRouteMatch, useParams, useLocation } from "react-router-dom";
 import { CircularProgress, Box } from "@material-ui/core";
 
-const ProductList = () => {
+const ProductList = () => {  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }, [])
+
   let match = useRouteMatch();
   return (
     <Switch>

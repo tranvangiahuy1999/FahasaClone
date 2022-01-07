@@ -5,11 +5,17 @@ import { convertURL, formatCurrency } from "../../../utils/format-string.util";
 import CardItemVertical from "./Card/CardItemVertical";
 import "../../../styles/style.css";
 import CategorySideBar from "./SideBar/CategorySideBar";
-import { Switch, Route, useRouteMatch, useParams, useLocation } from "react-router-dom";
+import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
 import { CircularProgress, Box } from "@material-ui/core";
 
 const SearchProductList = () => {
     let match = useRouteMatch();
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          })
+    }, [])
     return (
         <Switch>
             <Route path={`${match.path}/:name`} component={ProductListContent} />
