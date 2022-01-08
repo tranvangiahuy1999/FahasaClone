@@ -271,16 +271,7 @@ export default function BoxTagDetail() {
     );
     setProductList([...resultAll]);
     setProductListOfTag([...resultOfTag]);
-  };
-
-  // const handleOnDragEnd = (result) => {
-  //   if (!result.destination) return;
-  //   setUpdateBtnState(false);
-  //   const items = Array.from(tagList);
-  //   const [reorderedItem] = items.splice(result.source.index, 1);
-  //   items.splice(result.destination.index, 0, reorderedItem);
-  //   setTagList([...items]);
-  // };
+  };  
 
   return (
     <div className={classes.root}>
@@ -322,10 +313,10 @@ export default function BoxTagDetail() {
           )}
           <Button
             color="primary"
-            style={{ minWidth: 160, justifyContent: "flex-start" }}
+            style={{ width: "100%" }}
             onClick={openAddTagModal}
           >
-            > Thêm tag
+            {"> Thêm tag <"}
           </Button>
         </Tabs>
         <div className="row m-0 p-0" style={{ width: "100%" }}>
@@ -350,8 +341,8 @@ export default function BoxTagDetail() {
                         variant="standard"
                       />
                     </div>
-                    <div className="row col-lg-6 col-md-6 pt-2 pb-2">
-                      <div className="col-6 right-wrapper">
+                    <div className="row col-lg-6 col-md-6">
+                      <div className="col-7 right-wrapper">
                         <FormControlLabel
                           control={
                             <Switch
@@ -365,13 +356,13 @@ export default function BoxTagDetail() {
                           label="Thêm sản phẩm"
                         />
                       </div>
-                      <div className="col-6 right-wrapper">
+                      <div className="col-5">
                         <Button
                           style={{
                             color: "white",
                           }}
                           color="secondary"
-                          size="small"
+                          size="medium"
                           variant="contained"
                           onClick={openConfirmRemoveTagModal}
                           startIcon={<IoTrashBin></IoTrashBin>}
