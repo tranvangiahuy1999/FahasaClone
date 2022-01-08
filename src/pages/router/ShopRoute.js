@@ -13,8 +13,7 @@ import { useState } from "react";
 
 const ShopRoute = () => {
   const [badgeNumber,setBadgeNumber] = useState(0);
-  const addBadgeNumber = (num) =>{
-    console.log("hello world");
+  const addBadgeNumber = (num) =>{    
     setBadgeNumber(badgeNumber + num);
   }
   return (

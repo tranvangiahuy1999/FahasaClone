@@ -13,10 +13,7 @@ const MarketingBox = () => {
           Tỉnh/Thành khác
         </p>
         <p className="icon">
-          <AiOutlineDoubleRight /> Combo sách HOT - GIẢM 25%{" "}
-          <Link style={{ color: "orange" }} to="/">
-            <AiOutlineDoubleRight /> Xem ngay
-          </Link>
+          <AiOutlineDoubleRight /> Combo sách HOT - GIẢM 25%
         </p>
       </div>
     </div>

@@ -100,8 +100,7 @@ const CustomerProductListContent = (props) =>{
   const getProductData = async (page, perPage, sortType) => {
     try {
       setLoader(true);
-      const res = await shopApis.getProductByCate(page, params.id, perPage, sortType);
-      console.log(res)
+      const res = await shopApis.getProductByCate(page, params.id, perPage, sortType);      
       if (res.status === 200) {
         setProductList(res.data.product);
         setTotalPage(res.data.total_page);
