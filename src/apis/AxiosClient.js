@@ -70,7 +70,7 @@ axiosClient.interceptors.response.use(
         });
         break;
       case 500:
-        alert({ icon: "error", title: "Error", message: "404 Not Found" });
+        alert({ icon: "error", title: "Error", message: "Internal Server Error" });
         break;
       default:
         alert({

@@ -10,33 +10,35 @@ export default function VisitedCarousel(props) {
     const [display, setDisplay] = useState(true);
     const [listProduct, setListProduct] = useState([]);
     const [localVistedList, setLocalVistedList] = useState([]);
-    useEffect(() => {
+    
+    useEffect(() => {        
         setLocalVistedList(getLocalStorageVisitedList());
-    }, []);
-    useEffect(() => {
-        if (localVistedList.length > 0) {
+    }, [props.prodId]);
+
+    useEffect(() => {        
+        if (localVistedList.length) {
             getVisistedList();
         } else {
             setDisplay(false);
         }
     }, [localVistedList]);
+
     const getLocalStorageVisitedList = () => {
-        var localVistedList = localStorage.getItem("VisitedProductList");
+        var localVistedList = localStorage.getItem("VisitedProductList");        
         var result = [];
         if (localVistedList) {
             JSON.parse(localVistedList).map(item => result.push(item.id));
-        }
+        }        
         return result;
     }
 
-    const getVisistedList = async () => {
-        if (localVistedList && localVistedList.length > 0) {
+    const getVisistedList = async () => {        
+        if (localVistedList && localVistedList.length) {
             try {
                 var items = [];
                 for (const idItem of localVistedList) {
                     const res = await shopApis.getProductDetail(idItem);
-                    if (res.status === HTTP_RESPONSE_STATUS.SUCCESS) {
-                        // items.push(formatToItemIntro(res.data[0],"/chi-tiet/"));
+                    if (res.status === HTTP_RESPONSE_STATUS.SUCCESS) {                    
                         items.push({
                             _id: res.data[0]._id,
                             title: res.data[0].name ? res.data[0].name : "",
@@ -48,44 +50,26 @@ export default function VisitedCarousel(props) {
                             },
                             price: res.data[0].parameters[0] ? formatCurrency(res.data[0].parameters[0].price) + "đ" : ""
                         });
-                        setDisplay(true);
+                        setDisplay(true);                        
                     }
-                }
-                
-                // const res = await shopApis.getListProductByListId(localVistedList);
-                // if (res.status === HTTP_RESPONSE_STATUS.SUCCESS) {
-                    
-                //     res.data.map(item => items.push({
-                //         _id: item._id,
-                //         title: item.name ? item.name : "",
-                //         description: item.description ? item.description : "",
-                //         href: item._id ? ("/chi-tiet/" + convertURL(item.name) + "." + item._id) : "",
-                //         img: {
-                //             src: item.image[0] ? item.image[0].url : "",
-                //             alt: item.name ? item.name : ""
-                //         },
-                //         price: item.parameters[0] ? formatCurrency(item.parameters[0].price) + "đ" : ""
-                //     }))
-                //     setDisplay(true);
-                // }
-                setListProduct(items);
+                }                 
             } catch (e) {
             }
         }
+        setListProduct([...items])
         setLoader(false);
-
     }
     return (
         <div>
             {
                 display ?
-                    <div className="product-list-of-boxtag bg-white mb-4 row mx-0 pb-3">
-                        <div className="product-list-of-boxtag-title">Sản phẩm đã xem </div>
+                    <div className="product-list-of-boxtag bg-white mt-4 mb-4 row mx-0 pb-3">
+                        <div className="product-list-of-boxtag-title">Sản phẩm đã xem</div>
                         {loader ?
                             <Box sx={{ display: 'flex', justifyContent: "center" }}>
                                 <CircularProgress color="inherit" />
                             </Box>
-                            : (listProduct.length > 0 ?
+                            : (listProduct.length ?
                                 <MutipleItemCarousel listData={listProduct}
                                     settings={{
                                         dots: false,

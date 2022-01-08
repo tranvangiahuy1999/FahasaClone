@@ -42,7 +42,7 @@ const ProductDetail = (props) => {
   useEffect(() => {
     getSpecialProductData(1, 10, true);
     addToVisitedProductList(params.id);
-  }, [])
+  }, [params.id])
 
   useEffect(() => {
     if (params) {
@@ -437,7 +437,7 @@ const ProductDetail = (props) => {
 
                   </div> : <></>
               }
-              <VisitedCarousel></VisitedCarousel>
+              <VisitedCarousel prodId={params.id}></VisitedCarousel>
             </div>
 
           </div>
