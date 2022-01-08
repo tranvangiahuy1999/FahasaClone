@@ -22,19 +22,20 @@ axiosClient.interceptors.request.use(
 );
 
 //handle error
-const handleError = (error) => {
-  if (error)
-    alert({
-      icon: "error",
-      title: "Đã có lỗi xảy ra",
-      msg: "Xin vui lòng thử lại sau!",
-    });
-  else
-    alert({
-      icon: "error",
-      title: "Đã có lỗi xảy ra",
-      msg: "Không thể kết nối tới server!",
-    });
+const handleError = (error) => {  
+  // if(error)
+  //   alert({
+  //     icon: "error",
+  //     title: "Đã có lỗi xảy ra",
+  //     msg: "Xin vui lòng thử lại sau!",
+  //   });
+  // else
+  //   alert({
+  //     icon: "error",
+  //     title: "Đã có lỗi xảy ra",
+  //     msg: "Không thể kết nối tới server!",
+  //   });
+  return
 };
 
 //handle response
@@ -75,7 +76,7 @@ axiosClient.interceptors.response.use(
         alert({
           icon: "error",
           title: "Error",
-          msg: "500 Internal Server Error",
+          msg: "Đã có lỗi xảy ra",
         });
     }
     return Promise.reject(err);

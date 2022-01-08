@@ -84,7 +84,7 @@ const ProductDetail = (props) => {
         setProductDetail(result.data);
         getExactCateId(result.data)
       }
-    } catch (err) {
+    } catch (err) {      
       alert({ icon: "error", title: "Đã có lỗi xảy ra hoặc sản phẩm không tồn tại!" });
       history.push("/")
     }
